@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>什么是一宫 — 日本一宫神社指南</title>
+  <style>
+    :root { --red:#9b2335; --gold:#c9a84c; --ink:#1a1a2e; --cream:#fdf6ec; --mist:#f0ebe3; --gray:#6b6b6b; }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'PingFang SC','Microsoft YaHei','STSong','Georgia',serif; background:var(--cream); color:var(--ink); line-height:1.85; }
+
+    header { background:var(--ink); color:#fff; display:flex; align-items:center; justify-content:space-between; padding:16px 28px; position:sticky; top:0; z-index:100; }
+    .logo { display:flex; align-items:baseline; gap:12px; }
+    .logo .kanji { font-size:1.6rem; color:var(--gold); font-weight:bold; }
+    .logo .sub { font-size:0.8rem; color:rgba(255,255,255,0.55); }
+    .header-right { display:flex; align-items:center; gap:20px; }
+    nav a { color:rgba(255,255,255,0.6); text-decoration:none; font-size:0.8rem; margin-left:20px; }
+    nav a:hover, nav a.active { color:var(--gold); }
+    .lang-switcher { display:flex; gap:4px; }
+    .lang-btn { font-size:0.72rem; padding:3px 9px; border-radius:12px; text-decoration:none; border:1px solid rgba(255,255,255,0.2); color:rgba(255,255,255,0.5); transition:all 0.2s; }
+    .lang-btn:hover { border-color:var(--gold); color:var(--gold); }
+    .lang-btn.active { background:var(--gold); color:var(--ink); border-color:var(--gold); font-weight:bold; }
+
+    .hero { min-height:92vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:60px 24px; background:linear-gradient(160deg,#0f0c1d 0%,#1a0a0a 60%,#2a1010 100%); color:#fff; }
+    .hero-label { font-size:0.8rem; letter-spacing:0.15em; color:var(--gold); margin-bottom:16px; }
+    .hero h1 { font-size:clamp(2.2rem,7vw,5rem); font-weight:normal; line-height:1.2; letter-spacing:0.03em; }
+    .hero h1 .kanji { display:block; font-size:clamp(3.5rem,10vw,7.5rem); color:var(--gold); font-weight:bold; }
+    .hero-sub { margin-top:24px; font-size:clamp(1rem,2.5vw,1.2rem); color:rgba(255,255,255,0.75); max-width:580px; }
+    .scroll-hint { margin-top:60px; color:rgba(255,255,255,0.35); font-size:0.8rem; animation:pulse 2.5s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:.35} 50%{opacity:.8} }
+
+    .section { max-width:840px; margin:0 auto; padding:80px 24px; }
+    .sec-label { font-size:0.72rem; letter-spacing:0.2em; color:var(--gold); margin-bottom:12px; }
+    .section h2 { font-size:clamp(1.5rem,4vw,2.2rem); font-weight:normal; margin-bottom:28px; border-left:4px solid var(--red); padding-left:16px; line-height:1.35; }
+    .section p { font-size:1.03rem; color:#333; margin-bottom:20px; }
+    .section p strong { color:var(--red); }
+
+    .wave-divider { background:var(--mist); padding:60px 24px; }
+    .highlight { background:var(--mist); border-radius:12px; padding:32px; margin:40px 0; border-left:4px solid var(--gold); }
+    .highlight p { font-size:1.1rem; font-style:italic; color:#444; margin:0; }
+
+    .steps { display:grid; gap:32px; margin-top:40px; }
+    .step { display:flex; gap:24px; align-items:flex-start; }
+    .step-num { flex-shrink:0; width:48px; height:48px; border-radius:50%; background:var(--red); color:#fff; display:flex; align-items:center; justify-content:center; font-size:1.1rem; font-weight:bold; }
+    .step-body h3 { font-size:1.05rem; margin-bottom:6px; }
+    .step-body p { font-size:0.95rem; color:var(--gray); margin:0; }
+
+    .map-section { background:var(--ink); color:#fff; padding:80px 24px; }
+    .map-section .section { padding:0; }
+    .map-section .section h2 { color:#fff; border-color:var(--gold); }
+    .map-section .section p { color:rgba(255,255,255,0.8); }
+    .province-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:16px; margin-top:40px; }
+    .province-card { background:rgba(255,255,255,0.06); border:1px solid rgba(201,168,76,0.3); border-radius:8px; padding:16px; text-align:center; transition:background 0.2s; }
+    .province-card:hover { background:rgba(201,168,76,0.1); }
+    .province-card .road-jp { font-size:1.1rem; font-weight:bold; color:var(--gold); margin-bottom:4px; }
+    .province-card .road-zh { font-size:0.78rem; color:rgba(255,255,255,0.5); margin-bottom:2px; }
+    .province-card .road-en { font-size:0.7rem; color:rgba(255,255,255,0.3); }
+
+    .faq { margin-top:40px; display:grid; gap:24px; }
+    .faq-item { border-bottom:1px solid #ddd; padding-bottom:24px; }
+    .faq-item h3 { font-size:1rem; color:var(--red); margin-bottom:8px; }
+    .faq-item p { font-size:0.95rem; margin:0; }
+
+    .cta-section { background:var(--red); color:#fff; text-align:center; padding:80px 24px; }
+    .cta-section h2 { font-size:clamp(1.5rem,4vw,2.2rem); font-weight:normal; margin-bottom:16px; }
+    .cta-section p { color:rgba(255,255,255,0.85); max-width:500px; margin:0 auto 32px; font-size:1.05rem; }
+    .cta-links { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
+    .btn { display:inline-block; padding:14px 36px; border:2px solid #fff; color:#fff; text-decoration:none; border-radius:4px; font-size:0.95rem; transition:background 0.2s,color 0.2s; font-family:inherit; }
+    .btn:hover { background:#fff; color:var(--red); }
+    .btn.secondary { border-color:rgba(255,255,255,0.4); color:rgba(255,255,255,0.7); }
+    .btn.secondary:hover { background:rgba(255,255,255,0.15); color:#fff; }
+    footer { background:var(--ink); color:rgba(255,255,255,0.4); text-align:center; padding:32px 24px; font-size:0.8rem; }
+    @media(max-width:600px) { .step{flex-direction:column;gap:12px;} .province-grid{grid-template-columns:repeat(2,1fr);} }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <span class="kanji">一ノ宮</span>
+    <span class="sub">日本一宫神社指南</span>
+  </div>
+  <div class="header-right">
+    <nav>
+      <a href="ichinomiya-intro-zh.html" class="active">什么是一宫</a>
+      <a href="ichinomiya-map.html">地图</a>
+      <a href="ichinomiya-visit-zh.html">参拜方法</a>
+    </nav>
+    <div class="lang-switcher">
+      <a href="ichinomiya-intro-ja.html" class="lang-btn">日本語</a>
+      <a href="ichinomiya-intro.html"    class="lang-btn">EN</a>
+      <a href="ichinomiya-intro-zh.html" class="lang-btn active">中文</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-label">日本古代圣地巡礼</div>
+  <h1><span class="kanji">一ノ宮</span>是什么？</h1>
+  <p class="hero-sub">「一宫」——古代日本各地行政区划中，地位最崇高的神社。超过一千年历史的信仰与权威，静静守护着这片土地。</p>
+  <div class="scroll-hint">↓ 向下滚动</div>
+</section>
+
+<div class="section">
+  <div class="sec-label">基础知识</div>
+  <h2>一宫究竟是怎样的神社？</h2>
+  <p><strong>一宫（いちのみや，Ichinomiya）</strong>字面意思是「第一神社」——即古代各令制国（类似行政省份）中，社格（神社的等级地位）最高的那座神社。</p>
+  <p>自平安时代至镰仓时代，朝廷派驻各地的国司（地方长官）在赴任时，必须首先参拜该地区最高级别的神社，以获得神灵的庇佑与认可。这座神社便因此被称为「一宫」——「最先参拜之宫」。</p>
+  <div class="highlight">
+    <p>「与其记住一个地名，不如了解那里的一宫——它是这片土地历史与信仰的精华所在。」</p>
+  </div>
+  <p>如今，令制国的行政区划早已不存在，但「一宫」的称号作为地域荣誉延续至今。全国<strong>超过100座</strong>神社保有这一称号。从举世闻名的出云大社、伊势神宫，到隐藏于山间的小社，各有其独特的历史与魅力。</p>
+</div>
+
+<div class="wave-divider">
+  <div class="section" style="padding:0;max-width:840px;margin:0 auto;">
+    <div class="sec-label">历史渊源</div>
+    <h2>「一宫」称号是如何诞生的？</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h3>日本划分为「令制国」</h3>
+          <p>自7世纪起，朝廷将日本全境划分为约68个「令制国」，相当于古代的行政省份。武藏国（今东京周边）、大和国（今奈良）、出云国（今岛根）……这些名称如今仍活在地名与历史中。</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h3>神社被赋予等级排名</h3>
+          <p>各国境内有众多神社。经过朝廷评定、民间信仰与历史积淀，神社逐渐形成排名：一宫（第一）、二宫（第二）、三宫（第三）……依次排列，形成固定的地方信仰秩序。</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h3>国司「第一个参拜」的神社</h3>
+          <p>国司赴任后，首要的礼仪之事便是参拜本国最高级别的神社——即一宫。这一参拜被视为向神灵禀告上任、祈求庇护的神圣仪式，也由此确立了一宫作为「国中第一神社」的地位。</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h3>令制国消失，称号留存</h3>
+          <p>明治4年（1871年）废藩置县后，古代的国制随之消亡。但「一宫」的称号太过深入人心，作为地域自豪与文化遗产延续至今。如今，以巡遍全国一宫为毕生心愿的参拜者大有人在。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="map-section">
+  <div class="section" style="max-width:840px;margin:0 auto;">
+    <div class="sec-label">古代地理区划</div>
+    <h2>七道与畿内 — 古代日本的道路体系</h2>
+    <p>令制国按「道」（古代干道）分为数个区域，东海道、东山道、北陆道……这些名称至今仍保留在地名与铁路路线中。沿着各道分布的一宫，形成了天然的朝圣路线，让现代旅行者也能循着古人的足迹，逐一拜访这些历史圣地。</p>
+    <div class="province-grid">
+      <div class="province-card"><div class="road-jp">畿内</div><div class="road-zh">首都圈诸国</div><div class="road-en">Kinai</div></div>
+      <div class="province-card"><div class="road-jp">東海道</div><div class="road-zh">东海沿岸诸国</div><div class="road-en">Tōkaidō</div></div>
+      <div class="province-card"><div class="road-jp">東山道</div><div class="road-zh">东部山地诸国</div><div class="road-en">Tōsandō</div></div>
+      <div class="province-card"><div class="road-jp">北陸道</div><div class="road-zh">日本海沿岸诸国</div><div class="road-en">Hokurikudō</div></div>
+      <div class="province-card"><div class="road-jp">みちのく</div><div class="road-zh">东北诸国</div><div class="road-en">Michinoku</div></div>
+      <div class="province-card"><div class="road-jp">山陰道</div><div class="road-zh">山阴诸国</div><div class="road-en">San'indō</div></div>
+      <div class="province-card"><div class="road-jp">山陽道</div><div class="road-zh">山阳诸国</div><div class="road-en">San'yōdō</div></div>
+      <div class="province-card"><div class="road-jp">南海道</div><div class="road-zh">南海诸国</div><div class="road-en">Nankaidō</div></div>
+      <div class="province-card"><div class="road-jp">西海道</div><div class="road-zh">九州诸国</div><div class="road-en">Saikaidō</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-label">旅行者须知</div>
+  <h2>为什么值得专程参拜一宫？</h2>
+  <p>每座一宫供奉的神灵，都与那片土地的自然、产业和历史紧密相连。靠海的国度供奉海神，农耕之乡祭祀谷神，武者之国祀奉战神。<strong>神社即土地本身的镜像。</strong></p>
+  <p>以了解一宫的方式来旅行，不是走马观花地打卡，而是真正走进一个地方的内心。每座神社背后，都有一个关于这片土地的故事在等待你去聆听。</p>
+  <div class="faq">
+    <div class="faq-item">
+      <h3>没有宗教信仰，也可以参拜吗？</h3>
+      <p>当然可以。神社对所有人开放，无论信仰与否。参拜是一种文化体验——感受历史建筑之美、林木环绕的静谧氛围，以及日本人千年来寄托心愿的那份虔诚。</p>
+    </div>
+    <div class="faq-item">
+      <h3>什么是御朱印？</h3>
+      <p>御朱印是在神社社务所，由神职人员亲手书写、加盖印章的参拜证明，记录您到访的日期与神社信息。收集在专用的「御朱印帐」中，将成为旅途最独特的纪念。费用通常为300〜500日元。</p>
+    </div>
+    <div class="faq-item">
+      <h3>交通方便吗？</h3>
+      <p>因神社而异。部分一宫位于市中心，乘电车即可直达；另一些则藏于偏远山中甚至岛屿之上。这种多样性本身就是探索的魅力所在——每一次前往，都是一段独特的旅程。</p>
+    </div>
+    <div class="faq-item">
+      <h3>为什么同一地区有多个一宫？</h3>
+      <p>历史上，随着时代变迁，各地对「谁是一宫」的认定有所变化，部分地区出现了多社并立的情形。因此，如今某些旧国内存在两座乃至多座都自称一宫的神社。</p>
+    </div>
+  </div>
+</div>
+
+<div class="cta-section">
+  <h2>出发，去找您的第一座一宫吧</h2>
+  <p>在互动地图上探索全国100余座一宫，或先了解参拜礼仪，做好准备再出发。</p>
+  <div class="cta-links">
+    <a href="ichinomiya-map.html"       class="btn">查看全国地图 →</a>
+    <a href="ichinomiya-visit-zh.html"  class="btn secondary">参拜礼仪指南</a>
+  </div>
+</div>
+
+<footer>
+  <p>一ノ宮 &nbsp;·&nbsp; 日本一宫神社指南 &nbsp;·&nbsp; 参考资料：諸国一の宮一覧図（移動教室出版事業局）</p>
+</footer>
+</body>
+</html>
