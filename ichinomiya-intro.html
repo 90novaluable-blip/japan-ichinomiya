@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ichinomiya — Japan's First Shrines</title>
+  <style>
+    :root {
+      --red:    #9b2335;
+      --gold:   #c9a84c;
+      --ink:    #1a1a2e;
+      --cream:  #fdf6ec;
+      --mist:   #f0ebe3;
+      --gray:   #6b6b6b;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Georgia', serif;
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.75;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 24px;
+      overflow: hidden;
+      background: linear-gradient(160deg, #0f0c1d 0%, #1a0a0a 60%, #2a1010 100%);
+      color: #fff;
+    }
+
+    /* subtle torii silhouette */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 80%, rgba(155,35,53,0.18) 0%, transparent 70%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Cg opacity='.08' fill='%23c9a84c'%3E%3Crect x='320' y='80' width='160' height='18'/%3E%3Crect x='350' y='98' width='100' height='10'/%3E%3Crect x='340' y='108' width='16' height='380'/%3E%3Crect x='444' y='108' width='16' height='380'/%3E%3C/g%3E%3C/svg%3E") center/contain no-repeat;
+      pointer-events: none;
+    }
+
+    .hero-label {
+      font-size: 0.8rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.8rem, 8vw, 6rem);
+      font-weight: normal;
+      line-height: 1.1;
+      letter-spacing: 0.04em;
+    }
+
+    .hero h1 .kanji {
+      display: block;
+      font-size: clamp(3.5rem, 10vw, 7.5rem);
+      color: var(--gold);
+      font-weight: bold;
+    }
+
+    .hero-sub {
+      margin-top: 24px;
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      color: rgba(255,255,255,0.75);
+      max-width: 560px;
+    }
+
+    .scroll-hint {
+      margin-top: 60px;
+      color: rgba(255,255,255,0.35);
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.35; } 50% { opacity: 0.8; }
+    }
+
+    /* ── SECTION WRAPPER ── */
+    .section {
+      max-width: 840px;
+      margin: 0 auto;
+      padding: 80px 24px;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .section h2 {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: normal;
+      margin-bottom: 28px;
+      border-left: 4px solid var(--red);
+      padding-left: 16px;
+      line-height: 1.3;
+    }
+
+    .section p {
+      font-size: 1.05rem;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .section p strong {
+      color: var(--red);
+    }
+
+    /* ── DIVIDER ── */
+    .wave-divider {
+      background: var(--mist);
+      padding: 60px 24px;
+    }
+
+    /* ── TIMELINE / STEPS ── */
+    .steps {
+      display: grid;
+      gap: 32px;
+      margin-top: 40px;
+    }
+
+    .step {
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+    }
+
+    .step-num {
+      flex-shrink: 0;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--red);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+
+    .step-body h3 {
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+    }
+
+    .step-body p {
+      font-size: 0.95rem;
+      color: var(--gray);
+      margin: 0;
+    }
+
+    /* ── MAP EXPLAINER ── */
+    .map-section {
+      background: var(--ink);
+      color: #fff;
+      padding: 80px 24px;
+    }
+
+    .map-section .section {
+      padding: 0;
+    }
+
+    .map-section .section h2 {
+      color: #fff;
+      border-color: var(--gold);
+    }
+
+    .map-section .section p {
+      color: rgba(255,255,255,0.8);
+    }
+
+    .province-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 16px;
+      margin-top: 40px;
+    }
+
+    .province-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 8px;
+      padding: 16px;
+      text-align: center;
+      transition: background 0.2s;
+    }
+
+    .province-card:hover {
+      background: rgba(201,168,76,0.1);
+    }
+
+    .province-card .road-name {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .province-card .jp-name {
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+
+    .province-card .en-name {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.5);
+    }
+
+    /* ── HIGHLIGHT BOX ── */
+    .highlight {
+      background: var(--mist);
+      border-radius: 12px;
+      padding: 32px;
+      margin: 40px 0;
+      border-left: 4px solid var(--gold);
+    }
+
+    .highlight p {
+      font-size: 1.1rem;
+      font-style: italic;
+      color: #444;
+      margin: 0;
+    }
+
+    /* ── FAQ ── */
+    .faq {
+      margin-top: 40px;
+      display: grid;
+      gap: 24px;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 24px;
+    }
+
+    .faq-item h3 {
+      font-size: 1rem;
+      color: var(--red);
+      margin-bottom: 8px;
+    }
+
+    .faq-item p {
+      font-size: 0.95rem;
+      margin: 0;
+    }
+
+    /* ── CTA ── */
+    .cta-section {
+      background: var(--red);
+      color: #fff;
+      text-align: center;
+      padding: 80px 24px;
+    }
+
+    .cta-section h2 {
+      font-size: clamp(1.5rem, 4vw, 2.2rem);
+      font-weight: normal;
+      margin-bottom: 16px;
+    }
+
+    .cta-section p {
+      color: rgba(255,255,255,0.85);
+      max-width: 500px;
+      margin: 0 auto 32px;
+      font-size: 1.05rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 36px;
+      border: 2px solid #fff;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      letter-spacing: 0.1em;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .btn:hover {
+      background: #fff;
+      color: var(--red);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+      padding: 32px 24px;
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .step { flex-direction: column; gap: 12px; }
+      .province-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-label">Japan's Ancient Sacred Hierarchy</div>
+  <h1>
+    <span class="kanji">一ノ宮</span>
+    Ichinomiya
+  </h1>
+  <p class="hero-sub">
+    "The First Shrine" — Over a thousand years of pilgrimage, power, and prayer,
+    scattered across every corner of Japan.
+  </p>
+  <div class="scroll-hint">↓ &nbsp; scroll to explore</div>
+</section>
+
+
+<!-- ═══ WHAT IS IT? ═══ -->
+<div class="section">
+  <div class="section-label">The Basics</div>
+  <h2>What exactly is an Ichinomiya?</h2>
+
+  <p>
+    The word <strong>Ichinomiya (一ノ宮)</strong> literally means <em>"the first shrine"</em> —
+    the single most prestigious Shinto shrine within each of Japan's ancient provinces.
+  </p>
+
+  <p>
+    From around the 10th century, Japan was divided into roughly <strong>68 provinces (kuni 国)</strong>,
+    each governing a distinct region. Each province had a ranked hierarchy of shrines.
+    The Ichinomiya sat at the very top — the shrine that regional governors were
+    expected to visit <em>first</em> upon taking office, to pay their respects and receive
+    divine blessing for their rule.
+  </p>
+
+  <p>
+    That tradition gave them the name: <em>ichi</em> (一) = "first" · <em>no</em> (の) = "of" · <em>miya</em> (宮) = "shrine."
+    The first shrine you visit. The most important shrine of the land.
+  </p>
+
+  <div class="highlight">
+    <p>
+      "Think of them as the cathedrals of Japan — not just places of worship,
+      but the spiritual anchors of entire regions, chosen by history itself."
+    </p>
+  </div>
+
+  <p>
+    Today, even though Japan's ancient province system no longer exists,
+    around <strong>100+ shrines</strong> carry the Ichinomiya title.
+    They range from world-famous (Izumo Taisha, Sumiyoshi Taisha) to hidden gems
+    in remote countryside — and together they form a remarkable map of Japan's soul.
+  </p>
+</div>
+
+
+<!-- ═══ HOW IT WORKED ═══ -->
+<div class="wave-divider">
+  <div class="section" style="padding: 0; max-width:840px; margin:0 auto;">
+    <div class="section-label">A Little History</div>
+    <h2>How did the ranking system work?</h2>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h3>Japan is divided into provinces</h3>
+          <p>From the 7th century, the Imperial Court carved Japan into ~68 provinces
+          (kuni) each with its own governor sent from the capital. Provinces had names
+          you still hear today — Musashi (Tokyo), Yamato (Nara), Izumo (Shimane).</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h3>Shrines are ranked within each province</h3>
+          <p>Every province had multiple shrines. Over time, through a mix of imperial
+          decree, local power, and popular belief, shrines were ranked: Ichinomiya (1st),
+          Ninomiya (2nd), Sannomiya (3rd), and so on.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h3>Governors visit the "first shrine" first</h3>
+          <p>When a new governor arrived to take his post, his first ceremonial duty
+          was to worship at the province's top shrine — the Ichinomiya.
+          This ritual cemented their authority and divine legitimacy.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h3>The title lives on</h3>
+          <p>The old province system ended in 1871 with the Meiji reforms, out the
+          Ichinomiya reputation was too deep-rooted to disappear. Today these shrines
+          are cherished as living heritage — and for travelers, a lifetime pilgrimage quest.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ THE PROVINCES MAP ═══ -->
+<div class="map-section">
+  <div class="section" style="max-width:840px; margin:0 auto;">
+    <div class="section-label">The Ancient Road System</div>
+    <h2>How Japan was organized</h2>
+    <p>
+      The provinces were grouped along ancient highways (dō 道) radiating from
+      the capital. Each road corridor had its own cluster of Ichinomiya shrines —
+      meaning you can travel an entire historic route and encounter them one by one,
+      like stops on a grand pilgrimage.
+    </p>
+
+    <div class="province-grid">
+      <div class="province-card">
+        <div class="road-name">Capital Region</div>
+        <div class="jp-name">畿内</div>
+        <div class="en-name">Kinai</div>
+      </div>
+      <div class="province-card">
+        <div class="road-name">Eastern Sea Road</div>
+        <div class="jp-name">東海道</div>
+        <div class="en-name">Tōkaidō</div>
+      </div>
+      <div class="province-card">
+        <div class="road-name">Eastern Mountain Road</div>
+        <div class="jp-name">東山道</div>
+        <div class="en-name">Tōsandō</div>
+      </div>
+      <div class="province-card">
+        <div class="road-name">North Land Road</div>
+        <div class="jp-name">北陸道</div>
+        <div class="en-name">Hokurikudō</div>
+      </div>
+      <div class="province-card">
+        <div class="road-name">Far North</div>
+        <div class="jp-name">みちのく</div>
+        <div class="en-name">Michinoku</div>
+      </div>
+      <div class="province-card">
+        <div class="road-name">Mountain Shadow Road</div>
+        <div class="jp-name">山陰道</div>
+        <div class="en-name">San'indō</div>
+      </div>
+      <div class="province-card">
+        <div class="road-name">Mountain Sunny Road</div>
+        <div class="jp-name">山陽道</div>
+        <div class="en-name">San'yōdō</div>
+      </div>
+      <div class="province-card">
+        <div class="road-name">Southern Sea Road</div>
+        <div class="jp-name">南海道</div>
+        <div class="en-name">Nankaidō</div>
+      </div>
+      <div class="province-card">
+        <div class="road-name">Western Sea Road</div>
+        <div class="jp-name">西海道</div>
+        <div class="en-name">Saikaidō</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ WHY VISIT ═══ -->
+<div class="section">
+  <div class="section-label">For Travelers</div>
+  <h2>Why visit an Ichinomiya?</h2>
+
+  <p>
+    Each Ichinomiya is a window into a specific place's deepest identity.
+    The deity enshrined there —chosen for that region's particular landscape,
+    livelihood, or founding legend — tells you something no guidebook can:
+    <em>what this land cares about.</em>
+  </p>
+
+  <p>
+    A coastal province enshrines a god of safe passage at sea.
+    A rice-growing plain venerates the deity of harvest.
+    A warrior region honors a god of strength and protection.
+    <strong>The shrine IS the region.</strong>
+  </p>
+
+  <div class="faq">
+    <div class="faq-item">
+      <h3>Do I need to know Shinto to visit?</h3>
+      <p>Not at all. You don't need any religious knowledge. The visit is a cultural
+      experience —beautiful architecture, forested grounds, and a sense of deep
+      time. Many travelers simply enjoy the atmosphere and the ritual of receiving
+      a <em>goshuin</em> (御朱印), a handwritten stamp that proves you were there.</p>
+    </div>
+    <div class="faq-item">
+      <h3>What is a goshuin (御朱印)?</h3>
+      <p>A goshuin is an ink stamp and handwritten calligraphy given at the shrine
+      office (社務所). It's recorded in a special book called a <em>goshuinchō</em>
+      (御朱印帳). Think of it as a beautiful passport stamp for your spirit.
+      No appointment needed — just bring your book and a few hundred yen.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Are they easy to reach?</h3>
+      <p>It varies widely. Some Ichinomiya are in city centers with direct train acceze: clamp(1.5rem, 4vw, 2.2rem);
+      font-weight: normal;
+      margin-bottom: 16px;
+    }
+
+    .cta-section p {
+      color: rgba(255,255,255,0.85);
+      max-width: 500px;
+      margin: 0 auto 32px;
+      font-size: 1.05rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 36px;
+      border: 2px solid #fff;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      letter-spacing: 0.1em;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .btn:hover {
+      background: #fff;
+      color: var(--red);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+      padding: 32px 24px;
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .step { flex-direction: column; gap: 12px; }
+      .province-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-label">Japan's Ancient Sacred Hierarchy</div>
+  <h1>
+    <span class="kanji">一ノ宮</span>
+    Ichinomiya
+  </h1>
+  <p class="hero-sub">
+    "The First Shrine" — Over a thousand years of pilgrimage, power, and prayer,
+    scattered across every corner of Japan.
+  </p>
+  <div class="scroll-hint">↓ &nbsp; scroll to explore</div>
+</section>
+
+
+<!-- ═══ WHAT IS IT? ═══ -->
+<div class="section">
+  <div class="section-label">The Basics</div>
+  <h2>What exactly is an Ichinomiya?</h2>
+
+  <p>
+    The word <strong>Ichinomiya (一ノ宮)</strong> literally means <em>"the first shrine"</em> —
+    the single most prestigious Shinto shrine within each of Japan's ancient provinces.
+  </p>
+
+  <p>
+    From around the 10th century, Japan was divided into roughly <strong>68 provinces (kuni 国)</strong>,
+    each governing a distinct region. Each province had a ranked hierarchy of shrines.
+    The Ichinomiya sat at the very top — the shrine that regional governors were
+    expected to visit <em>first</em> upon taking office, to pay their respects and receive
+    divine blessing for their rule.
+  </p>
+
+  <p>
+    That tradition gave them the name: <em>ichi</em> (一) = "first" · <em>no</em> (の) = "of" · <em>miya</em> (宮) = "shrine."
+    The first shrine you visit. The most important shrine of the land.
+  </p>
+
+  <div class="highlight">
+    <p>
+      "Think of them as the cathedrals of Japan — not just places of worship,
+      but the spiritual anchors of entire regions, chosen by history itself."
+    </p>
+  </div>
+
+  <p>
+    Today, even though Japan's ancient province system no longer exists,
+    around <strong>100+ shrines</strong> carry the Ichinomiya title.
+    They range from world-famous (Izumo Taisha, Sumiyoshi Taisha) to hidden gems
+    in remote countryside — and together they form a remarkable map of Japan's soul.
+  </p>
+</div>
+
+
+<!-- ═══ HOW IT WORKED ═══ -->
+<div class="wave-divider">
+  <div class="section" style="padding: 0; max-width:840px; margin:0 auto;">
+    <div class="section-label">A Little History</div>
+    <h2>How did the ranking system work?</h2>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h3>Japan is divided into provinces</h3>
+          <p>From the 7th century, the Imperial Court carved Japan into ~68 provinces
+          (kuni), each with its own governor sent from the capital. Provinces had names
+          you still hear today — Musashi (Tokyo), Yamato (Nara), Izumo (Shimane).</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h3>Shrines are ranked within each province</h3>
+          <p>Every province had multiple shrines. Over time, through a mix of imperial
+          decree, local power, and popular belief, shrines were ranked: Ichinomiya (1st),
+          Ninomiya (2nd), Sannomiya (3rd), and so on.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h3>Governors visit the "first shrine" first</h3>
+          <p>When a new governor arrived to take his post, his first ceremonial duty
+          was to worship at the province's top shrine — the Ichinomiya.
+          This ritual cemented their authority and divine legitimacy.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h3>The title lives on</h3>
+          <p>The old province system ended in 1871 with the Meiji reforms, but the
+          Ichinomiya reputation was too deep-rooted to disappear. Today these shrines
+          are cherished as living heritage — and for travelers, a lifetime pilgrimage quest.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ THE PROVINCES MAP ═══ -->
+<div class="map-section">
+  <div class="section" style="max-width:840px; margin:0 auto;">
+    <div class="section-label">The Ancient Road System</div>
+    <h2>How Japan was organized</h2>
+    <p>
+      The provinces were grouped along ancient highways (dō 道) radiating from
+      the capital. Each road corridor had its own cluster of Ichinomiya shrines —
+      meaning you can travel an entire historic route and encounter them one by one,
+      like stops on a grand pilgrimage.
+    </p>
+
+    <div class="province-grid">
+      <div class="province-card">
+        <div class="road-name">Capital Region</div>
+        <div class="jp-name">畿内</div>
+        <div class="en-name">Kinai</div>
+      </div>
+      <div class="province-card">
+        <div class="road-name">Eastern Sea Road</div>
+        <div class="jp-name">東海道</div>
+        <div class="en-name">Tōkaidō</div>
+      </div>
+      <div class="province-card">
+        <div class="road-name">Eastern Mountain Road</div>
+        <div class="jp-name">東山道</div>
+        <div class="en-name">Tōsandō</div>
+      </div>
+      <div class="province-card">
+        <div class="road-name">North Land Road</div>
+        <div class="jp-name">北陸道</div>
+        <div class="en-name">Hokurikudō</div>
+      </div>
+      <div class="province-card">
+        <div class="road-name">Far North</div>
+        <div class="jp-name">みちのく</div>
+        <div class="en-name">Michinoku</div>
+      </div>
+      <div class="province-card">
+        <div class="road-name">Mountain Shadow Road</div>
+        <div class="jp-name">山陰道</div>
+        <div class="en-name">San'indō</div>
+      </div>
+      <div class="province-card">
+        <div class="road-name">Mountain Sunny Road</div>
+        <div class="jp-name">山陽道</div>
+        <div class="en-name">San'yōdō</div>
+      </div>
+      <div class="province-card">
+        <div class="road-name">Southern Sea Road</div>
+        <div class="jp-name">南海道</div>
+        <div class="en-name">Nankaidō</div>
+      </div>
+      <div class="province-card">
+        <div class="road-name">Western Sea Road</div>
+        <div class="jp-name">西海道</div>
+        <div class="en-name">Saikaidō</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ WHY VISIT ═══ -->
+<div class="section">
+  <div class="section-label">For Travelers</div>
+  <h2>Why visit an Ichinomiya?</h2>
+
+  <p>
+    Each Ichinomiya is a window into a specific place's deepest identity.
+    The deity enshrined there — chosen for that region's particular landscape,
+    livelihood, or founding legend — tells you something no guidebook can:
+    <em>what this land cares about.</em>
+  </p>
+
+  <p>
+    A coastal province enshrines a god of safe passage at sea.
+    A rice-growing plain venerates the deity of harvest.
+    A warrior region honors a god of strength and protection.
+    <strong>The shrine IS the region.</strong>
+  </p>
+
+  <div class="faq">
+    <div class="faq-item">
+      <h3>Do I need to know Shinto to visit?</h3>
+      <p>Not at all. You don't need any religious knowledge. The visit is a cultural
+      experience — beautiful architecture, forested grounds, and a sense of deep
+      time. Many travelers simply enjoy the atmosphere and the ritual of receiving
+      a <em>goshuin</em> (御朱印), a handwritten stamp that proves you were there.</p>
+    </div>
+    <div class="faq-item">
+      <h3>What is a goshuin (御朱印)?</h3>
+      <p>A goshuin is an ink stamp and handwritten calligraphy given at the shrine
+      office (社務所). It's recorded in a special book called a <em>goshuinchō</em>
+      (御朱印帳). Think of it as a beautiful passport stamp for your spirit.
+      No appointment needed — just bring your book and a few hundred yen.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Are they easy to reach?</h3>
+      <p>It varies widely. Some Ichinomiya are in city centers with direct train access.
+      Others are on remote islands or deep in mountains. That mix is part of the
+      adventure — each one is its own journey.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Can I visit even if I'm not Japanese?</h3>
+      <p>Absolutely. Shrines are open to everyone. Basic etiquette (washing hands at the
+      purification fountain, bowing at the gate) is appreciated but forgiving.
+      Staff at larger shrines sometimes speak English, and signage is improving.</p>
+    </div>
+    <div class="faq-item">
+      <h3>How many are there?</h3>
+      <p>Around 100 shrines hold the Ichinomiya title across Japan — though some
+      provinces have competing claimants. Visiting all of them is a lifetime goal
+      for dedicated pilgrims. Even visiting a handful is a deeply rewarding experience.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ CTA ═══ -->
+<div class="cta-section">
+  <h2>Ready to find your first shrine?</h2>
+  <p>Browse Ichinomiya shrines by region, deity, or access from major cities.</p>
+  <a href="#" class="btn">Explore the Shrines →</a>
+</div>
+
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <p>一ノ宮 Ichinomiya &nbsp;·&nbsp; Japan's First Shrines</p>
+  <p style="margin-top:8px;">Reference: 諸国一の宮一覧図 (移動教室出版事業局)</p>
+</footer>
+
+</body>
+</html>
