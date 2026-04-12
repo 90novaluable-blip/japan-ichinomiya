@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hokkaido Jingu — Ichinomiya of Hokkaido</title>
+  <style>
+    :root {
+      --red:   #9b2335;
+      --gold:  #c9a84c;
+      --ink:   #1a1a2e;
+      --cream: #fdf6ec;
+      --mist:  #f0ebe3;
+      --gray:  #6b6b6b;
+      --green: #2e7d32;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Georgia',serif; background:var(--cream); color:var(--ink); line-height:1.75; }
+
+    /* ── HEADER ── */
+    header {
+      background:var(--ink); color:#fff;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 28px; position:sticky; top:0; z-index:200;
+      box-shadow:0 2px 12px rgba(0,0,0,0.4);
+    }
+    .logo { display:flex; align-items:baseline; gap:10px; text-decoration:none; }
+    .logo .kanji { font-size:1.5rem; color:var(--gold); font-weight:bold; }
+    .logo .sub   { font-size:0.78rem; color:rgba(255,255,255,0.5); letter-spacing:0.1em; }
+    .header-right { display:flex; align-items:center; gap:16px; }
+    nav a { color:rgba(255,255,255,0.6); text-decoration:none; font-size:0.78rem; letter-spacing:0.08em; margin-left:20px; }
+    nav a:hover { color:var(--gold); }
+    .lang-switcher { display:flex; gap:4px; }
+  2 .lang-btn { font-size:0.7rem; padding:2px 8px; border-radius:10px; text-decoration:none; border:1px solid rgba(255,255,255,0.2); color:rgba(255,255,255,0.5); transition:all 0.2s; }
+    .lang-btn.active { background:var(--gold); color:var(--ink); border-color:var(--gold); font-weight:bold; }
+
+    /* ── HERO ── */
+    .hero {
+      position:relative; height:88vh; min-height:520px; overflow:hidden;
+      display:flex; flex-direction:column; align-items:center; justify-content:flex-end;
+      padding-bottom:48px; color:#fff; text-align:center;
+    }
+    /* Winter-forest theme: deep blue-green darkness with snow hint */
+    .hero-bg {
+      position:absolute; inset:0;
+      background:
+        linear-gradient(to bottom, rgba(5,10,20,0.35) 0%, rgba(5,10,20,0.1) 40%, rgba(5,10,20,0.82) 100%),
+        linear-gradient(160deg, #050a14 0%, #08100a 40%, #0c1408 70%, #04080f 100%);
+    }
+  2 /* Snow flurry particles (white, not gold) */
+    .particles { position:absolute; inset:0; overflow:hidden; }
+    .particle {
+      position:absolute;
+      border-radius:50%;
+      animation:snowfall linear infinite;
+    }
+    @keyframes snowfall {
+      0%   { transform:translateY(-10px) translateX(0) rotate(0deg); opacity:0; }
+      10%  { opacity:1; }
+      90%  { opacity:0.8; }
+      100% { transform:translateY(100vh) translateX(20px) rotate(360deg); opacity:0; }
+    }
+    /* Cherry blossom petal silhouettes */
+    .hero-trees {
+      position:absolute; bottom:0; left:0; right:0;
+      opacity:0.10;
+    }
+    .hero-torii {
+      position:absolute; bottom:0; left:50%;
+      transform:translateX(-50%);
+      width:100%; max-width:900px;
+      opacity:0.11;
+    }
+    .hero-glow {
+      position:absolute; width:700px; height:700px; border-radius:50%;
+      background:radial-gradient(circle, rgba(200,160,220,0.12) 0%, rgba(201,168,76,0.06) 50%, transparent 70%);
+      top:50%; left:50%; transform:translate(-50%,-50%);
+    }
+    .hero-content { position:relative; z-index:1; padding:0 20px; }
+    .hero-badge {
+      display:inline-block; border:1px solid var(--gold); color:var(--gold);
+      font-size:0.7rem; letter-spcing:0.25em; padding:4px 16px;
+      border-radius:20px; margin-bottom:16px; text-transform:uppercase;
+    }
+ �2 .hero h1 {
+      font-size:clamp(2rem,6vw,4.5rem); font-weight:normal;
+      line-height:1.1; margin-bottom:8px;
+    }
+    .hero h1 .jp { display:block; font-size:clamp(2.5rem,8vw,5.5rem); color:var(--gold); }
+    .hero-tagline {
+      font-size:clamp(0.9rem,2vw,1.1rem); color:rgba(255,255,255,0.75);
+      max-width:620px; margin:16px auto 0; font-style:italic;
+    }
+    .hero-scroll {
+      margin-top:32px; color:rgba(255,255,255,0.3);
+      font-size:0.72rem; letter-spacing:0.2em;
+      animation:pulse 2.5s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:.3} 50%{opacity:.8} }
+
+    /* ── QUICK FACTS BAR ── */
+    .quick-bar {
+      background:var(--ink); color:#fff;
+      display:flex; justify-content:center; flex-wrap:wrap;
+    }
+    .quick-item {
+      padding:14px 28px; display:flex; align-items:center; gap:8px;
+      border-right:1px solid rgba(255,255,255,0.1); font-size:0.8rem;
+    }
+    .quick-item:last-child { border-right:none; }
+    .quick-icon { font-size:1rem; }
+    .quick-label { color:rgba(255,255,255,0.45); font-size:0.65rem; display:block; }
+    .quick-value { color:#fff; font-size:0.85rem; }
+
+    /* ── MAIN GRID ── */
+    .main { max-width:1100px; margin:0 auto; padding:48px 20px 80px; }
+    .grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+    .grid-full { grid-column:1/-1; }
+
+    /* ── CARDS ── */
+    .card {
+      background:#fff; border-radius:12px; overflow:hidden;
+      box-shadow:0 2px 16px rgba(0,0,0,0.07); border:1px solid rgba(0,0,0,0.06);
+    }
+    .card-header {
+      padding:18px 24px 14px; border-bottom:1px solid #f0e8d8;
+      display:flex; align-items:center; gap:12px;
+    }
+    .card-num {
+      width:28px; height:28px; background:var(--red); color:#fff;
+      border-radius:50%; display:flex; align-items:center; justify-content:center;
+      font-size:0.75rem; font-weight:bold; flex-shrink:0;
+    }
+    .card-title-en { font-size:0.65rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold); display:block; }
+    .card-title-jp { font-size:1.05rem; font-weight:bold; display:block; line-height:1.2; }
+    .card-title-zh { font-size:0.7rem; color:var(--gray); display:block; }
+    .card-body { padding:20px 24px 24px; }
+
+    /* Essence */
+    .essence-highlight {
+      background:var(--mist); border-radius:8px; padding:16px 20px;
+      margin-bottom:16px; border-left:3px solid var(--gold);
+    }
+    .essence-label { font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:6px; }
+    .essence-text { font-size:0.95rem; color:#333; }
+    .essence-text strong { color:var(--red); }
+    .essence-story {
+      background:var(--mist); border-radius:8px; padding:14px 18px;
+      margin-top:12px; font-size:0.88rem; color:#444;
+    }
+
+    /* Video */
+    .video-wrapper {
+      position:relative; border-radius:8px; overflow:hidden;
+      background:var(--ink); margin-top:16px;
+    }
+    .video-thumb { width:100%; aspect-ratio:16/9; display:block; }
+    .video-overlay {
+      position:absolute; inset:0;
+      background:linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%);
+      display:flex; align-items:center; justify-content:center;
+    }
+    .play-btn {
+      width:56px; height:56px; border-radius:50%;
+      background:rgba(201,168,76,0.9);
+      display:flex; align-items:center; justify-content:center;
+      text-decoration:none; transition:transform 0.2s, background 0.2s;
+      font-size:1.3rem; color:var(--ink);
+    }
+    .play-btn:hover { transform:scale(1.1); background:var(--gold); }
+    .video-caption {
+      position:absolute; bottom:0; left:0; right:0;
+      padding:10px 14px; color:rgba(255,255,255,0.8); font-size:0.75rem;
+    }
+
+    /* Map */
+    .map-wrapper { border-radius:8px; overflow:hidden; margin-bottom:16px; }
+    .map-wrapper iframe { width:100%; height:240px; border:none; display:block; }
+    .map-link {
+      display:flex; align-items:center; gap:8px; background:var(--ink);
+      color:var(--gold); text-decoration:none; padding:10px 16px;
+      border-radius:6px; font-size:0.82rem; letter-spacing:0.08em;
+      margin-bottom:16px; transition:background 0.2s;
+    }
+    .map-link:hover { background:#2a2a3e; }
+    .access-list { list-style:none; }
+    .access-list li {
+      display:flex; gap:10px; align-items:flex-start;
+      padding:8px 0; border-bottom:1px solid #f0ebe3; font-size:0.88rem;
+    }
+    .access-list li:last-child { border-bottom:none; }
+    .access-icon { flex-shrink:0; font-size:1rem; }
+    .access-main { display:block; color:var(--ink); }
+    .access-sub  { display:block; font-size:0.75rem; color:var(--gray); }
+
+    /* Insight */
+    .insight-item {
+      display:flex; gap:14px; padding:12px 0;
+      border-bottom:1px solid #f0ebe3;
+    }
+    .insight-item:last-child { border-bottom:none; }
+    .insight-badge {
+      flex-shrink:0; padding:2px 8px; border-radius:4px;
+      font-size:0.65rem; font-weight:bold; letter-spacing:0.05em;
+      height:fit-content; margin-top:2px;
+    }
+    .badge-unique   { background:#fff3e0; color:#e65100; }
+    .badge-tip      { background:#e8f5e9; color:#1b5e20; }
+    .badge-info     { background:#e8f0fe; color:#1a237e; }
+    .badge-seasonal { background:#fce4ec; color:#880e4f; }
+    .badge-nature   { background:#e8f5e9; color:#2e7d32; }
+    .insight-title { font-size:0.9rem; font-weight:bold; margin-bottom:3px; }
+    .insight-desc  { font-size:0.83rem; color:var(--gray); }
+
+    /* Nearby */
+    .nearby-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; }
+    .nearby-item { background:var(--mist); border-radius:8px; padding:14px; }
+    .nearby-cat {
+      font-size:0.65rem; letter-spacing:0.15em;
+      text-transform:uppercase; color:var(--gray); margin-bottom:4px;
+    }
+    .nearby-icon { font-size:1.2rem; margin-bottom:6px; display:block; }
+    .nearby-name { font-size:0.88rem; font-weight:bold; margin-bottom:4px; }
+    .nearby-desc { font-size:0.78rem; color:var(--gray); }
+
+    /* Deity */
+    .deity-card {
+      background:var(--ink); color:#fff; border-radius:12px; padding:32px;
+      display:grid; grid-template-columns:auto 1fr; gap:28px; align-items:start;
+    }
+    .deity-symbol { font-size:4rem; line-height:1; }
+    .deity-label { font-size:0.65rem; letter-spacing:0.2em; color:var(--gold); text-transform:uppercase; margin-bottom:6px; }
+    .deity-name  { font-size:1.5rem; font-weight:bold; margin-bottom:4px; }
+    .deity-jp    { font-size:0.9rem; color:rgba(255,255,255,0.55); margin-bottom:16px; }
+    .deity-desc  { font-size:0.9rem; color:rgba(255,255,255,0.8); line-height:1.7; margin-bottom:16px; }
+    .blessing-tags { display:flex; flex-wrap:wrap; gap:6px; }
+    .blessing-tag {
+      background:rgba(201,168,76,0.15); border:1px solid rgba(201,168,76,0.3);
+      color:var(--gold); padding:3px 10px; border-radius:12px;
+      font-size:0.72rem; letter-spacing:0.05em;
+    }
+
+    /* Kaitaku Sanjin explainer */
+    .kaitaku-box {
+      background:linear-gradient(135deg, #050a14 0%, #08100a 60%, #0c1408 100%);
+      color:#fff; border-radius:12px; padding:32px;
+    }
+    .kaitaku-title { color:var(--gold); font-size:1.2rem; margin-bottom:6px; }
+    .kaitaku-sub   { font-size:0.75rem; letter-spacing:0.15em; color:rgba(255,255,255,0.4); margin-bottom:28px; }
+
+    /* Three deities + Emperor diagram */
+    .deity-grid {
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr 1fr;
+      gap:14px;
+      margin-bottom:28px;
+    }
+    .deity-block {
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(201,168,76,0.25);
+      border-radius:10px;
+      padding:16px 12px;
+      text-align:center;
+    }
+    .deity-icon-lg { font-size:2rem; margin-bottom:8px; display:block; }
+    .deity-role { font-size:0.65rem; color:var(--gold); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:4px; }
+    .deity-nm   { font-size:0.78rem; color:#fff; font-weight:bold; margin-bottom:2px; }
+    .deity-nm-jp{ font-size:0.68rem; color:rgba(255,255,255,0.4); }
+    .deity-power{ font-size:0.7rem; color:rgba(255,255,255,0.6); margin-top:6px; }
+
+    /* Year timeline */
+    .timeline {
+      display:flex; align-items:center; gap:0;
+      margin-bottom:24px; overflow-x:auto;
+    }
+    .tl-item {
+      display:flex; flex-direction:column; align-items:center;
+      min-width:120px; flex:1;
+    }
+    .tl-year { font-size:0.75rem; color:var(--gold); font-weight:bold; margin-bottom:4px; }
+    .tl-dot { width:10px; height:10px; border-radius:50%; background:var(--gold); flex-shrink:0; }
+    .tl-line { flex:1; height:1px; background:rgba(201,168,76,0.25); }
+    .tl-row { display:flex; align-items:center; width:100%; margin-bottom:6px; }
+    .tl-event { font-size:0.7rem; color:rgba(255,255,255,0.6); text-align:center; }
+
+    .kaitaku-desc { font-size:0.88rem; color:rgba(255,255,255,0.75); line-height:1.8; }
+    .kt-highlight { color:var(--gold); font-weight:bold; }
+
+    /* Seasonal banner */
+    .season-strip {
+    2 display:grid; grid-template-columns:repeat(4,1fr);
+      gap:1px; background:rgba(255,255,255,0.08);
+      border-radius:8px; overflow:hidden; margin:20px 0 24px;
+    }
+    .season-cell {
+      padding:12px 8px; text-align:center;
+      background:rgba(255,255,255,0.04);
+    }
+    .season-name { font-size:0.7rem; color:var(--gold); letter-spacing:0.1em; margin-bottom:4px; }
+    .season-icon { font-size:1.3rem; display:block; margin-bottom:4px; }
+    .season-note { font-size:0.65rem; color:rgba(255,255,255,0.55); }
+
+    /* CTA */
+    .cta-bar {
+      background:var(--red); border-radius:12px; padding:28px 32px;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:20px; flex-wrap:wrap;
+    }
+    .cta-bar h3 { color:#fff; font-size:1.1rem; font-weight:normal; }
+    .cta-bar p  { color:rgba(255,255,255,0.75); font-size:0.85rem; margin-top:4px; }
+    .cta-links  { display:flex; gap:10px; flex-wrap:wrap; }
+    .btn {
+      display:inline-block; padding:10px 22px;
+      border:2px solid #fff; color:#fff; text-decoration:none;
+      border-radius:4px; font-size:0.82rem; letter-spacing:0.08em;
+      transition:background 0.2s, color 0.2s; font-family:inherit;
+    }
+    .btn:hover { background:#fff; color:var(--red); }
+    .btn.secondary { border-color:rgba(255,255,255,0.4); color:rgba(255,255,255,0.7); }
+    .btn.secondary:hover { background:rgba(255,255,255,0.15); color:#fff; }
+
+    /* Breadcrumb */
+    .breadcrumb {
+      padding:12px 20px; font-size:0.75rem; color:var(--gray);
+      max-width:1100px; margin:0 auto;
+    }
+    .breadcrumb a { color:var(--gray); text-decoration:none; }
+    .breadcrumb a:hover { color:var(--red); }
+
+    footer {
+      background:var(--ink); color:rgba(255,255,255,0.35);
+      text-align:center; padding:28px; font-size:0.78rem;
+    }
+
+    @media(max-width:700px) {
+      .grid { grid-template-columns:1fr; }
+      .deity-grid { grid-template-columns:1fr 1fr; }
+      .season-strip { grid-template-columns:1fr 1fr; }
+      .nearby-grid { grid-template-columns:1fr; }
+      .deity-card { grid-template-columns:1fr; }
+      .quick-item { padding:10px 16px; }
+      .cta-bar { flex-direction:column; align-items:flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a class="logo" href="ichinomiya-map.html">
+    <span class="kanji">一ノ宮</span>
+    <span class="sub">Japan's First Shrines</span>
+  </a>
+  <div class="header-right">
+    <nav>
+      <a href="ichinomiya-intro.html">What is Ichinomiya?</a>
+      <a href="ichinomiya-map.html">← All Shrines</a>
+    </nav>
+    <div class="lang-switcher">
+      <a href="#" class="lang-btn">日本語</a>
+      <a href="#" class="lang-btn active">EN</a>
+      <a href="#" class="lang-btn">中文</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-glow"></div>
+
+  <!-- Tree silhouettes (winter/snow forest feel) -->
+  <svg class="hero-trees" viewBox="0 0 1440 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <!-- Pine trees -->
+    <polygon points="60,400 90,260 120,400" fill="white"/>
+    <polygon points="75,320 90,200 105,320" fill="white"/>
+    <polygon points="160,400 200,230 240,400" fill="white"/>
+    <polygon points="175,310 200,170 225,310" fill="white"/>
+    <polygon points="1200,400 1240,230 1280,400" fill="white"/>
+  2 <polygon points="1215,310 1240,170 1265,310" fill="white"/>
+    <polygon points="1320,400 1350,260 1380,400" fill="white"/>
+    <polygon points="1335,320 1350,200 1365,320" fill="white"/>
+    <!-- Cherry trees (bare branches) -->
+    <line x1="380" y1="400" x2="380" y2="280" stroke="white" stroke-width="3"/>
+    <line x1="380" y1="300" x2="340" y2="250" stroke="white" stroke-width="2"/>
+    <line x1="380" y1="300" x2="420" y2="245" stroke="white" stroke-width="2"/>
+    <line x1="380" y1="280" x2="355" y2="225" stroke="white" stroke-width="1.5"/>
+    <line x1="380" y1="280" x2="405" y2="220" stroke="white" stroke-width="1.5"/>
+    <line x1="1060" y1="400" x2="1060" y2="280" stroke="white" stroke-width="3"/>
+    <line x1="1060" y1="300" x2="1020" y2="250" stroke="white" stroke-width="2"/>
+    <line x1="1060" y1="300" x2="1100" y2="245" stroke="white" stroke-width="2"/>
+    <line x1="1060" y1="280" x2="1035" y2="225" stroke="white" stroke-width="1.5"/>
+    <line x1="1060" y1="280" x2="1085" y2="220" stroke="white" stroke-width="1.5"/>
+  </svg>
+
+  <!-- Torii silhouette -->
+  <svg class="hero-torii" viewBox="0 0 900 500" xmlns="http://www.w3.org/2000/svg">
+    <rect x="200" y="80" width="500" height="28" fill="white"/>
+    <rect x="240" y="108" width="420" height="16" fill="white"/>
+    <rect x="250" y="108" width="36" height="390" fill="white"/>
+    <rect x="614" y="108" width="36" height="390" fill="white"/>
+    <rect x="258" y="200" width="20" height="30" rx="3" fill="white" opacity="0.5"/>
+    <rect x="622" y="200" width="20" height="30" rx="3" fill="white" opacity="0.5"/>
+  </svg>
+
+  <!-- Snow particles -->
+  <div class="particles">
+    <div class="particle" style="width:3px;height:3px;background:rgba(255,255,255,0.7);left:5%;animation-duration:12s;animation-delay:0s;"></div>
+    <div class="particle" style="width:2px;height:2px;background:rgba(255,255,255,0.5);left:15%;animation-duration:15s;animation-delay:2s;"></div>
+    <div class="particle" style="width:4px;height:4px;background:rgba(255,255,255,0.6);left:25%;animation-duration:10s;animation-delay:1s;"></div>
+    <div class="particle" style="width:2px;height:2px;background:rgba(255,255,255,0.4);left:38%;animation-duration:13s;animation-delay:4s;"></div>
+    <div class="particle" style="width:3px;height:3px;background:rgba(255,255,255,0.7);left:52%;animation-duration:11s;animation-delay:0.5s;"></div>
+    <div class="particle" style="width:2px;height:2px;background:rgba(255,255,255,0.5);left:65%;animation-duration:14s;animation-delay:3s;"></div>
+    <div class="particle" style="width:3px;height:3px;background:rgba(255,255,255,0.6);left:75%;animation-duration:9s;animation-delay:2.5s;"></div>
+    <div class="particle" style="width:4px;height:4px;background:rgba(255,255,255,0.4);left:87%;animation-duration:16s;animation-delay:5s;"></div>
+    <div class="particle" style="width:2px;height:2px;background:rgba(255,255,255,0.7);left:93%;animation-duration:11s;animation-delay:1.5s;"></div>
+    <!-- Cherry petal hints in spring (gold tint) -->
+    <div class="particle" style="width:4px;height:4px;background:rgba(255,200,200,0.5);left:44%;animation-duration:18s;animation-delay:6s;"></div>
+    <div class="particle" style="width:3px;height:3px;background:rgba(255,200,200,0.4);left:58%;animation-duration:20s;animation-delay:8s;"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-badge">北海道一之宮 · Ichinomiya of Hokkaido</div>
+    <h1>
+      <span class="jp">北海道神宮</span>
+      Hokkaido Jingu
+    </h1>
+    <p class="hero-tagline">
+      Born from Emperor Meiji's vision to open the wild north —<br>
+      Sapporo's sacred forest of 1,400 cherry trees and frontier gods.
+    </p>
+    <div class="hero-scroll">↓ &nbsp; explore this shrine</div>
+  </div>
+</div>
+
+<!-- QUICK FACTS BAR -->
+<div class="quick-bar">
+  <div class="quick-item">
+    <span class="quick-icon">📍</span>
+    <div>
+      <span class="quick-label">Location</span>
+      <span class="quick-value">Maruyama, Chuo-ku, Sapporo</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">🚃</span>
+    <div>
+      <span class="quick-label">Nearest Station</span>
+      <span class="quick-value">Maruyama Koen · 15 min walk</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">✈️</span>
+    <div>
+      <span class="quick-label">From Tokyo</span>
+      <span class="quick-value">~1.5 hrs (flight) + 35 min train</span>
+    </div>
+ 2</div>
+  <div class="quick-item">
+    <span class="quick-icon">⏰</span>
+    <div>
+      <span class="quick-label">Open</span>
+      <span class="quick-value">6:00–17:00 (Apr–Oct) · Free</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">🌸</span>
+    <div>
+      <span class="quick-label">Cherry Trees</span>
+      <span class="quick-value">~1,400 trees (late Apr–May)</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">🅿️</span>
+    <div>
+      <span class="quick-label">Parking</span>
+      <span class="quick-value">Yes · on site</span>
+    </div>
+  </div>
+</div>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a href="ichinomiya-map.html">All Shrines</a> &nbsp;›&nbsp;
+  <a href="ichinomiya-map.html?road=Hokkaido">Hokkaido</a> &nbsp;›&nbsp;
+  Hokkaido Jingu
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+  <!-- Deity row (full width) -->
+  <div class="deity-card grid-full" style="margin-bottom:24px;">
+    <div class="deity-symbol">🏔️</div>
+    <div>
+      <div class="deity-label">Enshrined Deities</div>
+      <div class="deity-name">The Three Pioneer Gods &amp; Emperor Meiji</div>
+      <div class="deity-jp">開拓三神 · 大国魂神 · 大那牟遅神 · 少彦名神 · 明治天皇</div>
+      <div class="deity-desc">
+        In 1869, Emperor Meiji chose three powerful deities to protect the opening of Hokkaido:
+        the spirit of the land itself (Ōkunitama), the master of nation-building (Ōnamuji),
+        and the god of medicine, sake, and crafts (Sukunahikona). Together, they are called
+        <strong style="color:var(--gold)">the Three Pioneer Gods (開拓三神)</strong> —
+        chosen specifically because their combined powers covered everything needed to settle
+        a wild, unknown frontier. Emperor Meiji himself was added in 1964 as the fourth deity.
+      </div>
+      <div class="blessing-tags">
+        <span class="blessing-tag">Land &amp; Nation Building</span>
+        <span class="blessing-tag">New Beginnings</span>
+        <span class="blessing-tag">Medicine &amp; Health</span>
+        <span class="blessing-tag">Business &amp; Industry</span>
+        <span class="blessing-tag">Safe Travel</span>
+        <span class="blessing-tag">Harvest &amp; Prosperity</span>
+        <span class="blessing-tag">Modern Progress</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+
+    <!-- ■ CARD 1: ESSENCE -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">1</div>
+        <div class="card-title-block">
+          <span class="card-title-en">The Essence · 核心価値</span>
+          <span class="card-title-jp">核心的価値 — なぜここが特別なのる</span>
+          <span class="card-title-zh">核心价值 · 为何与众不同</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="essence-highlight">
+          <div class="essence-label">由緒 · Why It Matters</div>
+          <div class="essence-text">
+            <strong>明治維新が生んだ北海道守護の神。</strong><br>
+            Unlike most ichinomiya with ancient roots, Hokkaido Jingu was <em>deliberately created</em>
+            in 1869 — the year the Meiji government began the systematic settlement of Japan's
+            wild northern island. It is the only ichinomiya founded as a <strong>national development project</strong>,
+            its deities chosen by imperial decree to bless an entire frontier.
+          </div>
+        </div>
+        <div class="essence-story">
+          <strong>A shrine built for an impossible mission.</strong> When the Meiji government sent
+          settlers north into Hokkaido, they faced bitter winters, untamed wilderness, and a land
+          that had never been farmed at scale. The emperor enshrined the three gods in Tokyo first,
+          then ceremonially moved them to Sapporo — planting a sacred seed in the heart of the
+          new city. Today, the shrine's 180,000 sqm of old-growth forest feels ancient, but it is
+          entirely the product of deliberate planting and sacred care over 150 years.
+        </div>
+
+        <!-- Video thumbnail -->
+        <div class="video-wrapper">
+         2<svg class="video-thumb" viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="hg1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#050a14"/>
+                <stop offset="50%" stop-color="#08100a"/>
+                <stop offset="100%" stop-color="#0c1408"/>
+              </linearGradient>
+            </defs>
+            <rect width="640" height="360" fill="url(#hg1)"/>
+            <!-- Forest trees -->
+            <rect x="60" y="180" width="8" height="180" fill="rgba(255,255,255,0.12)"/>
+            <polygon points="40,200 64,100 88,200" fill="rgba(255,255,255,0.08)"/>
+   2        <rect x="110" y="200" width="7" height="160" fill="rgba(255,255,255,0.1)"/>
+            <polygon points="92,220 113.5,110 135,220" fill="rgba(255,255,255,0.07)"/>
+            <rect x="500" y="190" width="8" height="170" fill="rgba(255,255,255,0.12)"/>
+            <polygon points="480,210 504,105 528,210" fill="rgba(255,255,255,0.08)"/>
+            <rect x="560" y="200" width="7" height="160" fill="rgba(255,255,255,0.1)"/>
+            <!-- Cherry blossom blush -->
+            <ellipse cx="320" cy="160" rx="180" ry="80" fill="rgba(255,180,190,0.06)"/>
+            <!-- Snow on ground -->
+            <rect x="0" y="340" width="640" height="20" fill="rgba(255,255,255,0.06)"/>
+            <!-- Torii hint -->
+            <rect x="296" y="180" width="48" height="6" fill="rgba(155,35,53,0.5)"/>
+            <rect x="304" y="186" width="32" height="4" fill="rgba(155,35,53,0.35)"/>
+        2   <rect x="302" y="190" width="6" height="80" fill="rgba(155,35,53,0.5)"/>
+            <rect x="332" y="190" width="6" height="80" fill="rgba(155,35,53,0.5)"/>
+            <!-- Stars -->
+            <circle cx="100" cy="50" r="1.5" fill="rgba(255,255,255,0.5)"/>
+            <circle cx="220" cy="35" r="1" fill="rgba(255,255,255,0.4)"/>
+            <circle cx="450" cy="55" r="1.5" fill="rgba(255,255,255,0.5)"/>
+            <circle cx="570" cy="40" r="1" fill="rgba(255,255,255,0.3)"/>
+            <!-- Label -->
+            <text x="320" y="145" text-anchor="middle" font-family="Georgia,serif" font-size="16" fill="rgba(201,168,76,0.7)" letter-spacing="3">北海道神宮</text>
+            <text x="320" y="167" text-anchor="middle" font-family="Georgia,serif" font-size="10" fill="rgba(255,255,255,0.35)" letter-spacing="2">HOKKAIDO JINGU · SAPPORO</text>
+          </svg>
+          <div class="video-overlay">
+            <a class="play-btn" href="https://www.youtube.com/results?search_query=北海道神宮+参拝+桜+境内" target="_blank" rel="noopener">▶</a>
+          </div>
+          <div class="video-caption">▶ Watch: shrine grounds &amp; cherry blossom season — YouTube</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ■ CARD 2: ACCESS -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">2</div>
+        <div class="card-title-block">
+          <span class="card-title-en">Getting There · アクセス</span>
+          <span class="card-title-jp">旅の地図 — アクセスガイド</span>
+          <span class="card-title-zh">交通指南 · 如何前往</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="map-wrapper">
+          <iframe
+            src="https://maps.google.com/maps?q=北海道神宮&output=embed"
+            allowfullscreen loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+        <a class="map-link" href="https://maps.google.com/maps?q=北海道神宮" target="_blank" rel="noopener">
+          📍 Open in Google Maps ↗
+        </a>
+        <ul class="access-list">
+          <li>
+            <span class="access-icon">✈️</span>
+            <div class="access-text">
+              <span class="access-main">New Chitose Airport → Sapporo Station (JR Airport Express)</span>
+              <span class="access-sub">~35 min · ¥1,290 · then subway to Maruyama Koen</span>
+    2       </div>
+          </li>
+          <li>
+            <span class="access-icon">🚇</span>
+            <div class="access-text">
+              <span class="access-main">Sapporo Subway Tozai Line → Maruyama Koen Station (Exit 3)</span>
+              <span class="access-sub">~15 min walk from station · or take Bus #14 to Jingu-mae stop</span>
+            </div>
+          </li>
+          <li>
+            <span class="access-icon">🚃</span>
+            <div class="access-text">
+              <span class="access-main">From Sapporo Station: Tozai Line from Odori Sta. (~10 min total)</span>
+              <span class="access-sub">Change to Tozai Line at Odori — 2 stops to Maruyama Koen</span>
+            </div>
+          </li>
+          <li>
+            <span class="access-icon">🚗</span>
+            <div class="access-text">
+              <span class="access-main">By car: 10 min from central Sapporo · large parking lot on site</span>
+              <span class="access-sub">Parking may fill during cherry blossom season (late Apr–May)</span>
+            </div>
+          </li>
+          <li>
+          2 <span class="access-icon">⏰</span>
+            <div class="access-text">
+              <span class="access-main">Hours: 6:00–17:00 (Apr–Oct) · 7:00–16:00 (Nov–Mar) · Free</span>
+              <span class="access-sub">New Year (Dec 31–Jan 7): extended hours · very crowded</span>
+            </div>
+          </li>
+          <li>
+            <span class="access-icon">♿</span>
+            <div class="access-text">
+              <span class="access-main">Mostly paved paths, wheelchair accessible to main hall</span>
+              <span class="access-sub">Inner forest paths may be gravel — some assistance may be needed</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ■ CARD 3: DEEP INSIGHT -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">3</div>
+        <div class="card-title-block">
+        2 <span class="card-title-en">Deep Insight · 深掘り</span>
+          <span class="card-title-jp">リピーターのこだわり — 知る人ぞ知る</span>
+          <span class="card-title-zh">深度探索 · 行家才知道的</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="insight-item">
+          <span class="insight-badge badge-seasonal">Spring</span>
+          <div class="insight-body">
+           2<div class="insight-title">~1,400 cherry trees — Sapporo's finest hanami spot</div>
+            <div class="insight-desc">Because Hokkaido blooms a full month after Honshu (late April to mid-May), this is your last chance for cherry blossoms if you missed them elsewhere. Around 50 food stalls line the paths during peak bloom. Also ~250 plum trees open alongside — a rare double bloom.</div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-badge badge-nature">Nature</span>
+          <div class="insight-body">
+            <div class="insight-title">Wild Ezo squirrels &amp; rare birds in a city forest</div>
+          2 <div class="insight-desc">The 180,000 sqm of old-growth shrine forest hosts Ezo red squirrels (エゾリス), woodpeckers, and dozens of migratory bird species. Birders bring binoculars in spring and autumn. Spotting a squirrel on the approach path is genuinely common.</div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-badge badge-seasonal">Festival</span>
+          <div class="insight-body">
+            <div class="insight-title">Hokkaido Jingu Sai (札幌まつり) — June festival</div>
+            <div class="insight-desc">Every June, ~1,200 participants dress in Heian-period court costumes for a grand procession through central Sapporo. Called the "Sapporo Festival," it is Hokkaido's signal that summer has arrived. The mikoshi procession is elaborate and photograph-friendly.</div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-badge badge-unique">Unique</span>
+          <div class="insight-body">
+            <div class="insight-title">A 六花亭 (Rokkatei) sweets shop — inside the shrine grounds</div>
+            <div class="insight-desc">Hokkaido's most beloved confectionery brand has a branch <em>inside the shrine precincts</em>. After praying, buy fresh-baked butter-and-bean-paste manjū (butter sandwiches are their signature). A second sweet shop, Jingu Chaya, sells shrine-branded treats beside it.</div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-badge badge-info">History</span>
+          <div class="insight-body">
+            <div class="insight-title">Rebuilt from ashes — twice as meaningful</div>
+            <div class="insight-desc">The original shrine buildings were destroyed by arson fire in 1974. The current structures — rebuilt in 1978 in traditional Nagare-zukuri style — are authentically faithful to the lost originals. The rebuilding itself became a symbol of Hokkaido's resilient spirit.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ■ CARD 4: EAT / STAY / MORE -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">4</div>
+        <div class="card-title-block">
+   2      <span class="card-title-en">Eat · Stay · Explore</span>
+          <span class="card-title-jp">周辺の滞在 — 食・泊・次の旅へ</span>
+          <span class="card-title-zh">周边吃住行 · 延伸旅程</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="nearby-grid">
+          <div class="nearby-item">
+            <span class="nearby-cat">Inside the Shrine</span>
+            <span class="nearby-icon">🍡</span>
+            <div class="nearby-name">六花亭 Rokkatei Shrine Branch</div>
+            <div class="nearby-desc">Hokkaido's iconic confectionery shop has a rare in-shrine location. Their <em>satsu no mori</em> mochi and fresh butter sandwiches are the ultimate post-prayer treat. Sells out early on busy days — go straight there after praying.</div>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-cat">Local Ramen</span>
+            <span class="nearby-icon">🍜</span>
+            <div class="nearby-name">Sapporo Miso Ramen</div>
+            <div class="nearby-desc">The Maruyama /円山 neighborhood is full of excellent ramen shops. Sapporo's signature is miso-based with corn and butter — rich and warming after a cold morning visit. Try Ramen Yokocho downtown (20 min by subway) for the classic experience.</div>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-cat">Stay Nearby</span>
+            <span class="nearby-icon">🏨</span>
+            <div class="nearby-name">Susukino / Odori Hotels</div>
+            <div class="nearby-desc">Central Sapporo (Susukino, Odori) has hundreds of hotels from budget to luxury — all within 20 min by subway. JR Tower Hotel Nikko Sapporo has panoramic city views from the top of Sapporo Station. Book early for cherry blossom season.</div>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-cat">Adjacent Sight</span>
+            <span class="nearby-icon">🦁</span>
+            <div class="nearby-name">Maruyama Zoo · 5 min walk</div>
+            <div class="nearby-desc">One of Japan's best zoos is a 5-minute walk from the shrine — famous for its polar bears, snow leopards, and Hokkaido brown bears. Combine shrine + zoo for a full Maruyama day, especially perfect for families.</div>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-cat">Day Trip</span>
+            <span class="nearby-icon">🌾</span>
+            <div class="nearby-name">Furano &amp; Biei Flower Fields</div>
+            <div class="nearby-desc">In July-August, lavender fields of Furano (2 hrs by JR) turn Hokkaido purple. Biei's rolling patchwork hills are iconic. These are among Japan's most Instagrammed landscapes — easily reached by rental car or tourist bus from Sapporo.</div>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-cat">Winter Bonus</span>
+            <span class="nearby-icon">⛄</span>
+            <div class="nearby-name">Sapporo Snow Festival (Feb)</div>
+            <div class="nearby-desc">Every February, the Snow Festival fills Odori Park with massive ice sculptures. Combine a shrine hatsumode visit (New Year) or Snow Festival trip to see Hokkaido Jingu in its most dramatic state — deep snow, silent forest, lantern light.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /grid -->
+
+  <!-- ■ KAITAKU SANJIN — SPECIAL SECTION -->
+  <div class="kaitaku-box grid-full" style="margin-top:32px;">
+    <div class="kaitaku-title">開拓三神 · The Three Pioneer Gods of Hokkaido</div>
+    <div class="kaitaku-sub">CHOSEN BY IMPERIAL DECREE IN 1869 TO OPEN JAPAN'S LAST FRONTIER</div>
+
+    <!-- Four Deities Grid -->
+    <div class="deity-grid">
+      <div class="deity-block">
+ 2      <span class="deity-icon-lg">🌍</span>
+        <div class="deity-role">Land Spirit</div>
+        <div class="deity-nm">Ōkunitama</div>
+        <div class="deity-nm-jp">大国魂神</div>
+        <div class="deity-power">Guardian of Hokkaido's land and people · Spiritual root of the island</div>
+      </div>
+      <div class="deity-block">
+        <span class="deity-icon-lg">🏗️</span>
+        <div class="deity-role">Nation Builder</div>
+        <div class="deity-nm">Ōnamuji</div>
+        <div class="deity-nm-jp">大那牟遅神</div>
+        <div class="deity-power">God of development, agriculture, and creating civilization from wilderness</div>
+      </div>
+      <div class="deity-block">
+        <span class="deity-icon-lg">ښ�️</span>
+        <div class="deity-role">Craft &amp; Medicine</div>
+        <div class="deity-nm">Sukunahikona</div>
+        <div class="deity-nm-jp">少彦名神</div>
+        <div class="deity-power">God of medicine, brewing, and technical craft — essential for settler survival</div>
+      </div>
+      <div class="deity-block" style="border-color:rgba(201,168,76,0.5);">
+        <span class="deity-icon-lg">👑</span>
+        <div class="deity-role">Added 1964</div>
+        <div class="deity-nm">Emperor Meiji</div>
+        <div class="deity-nm-jp">明治天皇</div>
+        <div class="deity-power">Founder of modern Japan · Ordered Hokkaido's opening · Added by Showa Emperor</div>
+      </div>
+    </div>
+
+    <!-- Seasonal strip -->
+    <div class="season-strip">
+      <div class="season-cell">
+        <div class="season-name">SPRING</div>
+        <span class="season-icon">🌸</span>
+        <div class="season-note">Cherry + plum bloom · late Apr–May · Sapporo Festival in June</div>
+      </div>
+      <div class="season-cell">
+        <div class="season-name">SUMMER</div>
+        <span class="season-icon">🌿</span>
+        <div class="season-note">Lush green forest · cool 20°C · wild birds &amp; squirrels peak</div>
+      </div>
+      <div class="season-cell">
+        <div class="season-name">AUTUMN</div>
+        <span class="season-icon">🍁</span>
+        <div class="season-note">Maple &amp; ginkgo colours · Oct–Nov · quiet, atmospheric mornings</div>
+      </div>
+      <div class="season-cell">
+        <div class="season-name">WINTER</div>
+        <span class="season-icon">❄️</span>
+        <div class="season-note">Snow-covered torii · New Year ~700K visitors · lantern-lit path</div>
+      </div>
+    </div>
+
+    <div class="kaitaku-desc">
+      The creation of Hokkaido Jingu in 1869 was unlike any other shrine founding in Japanese history.
+      Rather than honoring a local legend or an ancient land deity, it was a <span class="kt-highlight">deliberate act of state</span> —
+      Emperor Meiji chose three gods whose combined powers exactly matched what Hokkaido's settlers would need:
+      land protection, agricultural development, and medical/technical knowledge.
+      <br><br>
+      This made Hokkaido Jingu a <span class="kt-highlight">"purpose-built" shrine for a national mission</span>.
+      The Meiji government was simultaneously sending thousands of settlers, soldiers, and engineers north
+      to transform Hokkaido from Ainu homeland and wilderness into agricultural land.
+      The shrine served as their spiritual anchor in an otherwise deeply unfamiliar world.
+      <br><br>
+      Today, the shrine's 180,000 sqm of forest in the middle of Sapporo — a city of 1.9 million —
+      is itself a miracle of planning. The old trees that shade the approach path were
+      <span class="kt-highlight">planted by hand in the 1870s and 1880s</span>.
+      What feels timeless was once bare ground. This is the real frontier miracle: not conquest, but cultivation.
+    </div>
+  </div>
+
+  <!-- ■ CTA -->
+  <div class="cta-bar" style="margin-top:32px;">
+    <div>
+      <h3>Ready to visit 北海道神宮?</h3>
+      <p>Beautiful in every season — plan around cherry blossom for the most magical visit.</p>
+    </div>
+    <div class="cta-links">
+      <a class="btn" href="http://www.hokkaidojingu.or.jp/" target="_blank" rel="noopener">Official Website ↗</a>
+      <a class="btn secondary" href="ichinomiya-map.html">← All Shrine Map</a>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<footer>
+  <p>一ノ宮 Japan's First Shrines — A guide for overseas travelers &nbsp;|&nbsp;
+  Information compiled from public sources. Always verify hours and seasonal access before visiting.</p>
+</footer>
+
+</body>
+</html>
