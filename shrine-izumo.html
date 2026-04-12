@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Izumo Taisha – Japan's Oldest Grand Shrine | Ichinomiya Guide</title>
+<meta name="description" content="Izumo Taisha (出雲大社), Shimane's ancient grand shrine of Okuninushi. The deity of matchmaking & nation-building. Complete visitor guide in EN / 日本語 / 中文.">
+<style>
+:root {
+  --red:   #9b2335;
+  --gold:  #c9a84c;
+  --ink:   #1a1a2e;
+  --cream: #fdf6ec;
+  --mist:  #f0ebe3;
+  --gray:  #6b6b6b;
+  --green: #2e7d32;
+  --purple: #4a1060;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: Georgia, 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+  background: var(--cream);
+  color: var(--ink);
+  line-height: 1.7;
+}
+
+/* ── HEADER ── */
+header {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(26,26,46,0.96);
+  backdrop-filter: blur(8px);
+  padding: 0 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 56px;
+}
+.logo {
+  color: var(--gold); font-size: 0.85rem; letter-spacing: 0.12em; text-decoration: none;
+  font-style: italic;
+}
+nav { display: flex; gap: 1.5rem; align-items: center; }
+nav a {
+  color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.8rem;
+  letter-spacing: 0.06em; transition: color 0.2s;
+}
+nav a:hover { color: var(--gold); }
+.lang-switcher { display: flex; gap: 0.4rem; margin-left: 1.5rem; }
+.lang-btn {
+  background: transparent; border: 1px solid rgba(201,168,76,0.4);
+  color: rgba(255,255,255,0.6); font-size: 0.72rem; padding: 3px 9px;
+  border-radius: 3px; cursor: pointer; transition: all 0.2s;
+  font-family: inherit;
+}
+.lang-btn.active, .lang-btn:hover {
+  background: var(--gold); border-color: var(--gold); color: var(--ink); font-weight: bold;
+}
+
+/* ── HERO ── */
+.hero {
+  position: relative; min-height: 88vh;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 4rem 1.5rem;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 30% 60%, rgba(74,16,96,0.35) 0%, transparent 55%),
+    radial-gradient(ellipse at 70% 30%, rgba(155,35,53,0.25) 0%, transparent 50%),
+    linear-gradient(175deg, #0d0d1a 0%, #1a0a2e 35%, #2e1040 55%, #1a1a2e 100%);
+}
+.particle {
+  position: absolute; border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,168,76,0.7) 0%, transparent 70%);
+  animation: drift linear infinite;
+  pointer-events: none;
+}
+@keyframes drift {
+  0% { transform: translateY(0) scale(1); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 0.6; }
+  100% { transform: translateY(-110vh) scale(0.4); opacity: 0; }
+}
+.hero-badge {
+  display: inline-block; border: 1px solid rgba(201,168,76,0.5);
+  color: var(--gold); font-size: 0.75rem; letter-spacing: 0.2em;
+  padding: 5px 18px; border-radius: 20px; margin-bottom: 1.5rem;
+  background: rgba(201,168,76,0.08);
+}
+.hero h1 {
+  font-size: clamp(2.2rem, 6vw, 4.2rem);
+  color: #fff; font-weight: normal; letter-spacing: 0.04em;
+  line-height: 1.15; margin-bottom: 0.6rem;
+}
+.hero h1 .jp {
+  display: block; font-size: 0.45em;
+  color: rgba(201,168,76,0.9); margin-top: 0.4rem; letter-spacing: 0.15em;
+}
+.hero-tagline {
+  font-size: 1.05rem; color: rgba(255,255,255,0.65);
+  max-width: 520px; margin: 1rem auto 2rem; font-style: italic;
+}
+
+/* Torii SVG */
+.torii-wrap { margin-bottom: 1.8rem; }
+.torii-wrap svg { filter: drop-shadow(0 0 18px rgba(201,168,76,0.4)); }
+
+/* ── QUICK BAR ── */
+.quick-bar {
+  background: var(--ink); color: #fff;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0;
+}
+.qitem {
+  padding: 1.1rem 1.4rem; border-right: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.qitem:last-child { border-right: none; }
+.qitem .qi-label { font-size: 0.68rem; color: var(--gold); letter-spacing: 0.12em; margin-bottom: 0.25rem; }
+.qitem .qi-value { font-size: 0.88rem; color: rgba(255,255,255,0.9); }
+
+/* ── DEITY CARD ── */
+.deity-card {
+  background: linear-gradient(135deg, #16002e 0%, #2a0845 50%, #1a0030 100%);
+  padding: 3.5rem 2rem; text-align: center;
+}
+.deity-name { font-size: 1.8rem; color: #fff; font-weight: normal; margin-bottom: 0.3rem; }
+.deity-jp { font-size: 1.1rem; color: var(--gold); letter-spacing: 0.15em; margin-bottom: 1.2rem; }
+.deity-desc { color: rgba(255,255,255,0.78); max-width: 640px; margin: 0 auto 1.8rem; font-size: 0.97rem; }
+.blessing-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
+.btag {
+  background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.35);
+  color: rgba(255,255,255,0.8); font-size: 0.75rem; padding: 4px 12px; border-radius: 20px;
+  letter-spacing: 0.05em;
+}
+
+/* ── CARDS ── */
+.cards { padding: 3rem 1.5rem; max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 2.5rem; }
+
+.card {
+  background: #fff; border-radius: 12px;
+  box-shadow: 0 2px 20px rgba(26,26,46,0.08);
+  overflow: hidden;
+}
+.card-header {
+  background: var(--ink); padding: 1rem 1.6rem;
+  display: flex; align-items: center; gap: 0.7rem;
+}
+.card-header .ch-num {
+  width: 28px; height: 28px; background: var(--gold); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.8rem; font-weight: bold; color: var(--ink); flex-shrink: 0;
+}
+.card-header .ch-title { color: #fff; font-size: 1rem; letter-spacing: 0.08em; }
+.card-header .ch-sub { color: rgba(255,255,255,0.5); font-size: 0.78rem; margin-left: auto; font-style: italic; }
+
+.card-body { padding: 1.8rem 1.8rem; }
+
+/* Essence card */
+.essence-highlight {
+  border-left: 3px solid var(--gold); padding-left: 1.2rem; margin-bottom: 1.5rem;
+  font-size: 1.05rem; color: var(--ink); font-style: italic;
+}
+.essence-story {
+  background: var(--mist); border-radius: 8px; padding: 1.2rem 1.4rem;
+  font-size: 0.92rem; margin-bottom: 1.4rem;
+}
+.video-wrapper {
+  background: var(--ink); border-radius: 8px; overflow: hidden;
+  position: relative; height: 80px; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; text-decoration: none;
+}
+.video-wrapper:hover { opacity: 0.85; }
+.video-label { color: rgba(255,255,255,0.7); font-size: 0.82rem; letter-spacing: 0.06em; }
+.play-icon { color: var(--gold); font-size: 1.6rem; margin-right: 0.7rem; }
+
+/* Access card */
+.map-wrap { margin-bottom: 1.5rem; }
+.map-wrap iframe { width: 100%; height: 280px; border: none; border-radius: 8px; }
+.access-list { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+.access-list li { font-size: 0.92rem; display: flex; gap: 0.6rem; align-items: flex-start; }
+.access-list .ac-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 0.1rem; }
+
+/* Deep Insight card */
+.tips { display: flex; flex-direction: column; gap: 1rem; }
+.tip-item { display: flex; gap: 0.8rem; align-items: flex-start; }
+.tip-badge {
+  font-size: 0.65rem; padding: 3px 8px; border-radius: 4px;
+  font-weight: bold; letter-spacing: 0.06em; white-space: nowrap; margin-top: 0.15rem; flex-shrink: 0;
+}
+.tip-badge.tip    { background: #e8f5e9; color: var(--green); }
+.tip-badge.unique { background: #fff8e1; color: #8a6d00; }
+.tip-badge.info   { background: #e3f2fd; color: #1565c0; }
+.tip-badge.seasonal { background: #fce4ec; color: var(--red); }
+.tip-text { font-size: 0.9rem; }
+.tip-text strong { color: var(--ink); }
+
+/* Eat/Stay/More card */
+.esm-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.2rem; }
+.esm-item { background: var(--mist); border-radius: 8px; padding: 1.1rem 1.2rem; }
+.esm-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.esm-title { font-size: 0.88rem; font-weight: bold; color: var(--ink); margin-bottom: 0.35rem; }
+.esm-desc { font-size: 0.83rem; color: var(--gray); }
+
+/* ── SPECIAL SECTION ── */
+.special-section {
+  background: linear-gradient(135deg, #0d0020 0%, #1a0038 40%, #2e0550 70%, #0d0020 100%);
+  padding: 4rem 2rem; text-align: center;
+}
+.ss-title { color: var(--gold); font-size: 1.5rem; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+.ss-sub { color: rgba(255,255,255,0.55); font-size: 0.82rem; margin-bottom: 2.5rem; font-style: italic; }
+
+.kamiari-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1rem; max-width: 700px; margin: 0 auto;
+}
+.kami-card {
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 10px; padding: 1.3rem 1rem;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.kami-card:hover { transform: translateY(-3px); border-color: rgba(201,168,76,0.5); }
+.kami-num { font-size: 1.8rem; color: var(--gold); margin-bottom: 0.4rem; }
+.kami-label { font-size: 0.78rem; color: rgba(255,255,255,0.75); letter-spacing: 0.05em; }
+
+.prayer-box {
+  margin-top: 2.5rem; background: rgba(201,168,76,0.08);
+  border: 1px solid rgba(201,168,76,0.25); border-radius: 12px;
+  padding: 1.8rem; max-width: 520px; margin: 2.5rem auto 0;
+}
+.prayer-steps { display: flex; justify-content: center; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.8rem; }
+.pstep {
+  width: 52px; height: 52px; border-radius: 50%;
+  background: rgba(201,168,76,0.15); border: 2px solid var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gold); font-size: 0.78rem; text-align: center; line-height: 1.2;
+}
+.prayer-desc { color: rgba(255,255,255,0.65); font-size: 0.83rem; font-style: italic; }
+
+/* ── CTA BAR ── */
+.cta-bar {
+  background: var(--ink); padding: 2rem; text-align: center;
+  display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; align-items: center;
+}
+.cta-btn {
+  display: inline-block; padding: 0.75rem 2rem; border-radius: 6px;
+  text-decoration: none; font-size: 0.9rem; letter-spacing: 0.08em; transition: all 0.2s;
+}
+.cta-btn.primary { background: var(--gold); color: var(--ink); font-weight: bold; }
+.cta-btn.primary:hover { background: #e0ba5a; }
+.cta-btn.secondary { border: 1px solid rgba(255,255,255,0.3); color: rgba(255,255,255,0.8); }
+.cta-btn.secondary:hover { border-color: var(--gold); color: var(--gold); }
+
+/* Responsive */
+@media (max-width: 600px) {
+  header { padding: 0 1rem; }
+  nav { display: none; }
+  .kamiari-grid { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a href="ichinomiya-intro.html" class="logo">⛩ Japan Ichinomiya</a>
+  <nav>
+    <a href="ichinomiya-intro.html">What is Ichinomiya?</a>
+    <a href="ichinomiya-map.html">Shrine Map</a>
+    <a href="ichinomiya-visit.html">Visit Guide</a>
+  </nav>
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('ja')">日本語</button>
+    <button class="lang-btn" onclick="setLang('zh')">中文</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+
+  <!-- Particles -->
+  <div class="particle" style="width:5px;height:5px;left:12%;bottom:-10%;animation-duration:14s;animation-delay:0s;"></div>
+  <div class="particle" style="width:4px;height:4px;left:25%;bottom:-10%;animation-duration:18s;animation-delay:2s;"></div>
+  <div class="particle" style="width:6px;height:6px;left:40%;bottom:-10%;animation-duration:12s;animation-delay:1s;"></div>
+  <div class="particle" style="width:3px;height:3px;left:55%;bottom:-10%;animation-duration:20s;animation-delay:4s;"></div>
+  <div class="particle" style="width:5px;height:5px;left:68%;bottom:-10%;animation-duration:16s;animation-delay:3s;"></div>
+  <div class="particle" style="width:4px;height:4px;left:80%;bottom:-10%;animation-duration:13s;animation-delay:5s;"></div>
+  <div class="particle" style="width:7px;height:7px;left:90%;bottom:-10%;animation-duration:17s;animation-delay:1.5s;"></div>
+  <div class="particle" style="width:3px;height:3px;left:5%;bottom:-10%;animation-duration:22s;animation-delay:6s;"></div>
+  <div class="particle" style="width:5px;height:5px;left:33%;bottom:-10%;animation-duration:15s;animation-delay:7s;"></div>
+  <div class="particle" style="width:4px;height:4px;left:72%;bottom:-10%;animation-duration:19s;animation-delay:2.5s;"></div>
+
+  <!-- Torii SVG -->
+  <div class="torii-wrap">
+    <svg width="90" height="80" viewBox="0 0 90 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="8" y="12" width="74" height="7" rx="3.5" fill="#c9a84c" opacity="0.9"/>
+      <rect x="14" y="18" width="62" height="5" rx="2.5" fill="#c9a84c" opacity="0.7"/>
+      <rect x="17" y="23" width="8" height="57" rx="4" fill="#c9a84c" opacity="0.85"/>
+      <rect x="65" y="23" width="8" height="57" rx="4" fill="#c9a84c" opacity="0.85"/>
+      <line x1="25" y1="8" x2="65" y2="8" stroke="#c9a84c" stroke-width="2" opacity="0.5"/>
+    </svg>
+  </div>
+
+  <div class="hero-badge" data-en="出雲國一之宮" data-ja="出雲國一之宮" data-zh="出雲國一之宮">出雲國一之宮</div>
+  <h1>
+    Izumo Taisha
+    <span class="jp">出雲大社</span>
+  </h1>
+  <p class="hero-tagline" data-en="Where all eight million gods gather — and destinies are forever entwined." data-ja="八百万の神が集い、縁を結ぶ聖地。" data-zh="八百万神明汇聚之地，缘分在此编织。">
+    Where all eight million gods gather — and destinies are forever entwined.
+  </p>
+
+</section>
+
+<!-- QUICK BAR -->
+<div class="quick-bar">
+  <div class="qitem">
+    <div class="qi-label">📍 Location</div>
+    <div class="qi-value" data-en="Izumo, Shimane Pref." data-ja="島根県出雲市" data-zh="岛根县出云市">Izumo, Shimane Pref.</div>
+  </div>
+  <div class="qitem">
+    <div class="qi-label">🚉 Nearest Station</div>
+    <div class="qi-value" data-en="Izumotaisha-mae (Ichibata Railway)" data-ja="出雲大社前駅（一畑電車）" data-zh="出云大社前站（一畑电车）">Izumotaisha-mae (Ichibata Railway)</div>
+  </div>
+  <div class="qitem">
+    <div class="qi-label">🚅 From Tokyo</div>
+    <div class="qi-value" data-en="~4.5 hrs (Shinkansen + express)" data-ja="紉49時間（新幹線＋特急）" data-zh="约4.5小时（新干线＋特急）">~4.5 hrs (Shinkansen + express)</div>
+  </div>
+  <div class="qitem">
+    <div class="qi-label">🕐 Hours</div>
+    <div class="qi-value" data-en="6:00–19:00 (Free)" data-ja="6:00〜19:00（無料）" data-zh="6:00〜19:00（免费）">6:00–19:00 (Free)</div>
+  </div>
+  <div class="qitem">
+    <div class="qi-label">👥 Annual Visitors</div>
+    <div class="qi-value" data-en="~2.4 million / year" data-ja="約240万人/年" data-zh="约240万人/年">~2.4 million / year</div>
+  </div>
+  <div class="qitem">
+    <div class="qi-label">🅿️ Parking</div>
+    <div class="qi-value" data-en="Yes (free near approach)" data-ja="あり（参道沿い無料）" data-zh="有（参道旁免费）">Yes (free near approach)</div>
+  </div>
+</div>
+
+<!-- DEITY CARD -->
+<section class="deity-card">
+  <div class="deity-name" data-en="Okuninushi no Okami" data-ja="大国主大神" data-zh="大国主大神">Okuninushi no Okami</div>
+  <div class="deity-jp">大国主大神</div>
+  <p class="deity-desc" data-en="Creator of the land of Japan and master of the unseen world, Okuninushi is the supreme deity of en-musubi — the power to bind souls together. From romantic matches to friendships, business ties, and community bonds, he weaves all human connections." data-ja="国土を創造し、幽冥界を支配する大神。縁結びの神として知られ、男女の縁はもちろん、人と人の絆、仕事やビジネスの縁など、あらゆる「縁」を司ります。" data-zh="日本国土的创造者，掌管隐世的神明。大国主大神是缘结之神，不仅庇护婚姻，也守护人与人之间的一切缘分与联结。">
+    Creator of the land of Japan and master of the unseen world, Okuninushi is the supreme deity of <em>en-musubi</em> — the power to bind souls together. From romantic matches to friendships, business ties, and community bonds, he weaves all human connections.
+  </p>
+  <div class="blessing-tags">
+    <span class="btag">#Matchmaking</span>
+    <span class="btag">#Relationships</span>
+    <span class="btag">#BusinessTies</span>
+    <span class="btag">#Medicine</span>
+    <span class="btag">#Agriculture</span>
+    <span class="btag">#NationBuilding</span>
+    <span class="btag">#縁結び</span>
+    <span class="btag">#縁起</span>
+  </div>
+</section>
+
+<!-- CARDS -->
+<div class="cards">
+
+  <!-- Card 1: Essence -->
+  <article class="card">
+    <div class="card-header">
+      <div class="ch-num">1</div>
+      <div class="ch-title" data-en="The Essence" data-ja="核心的価値" data-zh="精髓">The Essence</div>
+      <div class="ch-sub" data-en="Why Izumo Taisha matters" data-ja="出雲大社の本質" data-zh="出云大社的意义">Why Izumo Taisha matters</div>
+    </div>
+    <div class="card-body">
+      <p class="essence-highlight" data-en="Japan's oldest and most august shrine — where myths live and the gods themselves come to rest." data-ja="神話が息づく、日本最古にして最も崇高な聖地。神々自らが訪れる神社。" data-zh="日本最古老、最庄严的神社——神话在此流传，神明在此聚会。">
+        Japan's oldest and most august shrine — where myths live and the gods themselves come to rest.
+      </p>
+      <div class="essence-story" data-en="Izumo Taisha predates written history. Already venerated when Japan's oldest chronicles (the Kojiki, 712 CE) were compiled, the shrine is dedicated to Okuninushi, who built Japan's land and civilisation before ceding rule to the heavenly deities. As a reward, he was enshrined here in a palace that, according to legend, once soared 96 metres into the sky. Today's towering 24-metre Honden, designated a National Treasure in 1952, still commands awe — the tallest shrine hall in Japan." data-ja="出雲大社は記録以前から存在し、712年の古事記にもすでに登場します。大国主命が国造りを終え天津神に国を譲った後、その功績を讃えられて壮麗な宮殿に鎮座されました。現在の本殿は1744年建造、高さ24メートルで日本最高の社殿建築です。1952年に国宝指定。" data-zh="出云大社的历史早于文字记载。日本最古老的史书《古事记》（712年）中已有记载。大国主命开创日本国土与文明，将统治权让给天神后，被奉祀于此。据传当年神殿高达96米。如今24米高的本殿建于1744年，于1952年被指定为国宝，至今仍是日本最高的神社建筑。">
+        Izumo Taisha predates written history. Already venerated when Japan's oldest chronicles (the <em>Kojiki</em>, 712 CE) were compiled, the shrine is dedicated to Okuninushi, who built Japan's land and civilisation before ceding rule to the heavenly deities. As a reward, he was enshrined here in a palace that, according to legend, once soared 96 metres into the sky. Today's towering 24-metre Honden, designated a National Treasure in 1952, still commands awe — the tallest shrine hall in Japan.
+      </div>
+      <a class="video-wrapper" href="https://www.youtube.com/results?search_query=出雲大社+参拝+境内+4K" target="_blank">
+        <span class="play-icon">▶</span>
+        <span class="video-label" data-en="Watch: Izumo Taisha on YouTube →" data-ja="動画：出雲大社の境内を見る →" data-zh="视频：出云大社境内游览 →">Watch: Izumo Taisha on YouTube →</span>
+      </a>
+    </div>
+  </article>
+
+  <!-- Card 2: Access -->
+  <article class="card">
+    <div class="card-header">
+      <div class="ch-num">2</div>
+      <div class="ch-title" data-en="Getting There" data-ja="アクセス" data-zh="交通">Getting There</div>
+      <div class="ch-sub" data-en="Izumo, Shimane Prefecture" data-ja="島根県出雲市" data-zh="岛根县出云市">Izumo, Shimane Prefecture</div>
+    </div>
+    <div class="card-body">
+      <div class="map-wrap">
+        <iframe src="https://maps.google.com/maps?q=出雲大社&output=embed" loading="lazy" title="Izumo Taisha Map"></iframe>
+      </div>
+      <ul class="access-list">
+        <li><span class="ac-icon">✈️</span><span data-en="By Air: Fly Haneda → Izumo Airport (~1 hr 25 min), then bus direct to shrine (~30 min). Fastest option from Tokyo." data-ja="飛行機：羽田→出雲空港（約1時間25分）、空港から路線バスで直接、神社まで約30分。東京からの最速ルート。" data-zh="飞机：羽田→出云机场（约1小时25分钟），机场乘直达巴士约30分钟抵达神社。从东京最快的路线。">By Air: Fly Haneda → Izumo Airport (~1 hr 25 min), then bus direct to shrine (~30 min). Fastest option from Tokyo.</span></li>
+        <li><span class="ac-icon">🚂</span><span data-en="By Train from Tokyo: Shinkansen to Okayama (~3.5 hr), then Limited Express Yakumo to Izumo-shi (~2 hr), then Ichibata Railway to Izumotaisha-mae (~45 min). Total ~6 hrs." data-ja="電車：新幹線で岡山まで（約3.5時間）、特急やくもで出雲市駅まで（約2時間）、一畑電車で出雲大社前駅まで（約45分）。合計約6時間。" data-zh="电车：新干线至冈山（约3.5小时），特急「yakumo」至出云市站（约2小时），再乘一畑电车至出云大社前站（约45分钟）。共约6小时。">By Train from Tokyo: Shinkansen to Okayama (~3.5 hr), then Limited Express Yakumo to Izumo-shi (~2 hr), then Ichibata Railway to Izumotaisha-mae (~45 min). Total ~6 hrs.</span></li>
+        <li><span class="ac-icon">🚂</span><span data-en="By Train from Osaka: Shinkansen to Okayama (~55 min), then Limited Express Yakumo to Izumo-shi (~2 hr), then Ichibata Railway. Total ~3.5 hrs." data-ja="大阪から：新幹線で岡山まで（約55分）、特急やくもで出雲市駅まで（約2時間）、一畑電車。合計約3.5時間。" data-zh="从大阪：新干线至冈山（约55分钟），特急至出云市站（约2小时），再乘一畑电车。共约3.5小时。">By Train from Osaka: Shinkansen to Okayama (~55 min), then Limited Express Yakumo to Izumo-shi (~2 hr), then Ichibata Railway. Total ~3.5 hrs.</span></li>
+        <li><span class="ac-icon">🚗</span><span data-en="By Car: ~6 hrs from Tokyo on expressway. Parking near the shrine approach is free (spacious lots)." data-ja="車：東京から高速道路で約6時間。参道近くに広い無料駐車場あり。" data-zh="驾车：从东京走高速约6小时。参道附近有宽敞的免费停车场。">By Car: ~6 hrs from Tokyo on expressway. Parking near the shrine approach is free (spacious lots).</span></li>
+        <li><span class="ac-icon">🕐</span><span data-en="Hours: 6:00–19:00 daily (main approach & Haiden). Inner Hon-den precincts: 6:00–16:30. Free admission." data-ja="参拝時間：毎日6:00〜19:00（拝殿等）。御本殿周囲は6:00〜16:30。拝観料無料。" data-zh="开放时间：每天6:00〜19:00（参拜殿等）。本殿周围：6:00〜16:30。免费参观。">Hours: 6:00–19:00 daily (main approach &amp; Haiden). Inner Hon-den precincts: 6:00–16:30. Free admission.</span></li>
+        <li><span class="ac-icon">♿</span><span data-en="Accessibility: Mostly flat gravel paths. Wheelchair accessible routes available via the side entrance." data-ja="バリアフリー：境内はほぼ平坦。車椅子用のルートは横の入口から利用可能。" data-zh="无障碍设施：境内大致平坦。轮椅可从侧门进入参拜。">Accessibility: Mostly flat gravel paths. Wheelchair accessible routes available via the side entrance.</span></li>
+      </ul>
+    </div>
+  </article>
+
+  <!-- Card 3: Deep Insight -->
+  <article class="card">
+    <div class="card-header">
+      <div class="ch-num">3</div>
+      <div class="ch-title" data-en="Deep Insight" data-ja="リピーターのこだわり" data-zh="深度见解">Deep Insight</div>
+      <div class="ch-sub" data-en="5 things only regulars know" data-ja="常連だけが知る5つのこと" data-zh="只有常客才知道的5件事">5 things only regulars know</div>
+    </div>
+    <div class="card-body">
+      <div class="tips">
+        <div class="tip-item">
+          <span class="tip-badge unique">UNIQUE</span>
+          <div class="tip-text" data-en="<strong>Four Claps, Not Two.</strong> At Izumo Taisha, the correct form of prayer (Shime no Yotsude) is 2 bows, 4 claps, 1 bow — not the standard 2 claps used at other shrines. Four claps honour the four deities enshrined in the corridor halls alongside the main deity." data-ja="<strong>拍手は4回（二礼四拍手一礼）。</strong>他の神社が二礼二拍手一礼なのに対し、出雲大社では「四拍手」が正式作法。本殿周囲の四つの摂社の神々への敬意が込められています。" data-zh="<strong>拍手四次，而非两次。</strong>出云大社的正式参拜方式是：二拜四拍手一拜，而非其他神社通常的二拍手。四次拍手是对本殿周围四座摄社神明的敬礼。">
+            <strong>Four Claps, Not Two.</strong> At Izumo Taisha, the correct form of prayer (<em>Shime no Yotsude</em>) is 2 bows, 4 claps, 1 bow — not the standard 2 claps used at other shrines. Four claps honour the four deities enshrined in the corridor halls alongside the main deity.
+          </div>
+        </div>
+        <div class="tip-item">
+          <span class="tip-badge unique">UNIQUE</span>
+          <div class="tip-text" data-en="<strong>The Reversed Shimenawa.</strong> The giant sacred rope at the Kaguraden (13.5 m long, 5 tons) hangs in reverse orientation — thick end on the left. This is unique to Izumo Taisha and reflects an ancient, independent Shinto tradition predating standardised practice." data-ja="<strong>逆向きの注連縄。</strong>神楽殿に吊るされた注連縄（長さ13.5m、重さ5トン）は、太い方が向かって左側。一般の神社とは逆向きで、出雲独自の古い神道形式の名残です。" data-zh="<strong>反向悬挂的注连绳。</strong>神乐殿的巨大注连绳（13.5米长，重达5吨）粗端朝左，与其他神社方向相反。这是出云独有的古老神道传统的遗留。">
+            <strong>The Reversed Shimenawa.</strong> The giant sacred rope at the Kaguraden (13.5 m long, 5 tons) hangs in reverse orientation — thick end on the left. This is unique to Izumo Taisha and reflects an ancient, independent Shinto tradition predating standardised practice.
+          </div>
+        </div>
+        <div class="tip-item">
+          <span class="tip-badge info">INFO</span>
+          <div class="tip-text" data-en="<strong>The Invisible Honden.</strong> The main hall (Honden) itself cannot be viewed by visitors. Only the outer corridors are accessible. Okuninushi faces west — toward the unseen world — not south like most enshrined deities, making this a uniquely other-worldly presence." data-ja="<strong>見えない本殿。</strong>本殿の内部は一般公開されておらず、周囲の廊のみ参拝可能。大国主命は通常の神社が南を向くのに対し、幽冥界に向かって西を向いているとされます。" data-zh="<strong>不可见的本殿。</strong>本殿内部不对外开放，只能参拜外围走廊。大国主大神面朝西方，面对隐世，而非如一般神明朝南，赋予此地独特的神秘气息。">
+            <strong>The Invisible Honden.</strong> The main hall (Honden) itself cannot be viewed by visitors. Only the outer corridors are accessible. Okuninushi faces west — toward the unseen world — not south like most enshrined deities, making this a uniquely other-worldly presence.
+          </div>
+        </div>
+        <div class="tip-item">
+          <span class="tip-badge seasonal">SEASONAL</span>
+          <div class="tip-text" data-en="<strong>Kamiari-zuki: October 2025 lunar calendar.</strong> During the 10th lunar month, 8 million gods from across Japan travel to Izumo for a divine conference on human fates and relationships. While the rest of Japan calls it 'Kannazuki' (month without gods), Izumo celebrates 'Kamiari-zuki' (month WITH gods). The Kamiari Festival runs for 8 days." data-ja="<strong>神在月（かみありづき）。</strong>旧暦10月、全国の八百万の神々が出雲に集まり、人の縁・運命を決める神議が行われます。全国では「神無月」ですが、出雲では「神在月」。神在祭は8日間開催。" data-zh="<strong>神在月（旧历十月）。</strong>旧历十月，全国八百万神明聚集出云，商议人间缘分与命运。全国各地称此月为「神无月」，唯独出云称「神在月」。神在祭历时8天。">
+            <strong>Kamiari-zuki: The Month the Gods Arrive.</strong> During the 10th lunar month, 8 million gods from across Japan travel to Izumo for a divine conference on human fates and relationships. While the rest of Japan calls it 'Kannazuki' (month without gods), Izumo celebrates 'Kamiari-zuki' (month WITH gods). The Kamiari Festival runs for 8 days.
+          </div>
+        </div>
+        <div class="tip-item">
+          <span class="tip-badge tip">TIP</span>
+          <div class="tip-text" data-en="<strong>The Lucky White Rabbits.</strong> Dozens of small rabbit statues dot the shrine grounds, referencing the myth of the White Rabbit of Inaba — a story of Okuninushi's compassion. Look for them in different poses along the approach; finding one with the same zodiac animal as you is said to bring especially strong blessings." data-ja="<strong>ウサギ像を探して。</strong>境内各所に因幡の白兎伝説にちなんだ愛らしいウサギの像が点在。大国主命の慈悲心を示す神話の主人公です。参道で自分の干支の兎を見つけると、特別なご縁があると言われています。" data-zh="<strong>寻找幸运白兔像。</strong>境内各处散布着以「因幡白兔」传说为主题的可爱兔子像，象征大国主大神的慈悲。在参道上找到与自己生肖相符的兔子，据说会带来特别的缘分。">
+            <strong>The Lucky White Rabbits.</strong> Dozens of small rabbit statues dot the shrine grounds, referencing the myth of the White Rabbit of Inaba — a story of Okuninushi's compassion. Look for them in different poses along the approach; finding one with the same zodiac animal as you is said to bring especially strong blessings.
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Card 4: Eat/Stay/More -->
+  <article class="card">
+    <div class="card-header">
+      <div class="ch-num">4</div>
+      <div class="ch-title" data-en="Eat · Stay · More" data-ja="周辺を楽しむ" data-zh="周边体验">Eat · Stay · More</div>
+      <div class="ch-sub" data-en="Around Izumo" data-ja="出雲エリア" data-zh="出云周边">Around Izumo</div>
+    </div>
+    <div class="card-body">
+      <div class="esm-grid">
+        <div class="esm-item">
+          <div class="esm-icon">🍜</div>
+          <div class="esm-title" data-en="Izumo Soba" data-ja="出雲そば" data-zh="出云荞麦面">Izumo Soba</div>
+          <div class="esm-desc" data-en="Japan's finest buckwheat noodles, served in three stacked lacquer bowls (warigo). The nutty, dark soba is ground with the husk for depth of flavour. Dozens of shops line the Kamiari-dori approach." data-ja="殻ごと挽いた風味豊かな割子そばは出雲の名物。神門通りや大社周辺に老舗が並ぶ。" data-zh="带壳磨制的出云荞麦面，盛于三层漆器碗中（割子）。神社参道沿线有多家老字号。">Japan's finest buckwheat noodles, served in three stacked lacquer bowls (<em>warigo</em>). The nutty, dark soba is ground with the husk for depth of flavour. Dozens of shops line the approach.</div>
+        </div>
+        <div class="esm-item">
+          <div class="esm-icon">🏨</div>
+          <div class="esm-title" data-en="Kamiari no Yado Okamoto" data-ja="神在の宿 岡本" data-zh="神在之宿 冈本">Kamiari no Yado Okamoto</div>
+          <div class="esm-desc" data-en="A traditional inn just steps from the shrine, offering kaiseki cuisine with local Shimane ingredients and a view of the sacred forest. Ideal for a dawn visit before crowds arrive." data-ja="大社前に位置する老舗旅館。島根の食材を使った会席料理と早朝参拝が楽しめる。" data-zh="位于大社前的传统旅馆，提供以岛根食材制作的怀石料理，是清晨游览的理想选择。">A traditional inn steps from the shrine, offering kaiseki cuisine with local Shimane ingredients. Ideal for a dawn visit before crowds arrive.</div>
+        </div>
+        <div class="esm-item">
+          <div class="esm-icon">🗺️</div>
+          <div class="esm-title" data-en="Inasa no Hama Beach" data-ja="稲佐の浜" data-zh="稻佐之滨">Inasa no Hama Beach</div>
+          <div class="esm-desc" data-en="A 15-min walk west of the shrine. According to mythology, this is where all 8 million gods arrive by sea each year during Kamiari-zuki. A sacred rock called Benzaiten sits offshore. Beautiful at sunset." data-ja="神社から徒歩15分。神在月に八百万の神々が上陸するとされる聖なる浜。岩上に弁財天が祀られ、夕暮れが美しい。" data-zh="距神社步行约15分钟。相传这里是神在月八百万神明从海上登陆之处。海中矗立着弁財天岩，日落时分景色绝美。">According to mythology, this is where 8 million gods arrive by sea each year. A sacred rock (Benzaiten) sits offshore. Beautiful at sunset. 15-min walk from the shrine.</div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+</div>
+
+<!-- SPECIAL SECTION: Kamiari-zuki -->
+<section class="special-section">
+  <div class="ss-title" data-en="Kamiari-zuki: When Gods Walk Among Us" data-ja="神在月：神々が地上に降りるとき" data-zh="神在月：众神降临人间">Kamiari-zuki: When Gods Walk Among Us</div>
+  <div class="ss-sub" data-en="Every year in the 10th lunar month, Izumo hosts the entire divine council of Japan" data-ja="旧暦10月、出雲は全国の神々を迎える唯一の地" data-zh="每年旧历十月，出云迎接日本所有神明汇聚">Every year in the 10th lunar month, Izumo hosts the entire divine council of Japan</div>
+
+  <div class="kamiari-grid">
+    <div class="kami-card">
+      <div class="kami-num">8M</div>
+      <div class="kami-label" data-en="Gods gather here from across Japan" data-ja="全国から集まる神々" data-zh="从日本各地汇聚的神明">Gods gather here from across Japan</div>
+    </div>
+    <div class="kami-card">
+      <div class="kami-num">8</div>
+      <div class="kami-label" data-en="Days of the Kamiari Grand Festival" data-ja="神在祭の開催日数" data-zh="神在大祭持续天数">Days of the Kamiari Grand Festival</div>
+    </div>
+    <div class="kami-card">
+      <div class="kami-num">96m</div>
+      <div class="kami-label" data-en="Legendary original height of Honden (ancient records)" data-ja="古代の本殿伝承高さ（諸説あり）" data-zh="本殿传说中的原始高度（古籍记载）">Legendary original height of Honden (ancient records)</div>
+    </div>
+    <div class="kami-card">
+      <div class="kami-num">5t</div>
+      <div class="kami-label" data-en="Weight of the giant shimenawa sacred rope" data-ja="注連縄の重さ（日本最大）" data-zh="巨大注连绳的重量（日本最大）">Weight of the giant shimenawa sacred rope</div>
+    </div>
+    <div class="kami-card">
+      <div class="kami-num">1744</div>
+      <div class="kami-label" data-en="Year the current Honden was built" data-ja="現在の本殿が建てられた年" data-zh="现存本殿建造年份">Year the current Honden was built</div>
+    </div>
+    <div class="kami-card">
+      <div class="kami-num">4×</div>
+      <div class="kami-label" data-en="Unique prayer: 4 claps instead of the usual 2" data-ja="参拝作法：四拍手（独自様式）" data-zh="独特参拜礼仪：四次拍手">Unique prayer: 4 claps instead of the usual 2</div>
+    </div>
+  </div>
+
+  <div class="prayer-box">
+    <div style="color:var(--gold);font-size:0.9rem;letter-spacing:0.1em;margin-bottom:1rem;" data-en="🙏 The Correct Prayer at Izumo Taisha" data-ja="🙏 出雲大社での正しい参拝作法" data-zh="🙏 出云大社的正确参拜方式">🙏 The Correct Prayer at Izumo Taisha</div>
+    <div class="prayer-steps">
+      <div class="pstep">2<br>Bows</div>
+      <div class="pstep" style="font-size:1.2rem;">→</div>
+      <div class="pstep">4<br>Claps</div>
+      <div class="pstep" style="font-size:1.2rem;">→</div>
+      <div class="pstep">1<br>Bow</div>
+    </div>
+    <p class="prayer-desc" data-en="二礼・四拍手・一礼 (Ni-rei, Shi-hakushu, Ichi-rei) — the ancient Izumo style, distinct from all other shrines in Japan." data-ja="二礼・四拍手・一礼。全国の神社と異なる、出雲大社独自の参拝作法です。" data-zh="二拜·四拍手·一拜，这是出云大社独有的古老参拜形式，与全日本其他神社不同。">
+      二礼・四拍手・一礼 (Ni-rei, Shi-hakushu, Ichi-rei) — the ancient Izumo style, distinct from all other shrines in Japan.
+    </p>
+  </div>
+</section>
+
+<!-- CTA BAR -->
+<div class="cta-bar">
+  <a class="cta-btn primary" href="https://www.izumooyashiro.or.jp/" target="_blank" data-en="Official Website ↗" data-ja="公式サイト ↗" data-zh="官方网站 ↗">Official Website ↗</a>
+  <a class="cta-btn secondary" href="ichinomiya-map.html" data-en="← Back to Shrine Map" data-ja="← 神社マップに戻る" data-zh="← 返回神社地图">← Back to Shrine Map</a>
+</div>
+
+<script>
+// Particles - random positioning
+document.querySelectorAll('.particle').forEach(p => {
+  p.style.left = (Math.random() * 95 + 2) + '%';
+  const dur = 10 + Math.random() * 15;
+  const delay = Math.random() * 8;
+  p.style.animationDuration = dur + 's';
+  p.style.animationDelay = '-' + delay + 's';
+});
+
+// Language switcher
+function setLang(lang) {
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+    const val = el.getAttribute('data-' + lang);
+    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+      el.value = val;
+    } else {
+      el.innerHTML = val;
+    }
+  });
+}
+</script>
+
+</body>
+</html>
