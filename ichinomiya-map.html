@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ichinomiya — All First Shrines of Japan</title>
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+  <!-- Leaflet JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+
+  <style>
+    :root {
+      --red:   #9b2335;
+      --gold:  #c9a84c;
+      --ink:   #1a1a2e;
+      --cream: #fdf6ec;
+      --mist:  #f0ebe3;
+      --gray:  #6b6b6b;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Georgia',serif; background:var(--cream); color:var(--ink); }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--ink);
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:16px 28px;
+      position:sticky;
+      top:0;
+      z-index:1000;
+      box-shadow:0 2px 12px rgba(0,0,0,0.4);
+    }
+    .logo {
+      display:flex;
+      align-items:baseline;
+      gap:12px;
+    }
+    .logo .kanji { font-size:1.6rem; color:var(--gold); font-weight:bold; }
+    .logo .en    { font-size:0.85rem; letter-spacing:0.15em; color:rgba(255,255,255,0.6); }
+    nav a {
+      color:rgba(255,255,255,0.65);
+      text-decoration:none;
+      font-size:0.8rem;
+      letter-spacing:0.1em;
+      margin-left:24px;
+      transition:color 0.2s;
+    }
+    nav a:hover { color:var(--gold); }
+
+    /* ── HERO BAR ── */
+    .hero-bar {
+      background: linear-gradient(90deg, var(--red) 0%, #6b1020 100%);
+      color:#fff;
+      text-align:center;
+      padding:28px 20px;
+    }
+    .hero-bar h1 { font-size:clamp(1.3rem,3vw,1.9rem); font-weight:normal; }
+    .hero-bar p  { margin-top:6px; font-size:0.9rem; color:rgba(255,255,255,0.75); }
+
+    /* ── FILTER BAR ── */
+    .filter-bar {
+      background:#fff;
+      border-bottom:1px solid #e0d8ce;
+      padding:12px 20px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      align-items:center;
+      position:sticky;
+      top:57px;
+      z-index:999;
+    }
+    .filter-label {
+      font-size:0.72rem;
+      letter-spacing:0.15em;
+      text-transform:uppercase;
+      color:var(--gray);
+      margin-right:4px;
+    }
+    .filter-btn {
+      border:1px solid #ccc;
+      background:#fff;
+      border-radius:20px;
+      padding:5px 14px;
+      font-size:0.78rem;
+      cursor:pointer;
+      transition:all 0.18s;
+      font-family:inherit;
+      color:var(--ink);
+    }
+    .filter-btn:hover   { border-color:var(--red); color:var(--red); }
+    .filter-btn.active  { background:var(--red); color:#fff; border-color:var(--red); }
+    .shrine-count {
+      margin-left:auto;
+      font-size:0.78rem;
+      color:var(--gray);
+    }
+
+    /* ── LAYOUT ── */
+    .layout {
+      display:grid;
+      grid-template-columns:1fr 360px;
+      height:calc(100vh - 160px);
+      min-height:500px;
+    }
+
+    /* ── MAP ── */
+    #map {
+      height:100%;
+      background:#c8e6f5;
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      overflow-y:auto;
+      border-left:1px solid #e0d8ce;
+      background:#fff;
+    }
+    .sidebar-header {
+      padding:16px 20px 12px;
+      border-bottom:1px solid #ece5da;
+      font-size:0.72rem;
+      letter-spacing:0.15em;
+      text-transform:uppercase;
+      color:var(--gray);
+      position:sticky;
+      top:0;
+      background:#fff;
+      z-index:10;
+    }
+
+    /* Grouped by road */
+    .road-group { }
+    .road-header {
+      background:var(--mist);
+      padding:8px 20px;
+      font-size:0.7rem;
+      letter-spacing:0.2em;
+      text-transform:uppercase;
+      color:var(--gray);
+      border-bottom:1px solid #e0d8ce;
+      position:sticky;
+      top:38px;
+      z-index:5;
+    }
+
+    .shrine-item {
+      padding:12px 20px;
+      border-bottom:1px solid #f0ebe3;
+      cursor:pointer;
+      transition:background 0.15s;
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+    }
+    .shrine-item:hover        { background:#fdf6ec; }
+    .shrine-item.highlighted  { background:#fff5e6; border-left:3px solid var(--gold); }
+
+    .shrine-dot {
+      flex-shrink:0;
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      margin-top:5px;
+    }
+    .shrine-item-body {}
+    .shrine-item-jp   { font-size:0.95rem; font-weight:bold; }
+    .shrine-item-en   { font-size:0.78rem; color:var(--gray); margin-top:1px; }
+    .shrine-item-pref { font-size:0.72rem; color:#aaa; margin-top:2px; }
+
+    /* ── POPUP ── */
+    .leaflet-popup-content-wrapper {
+      border-radius:8px;
+      box-shadow:0 4px 20px rgba(0,0,0,0.25);
+      padding:0;
+      overflow:hidden;
+    }
+    .leaflet-popup-content { margin:0; width:240px !important; }
+    .popup-header {
+      background:var(--ink);
+      color:#fff;
+      padding:12px 16px 10px;
+    }
+    .popup-road {
+      font-size:0.65rem;
+      letter-spacing:0.15em;
+      text-transform:uppercase;
+      color:var(--gold);
+      margin-bottom:4px;
+    }
+    .popup-jp   { font-size:1.2rem; font-weight:bold; }
+    .popup-en   { font-size:0.78rem; color:rgba(255,255,255,0.7); margin-top:2px; }
+    .popup-body { padding:12px 16px; }
+    .popup-row  { display:flex; gap:8px; margin-bottom:6px; font-size:0.82rem; }
+    .popup-icon { color:var(--gold); flex-shrink:0; }
+    .popup-deity-label { font-size:0.65rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray); margin-bottom:2px; }
+    .popup-deity { font-size:0.88rem; }
+    .popup-link {
+      display:block;
+      margin-top:10px;
+      text-align:center;
+      background:var(--red);
+      color:#fff;
+      padding:8px;
+      border-radius:4px;
+      text-decoration:none;
+      font-size:0.8rem;
+      letter-spacing:0.08em;
+      transition:background 0.2s;
+    }
+    .popup-link:hover { background:#7a1a28; }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:700px) {
+      .layout { grid-template-columns:1fr; grid-template-rows:55vh 1fr; height:auto; }
+      .sidebar { height:45vh; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header>
+  <div class="logo">
+    <span class="kanji">一ノ宮</span>
+    <span class="en">Ichinomiya · Japan's First Shrines</span>
+  </div>
+  <nav>
+    <a href="ichinomiya-intro.html">What is Ichinomiya?</a>
+    <a href="#map">Map</a>
+    <a href="#" style="color:var(--gold)">All Shrines</a>
+  </nav>
+</header>
+
+<!-- ── HERO BAR ── -->
+<div class="hero-bar">
+  <h1>All Ichinomiya Shrines of Japan</h1>
+  <p>Over 100 "First Shrines" — one for each ancient province. Click any marker to explore.</p>
+</div>
+
+<!-- ── FILTER BAR ── -->
+<div class="filter-bar">
+  <span class="filter-label">Region:</span>
+  <button class="filter-btn active" data-road="all">All</button>
+  <button class="filter-btn" data-road="Kinai">Kinai 畿内</button>
+  <button class="filter-btn" data-road="Tokaido">Tōkaidō 東海道</button>
+  <button class="filter-btn" data-road="Tosando">Tōsandō 東山道</button>
+  <button class="filter-btn" data-road="Hokurikudo">Hokuriku 北陸道</button>
+  <button class="filter-btn" data-road="Michinoku">Michinoku みちのく</button>
+  <button class="filter-btn" data-road="Sanindo">San'in 山陰道</button>
+  <button class="filter-btn" data-road="Sanyodo">San'yō 山陽道</button>
+  <button class="filter-btn" data-road="Nankido">Nankai 南海道</button>
+  <button class="filter-btn" data-road="Saikido">Saikai 西海道</button>
+  <span class="shrine-count" id="shrineCount">— shrines</span>
+</div>
+
+<!-- ── MAIN LAYOUT ── -->
+<div class="layout">
+  <div id="map"></div>
+  <div class="sidebar">
+    <div class="sidebar-header">Shrine List</div>
+    <div id="shrineList"></div>
+  </div>
+</div>
+
+
+<script>
+// ════════════════════════════════════════════
+// SHRINE DATA
+// ═══════════════════════════════════════════
+const ROADS = {
+  Kinai:     { en:"Kinai",      jp:"畿内",   color:"#8B4513" },
+  Tokaido:   { en:"Tōkaidō",   jp:"東海道",  color:"#1565C0" },
+  Tosando:   { en:"Tōsandō",   jp:"東山道",  color:"#2E7D32" },
+  Hokurikudo:{ en:"Hokurikudō",jp:"北陸道",  color:"#6A1B9A" },
+  Michinoku: { en:"Michinoku", jp:"みちのく", color:"#00838F" },
+  Sanindo:   { en:"San'indō",  jp:"山陰道",  color:"#E65100" },
+  Sanyodo:   { en:"San'yōdō",  jp:"山陽道",  color:"#AD1457" },
+  Nankido:   { en:"Nankaidō",  jp:"南海道",  color:"#558B2F" },
+  Saikido:   { en:"Saikaidō",  jp:"西海道",  color:"#4527A0" },
+};
+
+const shrines = [
+  // ── KINAI 畿内 ──
+  { id:1,  jp:"賀茂別雷神社", en:"Kamigamo Shrine",       road:"Kinai",  kuni:"Yamashiro 山城", pref:"Kyoto",    lat:35.0595, lng:135.7524, deity:"Kamowakeikazuchi (Thunder & Rain)" },
+  { id:2,  jp:"賀茂御祖神社", en:"Shimogamo Shrine",      road:"Kinai",  kuni:"Yamashiro 山城", pref:"Kyoto",    lat:35.0392, lng:135.7723, deity:"Tamayorihime & Kotoshironushi" },
+  { id:3,  jp:"大神神社",     en:"Ōmiwa Shrine",          road:"Kinai",  kuni:"Yamato 大和",    pref:"Nara",     lat:34.5322, lng:135.8524, deity:"Ōmononushi (Harmony & Sake)" },
+  { id:4,  jp:"枚岡神社",     en:"Hiraoka Shrine",        road:"Kinai",  kuni:"Kawachi 河内",   pref:"Osaka",    lat:34.6731, lng:135.6872, deity:"Amenokoyane (Wisdom)" },
+  { id:5,  jp:"大鳥大社",     en:"Ōtori Taisha",          road:"Kinai",  kuni:"Izumi 和泉",     pref:"Osaka",    lat:34.5534, lng:135.4797, deity:"Yamato Takeru" },
+  { id:6,  jp:"住吉大社",     en:"Sumiyoshi Taisha",      road:"Kinai",  kuni:"Settsu 摂津",    pref:"Osaka",    lat:34.6137, lng:135.4927, deity:"Sumiyoshi Sanjin (Safe Seafaring)" },
+
+  // ── TOKAIDO 東海道 ──
+  { id:7,  jp:"椿大神社",     en:"Tsubaki Grand Shrine",  road:"Tokaido",kuni:"Ise 伊勢",       pref:"Mie",      lat:34.8808, lng:136.4731, deity:"Sarutahiko (Roads & Guidance)" },
+  { id:8,  jp:"伊雑宮",       en:"Izawanomiya",           road:"Tokaido",kuni:"Shima 志摩",     pref:"Mie",      lat:34.4639, lng:136.7311, deity:"Amaterasu (Sun Goddess)" },
+  { id:9,  jp:"真清田神社",   en:"Mashuda Shrine",        road:"Tokaido",kuni:"Owari 尾張",     pref:"Aichi",    lat:35.3108, lng:136.7950, deity:"Ameno-hohi" },
+  { id:10, jp:"砥鹿神社",     en:"Toga Shrine",           road:"Tokaido",kuni:"Mikawa 三河",    pref:"Aichi",    lat:34.8108, lng:137.4108, deity:"Ōyamatsumi (Mountains)" },
+  { id:11, jp:"小国神社",     en:"Oguni Shrine",          road:"Tokaido",kuni:"Tōtōmi 遠江",    pref:"Shizuoka", lat:34.9108, lng:137.8108, deity:"Ōkuninushi" },
+  { id:12, jp:"富士山本宮浅間大社",en:"Fujisan Hongu Sengen",road:"Tokaido",kuni:"Suruga 駿河", pref:"Shizuoka", lat:35.3622, lng:138.7317, deity:"Konohanasakuya-hime (Mt. Fuji)" },
+  { id:13, jp:"三嶋大社",     en:"Mishima Taisha",        road:"Tokaido",kuni:"Izu 伊豆",       pref:"Shizuoka", lat:35.1108, lng:138.9108, deity:"Mishima Myōjin (Sea & Land)" },
+  { id:14, jp:"富士山浅間神社",en:"Fuji Asama Shrine",    road:"Tokaido",kuni:"Kai 甲斐",       pref:"Yamanashi",lat:35.4722, lng:138.7411, deity:"Konohanasakuya-hime" },
+  { id:15, jp:"寒川神社",     en:"Samukawa Shrine",       road:"Tokaido",kuni:"Sagami 相模",    pref:"Kanagawa", lat:35.3781, lng:139.3802, deity:"Samukawa Myōjin (Eight Directions)" },
+  { id:16, jp:"氷川神社",     en:"Hikawa Shrine (Omiya)", road:"Tokaido",kuni:"Musashi 武蔵",   pref:"Saitama",  lat:35.9108, lng:139.6208, deity:"Susanoo (Storms & Valor)" },
+  { id:17, jp:"安房神社",     en:"Awa Shrine",            road:"Tokaido",kuni:"Awa 安房",       pref:"Chiba",    lat:34.9802, lng:139.8713, deity:"Futodama (Crafts & Industry)" },
+  { id:18, jp:"玉前神社",     en:"Tamasaki Shrine",       road:"Tokaido",kuni:"Kazusa 上総",    pref:"Chiba",    lat:35.3344, lng:140.3391, deity:"Tamayorihime" },
+  { id:19, jp:"香取神宮",     en:"Katori Jingū",          road:"Tokaido",kuni:"Shimōsa 下総",   pref:"Chiba",    lat:35.8892, lng:140.5261, deity:"Futsunushi (Swords & Martial Arts)" },
+  { id:20, jp:"鹿島神宮",     en:"Kashima Jingū",         road:"Tokaido",kuni:"Hitachi 常陸",   pref:"Ibaraki",  lat:35.9647, lng:140.6314, deity:"Takemikazuchi (Lightning & Martial Arts)" },
+
+  // ── TOSANDO 東山道 ──
+  { id:21, jp:"建部大社",     en:"Tatebe Taisha",         road:"Tosando",kuni:"Ōmi 近江",       pref:"Shiga",    lat:34.9797, lng:135.9070, deity:"Yamato Takeru (Heroism)" },
+  { id:22, jp:"南宮大社",     en:"Nangū Taisha",          road:"Tosando",kuni:"Mino 美濃",       pref:"Gifu",     lat:35.4108, lng:136.6708, deity:"Kanayamahiko (Metals & Mining)" },
+  { id:23, jp:"水無神社",     en:"Minashi Shrine",        road:"Tosando",kuni:"Hida 飛騨",       pref:"Gifu",     lat:36.1397, lng:137.2608, deity:"Shirayamahime" },
+  { id:24, jp:"諏訪大社",     en:"Suwa Taisha",           road:"Tosando",kuni:"Shinano 信濃",    pref:"Nagano",   lat:36.0392, lng:138.0797, deity:"Takeminakata (Wind, Water, Hunting)" },
+  { id:25, jp:"貫前神社",     en:"Nukisaki Shrine",       road:"Tosando",kuni:"Kōzuke 上野",     pref:"Gunma",    lat:36.2108, lng:138.8308, deity:"Futsunushi & Himegami" },
+  { id:26, jp:"日光二荒山神社",en:"Nikkō Futarasan Shrine",road:"Tosando",kuni:"Shimotsuke 下野",pref:"Tochigi",  lat:36.7583, lng:139.5997, deity:"Ōkuninushi (Mountains)" },
+  { id:27, jp:"都々古別神社(馬場)",en:"Tsutsukowake Shrine (Baba)",road:"Tosando",kuni:"Mutsu 陸奥",pref:"Fukushima",lat:37.0908,lng:140.5208,deity:"Ajisukitakahikone" },
+  { id:28, jp:"石都々古和気神社",en:"Iwatsutsuko Shrine",  road:"Tosando",kuni:"Mutsu 陸奥",     pref:"Fukushima",lat:37.1208, lng:140.5608, deity:"Futsunushi" },
+
+  // ── HOKURIKUDO 北陸道 ──
+  { id:29, jp:"若狭彦神社",   en:"Wakasahiko Shrine",     road:"Hokurikudo",kuni:"Wakasa 若狭",  pref:"Fukui",    lat:35.5808, lng:135.9308, deity:"Wakasahiko (Fishing & Sea)" },
+  { id:30, jp:"気比神宮",     en:"Kehi Jingū",            road:"Hokurikudo",kuni:"Echizen 越前", pref:"Fukui",    lat:35.6447, lng:136.0614, deity:"Izasawake (Food & Fishing)" },
+  { id:31, jp:"白山比咩神社", en:"Shirayama Hime Shrine",  road:"Hokurikudo",kuni:"Kaga 加賀",   pref:"Ishikawa", lat:36.4969, lng:136.7025, deity:"Shirayamahime (Mt. Hakusan)" },
+  { id:32, jp:"気多大社",     en:"Keta Taisha",           road:"Hokurikudo",kuni:"Noto 能登",    pref:"Ishikawa", lat:37.0908, lng:136.8908, deity:"Ōkuninushi" },
+  { id:33, jp:"雄山神社",     en:"Oyama Shrine",          road:"Hokurikudo",kuni:"Etchū 越中",   pref:"Toyama",   lat:36.5697, lng:137.6178, deity:"Oyamatsumi (Mt. Tateyama)" },
+  { id:34, jp:"弥彦神社",     en:"Yahiko Shrine",         road:"Hokurikudo",kuni:"Echigo 越後",  pref:"Niigata",  lat:37.6908, lng:138.8308, deity:"Amenokagami (Sake & Crafts)" },
+  { id:35, jp:"度津神社",     en:"Wataritsu Shrine",      road:"Hokurikudo",kuni:"Sado 佐渡",    pref:"Niigata",  lat:38.0208, lng:138.4208, deity:"Futsunushi" },
+
+  // ── MICHINOKU みちのく ──
+  { id:36, jp:"鹽竈神社",     en:"Shiogama Shrine",       road:"Michinoku",kuni:"Mutsu 陸前",   pref:"Miyagi",   lat:38.3108, lng:141.0208, deity:"Shiotsuchi (Salt & Sea)" },
+  { id:37, jp:"駒形神社",     en:"Komagata Shrine",       road:"Michinoku",kuni:"Mutsu 陸中",   pref:"Iwate",    lat:39.1308, lng:141.1308, deity:"Komagata (Horses)" },
+  { id:38, jp:"岩木山神社",   en:"Iwakiyama Shrine",      road:"Michinoku",kuni:"Mutsu 陸奥",   pref:"Aomori",   lat:40.6208, lng:140.3108, deity:"Ōkuninushi (Mt. Iwaki)" },
+  { id:39, jp:"鳥海山大物忌神社",en:"Chōkai Ōmononimi",   road:"Michinoku",kuni:"Dewa 羽前",    pref:"Yamagata", lat:39.0908, lng:140.0508, deity:"Ōmononimi (Mt. Chōkai)" },
+  { id:40, jp:"伊豆山神社",   en:"Izusan Shrine",         road:"Michinoku",kuni:"Dewa 羽後",    pref:"Akita",    lat:39.6208, lng:140.1808, deity:"Hayaakitsu Hiko" },
+
+  // ── SANINDO 山陰道 ──
+  { id:41, jp:"出雲大神宮",   en:"Izumo Daijingū",        road:"Sanindo",kuni:"Tanba 丹波",     pref:"Kyoto",    lat:35.1308, lng:135.4108, deity:"Ōkuninushi & Mihotsuhime" },
+  { id:42, jp:"籠神社",       en:"Kono Shrine",           road:"Sanindo",kuni:"Tango 丹後",     pref:"Kyoto",    lat:35.5708, lng:135.1908, deity:"Toyoukehime (Food & Industry)" },
+  { id:43, jp:"出石神社",     en:"Izushi Shrine",         road:"Sanindo",kuni:"Tajima 但馬",    pref:"Hyogo",    lat:35.4708, lng:134.8608, deity:"Amenohiboko (Korean Prince)" },
+  { id:44, jp:"宇倍神社",     en:"Ube Shrine",            road:"Sanindo",kuni:"Inaba 因幡",     pref:"Tottori",  lat:35.4808, lng:134.2208, deity:"Takenouchi (Longevity)" },
+  { id:45, jp:"倭文神社",     en:"Shizori Shrine",        road:"Sanindo",kuni:"Hōki 伯耆",      pref:"Tottori",  lat:35.3908, lng:133.6608, deity:"Tatehaya Susanoo" },
+  { id:46, jp:"熊野大社",     en:"Kumano Taisha (Izumo)", road:"Sanindo",kuni:"Izumo 出雲",     pref:"Shimane",  lat:35.4208, lng:133.0508, deity:"Susanoo (Fire)" },
+  { id:47, jp:"出雲大社",     en:"Izumo Taisha",          road:"Sanindo",kuni:"Izumo 出雲",     pref:"Shimane",  lat:35.4011, lng:132.6844, deity:"Ōkuninushi (Marriage & Relationships)" },
+  { id:48, jp:"物部神社",     en:"Mononobe Shrine",       road:"Sanindo",kuni:"Iwami 石見",     pref:"Shimane",  lat:35.0308, lng:132.6208, deity:"Umashimaji (Military)" },
+  { id:49, jp:"水若酢神社",   en:"Mizuwakasu Shrine",     road:"Sanindo",kuni:"Oki 隠岐",       pref:"Shimane",  lat:36.2308, lng:133.1208, deity:"Mizuwakasu Mikoto" },
+
+  // ── SANYODO 山陽道 ──
+  { id:50, jp:"伊和神社",     en:"Iwa Shrine",            road:"Sanyodo",kuni:"Harima 播磨",    pref:"Hyogo",    lat:35.0408, lng:134.6808, deity:"Ōnamuchi" },
+  { id:51, jp:"中山神社",     en:"Nakayama Shrine",       road:"Sanyodo",kuni:"Mimasaka 美作",  pref:"Okayama",  lat:35.0908, lng:133.9208, deity:"Kagamitsukuri" },
+  { id:52, jp:"吉備津彦神社", en:"Kibitsu Hiko Shrine",   road:"Sanyodo",kuni:"Bizen 備前",     pref:"Okayama",  lat:34.7108, lng:133.8808, deity:"Kibitsu Hiko (Oni-slayer legend)" },
+  { id:53, jp:"吉備津神社",   en:"Kibitsu Shrine",        road:"Sanyodo",kuni:"Bitchū 備中",    pref:"Okayama",  lat:34.7008, lng:133.8508, deity:"Kibitsu Hiko" },
+  { id:54, jp:"素盞嗚神社",   en:"Susanoo Shrine",        road:"Sanyodo",kuni:"Bingo 備後",     pref:"Hiroshima",lat:34.4808, lng:133.3608, deity:"Susanoo" },
+  { id:55, jp:"厳島神社",     en:"Itsukushima Shrine",    road:"Sanyodo",kuni:"Aki 安芸",       pref:"Hiroshima",lat:34.2953, lng:132.3197, deity:"Munakata Sanjoshin (Sea & Arts)" },
+  { id:56, jp:"玉祖神社",     en:"Tamaoya Shrine",        road:"Sanyodo",kuni:"Suō 周防",       pref:"Yamaguchi",lat:34.1308, lng:131.5508, deity:"Tamaoya Mikoto (Jewels & Crafts)" },
+  { id:57, jp:"住吉神社",     en:"Sumiyoshi Shrine (Shimonoseki)",road:"Sanyodo",kuni:"Nagato 長門",pref:"Yamaguchi",lat:34.0008,lng:130.9808,deity:"Sumiyoshi Sanjin" },
+
+  // ── NANKIDO 南海道 ──
+  { id:58, jp:"日前神宮・国懸神宮",en:"Hinokuma & Kunikakasu Jingū",road:"Nankido",kuni:"Kii 紀伊",pref:"Wakayama",lat:34.2347,lng:135.1578,deity:"Hinokuma & Kunikakasu" },
+  { id:59, jp:"伊弉諾神宮",   en:"Izanagi Jingū",         road:"Nankido",kuni:"Awaji 淡路",     pref:"Hyogo",    lat:34.3608, lng:134.8908, deity:"Izanagi & Izanami (Creator Gods)" },
+  { id:60, jp:"大麻比古神社", en:"ōasahiko Shrine",       road:"Nankido",kuni:"Awa 阿波",       pref:"Tokushima",lat:34.1808, lng:134.5308, deity:"Ōasahiko (Silk & Weaving)" },
+  { id:61, jp:"田村神社",     en:"Tamura Shrine",         road:"Nankido",kuni:"Sanuki 讃岐",    pref:"Kagawa",   lat:34.2608, lng:133.9308, deity:"Tamayorihime (Water)" },
+  { id:62, jp:"大山祇神社",   en:"Ōyamazumi Shrine",      road:"Nankido",kuni:"Iyo 伊予",       pref:"Ehime",    lat:34.2297, lng:133.0017, deity:"Ōyamazumi (Mountains & Sea)" },
+  { id:63, jp:"土佐神社",     en:"Tosa Shrine",           road:"Nankido",kuni:"Tosa 土佐",      pref:"Kochi",    lat:33.5908, lng:133.5508, deity:"Ajisukitakahikone" },
+
+  // ── SAIKIDO 西海道 ──
+  { id:64, jp:"住吉神社(博多)",en:"Sumiyoshi Shrine (Hakata)",road:"Saikido",kuni:"Chikuzen 筑前",pref:"Fukuoka",lat:33.5908,lng:130.3908,deity:"Sumiyoshi Sanjin (Sea & Seafarers)" },
+  { id:65, jp:"高良大社",     en:"Kōra Taisha",           road:"Saikido",kuni:"Chikugo 筑後",   pref:"Fukuoka",  lat:33.3108, lng:130.6208, deity:"Kōra Mitama" },
+  { id:66, jp:"宇佐神宮",     en:"Usa Jingū",             road:"Saikido",kuni:"Buzen 豊前",     pref:"Oita",     lat:33.4708, lng:131.3808, deity:"Hachiman (War & Culture)" },
+  { id:67, jp:"西寒多神社",   en:"Nishisamuta Shrine",    road:"Saikido",kuni:"Bungo 豊後",     pref:"Oita",     lat:33.2508, lng:131.6008, deity:"Nishisamuta Mikoto" },
+  { id:68, jp:"千栗八幡宮",   en:"Chikuhi Hachimangū",    road:"Saikido",kuni:"Hizen 肥前",     pref:"Saga",     lat:33.2208, lng:130.5408, deity:"Hachiman" },
+  { id:69, jp:"阿蘇神社",     en:"Aso Shrine",            road:"Saikido",kuni:"Higo 肥後",      pref:"Kumamoto", lat:32.9208, lng:131.1108, deity:"Takeiwatatsu (Caldera)" },
+  { id:70, jp:"都農神社",     en:"Tsuno Shrine",          road:"Saikido",kuni:"Hyūga 日向",     pref:"Miyazaki", lat:32.0908, lng:131.5608, deity:"Ōnamuchi" },
+  { id:71, jp:"鹿児島神宮",   en:"Kagoshima Jingū",       road:"Saikido",kuni:"Ōsumi 大隅",     pref:"Kagoshima",lat:31.6308, lng:130.8608, deity:"Yamasachi Hiko (Hunting & Sea)" },
+  { id:72, jp:"枚聞神社",     en:"Hiraki Shrine",         road:"Saikido",kuni:"Satsuma 薩摩",   pref:"Kagoshima",lat:31.0208, lng:130.5508, deity:"Ōhirutame" },
+  { id:73, jp:"天手長男神社", en:"Ametanagao Shrine",     road:"Saikido",kuni:"Iki 壱岐",       pref:"Nagasaki", lat:33.8208, lng:129.7008, deity:"Ametanagao" },
+  { id:74, jp:"海神神社",     en:"Watatsumi Shrine",      road:"Saikido",kuni:"Tsushima 対馬",  pref:"Nagasaki", lat:34.7008, lng:129.2808, deity:"Watatsumi (Sea God)" },
+];
+
+// ════════════════════════════════════════════
+// MAP SETUP
+// ═══════════════════════════════════════════
+const map = L.map('map', {
+  center: [36.5, 136.5],
+  zoom: 5,
+  zoomControl: true,
+});
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '© OpenStreetMap contributors',
+  maxZoom: 18,
+}).addTo(map);
+
+// ═══════════════════════════════════════════
+// MARKERS
+// ═══════════════════════════════════════════
+function makeIcon(color) {
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 32" width="24" height="32">
+    <path d="M12 0C7.6 0 4 3.6 4 8c0 6 8 20 8 20s8-14 8-20c0-4.4-3.6-8-8-8z"
+          fill="${color}" stroke="#fff" stroke-width="1.5"/>
+    <circle cx="12" cy="8" r="3.5" fill="#fff" opacity="0.9"/>
+  </svg>`;
+  return L.divIcon({
+    html: svg,
+    className: '',
+    iconSize: [24, 32],
+    iconAnchor: [12, 32],
+    popupAnchor: [0, -32],
+  });
+}
+
+let markers = [];
+let activeRoad = 'all';
+
+function buildPopup(s) {
+  const road = ROADS[s.road];
+  return `
+    <div class="popup-header">
+      <div class="popup-road">${road.jp} · ${road.en}</div>
+      <div class="popup-jp">${s.jp}</div>
+      <div class="popup-en">${s.en}</div>
+    </div>
+    <div class="popup-body">
+      <div class="popup-deity-label">Enshrined Deity &amp; Domain</div>
+      <div class="popup-deity">${s.deity}</div>
+      <div class="popup-row" style="margin-top:10px;">
+        <span class="popup-icon">�M</span>
+        <span>${s.kuni} · ${s.pref} Pref.</span>
+      </div>
+      <a class="popup-link" href="#">View Details →</a>
+    </div>`;
+}
+
+function renderMarkers(roadFilter) {
+  markers.forEach(m => map.removeLayer(m.marker));
+  markers = [];
+
+  const filtered = roadFilter === 'all'
+    ? shrines
+    : shrines.filter(s => s.road === roadFilter);
+
+  filtered.forEach(s => {
+    const color = ROADS[s.road].color;
+    const m = L.marker([s.lat, s.lng], { icon: makeIcon(color) })
+      .bindPopup(buildPopup(s), { maxWidth: 260 })
+      .addTo(map);
+
+    m.on('click', () => {
+      highlightSidebarItem(s.id);
+    });
+
+    markers.push({ marker: m, shrine: s });
+  });
+
+  document.getElementById('shrineCount').textContent =
+    `${filtered.length} shrine${filtered.length !== 1 ? 's' : ''}`;
+
+  renderSidebar(roadFilter);
+}
+
+// ════════════════════════════════════════════
+// SIDEBAR
+// ════════════════════════════════════════════
+function renderSidebar(roadFilter) {
+  const list = document.getElementById('shrineList');
+  list.innerHTML = '';
+
+  const filtered = roadFilter === 'all'
+    ? shrines
+    : shrines.filter(s => s.road === roadFilter);
+
+  // Group by road
+  const groups = {};
+  filtered.forEach(s => {
+    if (!groups[s.road]) groups[s.road] = [];
+    groups[s.road].push(s);
+  });
+
+  Object.entries(groups).forEach(([roadKey, items]) => {
+    const road = ROADS[roadKey];
+    const header = document.createElement('div');
+    header.className = 'road-header';
+    header.textContent = `${road.jp}  ${road.en}`;
+    list.appendChild(header);
+
+    items.forEach(s => {
+      const div = document.createElement('div');
+      div.className = 'shrine-item';
+      div.dataset.id = s.id;
+      div.innerHTML = `
+        <div class="shrine-dot" style="background:${ROADS[s.road].color}"></div>
+        <div class="shrine-item-body">
+          <div class="shrine-item-jp">${s.jp}</div>
+          <div class="shrine-item-en">${s.en}</div>
+          <div class="shrine-item-pref">${s.kuni} · ${s.pref}</div>
+        </div>`;
+      div.addEventListener('click', () => {
+        const marker = markers.find(m => m.shrine.id === s.id);
+        if (marker) {
+          map.setView([s.lat, s.lng], 10, { animate: true });
+          marker.marker.openPopup();
+          highlightSidebarItem(s.id);
+        }
+      });
+      list.appendChild(div);
+    });
+  });
+}
+
+function highlightSidebarItem(id) {
+  document.querySelectorAll('.shrine-item').forEach(el => {
+    el.classList.toggle('highlighted', +el.dataset.id === id);
+  });
+  const el = document.querySelector(`.shrine-item[data-id="${id}"]`);
+  if (el) el.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+}
+
+// ═══════════════════════════════════════════
+// FILTER BUTTONS
+// ════════════════════════════════════════════
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeRoad = btn.dataset.road;
+    renderMarkers(activeRoad);
+  });
+});
+
+// Initial render
+renderMarkers('all');
+</script>
+</body>
+</html>
