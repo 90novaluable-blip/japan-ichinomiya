@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Suwa Taisha — Ichinomiya of Shinano Province</title>
+  <style>
+    :root {
+      --red:   #9b2335;
+      --gold:  #c9a84c;
+      --ink:   #1a1a2e;
+      --cream: #fdf6ec;
+      --mist:  #f0ebe3;
+      --gray:  #6b6b6b;
+      --green: #2e7d32;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Georgia',serif; background:var(--cream); color:var(--ink); line-height:1.75; }
+
+    /* ── HEADER ── */
+    header {
+      background:var(--ink); color:#fff;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 28px; position:sticky; top:0; z-index:200;
+      box-shadow:0 2px 12px rgba(0,0,0,0.4);
+    }
+    .logo { display:flex; align-items:baseline; gap:10px; text-decoration:none; }
+    .logo .kanji { font-size:1.5rem; color:var(--gold); font-weight:bold; }
+    .logo .sub   { font-size:0.78rem; color:rgba(255,255,255,0.5); letter-spacing:0.1em; }
+    .header-right { display:flex; align-items:center; gap:16px; }
+    nav a { color:rgba(255,255,255,0.6); text-decoration:none; font-size:0.78rem; letter-spacing:0.08em; margin-left:20px; }
+    nav a:hover { color:var(--gold); }
+    .lang-switcher { display:flex; gap:4px; }
+    .lang-btn { font-size:0.7rem; padding:2px 8px; border-radius:10px; text-decoration:none; border:1px solid rgba(255,255,255,0.2); color:rgba(255,255,255,0.5); transition:all 0.2s; }
+    .lang-btn.active { background:var(--gold); color:var(--ink); border-color:var(--gold); font-weight:bold; }
+
+    /* ── HERO ── */
+    .hero {
+      position:relative; height:88vh; min-height:520px; overflow:hidden;
+      display:flex; flex-direction:column; align-items:center; justify-content:flex-end;
+      padding-bottom:48px; color:#fff; text-align:center;
+    }
+    .hero-bg {
+      position:absolute; inset:0;
+      background:
+        linear-gradient(to bottom, rgba(10,15,5,0.3) 0%, rgba(10,15,5,0.1) 40%, rgba(10,15,5,0.8) 100%),
+        linear-gradient(160deg, #0a1505 0%, #0f1e08 40%, #1a1a0a 70%, #080d14 100%);
+    }
+    /* Mountain silhouette */
+    .hero-mountain {
+      position:absolute; bottom:0; left:0; right:0;
+      opacity:0.13;
+    }
+    .hero-torii {
+      position:absolute; bottom:0; left:50%;
+      transform:translateX(-50%);
+      width:100%; max-width:900px;
+      opacity:0.10;
+    }
+    .hero-glow {
+      position:absolute; width:700px; height:700px; border-radius:50%;
+      background:radial-gradient(circle, rgba(60,100,30,0.15) 0%, rgba(201,168,76,0.07) 50%, transparent 70%);
+      top:50%; left:50%; transform:translate(-50%,-50%);
+    }
+    .particles { position:absolute; inset:0; overflow:hidden; }
+    .particle {
+      position:absolute; width:2px; height:2px;
+      background:rgba(201,168,76,0.6); border-radius:50%;
+      animation:float linear infinite;
+    }
+    @keyframes float {
+      0%   { transform:translateY(100vh) translateX(0); opacity:0; }
+      10%  { opacity:1; } 90% { opacity:1; }
+      100% { transform:translateY(-20px) translateX(30px); opacity:0; }
+    }
+    .hero-content { position:relative; z-index:1; padding:0 20px; }
+    .hero-badge {
+      display:inline-block; border:1px solid var(--gold); color:var(--gold);
+      font-size:0.7rem; letter-spacing:0.25em; padding:4px 16px;
+      border-radius:20px; margin-bottom:16px; text-transform:uppercase;
+    }
+    .hero h1 {
+      font-size:clamp(2rem,6vw,4.5rem); font-weight:normal;
+      line-height:1.1; margin-bottom:8px;
+    }
+    .hero h1 .jp { display:block; font-size:clamp(2.5rem,8vw,5.5rem); color:var(--gold); }
+    .hero-tagline {
+      font-size:clamp(0.9rem,2vw,1.1rem); color:rgba(255,255,255,0.75);
+      max-width:620px; margin:16px auto 0; font-style:italic;
+    }
+    .hero-scroll {
+      margin-top:32px; color:rgba(255,255,255,0.3);
+      font-size:0.72rem; letter-spacing:0.2em;
+      animation:pulse 2.5s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:.3} 50%{opacity:.8} }
+
+    /* ── QUICK FACTS BAR ── */
+    .quick-bar {
+      background:var(--ink); color:#fff;
+      display:flex; justify-content:center; flex-wrap:wrap; gap:0;
+    }
+    .quick-item {
+      padding:14px 28px; display:flex; align-items:center; gap:8px;
+      border-right:1px solid rgba(255,255,255,0.1); font-size:0.8rem;
+    }
+    .quick-item:last-child { border-right:none; }
+    .quick-icon { font-size:1rem; }
+    .quick-label { color:rgba(255,255,255,0.45); font-size:0.65rem; display:block; }
+    .quick-value { color:#fff; font-size:0.85rem; }
+
+    /* ── MAIN GRID ── */
+    .main { max-width:1100px; margin:0 auto; padding:48px 20px 80px; }
+    .grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+    .grid-full { grid-column:1/-1; }
+
+    /* ── CARDS ── */
+    .card {
+      background:#fff; border-radius:12px; overflow:hidden;
+      box-shadow:0 2px 16px rgba(0,0,0,0.07); border:1px solid rgba(0,0,0,0.06);
+    }
+    .card-header {
+      padding:18px 24px 14px; border-bottom:1px solid #f0e8d8;
+      display:flex; align-items:center; gap:12px;
+    }
+    .card-num {
+      width:28px; height:28px; background:var(--red); color:#fff;
+      border-radius:50%; display:flex; align-items:center; justify-content:center;
+      font-size:0.75rem; font-weight:bold; flex-shrink:0;
+    }
+    .card-title-en { font-size:0.65rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold); display:block; }
+    .card-title-jp { font-size:1.05rem; font-weight:bold; display:block; line-height:1.2; }
+    .card-title-zh { font-size:0.7rem; color:var(--gray); display:block; }
+    .card-body { padding:20px 24px 24px; }
+
+    /* Essence */
+    .essence-highlight {
+      background:var(--mist); border-radius:8px; padding:16px 20px;
+      margin-bottom:16px; border-left:3px solid var(--gold);
+    }
+    .essence-label { font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:6px; }
+    .essence-text { font-size:0.95rem; color:#333; }
+    .essence-text strong { color:var(--red); }
+    .essence-story {
+      background:var(--mist); border-radius:8px; padding:14px 18px;
+      margin-top:12px; font-size:0.88rem; color:#444;
+    }
+
+    /* Video */
+    .video-wrapper {
+      position:relative; border-radius:8px; overflow:hidden;
+      background:var(--ink); margin-top:16px;
+    }
+    .video-thumb { width:100%; aspect-ratio:16/9; display:block; }
+    .video-overlay {
+      position:absolute; inset:0;
+      background:linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%);
+      display:flex; align-items:center; justify-content:center;
+    }
+    .play-btn {
+      width:56px; height:56px; border-radius:50%;
+      background:rgba(201,168,76,0.9);
+      display:flex; align-items:center; justify-content:center;
+      text-decoration:none; transition:transform 0.2s, background 0.2s;
+      font-size:1.3rem; color:var(--ink);
+    }
+    .play-btn:hover { transform:scale(1.1); background:var(--gold); }
+    .video-caption {
+      position:absolute; bottom:0; left:0; right:0;
+      padding:10px 14px; color:rgba(255,255,255,0.8); font-size:0.75rem;
+    }
+
+    /* Map */
+    .map-wrapper { border-radius:8px; overflow:hidden; margin-bottom:16px; }
+    .map-wrapper iframe { width:100%; height:240px; border:none; display:block; }
+    .map-link {
+      display:flex; align-items:center; gap:8px; background:var(--ink);
+      color:var(--gold); text-decoration:none; padding:10px 16px;
+      border-radius:6px; font-size:0.82rem; letter-spacing:0.08em;
+      margin-bottom:16px; transition:background 0.2s;
+    }
+    .map-link:hover { background:#2a2a3e; }
+    .access-list { list-style:none; }
+    .access-list li {
+      display:flex; gap:10px; align-items:flex-start;
+      padding:8px 0; border-bottom:1px solid #f0ebe3; font-size:0.88rem;
+    }
+    .access-list li:last-child { border-bottom:none; }
+    .access-icon { flex-shrink:0; font-size:1rem; }
+    .access-main { display:block; color:var(--ink); }
+    .access-sub  { display:block; font-size:0.75rem; color:var(--gray); }
+
+    /* Insight */
+    .insight-item {
+      display:flex; gap:14px; padding:12px 0;
+      border-bottom:1px solid #f0ebe3;
+    }
+    .insight-item:last-child { border-bottom:none; }
+    .insight-badge {
+      flex-shrink:0; padding:2px 8px; border-radius:4px;
+      font-size:0.65rem; font-weight:bold; letter-spacing:0.05em;
+      height:fit-content; margin-top:2px;
+    }
+    .badge-unique   { background:#fff3e0; color:#e65100; }
+    .badge-tip      { background:#e8f5e9; color:#1b5e20; }
+    .badge-info     { background:#e8f0fe; color:#1a237e; }
+    .badge-seasonal { background:#fce4ec; color:#880e4f; }
+    .badge-ritual   { background:#f3e5f5; color:#6a1b9a; }
+    .insight-title { font-size:0.9rem; font-weight:bold; margin-bottom:3px; }
+    .insight-desc  { font-size:0.83rem; color:var(--gray); }
+
+    /* Nearby */
+    .nearby-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; }
+    .nearby-item { background:var(--mist); border-radius:8px; padding:14px; }
+    .nearby-cat {
+      font-size:0.65rem; letter-spacing:0.15em;
+      text-transform:uppercase; color:var(--gray); margin-bottom:4px;
+    }
+    .nearby-icon { font-size:1.2rem; margin-bottom:6px; display:block; }
+    .nearby-name { font-size:0.88rem; font-weight:bold; margin-bottom:4px; }
+    .nearby-desc { font-size:0.78rem; color:var(--gray); }
+
+    /* Deity */
+    .deity-card {
+      background:var(--ink); color:#fff; border-radius:12px; padding:32px;
+      display:grid; grid-template-columns:auto 1fr; gap:28px; align-items:start;
+    }
+    .deity-symbol { font-size:4rem; line-height:1; }
+    .deity-label { font-size:0.65rem; letter-spacing:0.2em; color:var(--gold); text-transform:uppercase; margin-bottom:6px; }
+    .deity-name  { font-size:1.5rem; font-weight:bold; margin-bottom:4px; }
+    .deity-jp    { font-size:0.9rem; color:rgba(255,255,255,0.55); margin-bottom:16px; }
+    .deity-desc  { font-size:0.9rem; color:rgba(255,255,255,0.8); line-height:1.7; margin-bottom:16px; }
+    .blessing-tags { display:flex; flex-wrap:wrap; gap:6px; }
+    .blessing-tag {
+      background:rgba(201,168,76,0.15); border:1px solid rgba(201,168,76,0.3);
+      color:var(--gold); padding:3px 10px; border-radius:12px;
+      font-size:0.72rem; letter-spacing:0.05em;
+    }
+
+    /* Onbashira explainer */
+    .onbashira-box {
+      background:linear-gradient(135deg, #0a1505 0%, #1a1a08 60%, #100a05 100%);
+      color:#fff; border-radius:12px; padding:32px;
+    }
+    .onbashira-title { color:var(--gold); font-size:1.2rem; margin-bottom:6px; }
+    .onbashira-sub   { font-size:0.75rem; letter-spacing:0.15em; color:rgba(255,255,255,0.4); margin-bottom:24px; }
+
+    /* 4-shrine compass diagram */
+    .shrine-compass {
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      grid-template-rows:1fr 1fr;
+      gap:12px;
+      max-width:400px;
+      margin:0 auto 24px;
+    }
+    .sc-shrine {
+      background:rgba(201,168,76,0.1);
+      border:1px solid rgba(201,168,76,0.3);
+      border-radius:8px;
+      padding:14px;
+      text-align:center;
+    }
+    .sc-name-en { font-size:0.75rem; color:var(--gold); font-weight:bold; letter-spacing:0.05em; margin-bottom:4px; }
+    .sc-name-jp { font-size:0.85rem; color:rgba(255,255,255,0.8); margin-bottom:4px; }
+    .sc-detail  { font-size:0.68rem; color:rgba(255,255,255,0.4); }
+    .sc-pillar  { font-size:0.65rem; margin-top:6px; color:rgba(201,168,76,0.7); }
+    .compass-label {
+      text-align:center; font-size:0.7rem; color:rgba(255,255,255,0.3);
+      letter-spacing:0.1em; margin-bottom:8px;
+    }
+    .onbashira-desc { font-size:0.88rem; color:rgba(255,255,255,0.75); line-height:1.8; }
+    .ob-highlight { color:var(--gold); font-weight:bold; }
+
+    /* CTA */
+    .cta-bar {
+      background:var(--red); border-radius:12px; padding:28px 32px;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:20px; flex-wrap:wrap;
+    }
+    .cta-bar h3 { color:#fff; font-size:1.1rem; font-weight:normal; }
+    .cta-bar p  { color:rgba(255,255,255,0.75); font-size:0.85rem; margin-top:4px; }
+    .cta-links  { display:flex; gap:10px; flex-wrap:wrap; }
+    .btn {
+      display:inline-block; padding:10px 22px;
+      border:2px solid #fff; color:#fff; text-decoration:none;
+      border-radius:4px; font-size:0.82rem; letter-spacing:0.08em;
+      transition:background 0.2s, color 0.2s; font-family:inherit;
+    }
+    .btn:hover { background:#fff; color:var(--red); }
+    .btn.secondary { border-color:rgba(255,255,255,0.4); color:rgba(255,255,255,0.7); }
+    .btn.secondary:hover { background:rgba(255,255,255,0.15); color:#fff; }
+
+    /* Breadcrumb */
+    .breadcrumb {
+      padding:12px 20px; font-size:0.75rem; color:var(--gray);
+      max-width:1100px; margin:0 auto;
+    }
+    .breadcrumb a { color:var(--gray); text-decoration:none; }
+    .breadcrumb a:hover { color:var(--red); }
+
+    footer {
+      background:var(--ink); color:rgba(255,255,255,0.35);
+      text-align:center; padding:28px; font-size:0.78rem;
+    }
+
+    @media(max-width:700px) {
+      .grid { grid-template-columns:1fr; }
+      .shrine-compass { grid-template-columns:1fr 1fr; }
+      .nearby-grid { grid-template-columns:1fr; }
+      .deity-card { grid-template-columns:1fr; }
+      .quick-item { padding:10px 16px; }
+      .cta-bar { flex-direction:column; align-items:flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a class="logo" href="ichinomiya-map.html">
+    <span class="kanji">一ノ宮</span>
+    <span class="sub">Japan's First Shrines</span>
+  </a>
+  <div class="header-right">
+    <nav>
+      <a href="ichinomiya-intro.html">What is Ichinomiya?</a>
+      <a href="ichinomiya-map.html">← All Shrines</a>
+    </nav>
+    <div class="lang-switcher">
+      <a href="#" class="lang-btn">日本語</a>
+      <a href="#" class="lang-btn active">EN</a>
+      <a href="#" class="lang-btn">中文</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-glow"></div>
+
+  <!-- Mountain silhouette -->
+  <svg class="hero-mountain" viewBox="0 0 1440 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <polygon points="0,400 200,400 500,120 720,220 900,80 1100,200 1300,100 1440,180 1440,400" fill="white"/>
+    <polygon points="0,400 150,400 400,200 600,280 750,150 950,250 1150,160 1440,260 1440,400" fill="white" opacity="0.4"/>
+  </svg>
+
+  <!-- Torii silhouette -->
+  <svg class="hero-torii" viewBox="0 0 900 500" xmlns="http://www.w3.org/2000/svg">
+    <rect x="200" y="80" width="500" height="28" fill="white"/>
+    <rect x="240" y="108" width="420" height="16" fill="white"/>
+    <rect x="250" y="108" width="36" height="390" fill="white"/>
+    <rect x="614" y="108" width="36" height="390" fill="white"/>
+    <rect x="258" y="200" width="20" height="30" rx="3" fill="white" opacity="0.5"/>
+    <rect x="622" y="200" width="20" height="30" rx="3" fill="white" opacity="0.5"/>
+  </svg>
+
+  <!-- Particles -->
+  <div class="particles">
+    <div class="particle" style="left:7%;animation-duration:10s;animation-delay:0s;"></div>
+    <div class="particle" style="left:18%;animation-duration:13s;animation-delay:2s;"></div>
+    <div class="particle" style="left:33%;animation-duration:9s;animation-delay:4s;"></div>
+    <div class="particle" style="left:48%;animation-duration:11s;animation-delay:1s;"></div>
+    <div class="particle" style="left:60%;animation-duration:8s;animation-delay:3.5s;"></div>
+    <div class="particle" style="left:72%;animation-duration:12s;animation-delay:0.5s;"></div>
+    <div class="particle" style="left:84%;animation-duration:10s;animation-delay:2.5s;"></div>
+    <div class="particle" style="left:93%;animation-duration:14s;animation-delay:5s;"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-badge">信濃國一之宮 · Ichinomiya of Shinano Province</div>
+    <h1>
+      <span class="jp">諏訪大社</span>
+      Suwa Taisha
+    </h1>
+    <p class="hero-tagline">
+      Four ancient shrines around Lake Suwa — where the deity himself<br>
+      is said to still dwell, bound by an ancient vow never to leave.
+    </p>
+    <div class="hero-scroll">↓ &nbsp; explore this shrine</div>
+  </div>
+</div>
+
+<!-- QUICK FACTS BAR -->
+<div class="quick-bar">
+  <div class="quick-item">
+    <span class="quick-icon">📍</span>
+    <div>
+      <span class="quick-label">Location</span>
+      <span class="quick-value">Suwa / Chino / Shimosuwa, Nagano</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">🚃</span>
+    <div>
+      <span class="quick-label">Nearest Station</span>
+      <span class="quick-value">Kami-Suwa / Shimo-Suwa (JR Chuo)</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">🚄</span>
+    <div>
+      <span class="quick-label">From Tokyo</span>
+      <span class="quick-value">~2 hrs (Azusa Limited Express)</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">⏰</span>
+    <div>
+      <span class="quick-label">Open</span>
+      <span class="quick-value">24 hours · Free</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">⛩️</span>
+    <div>
+      <span class="quick-label">Shrines to Visit</span>
+      <span class="quick-value">4 shrines · 2 sites</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">🅿️</span>
+    <div>
+      <span class="quick-label">Parking</span>
+      <span class="quick-value">Yes · at each shrine</span>
+    </div>
+  </div>
+</div>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a href="ichinomiya-map.html">All Shrines</a> &nbsp;›&nbsp;
+  <a href="ichinomiya-map.html?road=Tosando">Tōsandō 東山道</a> &nbsp;›&nbsp;
+  Shinano Province &nbsp;›&nbsp; Suwa Taisha
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+  <!-- Deity row (full width) -->
+  <div class="deity-card grid-full" style="margin-bottom:24px;">
+    <div class="deity-symbol">⛰️</div>
+    <div>
+      <div class="deity-label">Enshrined Deities</div>
+      <div class="deity-name">Takeminakata &amp; Yasakatome</div>
+      <div class="deity-jp">建御名方神 · 八坂刀売神</div>
+      <div class="deity-desc">
+        Takeminakata-no-kami is the son of Ōkuninushi, the great creator god of Izumo.
+        After losing a divine contest of strength to the warrior god Takemikazuchi,
+        he fled to Suwa and vowed never to leave — and so the deity is believed to
+        literally reside here still, bound to this sacred land. He rules over
+        <strong style="color:var(--gold)">wind, water, farming, hunting, and martial arts</strong>,
+        and was venerated by Japan's greatest samurai clans. Beside him, Yasakatome-no-kami
+        is his consort, enshrined at the Upper Shrine's Maemiya.
+      </div>
+      <div class="blessing-tags">
+        <span class="blessing-tag">Wind &amp; Water</span>
+        <span class="blessing-tag">Agriculture &amp; Harvest</span>
+        <span class="blessing-tag">Hunting &amp; Fishing</span>
+        <span class="blessing-tag">Martial Arts</span>
+        <span class="blessing-tag">Victory in Battle</span>
+        <span class="blessing-tag">Business Success</span>
+        <span class="blessing-tag">Safety &amp; Protection</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+
+    <!-- ■ CARD 1: ESSENCE -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">1</div>
+        <div class="card-title-block">
+          <span class="card-title-en">The Essence · 核心価値</span>
+          <span class="card-title-jp">核心的価値 — なぜここが特別なのか</span>
+          <span class="card-title-zh">核心价值 · 为何与众不同</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="essence-highlight">
+          <div class="essence-label">由緒 · Why It Matters</div>
+          <div class="essence-text">
+            <strong>本殿を持たない、山と木が神体。</strong><br>
+            One of Japan's oldest shrines, cited in the 8th-century <em>Kojiki</em>, Suwa Taisha
+            consists of <em>four</em> separate shrines around Lake Suwa — and three of them have
+            <strong>no honden (main hall)</strong> at all. The deity's body is the mountain,
+            the sacred trees, and the land itself.
+          </div>
+        </div>
+        <div class="essence-story">
+          <strong>A shrine older than the written record.</strong> When Empress Suiko's court
+          compiled the Kojiki in 712 CE, Suwa Taisha was already ancient. Takeda Shingen,
+          the great warlord of Kai, prayed here before every campaign and credited his
+          victories to the martial god's blessing. The Hōjō clan, too, bore the shrine's
+          symbol. For over a millennium, no warrior dared face battle without Suwa's blessing.
+        </div>
+
+        <!-- Video thumbnail -->
+        <div class="video-wrapper">
+          <svg class="video-thumb" viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="sg1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#0a1505"/>
+                <stop offset="60%" stop-color="#1a1a08"/>
+                <stop offset="100%" stop-color="#100a05"/>
+              </linearGradient>
+            </defs>
+            <rect width="640" height="360" fill="url(#sg1)"/>
+            <!-- Mountain silhouette -->
+            <polygon points="0,360 100,360 280,180 380,240 480,140 580,220 640,180 640,360" fill="rgba(255,255,255,0.06)"/>
+            <!-- Lake reflection -->
+            <ellipse cx="320" cy="330" rx="280" ry="20" fill="rgba(100,150,200,0.07)"/>
+            <!-- Sacred log / Onbashira hint -->
+            <rect x="290" y="120" width="12" height="160" rx="3" fill="rgba(139,90,43,0.5)" transform="rotate(-15,296,200)"/>
+            <rect x="330" y="110" width="12" height="160" rx="3" fill="rgba(139,90,43,0.4)" transform="rotate(10,336,190)"/>
+            <!-- Stars -->
+            <circle cx="80" cy="50" r="1.5" fill="rgba(255,255,255,0.5)"/>
+            <circle cx="200" cy="35" r="1" fill="rgba(255,255,255,0.4)"/>
+            <circle cx="420" cy="60" r="1.5" fill="rgba(255,255,255,0.5)"/>
+            <circle cx="560" cy="40" r="1" fill="rgba(255,255,255,0.4)"/>
+            <circle cx="500" cy="80" r="1" fill="rgba(255,255,255,0.3)"/>
+            <!-- Moon -->
+            <circle cx="540" cy="70" r="20" fill="none" stroke="rgba(201,168,76,0.25)" stroke-width="1"/>
+            <!-- Label -->
+            <text x="320" y="155" text-anchor="middle" font-family="Georgia,serif" font-size="16" fill="rgba(201,168,76,0.7)" letter-spacing="3">諏訪大社</text>
+            <text x="320" y="177" text-anchor="middle" font-family="Georgia,serif" font-size="10" fill="rgba(255,255,255,0.35)" letter-spacing="2">SUWA TAISHA · FOUR SHRINES</text>
+          </svg>
+          <div class="video-overlay">
+            <a class="play-btn" href="https://www.youtube.com/results?search_query=諏訪大社+参拝+四社+御柱" target="_blank" rel="noopener">▶</a>
+          </div>
+          <div class="video-caption">▶ Watch: four shrines &amp; Onbashira festival — YouTube</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ■ CARD 2: ACCESS -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">2</div>
+        <div class="card-title-block">
+          <span class="card-title-en">Getting There · アクセス</span>
+          <span class="card-title-jp">旅の地図 — 四社へのアクセス</span>
+          <span class="card-title-zh">交通指南 · 如何前往</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="map-wrapper">
+          <iframe
+            src="https://maps.google.com/maps?q=諏訪大社本宮&output=embed"
+            allowfullscreen loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+        <a class="map-link" href="https://maps.google.com/maps?q=諏訪大社本宮" target="_blank" rel="noopener">
+          📍 Open in Google Maps ↗
+        </a>
+        <ul class="access-list">
+          <li>
+            <span class="access-icon">🚄</span>
+            <div class="access-text">
+              <span class="access-main">JR Chuo Line Azusa Limited Express from Shinjuku</span>
+              <span class="access-sub">~2 hrs to Kami-Suwa Sta. (Upper) / Shimo-Suwa Sta. (Lower)</span>
+            </div>
+          </li>
+          <li>
+            <span class="access-icon">🚃</span>
+            <div class="access-text">
+              <span class="access-main">Kamisha Honmiya: 50 min by bus or 15 min taxi from Kami-Suwa</span>
+              <span class="access-sub">Shimosha Harumiya &amp; Akimiya: 15–20 min walk from Shimo-Suwa Sta.</span>
+            </div>
+          </li>
+          <li>
+            <span class="access-icon">🚌</span>
+            <div class="access-text">
+              <span class="access-main">Free tour bus (seasonal) connecting all four shrines</span>
+              <span class="access-sub">Check visit-suwa.com for schedule — runs on specific dates</span>
+            </div>
+          </li>
+          <li>
+            <span class="access-icon">🚗</span>
+            <div class="access-text">
+              <span class="access-main">Car strongly recommended for visiting all four shrines</span>
+              <span class="access-sub">Parking available at each shrine · allow 3–4 hrs for all four</span>
+            </div>
+          </li>
+          <li>
+            <span class="access-icon">⏰</span>
+            <div class="access-text">
+              <span class="access-main">Open 24 hours · Free admission at all four shrines</span>
+              <span class="access-sub">Office hours (goshuin, amulets): ~9:00–16:30</span>
+            </div>
+          </li>
+          <li>
+            <span class="access-icon">♿</span>
+            <div class="access-text">
+              <span class="access-main">Partially accessible — gravel paths at some sites</span>
+              <span class="access-sub">Shimosha Akimiya is the most level and accessible of the four</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ■ CARD 3: DEEP INSIGHT -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">3</div>
+        <div class="card-title-block">
+          <span class="card-title-en">Deep Insight · 深掘り</span>
+          <span class="card-title-jp">リピーターのこだわり — 知る人ぞ知る</span>
+          <span class="card-title-zh">深度探索 · 行家才知道的</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="insight-item">
+          <span class="insight-badge badge-unique">Unique</span>
+          <div class="insight-body">
+            <div class="insight-title">No main hall — the mountain IS the deity</div>
+            <div class="insight-desc">At Kamisha Honmiya, there is no honden (inner hall). You pray directly toward sacred Mt. Moriya (守屋山). At the Lower Shrine, the go-shintai are living trees: a thousand-year-old sugi at Harumiya and a yew at Akimiya. Nature itself is the god.</div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-badge badge-seasonal">Festival</span>
+          <div class="insight-body">
+            <div class="insight-title">Onbashira — Japan's most dangerous festival (every 6 years)</div>
+            <div class="insight-desc">Sixteen giant fir trees (each ~10 tons, 17m long) are felled in the mountains, then dragged by thousands of men and ridden down a 30° slope to the four shrines. Held every 6 years in years of the Tiger and Monkey. Next: 2028.</div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-badge badge-ritual">Ritual</span>
+          <div class="insight-body">
+            <div class="insight-title">Collect all four goshuin — and earn a special gift</div>
+            <div class="insight-desc">Each of the four shrines offers its own unique goshuin (shrine seal). Collect stamps from all four and present them at the final shrine office to receive a commemorative certificate. Allow a full day with a car.</div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-badge badge-info">History</span>
+          <div class="insight-body">
+            <div class="insight-title">Takeda Shingen's sacred sanctuary</div>
+            <div class="insight-desc">The great warlord Takeda Shingen of Kai Province was a fervent devotee of Suwa. He prayed here before every military campaign and took the shrine's sacred banner into battle. Suwa Taisha was effectively the spiritual headquarters of medieval Japanese warfare.</div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-badge badge-tip">Tip</span>
+          <div class="insight-body">
+            <div class="insight-title">Best route: Maemiya → Honmiya (Upper), then Harumiya → Akimiya (Lower)</div>
+            <div class="insight-desc">Start at the Upper Shrine (Maemiya first — the spiritual origin), then head north around the lake to the Lower Shrine. The drive along Lake Suwa's shore is scenic. End at Akimiya for the grand Kaguraden (music hall) and the 1-ton sacred rope.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ■ CARD 4: EAT / STAY / MORE -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">4</div>
+        <div class="card-title-block">
+          <span class="card-title-en">Eat · Stay · Explore</span>
+          <span class="card-title-jp">周辺の滞在 — 食・泊・次の旅へ</span>
+          <span class="card-title-zh">周边吃住行 · 延伸旅程</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="nearby-grid">
+          <div class="nearby-item">
+            <span class="nearby-cat">Local Sake</span>
+            <span class="nearby-icon">🍶</span>
+            <div class="nearby-name">Kamisuwa Sake Alley</div>
+            <div class="nearby-desc">Five sake breweries line up in just 400 meters near Kami-Suwa Station. Suwa's cold mountain water and crisp air produce some of Japan's finest sake — many offer free tastings. Don't miss Masumi (真澄), founded 1662.</div>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-cat">Local Food</span>
+            <span class="nearby-icon">🍜</span>
+            <div class="nearby-name">Soba &amp; Unagi</div>
+            <div class="nearby-desc">Nagano is Japan's soba capital. Around Lake Suwa, also try freshwater eel (unagi) from the lake — a regional speciality for centuries. Chabo Shokudo near Kami-Suwa Station serves a beloved massive chicken katsu.</div>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-cat">Onsen Stay</span>
+            <span class="nearby-icon">♨️</span>
+            <div class="nearby-name">Lake Suwa Onsen Hotels</div>
+            <div class="nearby-desc">The Suwa lakeside has excellent hot spring hotels with views of the water. In winter, the lake sometimes freezes and creates "Omiwatari" (御神渡り) — sacred ice ridges believed to be the gods' crossing. Plan a winter visit for this rare sight.</div>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-cat">Nature</span>
+            <span class="nearby-icon">🏔️</span>
+            <div class="nearby-name">Mt. Kirigamine &amp; Tateshina</div>
+            <div class="nearby-desc">The highland plateau of Kirigamine (霧ヶ峰) offers summer wildflower hiking and winter skiing — 30 min by car from the shrines. Tateshina's birch forests and Shirakabako lake are stunning in autumn foliage.</div>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-cat">Nearby Sight</span>
+            <span class="nearby-icon">🏯</span>
+            <div class="nearby-name">Takato Castle Ruins</div>
+            <div class="nearby-desc">1 hr north, Takato Castle (高遠城) is famous as one of Japan's top 3 cherry blossom spots. Over 1,500 trees turn deep pink in April — an otherworldly sight against the Ina Valley mountains.</div>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-cat">Next Ichinomiya</span>
+            <span class="nearby-icon">⛩️</span>
+            <div class="nearby-name">Mino Ichinomiya: Nangū Taisha</div>
+            <div class="nearby-desc">Head southwest ~2.5 hrs to Nangū Taisha in Gifu — the ichinomiya of Mino Province, enshrining the god of metalworking. Or head north to 気多大社 in Ishikawa (4 hrs) to continue your Tōsandō pilgrimage.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /grid -->
+
+  <!-- ■ ONBASHIRA EXPLAINER -->
+  <div class="onbashira-box grid-full" style="margin-top:32px;">
+    <div class="onbashira-title">御柱祭 Onbashira — The Sacred Pillar Festival</div>
+    <div class="onbashira-sub">EVERY 6 YEARS · YEARS OF THE TIGER &amp; MONKEY · NEXT: 2028</div>
+
+    <!-- 4-Shrine Pillar Map -->
+    <p class="compass-label">Four shrines · Four pillars each · Sixteen giant fir trees total</p>
+    <div class="shrine-compass">
+      <div class="sc-shrine">
+        <div class="sc-name-en">KAMISHA MAEMIYA</div>
+        <div class="sc-name-jp">上社 前宮</div>
+        <div class="sc-detail">Chino City · Origin site</div>
+        <div class="sc-pillar">🪵 Pillars: 一之御柱〜四之御柱</div>
+      </div>
+      <div class="sc-shrine">
+        <div class="sc-name-en">KAMISHA HONMIYA</div>
+        <div class="sc-name-jp">上社 本宮</div>
+        <div class="sc-detail">Suwa City · 6 National Imp. Props</div>
+        <div class="sc-pillar">🪵 Pillars: 一之御柱〜四之御柱</div>
+      </div>
+      <div class="sc-shrine">
+        <div class="sc-name-en">SHIMOSHA HARUMIYA</div>
+        <div class="sc-name-jp">下社 春宮</div>
+        <div class="sc-detail">Shimosuwa · Sacred sugi tree</div>
+        <div class="sc-pillar">🪵 Pillars: 一之御柱〜四之御柱</div>
+      </div>
+      <div class="sc-shrine">
+        <div class="sc-name-en">SHIMOSHA AKIMIYA</div>
+        <div class="sc-name-jp">下社 秋宮</div>
+        <div class="sc-detail">Shimosuwa · Sacred yew tree</div>
+        <div class="sc-pillar">🪵 Pillars: 一之御柱〜四之御柱</div>
+      </div>
+    </div>
+
+    <div class="onbashira-desc">
+      Once every six years, in years corresponding to the Tiger (寅) and Monkey (申) on the zodiac cycle,
+      Suwa Taisha undergoes its most spectacular ritual: the <span class="ob-highlight">Onbashira Matsuri (御柱祭)</span>.<br><br>
+
+      Sixteen enormous fir trees are selected from the sacred forests of Mt. Yatsugatake,
+      each measuring about <span class="ob-highlight">17 meters in length and weighing up to 10 tons</span>.
+      Thousands of men haul each log down the mountain using ropes — then, in the most dramatic moment,
+      volunteers <span class="ob-highlight">ride the logs as they slide down a 30° slope</span> called
+      <em>Kiotoshi</em> (木落し). Injuries are common; it is said that dying in this act is considered an honor.
+      <br><br>
+
+      The logs are then erected at the four corners of each shrine as sacred boundary markers —
+      replacing the previous set that has stood for six years.
+      <span class="ob-highlight">The ritual has been performed continuously for over 1,200 years</span>,
+      and is one of the largest festivals in Japan. As many as 200,000 spectators gather to watch.
+      <br><br>
+      The word <em>Onbashira</em> (御柱) means "the honored pillar." Through this festival,
+      the shrines are symbolically renewed and the deity's power refreshed for another cycle of six years.
+    </div>
+  </div>
+
+  <!-- ■ CTA -->
+  <div class="cta-bar" style="margin-top:32px;">
+    <div>
+      <h3>Ready to visit 諏訪大社?</h3>
+      <p>Plan a day or two — visiting all four shrines is deeply rewarding.</p>
+    </div>
+    <div class="cta-links">
+      <a class="btn" href="https://suwataisha.or.jp/en/" target="_blank" rel="noopener">Official Website ↗</a>
+      <a class="btn secondary" href="ichinomiya-map.html">← All Shrine Map</a>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<footer>
+  <p>一ノ宮 Japan's First Shrines — A guide for overseas travelers &nbsp;|&nbsp;
+  Information compiled from public sources. Always verify hours and seasonal access before visiting.</p>
+</footer>
+
+</body>
+</html>
