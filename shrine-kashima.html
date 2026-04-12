@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kashima Jingū — Ichinomiya of Hitachi Province</title>
+  <style>
+    :root {
+      --red:   #9b2335;
+      --gold:  #c9a84c;
+      --ink:   #1a1a2e;
+      --cream: #fdf6ec;
+      --mist:  #f0ebe3;
+      --gray:  #6b6b6b;
+      --green: #2e7d32;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Georgia',serif; background:var(--cream); color:var(--ink); line-height:1.75; }
+
+    /* ── HEADER ── */
+    header {
+      background:var(--ink); color:#fff;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 28px; position:sticky; top:0; z-index:200;
+      box-shadow:0 2px 12px rgba(0,0,0,0.4);
+    }
+    .logo { display:flex; align-items:baseline; gap:10px; text-decoration:none; }
+    .logo .kanji { font-size:1.5rem; color:var(--gold); font-weight:bold; }
+    .logo .sub   { font-size:0.78rem; color:rgba(255,255,255,0.5); letter-spacing:0.1em; }
+    .header-right { display:flex; align-items:center; gap:16px; }
+    nav a { color:rgba(255,255,255,0.6); text-decoration:none; font-size:0.78rem; letter-spacing:0.08em; margin-left:20px; }
+    nav a:hover { color:var(--gold); }
+    .lang-switcher { display:flex; gap:4px; }
+    .lang-btn { font-size:0.7rem; padding:2px 8px; border-radius:10px; text-decoration:none; border:1px solid rgba(255,255,255,0.2); color:rgba(255,255,255,0.5); transition:all 0.2s; }
+    .lang-btn.active { background:var(--gold); color:var(--ink); border-color:var(--gold); font-weight:bold; }
+
+    /* ── HERO ── */
+    .hero {
+      position:relative;
+      height:88vh;
+      min-height:520px;
+      overflow:hidden;
+      display:flex; flex-direction:column; align-items:center; justify-content:flex-end;
+      padding-bottom:48px;
+      color:#fff;
+      text-align:center;
+    }
+    .hero-bg {
+      position:absolute; inset:0;
+      background:
+        linear-gradient(to bottom, rgba(5,10,20,0.3) 0%, rgba(5,10,20,0.1) 40%, rgba(5,10,20,0.8) 100%),
+        linear-gradient(135deg, #0a0d1a 0%, #0d1a0a 40%, #1a0d05 100%);
+    }
+    .hero-torii {
+      position:absolute;
+      bottom:0; left:50%;
+      transform:translateX(-50%);
+      width:100%; max-width:900px;
+      opacity:0.12;
+    }
+    .hero-glow {
+      position:absolute;
+      width:700px; height:700px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%);
+      top:50%; left:50%;
+      transform:translate(-50%,-50%);
+    }
+    /* Lightning glow unique to Kashima (thunder deity) */
+    .hero-glow2 {
+      position:absolute;
+      width:300px; height:300px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(150,200,255,0.08) 0%, transparent 70%);
+      top:30%; left:40%;
+      transform:translate(-50%,-50%);
+    }
+    .particles { position:absolute; inset:0; overflow:hidden; }
+    .particle {
+      position:absolute;
+      width:2px; height:2px;
+      background:rgba(201,168,76,0.6);
+      border-radius:50%;
+      animation:float linear infinite;
+    }
+    @keyframes float {
+      0%   { transform:translateY(100vh) translateX(0); opacity:0; }
+      10%  { opacity:1; }
+      90%  { opacity:1; }
+      100% { transform:translateY(-20px) translateX(30px); opacity:0; }
+    }
+
+    .hero-content { position:relative; z-index:1; padding:0 20px; }
+    .hero-badge {
+      display:inline-block;
+      border:1px solid var(--gold);
+      color:var(--gold);
+      font-size:0.7rem;
+      letter-spacing:0.25em;
+      padding:4px 16px;
+      border-radius:20px;
+      margin-bottom:16px;
+      text-transform:uppercase;
+    }
+    .hero-kuni {
+      font-size:0.85rem;
+      letter-spacing:0.2em;
+      color:rgba(255,255,255,0.6);
+      margin-bottom:6px;
+    }
+    .hero h1 {
+      font-size:clamp(2rem,6vw,4.5rem);
+      font-weight:normal;
+      line-height:1.1;
+      margin-bottom:8px;
+    }
+    .hero h1 .jp { display:block; font-size:clamp(2.5rem,8vw,5.5rem); color:var(--gold); }
+    .hero-tagline {
+      font-size:clamp(0.9rem,2vw,1.1rem);
+      color:rgba(255,255,255,0.75);
+      max-width:580px;
+      margin:16px auto 0;
+      font-style:italic;
+    }
+    .hero-scroll {
+      margin-top:32px;
+      color:rgba(255,255,255,0.3);
+      font-size:0.72rem;
+      letter-spacing:0.2em;
+      animation:pulse 2.5s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:.3} 50%{opacity:.8} }
+
+    /* ── QUICK FACTS BAR ── */
+    .quick-bar {
+      background:var(--ink);
+      color:#fff;
+      display:flex;
+      justify-content:center;
+      flex-wrap:wrap;
+      gap:0;
+    }
+    .quick-item {
+      padding:14px 28px;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      border-right:1px solid rgba(255,255,255,0.1);
+      font-size:0.8rem;
+    }
+    .quick-item:last-child { border-right:none; }
+    .quick-icon { font-size:1rem; }
+    .quick-label { color:rgba(255,255,255,0.45); font-size:0.65rem; display:block; }
+    .quick-value { color:#fff; font-size:0.85rem; }
+
+    /* ── MAIN GRID ── */
+    .main { max-width:1100px; margin:0 auto; padding:48px 20px 80px; }
+    .grid {
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:24px;
+    }
+    .grid-full { grid-column:1/-1; }
+
+    /* ── CARDS ── */
+    .card {
+      background:#fff;
+      border-radius:12px;
+      overflow:hidden;
+      box-shadow:0 2px 16px rgba(0,0,0,0.07);
+      border:1px solid rgba(0,0,0,0.06);
+    }
+    .card-header {
+      padding:18px 24px 14px;
+      border-bottom:1px solid #f0e8d8;
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    .card-num {
+      width:28px; height:28px;
+      background:var(--red);
+      color:#fff;
+      border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      font-size:0.75rem;
+      font-weight:bold;
+      flex-shrink:0;
+    }
+    .card-title-block {}
+    .card-title-en { font-size:0.65rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold); display:block; }
+    .card-title-jp { font-size:1.05rem; font-weight:bold; display:block; line-height:1.2; }
+    .card-title-zh { font-size:0.7rem; color:var(--gray); display:block; }
+    .card-body { padding:20px 24px 24px; }
+
+    /* Essence card */
+    .essence-highlight {
+      background:var(--mist);
+      border-radius:8px;
+      padding:16px 20px;
+      margin-bottom:16px;
+      border-left:3px solid var(--gold);
+    }
+    .essence-label {
+      font-size:0.65rem;
+      letter-spacing:0.2em;
+      text-transform:uppercase;
+      color:var(--gold);
+      margin-bottom:6px;
+    }
+    .essence-text { font-size:0.95rem; color:#333; }
+    .essence-text strong { color:var(--red); }
+
+    /* Video embed */
+    .video-wrapper {
+      position:relative;
+      border-radius:8px;
+      overflow:hidden;
+      background:var(--ink);
+      margin-top:16px;
+    }
+    .video-overlay {
+      position:absolute; inset:0;
+      background:linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .play-btn {
+      width:56px; height:56px;
+      border-radius:50%;
+      background:rgba(201,168,76,0.9);
+      display:flex; align-items:center; justify-content:center;
+      text-decoration:none;
+      transition:transform 0.2s, background 0.2s;
+      font-size:1.3rem;
+      color:var(--ink);
+    }
+    .play-btn:hover { transform:scale(1.1); background:var(--gold); }
+    .video-caption {
+      position:absolute; bottom:0; left:0; right:0;
+      padding:10px 14px;
+      color:rgba(255,255,255,0.8);
+      font-size:0.75rem;
+    }
+
+    /* Map card */
+    .map-wrapper {
+      border-radius:8px;
+      overflow:hidden;
+      margin-bottom:16px;
+    }
+    .map-wrapper iframe {
+      width:100%;
+      height:240px;
+      border:none;
+      display:block;
+    }
+    .map-link {
+      display:flex; align-items:center; gap:8px;
+      background:var(--ink);
+      color:var(--gold);
+      text-decoration:none;
+      padding:10px 16px;
+      border-radius:6px;
+      font-size:0.82rem;
+      letter-spacing:0.08em;
+      margin-bottom:16px;
+      transition:background 0.2s;
+    }
+    .map-link:hover { background:#2a2a3e; }
+    .access-list { list-style:none; }
+    .access-list li {
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      padding:8px 0;
+      border-bottom:1px solid #f0ebe3;
+      font-size:0.88rem;
+    }
+    .access-list li:last-child { border-bottom:none; }
+    .access-icon { flex-shrink:0; font-size:1rem; }
+    .access-text {}
+    .access-main { display:block; color:var(--ink); }
+    .access-sub  { display:block; font-size:0.75rem; color:var(--gray); }
+
+    /* Deep Insight card */
+    .insight-item {
+      display:flex;
+      gap:14px;
+      padding:12px 0;
+      border-bottom:1px solid #f0ebe3;
+    }
+    .insight-item:last-child { border-bottom:none; }
+    .insight-badge {
+      flex-shrink:0;
+      padding:2px 8px;
+      border-radius:4px;
+      font-size:0.65rem;
+      font-weight:bold;
+      letter-spacing:0.05em;
+      height:fit-content;
+      margin-top:2px;
+    }
+    .badge-unique   { background:#fff3e0; color:#bf360c; }
+    .badge-tip      { background:#f3e5f5; color:#6a1b9a; }
+    .badge-info     { background:#e8f0fe; color:#1a237e; }
+    .badge-seasonal { background:#fce4ec; color:#880e4f; }
+    .badge-secret   { background:#e8f5e9; color:#1b5e20; }
+    .insight-body {}
+    .insight-title { font-size:0.9rem; font-weight:bold; margin-bottom:3px; }
+    .insight-desc  { font-size:0.83rem; color:var(--gray); }
+
+    /* Nearby card */
+    .nearby-grid {
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr;
+      gap:12px;
+    }
+    .nearby-item {
+      background:var(--mist);
+      border-radius:8px;
+      padding:14px;
+    }
+    .nearby-cat {
+      font-size:0.65rem;
+      letter-spacing:0.15em;
+      text-transform:uppercase;
+      color:var(--gray);
+      margin-bottom:4px;
+    }
+    .nearby-icon { font-size:1.2rem; margin-bottom:6px; display:block; }
+    .nearby-name { font-size:0.88rem; font-weight:bold; margin-bottom:4px; }
+    .nearby-desc { font-size:0.78rem; color:var(--gray); }
+
+    /* Deity section */
+    .deity-card {
+      background:var(--ink);
+      color:#fff;
+      border-radius:12px;
+      padding:32px;
+      display:grid;
+      grid-template-columns:auto 1fr;
+      gap:28px;
+      align-items:start;
+    }
+    .deity-symbol {
+      font-size:4rem;
+      line-height:1;
+    }
+    .deity-label { font-size:0.65rem; letter-spacing:0.2em; color:var(--gold); text-transform:uppercase; margin-bottom:6px; }
+    .deity-name  { font-size:1.5rem; font-weight:bold; margin-bottom:4px; }
+    .deity-jp    { font-size:0.9rem; color:rgba(255,255,255,0.55); margin-bottom:16px; }
+    .deity-desc  { font-size:0.9rem; color:rgba(255,255,255,0.8); line-height:1.7; margin-bottom:16px; }
+    .blessing-tags { display:flex; flex-wrap:wrap; gap:6px; }
+    .blessing-tag {
+      background:rgba(201,168,76,0.15);
+      border:1px solid rgba(201,168,76,0.3);
+      color:var(--gold);
+      padding:3px 10px;
+      border-radius:12px;
+      font-size:0.72rem;
+      letter-spacing:0.05em;
+    }
+
+    /* Three Jingu special section */
+    .jingu-box {
+      background:linear-gradient(135deg, #0a0d1a 0%, #0d1505 100%);
+      color:#fff;
+      border-radius:12px;
+      padding:32px;
+    }
+    .jingu-title { color:var(--gold); font-size:1.3rem; margin-bottom:6px; }
+    .jingu-sub   { font-size:0.75rem; letter-spacing:0.15em; color:rgba(255,255,255,0.4); text-transform:uppercase; margin-bottom:24px; }
+    .jingu-grid  { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:20px; }
+    .jingu-node {
+      text-align:center;
+      padding:18px 12px;
+      background:rgba(255,255,255,0.05);
+      border-radius:10px;
+      border:1px solid rgba(201,168,76,0.25);
+      position:relative;
+    }
+    .jingu-node.current {
+      background:rgba(201,168,76,0.12);
+      border-color:var(--gold);
+    }
+    .jingu-node .j-sym  { font-size:2rem; display:block; margin-bottom:8px; }
+    .jingu-node .j-name { font-size:0.95rem; font-weight:bold; color:var(--gold); margin-bottom:4px; }
+    .jingu-node .j-jp   { font-size:0.78rem; color:rgba(255,255,255,0.5); margin-bottom:6px; }
+    .jingu-node .j-pref { font-size:0.7rem; color:rgba(255,255,255,0.3); }
+    .jingu-node .j-badge {
+      position:absolute; top:-8px; left:50%; transform:translateX(-50%);
+      background:var(--gold); color:var(--ink);
+      font-size:0.6rem; font-weight:bold; padding:2px 8px; border-radius:8px;
+      letter-spacing:0.1em; white-space:nowrap;
+    }
+    .jingu-desc { font-size:0.88rem; color:rgba(255,255,255,0.75); line-height:1.8; }
+
+    /* Kaname-ishi section */
+    .kaname-box {
+      background:linear-gradient(160deg, #101520 0%, #1a1005 100%);
+      color:#fff;
+      border-radius:12px;
+      padding:28px;
+      margin-top:16px;
+    }
+    .kaname-title { color:var(--gold); font-size:1rem; margin-bottom:8px; display:flex; align-items:center; gap:10px; }
+    .kaname-desc  { font-size:0.88rem; color:rgba(255,255,255,0.75); line-height:1.75; }
+
+    /* CTA */
+    .cta-bar {
+      background:var(--red);
+      border-radius:12px;
+      padding:28px 32px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+      flex-wrap:wrap;
+    }
+    .cta-bar h3 { color:#fff; font-size:1.1rem; font-weight:normal; }
+    .cta-bar p  { color:rgba(255,255,255,0.75); font-size:0.85rem; margin-top:4px; }
+    .cta-links  { display:flex; gap:10px; flex-wrap:wrap; }
+    .btn {
+      display:inline-block; padding:10px 22px;
+      border:2px solid #fff; color:#fff; text-decoration:none;
+      border-radius:4px; font-size:0.82rem; letter-spacing:0.08em;
+      transition:background 0.2s, color 0.2s; font-family:inherit; cursor:pointer;
+    }
+    .btn:hover { background:#fff; color:var(--red); }
+    .btn.secondary { border-color:rgba(255,255,255,0.4); color:rgba(255,255,255,0.7); }
+    .btn.secondary:hover { background:rgba(255,255,255,0.15); color:#fff; }
+
+    /* Breadcrumb */
+    .breadcrumb {
+      padding:12px 20px;
+      font-size:0.75rem;
+      color:var(--gray);
+      max-width:1100px;
+      margin:0 auto;
+    }
+    .breadcrumb a { color:var(--gray); text-decoration:none; }
+    .breadcrumb a:hover { color:var(--red); }
+
+    footer {
+      background:var(--ink);
+      color:rgba(255,255,255,0.35);
+      text-align:center;
+      padding:28px;
+      font-size:0.78rem;
+    }
+
+    @media(max-width:700px) {
+      .grid { grid-template-columns:1fr; }
+      .jingu-grid { grid-template-columns:1fr; gap:20px; }
+      .nearby-grid { grid-template-columns:1fr; }
+      .deity-card { grid-template-columns:1fr; }
+      .quick-item { padding:10px 16px; }
+      .cta-bar { flex-direction:column; align-items:flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a class="logo" href="ichinomiya-map.html">
+    <span class="kanji">一ノ宮</span>
+    <span class="sub">Japan's First Shrines</span>
+  </a>
+  <div class="header-right">
+    <nav>
+      <a href="ichinomiya-intro.html">What is Ichinomiya?</a>
+      <a href="ichinomiya-map.html">← All Shrines</a>
+    </nav>
+    <div class="lang-switcher">
+      <a href="#" class="lang-btn">日本語</a>
+      <a href="#" class="lang-btn active">EN</a>
+      <a href="#" class="lang-btn">中文</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+
+  <!-- Torii silhouette -->
+  <svg class="hero-torii" viewBox="0 0 900 500" xmlns="http://www.w3.org/2000/svg">
+    <!-- Grand Romon gate shape (two-story) -->
+    <rect x="180" y="60" width="540" height="30" fill="white"/>
+    <rect x="220" y="90" width="460" height="18" fill="white"/>
+    <!-- Upper tier -->
+    <rect x="260" y="140" width="380" height="20" fill="white"/>
+    <rect x="290" y="160" width="320" height="12" fill="white"/>
+    <!-- Pillars -->
+    <rect x="240" y="90" width="40" height="50" fill="white"/>
+    <rect x="620" y="90" width="40" height="50" fill="white"/>
+    <rect x="270" y="160" width="36" height="340" fill="white"/>
+    <rect x="594" y="160" width="36" height="340" fill="white"/>
+    <!-- Lanterns -->
+    <rect x="278" y="260" width="20" height="32" rx="4" fill="white" opacity="0.5"/>
+    <rect x="602" y="260" width="20" height="32" rx="4" fill="white" opacity="0.5"/>
+  </svg>
+
+  <!-- Particles -->
+  <div class="particles">
+    <div class="particle" style="left:8%;animation-duration:9s;animation-delay:0s;"></div>
+    <div class="particle" style="left:22%;animation-duration:12s;animation-delay:1.5s;"></div>
+    <div class="particle" style="left:38%;animation-duration:8s;animation-delay:3s;"></div>
+    <div class="particle" style="left:55%;animation-duration:14s;animation-delay:0.5s;"></div>
+    <div class="particle" style="left:68%;animation-duration:10s;animation-delay:2.5s;"></div>
+    <div class="particle" style="left:80%;animation-duration:11s;animation-delay:4s;"></div>
+    <div class="particle" style="left:92%;animation-duration:7s;animation-delay:1s;"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-badge">常陹國一之宮 · Ichinomiya of Hitachi Province</div>
+    <h1>
+      <span class="jp">鹿島神宮</span>
+      Kashima Jingū
+    </h1>
+    <p class="hero-tagline">
+      Where the thunder deity forged the sword that pacified the land —<br>
+      sanctuary of martial valor, sacred deer, and an ancient forest that never sleeps.
+    </p>
+    <div class="hero-scroll">↓ &nbsp; explore this shrine</div>
+  </div>
+</div>
+
+<!-- QUICK FACTS BAR -->
+<div class="quick-bar">
+  <div class="quick-item">
+    <span class="quick-icon">📍</span>
+    <div>
+      <span class="quick-label">Location</span>
+      <span class="quick-value">Kashima, Ibaraki</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">🚃</span>
+    <div>
+      <span class="quick-label">Nearest Station</span>
+      <span class="quick-value">Kashima Jingū · 10 min walk</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">🚅</span>
+    <div>
+      <span class="quick-label">From Tokyo</span>
+      <span class="quick-value">~2 hrs (bus or train)</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">⏰</span>
+    <div>
+      <span class="quick-label">Open</span>
+      <span class="quick-value">24 hrs · Goshuin 8:30–16:30</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">🙏</span>
+    <div>
+      <span class="quick-label">Annual Visitors</span>
+      <span class="quick-value">~1.8 million (New Year alone)</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">🅿️</span>
+    <div>
+      <span class="quick-label">Parking</span>
+      <span class="quick-value">Yes · near main gate</span>
+    </div>
+  </div>
+</div>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a href="ichinomiya-map.html">All Shrines</a> &nbsp;›&nbsp;
+  <a href="ichinomiya-map.html?road=Oshu">Ōshū 奥州道中</a> &nbsp;›&nbsp;
+  Hitachi Province &nbsp;›&nbsp; Kashima Jingū
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+  <!-- Deity row (full width) -->
+  <div class="deity-card grid-full" style="margin-bottom:24px;">
+    <div class="deity-symbol">⚡</div>
+    <div>
+      <div class="deity-label">Enshrined Deity</div>
+      <div class="deity-name">Takemikazuchi no Okami</div>
+      <div class="deity-jp">武甕槌大神 — God of Thunder, Lightning &amp; Martial Valor</div>
+      <div class="deity-desc">
+        Born from the blood of a slain fire deity, Takemikazuchi descended to the land of Izumo
+        and — with a single display of his divine sword — pacified all gods who resisted the
+        rule of Heaven. Warriors, generals, and samurai throughout history have made the long
+        pilgrimage to Kashima to seek his blessing before battle.
+        <strong style="color:var(--gold)">Fujiwara clan, Minamoto no Yoritomo, Tokugawa Ieyasu</strong>
+        — all came here. His power governs thunder, victory, protection, and the forging of fate.
+      </div>
+      <div class="blessing-tags">
+        <span class="blessing-tag">Martial Victory</span>
+        <span class="blessing-tag">Sports &amp; Competition</span>
+        <span class="blessing-tag">National Protection</span>
+        <span class="blessing-tag">Thunder &amp; Power</span>
+        <span class="blessing-tag">Safe Travel</span>
+        <span class="blessing-tag">Career Advancement</span>
+        <span class="blessing-tag">Overcoming Hardship</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+
+    <!-- ■ CARD 1: ESSENCE -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">1</div>
+        <div class="card-title-block">
+          <span class="card-title-en">The Essence · 核心価値</span>
+          <span class="card-title-jp">核心的価値 — なぜここが特別なのか</span>
+          <span class="card-title-zh">核心价值 · 为何与众不同</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="essence-highlight">
+          <div class="essence-label">由緒 · Why It Matters</div>
+          <div class="essence-text">
+            <strong>神宮の名を持つ、三社のひとつ。</strong><br>
+            Until the Meiji era, only <em>three</em> shrines in all of Japan bore the supreme title
+            "<em>Jingū</em>" — Ise, Katori, and Kashima. Founded (according to tradition) in 660 BC,
+            Kashima Jingū stands apart as the shrine where Japan's very destiny was shaped:
+            its deity personally pacified the land before the first emperor could rule.
+          </div>
+        </div>
+
+        <div class="essence-highlight" style="border-color:var(--red);">
+          <div class="essence-label" style="color:var(--red);">深読み · The Deeper Story</div>
+          <div class="essence-text" style="font-size:0.88rem; color:#444;">
+            The <em>Kashima Shinto-ryu</em>, founded here in the 15th century, is widely regarded
+            as Japan's oldest systematized martial art. Its techniques were the basis for every
+            major sword school that followed — kendo, iaido, ninjutsu. Even today, Japanese
+            athletes in kendo, judo, and other martial sports travel to Kashima before major
+            competitions. The shrine also holds a National Treasure: a straight sword
+            (<em>chokuto</em>) over 2.7 meters long — a blade forged for a god.
+          </div>
+        </div>
+
+        <!-- Video link -->
+        <div class="video-wrapper">
+          <svg style="width:100%;aspect-ratio:16/9;display:block;" viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="kgrd" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#0a0d1a"/>
+                <stop offset="60%" style="stop-color:#0d1505"/>
+                <stop offset="100%" style="stop-color:#1a1005"/>
+              </linearGradient>
+            </defs>
+            <rect width="800" height="450" fill="url(#kgrd)"/>
+            <!-- Forest path -->
+            <rect x="340" y="80" width="120" height="370" fill="rgba(255,255,255,0.03)"/>
+            <!-- Trees silhouettes -->
+            <ellipse cx="100" cy="200" rx="80" ry="220" fill="rgba(255,255,255,0.04)"/>
+            <ellipse cx="700" cy="180" rx="90" ry="250" fill="rgba(255,255,255,0.04)"/>
+            <ellipse cx="220" cy="240" rx="60" ry="180" fill="rgba(255,255,255,0.03)"/>
+            <ellipse cx="580" cy="220" rx="70" ry="200" fill="rgba(255,255,255,0.03)"/>
+            <!-- Torii in distance -->
+            <rect x="360" y="120" width="80" height="8" fill="rgba(201,168,76,0.3)"/>
+            <rect x="370" y="128" width="8" height="80" fill="rgba(201,168,76,0.2)"/>
+            <rect x="422" y="128" width="8" height="80" fill="rgba(201,168,76,0.2)"/>
+            <!-- Deer silhouette -->
+            <ellipse cx="400" cy="350" rx="30" ry="18" fill="rgba(201,168,76,0.15)"/>
+            <line x1="400" y1="332" x2="400" y2="310" stroke="rgba(201,168,76,0.15)" stroke-width="4"/>
+            <!-- Glow -->
+            <circle cx="400" cy="225" r="120" fill="rgba(201,168,76,0.04)"/>
+            <!-- Text -->
+            <text x="400" y="420" text-anchor="middle" fill="rgba(255,255,255,0.25)" font-size="13" font-family="Georgia,serif" letter-spacing="3">SACRED FOREST · 鹿島の杜</text>
+          </svg>
+          <div class="video-overlay">
+            <a class="play-btn" href="https://www.youtube.com/results?search_query=鹿島神宮+参拝+境内+4K" target="_blank">▶</a>
+          </div>
+          <div class="video-caption">Watch: Kashima Jingū — Walk the Sacred Forest Path</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ■ CARD 2: ACCESS -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">2</div>
+        <div class="card-title-block">
+          <span class="card-title-en">Getting There · アクセス</span>
+          <span class="card-title-jp">旅の地図 — アクセス完全ガイド</span>
+          <span class="card-title-zh">交通指南 · 如何前往</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="map-wrapper">
+          <iframe
+            src="https://maps.google.com/maps?q=鹿島神宮+茨城県&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+        <a class="map-link" href="https://maps.google.com/maps?q=鹿島神宮" target="_blank">
+          📍 Open in Google Maps ↗
+        </a>
+        <ul class="access-list">
+          <li>
+            <span class="access-icon">🚌</span>
+            <span class="access-text">
+              <span class="access-main">Highway Bus from Tokyo Station (Yaesu Exit)</span>
+              <span class="access-sub">~2 hrs to Kashima Jingū · Most convenient option · ¥1,800–2,200</span>
+            </span>
+          </li>
+          <li>
+            <span class="access-icon">🚂</span>
+            <span class="access-text">
+              <span class="access-main">JR Sobu Line → Chiba → JR Kashima Line → Kashima Jingū Sta.</span>
+              <span class="accest-sub">~2 hrs from Tokyo · Then 10 min walk to shrine gate</span>
+            </span>
+          </li>
+          <li>
+            <span class="access-icon">🚗</span>
+            <span class="access-text">
+              <span class="access-main">Higashi-Kanto Expressway → Katori IC or Kashima IC</span>
+              <span class="access-sub">~1.5 hrs from central Tokyo · Parking available near Romon Gate</span>
+            </span>
+          </li>
+          <li>
+            <span class="access-icon">⏰</span>
+            <span class="access-text">
+              <span class="access-main">Grounds: Open 24 hours year-round</span>
+              <span class="access-sub">Goshuin &amp; prayers: 8:30–16:30 · Treasure Hall: 8:00–16:00 (¥500)</span>
+            </span>
+          </li>
+          <li>
+            <span class="access-icon">♿</span>
+            <span class="access-text">
+              <span class="access-main">Main approach is paved; forest path has some steps</span>
+              <span class="access-sub">Wheelchair accessible to main hall; inner shrine path uneven</span>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ■ CARD 3: DEEP INSIGHT -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">3</div>
+        <div class="card-title-block">
+          <span class="card-title-en">Insider's Guide · 深掘り</span>
+          <span class="card-title-jp">リピーターのこだわり — 5つの必見ポイント</span>
+          <span class="card-title-zh">深度体验 · 行家才知道的5件事</span>
+        </div>
+      </div>
+      <div class="card-body">
+
+        <div class="insight-item">
+          <span class="insight-badge badge-unique">UNIQUE</span>
+          <div class="insight-body">
+            <div class="insight-title">Sacred Deer — Messengers of the God</div>
+            <div class="insight-desc">The deer of Kashima are considered divine messengers (<em>shinkoku</em>). Legend holds that when the god Takemikazuchi traveled to Nara, his deer accompanied him — which is why Nara's famous deer are considered descendants of Kashima's sacred animals. About 60 deer still roam the inner deer park today.</div>
+          </div>
+        </div>
+
+        <div class="insight-item">
+          <span class="insight-badge badge-info">MYSTERY</span>
+          <div class="insight-body">
+            <div class="insight-title">Kaname-ishi — The Earthquake Keystone</div>
+            <div class="insight-desc">Buried deep in the earth near the inner shrine is a stone called <em>Kaname-ishi</em> (要石, "keystone"). Only a small tip is visible. Myth holds it pins down the head of the giant underground catfish (<em>namazu</em>) whose thrashing causes earthquakes. A similar stone exists at Katori Shrine nearby.</div>
+          </div>
+        </div>
+
+        <div class="insight-item">
+          <span class="insight-badge badge-unique">UNIQUE</span>
+          <div class="insight-body">
+            <div class="insight-title">Mitarashi Pond — The Spring That Never Overflows</div>
+            <div class="insight-desc">This crystal-clear spring produces an estimated 400,000 liters of fresh water daily — yet the pond has never overflowed and never dried in recorded history. In January, over 200 people participate in the Great Cold Purification Ritual (<em>Kanmisogi</em>) by immersing themselves in its icy waters.</div>
+          </div>
+        </div>
+
+        <div class="insight-item">
+          <span class="insight-badge badge-tip">TIP</span>
+          <div class="insight-body">
+            <div class="insight-title">Walk the Oku-Sando — The Inner Forest Path</div>
+            <div class="insight-desc">Beyond the main hall, a 500-meter moss-covered stone path leads through a 70-hectare ancient forest to the Oku-miya (inner shrine), donated by Tokugawa Ieyasu in 1605. The forest holds over 800 plant species and is a prefectural Natural Monument. Go early morning for complete silence.</div>
+          </div>
+        </div>
+
+        <div class="insight-item">
+          <span class="insight-badge badge-seasonal">FESTIVAL</span>
+          <div class="insight-body">
+            <div class="insight-title">Ofune Matsuri — Once Every 12 Years</div>
+            <div class="insight-desc">The legendary Ship Festival (<em>Ofune Matsuri</em>) has been held since ancient times and occurs only once every 12 years, drawing pilgrims from across Japan. Over 80 annual festivals take place throughout the year, including spectacular autumn festivals and New Year celebrations that draw nearly 600,000 visitors in three days.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ■ CARD 4: EAT / STAY / MORE -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">4</div>
+        <div class="card-title-block">
+          <span class="card-title-en">Around the Shrine · 周辺情報</span>
+          <span class="card-title-jp">周辺の滞在 — 食・泊・さらなる探訪</span>
+          <span class="card-title-zh">周边体验 · 美食、住宿与周边景点</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="nearby-grid">
+          <div class="nearby-item">
+            <div class="nearby-cat">🍽️ Local Flavors</div>
+            <span class="nearby-icon">🐚</span>
+            <div class="nearby-name">Hamaguri &amp; Namazu</div>
+            <div class="nearby-desc">The shrine approach is lined with stalls serving hamaguri (clam) dishes — hamaguri curry, hamaguri ramen — alongside namazu (catfish) hot pot at century-old restaurants, and anko (anglerfish) stew in winter.</div>
+          </div>
+          <div class="nearby-item">
+            <div class="nearby-cat">🏨 Stay Nearby</div>
+            <span class="nearby-icon">🌊</span>
+            <div class="nearby-name">Kashima / Kamisu Hotels</div>
+            <div class="nearby-desc">Several business hotels in Kashima City within 15 min of the shrine. Alternatively, stay in Choshi or Sawara for a more traditional riverside inn experience along the Tone River.</div>
+          </div>
+          <div class="nearby-item">
+            <div class="nearby-cat">🗺️ Next Stop</div>
+            <span class="nearby-icon">⛩️</span>
+            <div class="nearby-name">Higashi-Kuni Sansha Pilgrimage</div>
+            <div class="nearby-desc">Combine with nearby Katori Jingū (Chiba, 30 min) and Ikisu Shrine to complete the "Three Eastern Shrines" pilgrimage — known as the Kantō region's equivalent of the Ise Grand Shrine circuit.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ■ SPECIAL SECTION: Three Grand Jingū -->
+    <div class="grid-full">
+      <div class="jingu-box">
+        <div class="jingu-title">⚔️ Japan's Supreme Triad — The Three Grand Jingū</div>
+        <div class="jingu-sub">三大神宮 · Until the Meiji Era, Only Three Shrines Bore This Name</div>
+
+        <div class="jingu-grid">
+          <div class="jingu-node">
+            <span class="j-sym">☀️</span>
+            <div class="j-name">Ise Jingū</div>
+            <div class="j-jp">伊勢神宮</div>
+            <div class="j-pref">Mie Prefecture · Deity of the Sun</div>
+          </div>
+          <div class="jingu-node current">
+            <div class="j-badge">YOU ARE HERE</div>
+            <span class="j-sym">⚡</span>
+            <div class="j-name">Kashima Jingū</div>
+            <div class="j-jp">鹿島神宮</div>
+            <div class="j-pref">Ibaraki Prefecture · Deity of Thunder &amp; War</div>
+          </div>
+          <div class="jingu-node">
+            <span class="j-sym">🌊</span>
+            <div class="j-name">Katori Jingū</div>
+            <div class="j-jp">香取神宮</div>
+            <div class="j-pref">Chiba Prefecture · Deity of the Sword</div>
+          </div>
+        </div>
+
+        <div class="jingu-desc">
+          In the ancient Shinto hierarchy, the title "<em>Jingū</em>" (神宮) was reserved for the most sacred shrines
+          of all — those whose deities directly shaped the fate of Japan. For over a thousand years, this honor was
+          held by only three: Ise, enshrining the Sun Goddess Amaterasu; Kashima, enshrining the god who pacified the land;
+          and Katori, enshrining the god who aided that pacification. All other shrines, however grand, were called
+          "<em>Taisha</em>" or "<em>Jinja</em>." Today's pilgrims who walk the Eastern Jingū circuit in a single day
+          are following a tradition that stretches back over a thousand years.
+        </div>
+
+        <div class="kaname-box">
+          <div class="kaname-title">🪨 The Kaname-ishi: Japan's Earthquake Suppressor</div>
+          <div class="kaname-desc">
+            Deep beneath the grounds of Kashima Jingū lies the <em>Kaname-ishi</em> (要石) — the "keystone of the earth."
+            Only a small rounded tip, about the size of a fist, protrudes above the soil. According to Shinto mythology,
+            the stone penetrates into the underworld and pins down the enormous catfish (<em>Ōnamazu</em>) whose writhing
+            body causes earthquakes across Japan. An identical stone exists at Katori Jingū 30 km away — and together,
+            the two stones are said to secure both ends of the creature. Pilgrims touch the stone and pray for protection
+            from disasters. Scientists in the Edo period reportedly tried to dig up the stone for three consecutive days
+            and nights — and found it had no bottom.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ■ CTA BAR -->
+    <div class="grid-full">
+      <div class="cta-bar">
+        <div>
+          <h3>Ready to visit Kashima Jingū?</h3>
+          <p>Open 24 hours · Free entry to grounds · 2 hrs from Tokyo</p>
+        </div>
+        <div class="cta-links">
+          <a class="btn" href="https://kashimajingu.jp" target="_blank">Official Website ↗</a>
+          <a class="btn secondary" href="ichinomiya-map.html">← All Shrines Map</a>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /grid -->
+</div><!-- /main -->
+
+<footer>
+  <p>一ノ宮 Ichinomiya Japan · A guide to Japan's provincial first shrines for international travelers</p>
+  <p style="margin-top:6px;">Kashima Jingū · 常陸國一之宮 · Kashima City, Ibaraki Prefecture</p>
+</footer>
+
+</body>
+</html>
