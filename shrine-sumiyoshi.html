@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sumiyoshi Taisha — Ichinomiya of Settsu Province</title>
+  <style>
+    :root {
+      --red:   #9b2335;
+      --gold:  #c9a84c;
+      --ink:   #1a1a2e;
+      --cream: #fdf6ec;
+      --mist:  #f0ebe3;
+      --gray:  #6b6b6b;
+      --green: #2e7d32;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Georgia',serif; background:var(--cream); color:var(--ink); line-height:1.75; }
+
+    /* ── HEADER ── */
+    header {
+      background:var(--ink); color:#fff;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 28px; position:sticky; top:0; z-index:200;
+      box-shadow:0 2px 12px rgba(0,0,0,0.4);
+    }
+    .logo { display:flex; align-items:baseline; gap:10px; text-decoration:none; }
+    .logo .kanji { font-size:1.5rem; color:var(--gold); font-weight:bold; }
+    .logo .sub   { font-size:0.78rem; color:rgba(255,255,255,0.5); letter-spacing:0.1em; }
+    .header-right { display:flex; align-items:center; gap:16px; }
+    nav a { color:rgba(255,255,255,0.6); text-decoration:none; font-size:0.78rem; letter-spacing:0.08em; margin-left:20px; }
+    nav a:hover { color:var(--gold); }
+    .lang-switcher { display:flex; gap:4px; }
+    .lang-btn { font-size:0.7rem; padding:2px 8px; border-radius:10px; text-decoration:none; border:1px solid rgba(255,255,255,0.2); color:rgba(255,255,255,0.5); transition:all 0.2s; }
+    .lang-btn.active { background:var(--gold); color:var(--ink); border-color:var(--gold); font-weight:bold; }
+
+    /* ── HERO ── */
+    .hero {
+      position:relative;
+      height:88vh;
+      min-height:520px;
+      overflow:hidden;
+      display:flex; flex-direction:column; align-items:center; justify-content:flex-end;
+      padding-bottom:48px;
+      color:#fff;
+      text-align:center;
+    }
+    .hero-bg {
+      position:absolute; inset:0;
+      background:
+        linear-gradient(to bottom, rgba(5,15,30,0.3) 0%, rgba(5,15,30,0.1) 40%, rgba(5,15,30,0.78) 100%),
+        linear-gradient(135deg, #050f1e 0%, #0a1a2e 50%, #0d1a12 100%);
+    }
+    /* Wave motif — sea deity theme */
+    .hero-waves {
+      position:absolute;
+      bottom:0; left:0; right:0;
+      height:260px;
+      opacity:0.08;
+    }
+    .hero-torii {
+      position:absolute;
+      bottom:0; left:50%;
+      transform:translateX(-50%);
+      width:100%; max-width:900px;
+      opacity:0.11;
+    }
+    .hero-glow {
+      position:absolute;
+      width:700px; height:700px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(10,80,160,0.18) 0%, rgba(201,168,76,0.08) 50%, transparent 70%);
+      top:50%; left:50%;
+      transform:translate(-50%,-50%);
+    }
+    .particles { position:absolute; inset:0; overflow:hidden; }
+    .particle {
+      position:absolute;
+      width:2px; height:2px;
+      background:rgba(201,168,76,0.6);
+      border-radius:50%;
+      animation:float linear infinite;
+    }
+    @keyframes float {
+      0%   { transform:translateY(100vh) translateX(0); opacity:0; }
+      10%  { opacity:1; }
+      90%  { opacity:1; }
+      100% { transform:translateY(-20px) translateX(30px); opacity:0; }
+    }
+
+    .hero-content { position:relative; z-index:1; padding:0 20px; }
+    .hero-badge {
+      display:inline-block;
+      border:1px solid var(--gold);
+      color:var(--gold);
+      font-size:0.7rem;
+      letter-spacing:0.25em;
+      padding:4px 16px;
+      border-radius:20px;
+      margin-bottom:16px;
+      text-transform:uppercase;
+    }
+    .hero-kuni {
+      font-size:0.85rem;
+      letter-spacing:0.2em;
+      color:rgba(255,255,255,0.6);
+      margin-bottom:6px;
+    }
+    .hero h1 {
+      font-size:clamp(2rem,6vw,4.5rem);
+      font-weight:normal;
+      line-height:1.1;
+      margin-bottom:8px;
+    }
+    .hero h1 .jp { display:block; font-size:clamp(2.5rem,8vw,5.5rem); color:var(--gold); }
+    .hero-tagline {
+      font-size:clamp(0.9rem,2vw,1.1rem);
+      color:rgba(255,255,255,0.75);
+      max-width:600px;
+      margin:16px auto 0;
+      font-style:italic;
+    }
+    .hero-scroll {
+      margin-top:32px;
+      color:rgba(255,255,255,0.3);
+      font-size:0.72rem;
+      letter-spacing:0.2em;
+      animation:pulse 2.5s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:.3} 50%{opacity:.8} }
+
+    /* ── QUICK FACTS BAR ── */
+    .quick-bar {
+      background:var(--ink);
+      color:#fff;
+      display:flex;
+      justify-content:center;
+      flex-wrap:wrap;
+      gap:0;
+    }
+    .quick-item {
+      padding:14px 28px;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      border-right:1px solid rgba(255,255,255,0.1);
+      font-size:0.8rem;
+    }
+    .quick-item:last-child { border-right:none; }
+    .quick-icon { font-size:1rem; }
+    .quick-label { color:rgba(255,255,255,0.45); font-size:0.65rem; display:block; }
+    .quick-value { color:#fff; font-size:0.85rem; }
+
+    /* ── MAIN GRID ── */
+    .main { max-width:1100px; margin:0 auto; padding:48px 20px 80px; }
+    .grid {
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:24px;
+    }
+    .grid-full { grid-column:1/-1; }
+
+    /* ── CARDS ── */
+    .card {
+      background:#fff;
+      border-radius:12px;
+      overflow:hidden;
+      box-shadow:0 2px 16px rgba(0,0,0,0.07);
+      border:1px solid rgba(0,0,0,0.06);
+    }
+    .card-header {
+      padding:18px 24px 14px;
+      border-bottom:1px solid #f0e8d8;
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    .card-num {
+      width:28px; height:28px;
+      background:var(--red);
+      color:#fff;
+      border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      font-size:0.75rem;
+      font-weight:bold;
+      flex-shrink:0;
+    }
+    .card-title-block {}
+    .card-title-en { font-size:0.65rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold); display:block; }
+    .card-title-jp { font-size:1.05rem; font-weight:bold; display:block; line-height:1.2; }
+    .card-title-zh { font-size:0.7rem; color:var(--gray); display:block; }
+    .card-body { padding:20px 24px 24px; }
+
+    /* Essence card */
+    .essence-highlight {
+      background:var(--mist);
+      border-radius:8px;
+      padding:16px 20px;
+      margin-bottom:16px;
+      border-left:3px solid var(--gold);
+    }
+    .essence-label {
+      font-size:0.65rem;
+      letter-spacing:0.2em;
+      text-transform:uppercase;
+      color:var(--gold);
+      margin-bottom:6px;
+    }
+    .essence-text { font-size:0.95rem; color:#333; }
+    .essence-text strong { color:var(--red); }
+    .essence-story {
+      background:var(--mist);
+      border-radius:8px;
+      padding:14px 18px;
+      margin-top:12px;
+      font-size:0.88rem;
+      color:#444;
+    }
+
+    /* Video embed */
+    .video-wrapper {
+      position:relative;
+      border-radius:8px;
+      overflow:hidden;
+      background:var(--ink);
+      margin-top:16px;
+      cursor:pointer;
+    }
+    .video-thumb {
+      width:100%;
+      aspect-ratio:16/9;
+      display:block;
+    }
+    .video-overlay {
+      position:absolute; inset:0;
+      background:linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .play-btn {
+      width:56px; height:56px;
+      border-radius:50%;
+      background:rgba(201,168,76,0.9);
+      display:flex; align-items:center; justify-content:center;
+      text-decoration:none;
+      transition:transform 0.2s, background 0.2s;
+      font-size:1.3rem;
+      color:var(--ink);
+    }
+    .play-btn:hover { transform:scale(1.1); background:var(--gold); }
+    .video-caption {
+      position:absolute; bottom:0; left:0; right:0;
+      padding:10px 14px;
+      color:rgba(255,255,255,0.8);
+      font-size:0.75rem;
+    }
+
+    /* Map card */
+    .map-wrapper {
+      border-radius:8px;
+      overflow:hidden;
+      margin-bottom:16px;
+    }
+    .map-wrapper iframe {
+      width:100%;
+      height:240px;
+      border:none;
+      display:block;
+    }
+    .map-link {
+      display:flex; align-items:center; gap:8px;
+      background:var(--ink);
+      color:var(--gold);
+      text-decoration:none;
+      padding:10px 16px;
+      border-radius:6px;
+      font-size:0.82rem;
+      letter-spacing:0.08em;
+      margin-bottom:16px;
+      transition:background 0.2s;
+    }
+    .map-link:hover { background:#2a2a3e; }
+    .access-list { list-style:none; }
+    .access-list li {
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      padding:8px 0;
+      border-bottom:1px solid #f0ebe3;
+      font-size:0.88rem;
+    }
+    .access-list li:last-child { border-bottom:none; }
+    .access-icon { flex-shrink:0; font-size:1rem; }
+    .access-text {}
+    .access-main { display:block; color:var(--ink); }
+    .access-sub  { display:block; font-size:0.75rem; color:var(--gray); }
+
+    /* Deep Insight card */
+    .insight-item {
+      display:flex;
+      gap:14px;
+      padding:12px 0;
+      border-bottom:1px solid #f0ebe3;
+    }
+    .insight-item:last-child { border-bottom:none; }
+    .insight-badge {
+      flex-shrink:0;
+      padding:2px 8px;
+      border-radius:4px;
+      font-size:0.65rem;
+      font-weight:bold;
+      letter-spacing:0.05em;
+      height:fit-content;
+      margin-top:2px;
+    }
+    .badge-unique   { background:#fff3e0; color:#e65100; }
+    .badge-tip      { background:#e8f5e9; color:#1b5e20; }
+    .badge-info     { background:#e8f0fe; color:#1a237e; }
+    .badge-seasonal { background:#fce4ec; color:#880e4f; }
+    .badge-ritual   { background:#f3e5f5; color:#6a1b9a; }
+    .insight-body {}
+    .insight-title { font-size:0.9rem; font-weight:bold; margin-bottom:3px; }
+    .insight-desc  { font-size:0.83rem; color:var(--gray); }
+
+    /* Nearby card */
+    .nearby-grid {
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr;
+      gap:12px;
+    }
+    .nearby-item {
+      background:var(--mist);
+      border-radius:8px;
+      padding:14px;
+    }
+    .nearby-cat {
+      font-size:0.65rem;
+      letter-spacing:0.15em;
+      text-transform:uppercase;
+      color:var(--gray);
+      margin-bottom:4px;
+    }
+    .nearby-icon { font-size:1.2rem; margin-bottom:6px; display:block; }
+    .nearby-name { font-size:0.88rem; font-weight:bold; margin-bottom:4px; }
+    .nearby-desc { font-size:0.78rem; color:var(--gray); }
+
+    /* Deity section */
+    .deity-card {
+      background:var(--ink);
+      color:#fff;
+      border-radius:12px;
+      padding:32px;
+      display:grid;
+      grid-template-columns:auto 1fr;
+      gap:28px;
+      align-items:start;
+    }
+    .deity-symbol {
+      font-size:4rem;
+      line-height:1;
+    }
+    .deity-label { font-size:0.65rem; letter-spacing:0.2em; color:var(--gold); text-transform:uppercase; margin-bottom:6px; }
+    .deity-name  { font-size:1.5rem; font-weight:bold; margin-bottom:4px; }
+    .deity-jp    { font-size:0.9rem; color:rgba(255,255,255,0.55); margin-bottom:16px; }
+    .deity-desc  { font-size:0.9rem; color:rgba(255,255,255,0.8); line-height:1.7; margin-bottom:16px; }
+    .blessing-tags { display:flex; flex-wrap:wrap; gap:6px; }
+    .blessing-tag {
+      background:rgba(201,168,76,0.15);
+      border:1px solid rgba(201,168,76,0.3);
+      color:var(--gold);
+      padding:3px 10px;
+      border-radius:12px;
+      font-size:0.72rem;
+      letter-spacing:0.05em;
+    }
+
+    /* Sumiyoshi-zukuri explainer */
+    .zukuri-box {
+      background:linear-gradient(135deg, #050f1e 0%, #0a1a2e 100%);
+      color:#fff;
+      border-radius:12px;
+      padding:32px;
+    }
+    .zukuri-title { color:var(--gold); font-size:1.2rem; margin-bottom:6px; }
+    .zukuri-sub   { font-size:0.75rem; letter-spacing:0.15em; color:rgba(255,255,255,0.4); margin-bottom:24px; }
+
+    /* 4-shrine layout diagram */
+    .shrine-layout {
+      display:flex;
+      gap:10px;
+      align-items:flex-end;
+      justify-content:center;
+      margin-bottom:24px;
+    }
+    .shrine-block {
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:6px;
+    }
+    .shrine-hall {
+      background:rgba(201,168,76,0.12);
+      border:1px solid rgba(201,168,76,0.35);
+      border-radius:6px;
+      display:flex; align-items:center; justify-content:center;
+      color:var(--gold);
+      font-size:0.72rem;
+      font-weight:bold;
+      letter-spacing:0.05em;
+    }
+    .hall-label {
+      font-size:0.65rem;
+      color:rgba(255,255,255,0.45);
+      text-align:center;
+    }
+    .compass-row {
+      display:flex;
+      align-items:center;
+      gap:16px;
+      margin-bottom:16px;
+      color:rgba(255,255,255,0.5);
+      font-size:0.75rem;
+    }
+    .compass-row span { color:var(--gold); font-size:1rem; }
+    .zukuri-desc { font-size:0.88rem; color:rgba(255,255,255,0.75); line-height:1.8; }
+    .zukuri-highlight { color:var(--gold); font-weight:bold; }
+
+    /* CTA */
+    .cta-bar {
+      background:var(--red);
+      border-radius:12px;
+      padding:28px 32px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+      flex-wrap:wrap;
+    }
+    .cta-bar h3 { color:#fff; font-size:1.1rem; font-weight:normal; }
+    .cta-bar p  { color:rgba(255,255,255,0.75); font-size:0.85rem; margin-top:4px; }
+    .cta-links  { display:flex; gap:10px; flex-wrap:wrap; }
+    .btn {
+      display:inline-block; padding:10px 22px;
+      border:2px solid #fff; color:#fff; text-decoration:none;
+      border-radius:4px; font-size:0.82rem; letter-spacing:0.08em;
+      transition:background 0.2s, color 0.2s; font-family:inherit; cursor:pointer;
+    }
+    .btn:hover { background:#fff; color:var(--red); }
+    .btn.secondary { border-color:rgba(255,255,255,0.4); color:rgba(255,255,255,0.7); }
+    .btn.secondary:hover { background:rgba(255,255,255,0.15); color:#fff; }
+
+    /* Breadcrumb */
+    .breadcrumb {
+      padding:12px 20px;
+      font-size:0.75rem;
+      color:var(--gray);
+      max-width:1100px;
+      margin:0 auto;
+    }
+    .breadcrumb a { color:var(--gray); text-decoration:none; }
+    .breadcrumb a:hover { color:var(--red); }
+
+    footer {
+      background:var(--ink);
+      color:rgba(255,255,255,0.35);
+      text-align:center;
+      padding:28px;
+      font-size:0.78rem;
+    }
+
+    @media(max-width:700px) {
+      .grid { grid-template-columns:1fr; }
+      .shrine-layout { flex-wrap:wrap; }
+      .nearby-grid { grid-template-columns:1fr; }
+      .deity-card { grid-template-columns:1fr; }
+      .quick-item { padding:10px 16px; }
+      .cta-bar { flex-direction:column; align-items:flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a class="logo" href="ichinomiya-map.html">
+    <span class="kanji">一ノ宮</span>
+    <span class="sub">Japan's First Shrines</span>
+  </a>
+  <div class="header-right">
+    <nav>
+      <a href="ichinomiya-intro.html">What is Ichinomiya?</a>
+      <a href="ichinomiya-map.html">← All Shrines</a>
+    </nav>
+    <div class="lang-switcher">
+      <a href="#" class="lang-btn">日本語</a>
+      <a href="#" class="lang-btn active">EN</a>
+      <a href="#" class="lang-btn">中文</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-glow"></div>
+
+  <!-- Torii silhouette -->
+  <svg class="hero-torii" viewBox="0 0 900 500" xmlns="http://www.w3.org/2000/svg">
+    <rect x="200" y="80" width="500" height="28" fill="white"/>
+    <rect x="240" y="108" width="420" height="16" fill="white"/>
+    <rect x="250" y="108" width="36" height="390" fill="white"/>
+    <rect x="614" y="108" width="36" height="390" fill="white"/>
+    <rect x="258" y="200" width="20" height="30" rx="3" fill="white" opacity="0.5"/>
+    <rect x="622" y="200" width="20" height="30" rx="3" fill="white" opacity="0.5"/>
+  </svg>
+
+  <!-- Wave motif (sea deity) -->
+  <svg class="hero-waves" viewBox="0 0 1440 260" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <path d="M0,160 C240,220 480,100 720,160 C960,220 1200,100 1440,160 L1440,260 L0,260 Z" fill="white"/>
+    <path d="M0,200 C360,240 720,160 1080,200 C1260,220 1380,200 1440,200 L1440,260 L0,260 Z" fill="white" opacity="0.5"/>
+  </svg>
+
+  <!-- Particles -->
+  <div class="particles">
+    <div class="particle" style="left:8%;animation-duration:9s;animation-delay:0s;"></div>
+    <div class="particle" style="left:20%;animation-duration:12s;animation-delay:1.5s;"></div>
+    <div class="particle" style="left:35%;animation-duration:8s;animation-delay:3s;"></div>
+    <div class="particle" style="left:52%;animation-duration:11s;animation-delay:0.5s;"></div>
+    <div class="particle" style="left:65%;animation-duration:10s;animation-delay:2.5s;"></div>
+    <div class="particle" style="left:78%;animation-duration:13s;animation-delay:4s;"></div>
+    <div class="particle" style="left:90%;animation-duration:9s;animation-delay:1s;"></div>
+    <div class="particle" style="left:45%;animation-duration:14s;animation-delay:5s;"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-badge">摂津國一之宮 · Ichinomiya of Settsu Province</div>
+    <h1>
+      <span class="jp">住吉大社</span>
+      Sumiyoshi Taisha
+    </h1>
+    <p class="hero-tagline">
+      The grand head shrine of 2,300 Sumiyoshi shrines across Japan —<br>
+      home to the ancient sea gods who guided Empress Jingu's legendary fleet.
+    </p>
+    <div class="hero-scroll">↓ &nbsp; explore this shrine</div>
+  </div>
+</div>
+
+<!-- QUICK FACTS BAR -->
+<div class="quick-bar">
+  <div class="quick-item">
+    <span class="quick-icon">📍</span>
+    <div>
+      <span class="quick-label">Location</span>
+      <span class="quick-value">Sumiyoshi-ku, Osaka</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">🚃</span>
+    <div>
+      <span class="quick-label">Nearest Station</span>
+      <span class="quick-value">Sumiyoshi Taisha Sta. · 1 min</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">🕐</span>
+    <div>
+      <span class="quick-label">From Tokyo</span>
+      <span class="quick-value">~2.5 hrs (Shinkansen + local)</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">⏰</span>
+    <div>
+      <span class="quick-label">Open</span>
+      <span class="quick-value">6:00–17:00 · Free</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">🙏</span>
+    <div>
+      <span class="quick-label">New Year Visitors</span>
+      <span class="quick-value">~2 million (hatsumode)</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">🅿️</span>
+    <div>
+      <span class="quick-label">Parking</span>
+      <span class="quick-value">Yes · paid lot</span>
+    </div>
+  </div>
+</div>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a href="ichinomiya-map.html">All Shrines</a> &nbsp;›&nbsp;
+  <a href="ichinomiya-map.html?road=Kinai">Kinai 畿内</a> &nbsp;›&nbsp;
+  Settsu Province &nbsp;›&nbsp; Sumiyoshi Taisha
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+  <!-- Deity row (full width) -->
+  <div class="deity-card grid-full" style="margin-bottom:24px;">
+    <div class="deity-symbol">🌊</div>
+    <div>
+      <div class="deity-label">Enshrined Deities</div>
+      <div class="deity-name">Sumiyoshi Sanjin &amp; Empress Jingu</div>
+      <div class="deity-jp">住吉三神 · 底筒男命 · 中筒男命 · 表筒男命 &amp; 神功皇后</div>
+      <div class="deity-desc">
+        The three Sumiyoshi gods were born when the mythic hero Izanagi purified himself in the sea after
+        descending to the underworld — making them deities of the ocean itself. Alongside them, Empress Jingu
+        is enshrined for leading a miraculous naval expedition to Korea under their protection.
+        Together they govern the sea, safe travel, poetry and the arts, and prosperous enterprise.
+        This shrine is the <strong style="color:var(--gold)">grand headquarters (総本宮)</strong> of over
+        2,300 Sumiyoshi shrines throughout Japan.
+      </div>
+      <div class="blessing-tags">
+        <span class="blessing-tag">Maritime Safety</span>
+        <span class="blessing-tag">Safe Travel</span>
+        <span class="blessing-tag">Business Prosperity</span>
+        <span class="blessing-tag">Poetry &amp; Arts</span>
+        <span class="blessing-tag">Safe Childbirth</span>
+        <span class="blessing-tag">Purification</span>
+        <span class="blessing-tag">National Protection</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+
+    <!-- ■ CARD 1: ESSENCE -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">1</div>
+        <div class="card-title-block">
+          <span class="card-title-en">The Essence · 核心価値</span>
+          <span class="card-title-jp">核心的価値 — なぜここが特別なのか</span>
+          <span class="card-title-zh">核心价值 · 为何与众不同</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="essence-highlight">
+          <div class="essence-label">由緒 · Why It Matters</div>
+          <div class="essence-text">
+            <strong>全国2,300社、住吉神社の総本宮。</strong><br>
+            Founded in 211 CE by Empress Jingu upon her triumphant return from a naval expedition,
+            Sumiyoshi Taisha predates the introduction of Buddhism to Japan.
+            Its architecture — the <em>Sumiyoshi-zukuri</em> style — is a National Treasure,
+            representing the purest form of ancient Japanese sacred building, untouched by
+            continental influence.
+          </div>
+        </div>
+        <div class="essence-story">
+          <strong>A shrine born of the sea.</strong> According to legend, Empress Jingu was guided
+          by the three sea gods in crossing to Korea. On her return, the gods instructed her to
+          enshrine them in Osaka's coastal plain — then a marshy shoreline where the divine and
+          human worlds met. For over 1,800 years, sailors, merchants, and poets have come here
+          to seek blessing before setting out on the water.
+        </div>
+
+        <!-- Video thumbnail -->
+        <div class="video-wrapper">
+          <svg class="video-thumb" viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="sg1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#050f1e"/>
+                <stop offset="60%" stop-color="#0a1a2e"/>
+                <stop offset="100%" stop-color="#0d1a12"/>
+              </linearGradient>
+            </defs>
+            <rect width="640" height="360" fill="url(#sg1)"/>
+            <!-- Taiko bridge silhouette -->
+            <path d="M180,260 Q320,180 460,260" stroke="rgba(201,168,76,0.5)" stroke-width="4" fill="none"/>
+            <line x1="180" y1="260" x2="180" y2="310" stroke="rgba(255,255,255,0.15)" stroke-width="2"/>
+            <line x1="460" y1="260" x2="460" y2="310" stroke="rgba(255,255,255,0.15)" stroke-width="2"/>
+            <line x1="160" y1="310" x2="480" y2="310" stroke="rgba(255,255,255,0.1)" stroke-width="2"/>
+            <!-- Water ripples -->
+            <ellipse cx="320" cy="330" rx="200" ry="12" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+            <ellipse cx="320" cy="340" rx="160" ry="8" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+            <!-- Stars -->
+            <circle cx="100" cy="60" r="1.5" fill="rgba(255,255,255,0.5)"/>
+            <circle cx="200" cy="40" r="1" fill="rgba(255,255,255,0.4)"/>
+            <circle cx="450" cy="70" r="1.5" fill="rgba(255,255,255,0.5)"/>
+            <circle cx="560" cy="45" r="1" fill="rgba(255,255,255,0.4)"/>
+            <!-- Lanterns on poles -->
+            <rect x="296" y="195" width="10" height="16" rx="2" fill="rgba(201,168,76,0.4)"/>
+            <rect x="334" y="192" width="10" height="16" rx="2" fill="rgba(201,168,76,0.4)"/>
+            <!-- Label -->
+            <text x="320" y="150" text-anchor="middle" font-family="Georgia,serif" font-size="16" fill="rgba(201,168,76,0.7)" letter-spacing="3">住吉大社</text>
+            <text x="320" y="172" text-anchor="middle" font-family="Georgia,serif" font-size="10" fill="rgba(255,255,255,0.35)" letter-spacing="2">SUMIYOSHI TAISHA</text>
+          </svg>
+          <div class="video-overlay">
+            <a class="play-btn" href="https://www.youtube.com/results?search_query=住吉大社+参拝+境内+太鼓橋" target="_blank" rel="noopener">▶</a>
+          </div>
+          <div class="video-caption">▶ Watch shrine grounds &amp; Taiko bridge — YouTube</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ■ CARD 2: ACCESS -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">2</div>
+        <div class="card-title-block">
+          <span class="card-title-en">Getting There · アクセス</span>
+          <span class="card-title-jp">旅の地図 — アクセスガイド</span>
+          <span class="card-title-zh">交通指南 · 如何前往</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="map-wrapper">
+          <iframe
+            src="https://maps.google.com/maps?q=住吉大社&output=embed"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+        <a class="map-link" href="https://maps.google.com/maps?q=住吉大社" target="_blank" rel="noopener">
+          📍 Open in Google Maps ↗
+        </a>
+        <ul class="access-list">
+          <li>
+            <span class="access-icon">🚃</span>
+            <div class="access-text">
+              <span class="access-main">Nankai Main Line → Sumiyoshi Taisha Station</span>
+              <span class="access-sub">10 min from Nankai Namba · ¥240 · 1 min walk to shrine</span>
+            </div>
+          </li>
+          <li>
+            <span class="access-icon">🚋</span>
+            <div class="access-text">
+              <span class="access-main">Hankai Tramway from Tennoji-eki-mae</span>
+              <span class="access-sub">Alight at Sumiyoshitorii-mae or Sumiyoshi · 15 min · ¥230</span>
+            </div>
+          </li>
+          <li>
+            <span class="access-icon">🚅</span>
+            <div class="access-text">
+              <span class="access-main">From Tokyo: Shinkansen to Shin-Osaka (~2h15m)</span>
+              <span class="access-sub">Then Osaka Metro + Nankai Line · total ~2h45m</span>
+            </div>
+          </li>
+          <li>
+            <span class="access-icon">🚗</span>
+            <div class="access-text">
+              <span class="access-main">By car: Hanwa Expressway → Sumiyoshi exit</span>
+              <span class="access-sub">Paid parking lot on site · limited spaces</span>
+            </div>
+          </li>
+          <li>
+            <span class="access-icon">⏰</span>
+            <div class="access-text">
+              <span class="access-main">Hours: 6:00–17:00 (Apr–Sep) · 6:00–16:30 (Oct–Mar)</span>
+              <span class="access-sub">Free entry · no reservation needed</span>
+            </div>
+          </li>
+          <li>
+            <span class="access-icon">♿</span>
+            <div class="access-text">
+              <span class="access-main">Wheelchair accessible paths available</span>
+              <span class="access-sub">Note: Taiko bridge has steep 48° slope — use the flat side bridge</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ■ CARD 3: DEEP INSIGHT -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">3</div>
+        <div class="card-title-block">
+          <span class="card-title-en">Deep Insight · 深掘り</span>
+          <span class="card-title-jp">リブーターのこだわり — 知る人ぞ知る</span>
+          <span class="card-title-zh">深度探索 · 行家才知道的</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="insight-item">
+          <span class="insight-badge badge-unique">Unique</span>
+          <div class="insight-body">
+            <div class="insight-title">The Taiko Bridge — a stairway to purification</div>
+            <div class="insight-desc">The Sorihashi (反橋) curves at a dramatic 48° slope. Crossing it is considered an act of <em>oharae</em> (purification) — locals say each step washes away a sin. It's both a physical and spiritual ascent.</div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-badge badge-ritual">Ritual</span>
+          <div class="insight-body">
+            <div class="insight-title">Go-dairi-ki Stones at Gosho Gokoro (五所御前)</div>
+            <div class="insight-desc">Behind the first main hall, search the gravel for three small stones inscribed 「五」「大」「力」. Collect all three and wrap them in paper — they become a charm for body strength, wisdom, wealth, happiness, and long life.</div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-badge badge-info">Info</span>
+          <div class="insight-body">
+            <div class="insight-title">Four National Treasure Halls — oldest pre-Buddhist style</div>
+            <div class="insight-desc">The four honden (main halls) are all National Treasures, built in <em>Sumiyoshi-zukuri</em> — Japan's oldest architectural style with no Chinese Buddhist influence: straight roofs, no curved eaves, and a unique east-west orientation.</div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-badge badge-seasonal">Festival</span>
+          <div class="insight-body">
+            <div class="insight-title">Sumiyoshi Festival — July 30 to August 1</div>
+            <div class="insight-desc">Japan's "Three Great Purification Rituals." On August 1st, a nearly two-ton mikoshi (portable shrine) is carried by hundreds of participants across the Yamato River to Tonogū Shrine in Sakai — a tradition unchanged for centuries.</div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-badge badge-tip">Tip</span>
+          <div class="insight-body">
+            <div class="insight-title">Best time: early morning on Rabbit Day (初辰まいり)</div>
+            <div class="insight-desc">The monthly "Hatsutora-mairi" ritual on the first rabbit day of each month draws worshippers praying for business prosperity. Or visit at 6 am on any day — the grounds glow gold and almost entirely empty of tourists.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ■ CARD 4: EAT / STAY / MORE -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">4</div>
+        <div class="card-title-block">
+          <span class="card-title-en">Eat · Stay · Explore</span>
+          <span class="card-title-jp">周辺の滞在 — 食・泊・次の旅へ</span>
+          <span class="card-title-zh">周边吃住行 · 延伸旅程</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="nearby-grid">
+          <div class="nearby-item">
+            <span class="nearby-cat">Local Food</span>
+            <span class="nearby-icon">🍽️</span>
+            <div class="nearby-name">洋食やろく</div>
+            <div class="nearby-desc">An 80-year-old Yoshoku (Western-style Japanese) gem. Their egg croquette (tamago-korokke) — creamy-curry-flavored and crab-filled — is legendary among locals. 2 min from the shrine.</div>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-cat">Sweet Break</span>
+            <span class="nearby-icon">🍡</span>
+            <div class="nearby-name">喜久寿 Kikuju</div>
+            <div class="nearby-desc">The shrine's beloved wagashi shop. Their dorayaki — fluffy, thick pancakes filled with sweet red bean — are a post-prayer must. Sold out early on busy days, arrive before noon.</div>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-cat">Stay Nearby</span>
+            <span class="nearby-icon">🏨</span>
+            <div class="nearby-name">Tennoji / Namba Hotels</div>
+            <div class="nearby-desc">Stay 10 min away in Tennoji (Abeno area) or Namba. Both have excellent transport links and restaurants. The APA Hotel Tennoji Ekimae offers clean, affordable rooms.</div>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-cat">Day Trip Add-on</span>
+            <span class="nearby-icon">🌳</span>
+            <div class="nearby-name">Tennoji Zoo &amp; Park</div>
+            <div class="nearby-desc">Japan's oldest zoo (1915) and Tennoji Park'sJapanese gard[�\�HMHZ[��H�[H8�%\��X��܈H[�Y^K�Z\��]X�[��\�Z�\��\[���[\���\�ܘ\\��܈H[�ܘ[ZX��Y]�و��Z�K��]����]���]��\��H��X\��KZ][H����[��\��H��X\��KX�]����[����[����[��\��H��X\��KZX�ۈ��'��{�#���[���]��\��H��X\��K[�[YH���[Z^[��H��[��ZO�]���]��\��H��X\��KY\�ȏ�H�]���ݙ\�Y��[��\��YH]H��[�I���]H\��L���Έ���\����Y]���[��X�K[�ܘY�ˈH����[�\��Y[�Z�H�\[���X��
+LYX\��[���Z�K��]����]���]��\��H��X\��KZ][H����[��\��H��X\��KX�]���^X�hinomiya</span>
+            <span class="nearby-icon">⛩️</span>
+            <div class="nearby-name">Isonokami Jingu</div>
+            <div class="nearby-desc">30 min east to Nara's oldest shrine, home to the divine sword Futsu-no-mitama. Or head north 45 min to 伊弉諾神宮 (Awaji Island) — Japan's oldest shrine dedicated to the creator gods.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /grid -->
+
+  <!-- ■ SUMIYOSHI-ZUKURI EXPLAINER -->
+  <div class="zukuri-box grid-full" style="margin-top:32px;">
+    <div class="zukuri-title">住吉造 Sumiyoshi-zukuri Architecture</div>
+    <div class="zukuri-sub">NATIONAL TREASURE · JAPAN'S OLDEST SACRED BUILDING STYLE</div>
+
+    <!-- 4-Hall Diagram -->
+    <div class="compass-row">
+      <span>⬆</span> NORTH (rear)
+    </div>
+    <div class="shrine-layout">
+      <div class="shrine-block">
+        <div class="shrine-hall" style="width:80px;height:80px;">第一<br><span style="font-size:0.6rem;color:rgba(255,255,255,0.4)">1st</span></div>
+        <div class="hall-label">Sokotsutsu-o<br>(bottom sea)</div>
+      </div>
+      <div class="shrine-block">
+        <div class="shrine-hall" style="width:80px;height:80px;">第二<br><span style="font-size:0.6rem;color:rgba(255,255,255,0.4)">2nd</span></div>
+        <div class="hall-label">Nakatsutsu-o<br>(middle sea)</div>
+      </div>
+      <div class="shrine-block">
+        <div class="shrine-hall" style="width:80px;height:80px;">第三<br><span style="font-size:0.6rem;color:rgba(255,255,255,0.4)">3rd</span></div>
+        <div class="hall-label">Uwatsutsu-o<br>(surface sea)</div>
+      </div>
+      <div style="display:flex;flex-direction:column;justify-content:flex-end;margin-bottom:30px;">
+        <div class="shrine-hall" style="width:80px;height:80px;">第四<br><span style="font-size:0.6rem;color:rgba(255,255,255,0.4)">4th</span></div>
+        <div class="hall-label" style="color:rgba(255,255,255,0.4);font-size:0.6rem;text-align:center;">Empress Jingu</div>
+      </div>
+    </div>
+    <div class="compass-row" style="margin-top:0;">
+      <span>⬇</span> SOUTH (front, worshippers approach from here)
+    </div>
+
+    <div class="zukuri-desc">
+      The four main halls stand in a unique formation: the <span class="zukuri-highlight">first three halls line up north-to-south</span>,
+      each dedicated to one sea god, while the fourth hall for Empress Jingu sits to the east of the third.
+      <br><br>
+      This east-west orientation is extraordinary — after Buddhism arrived from China in the 6th century,
+      virtually all shrines adopted southward-facing layouts (following Chinese geomancy). Sumiyoshi Taisha
+      alone <span class="zukuri-highlight">preserved its pre-Buddhist, indigenous orientation</span>,
+      making it a living record of Japanese sacred architecture before external influence.
+      <br><br>
+      The style is also defined by its <strong>straight rooflines</strong> (no Buddhist curved eaves),
+      <strong>unpainted cypress wood</strong>, and <strong>thatched roofs</strong> — finimalist yet deeply powerful.
+      All four halls were designated National Treasures. They are rebuilt using the same ancient techniques
+      every 20 years in a ritual called <em>Shikinen Zotai</em>.
+    </div>
+  </div>
+
+  <!-- ■ CTA -->
+  <div class="cta-bar" style="margin-top:32px;">
+    <div>
+      <h3>Ready to visit 住吉大社?</h3>
+      <p>Plan your day in Osaka's most ancient sacred landscape.</p>
+    </div>
+    <div class="cta-links">
+      <a class="btn" href="https://www.sumiyoshitaisha.net/en/" target="_blank" rel="noopener">Official Website ↗</a>
+      <a class="btn secondary" href="ichinomiya-map.html">← All Shrine Map</a>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<footer>
+  <p>一ノ宮 Japan's First Shrines — A guide for overseas travelers &nbsp;|&nbsp;
+  Information compiled from public sources. Always verify hours before visiting.</p>
+</footer>
+
+</body>
+</html>
