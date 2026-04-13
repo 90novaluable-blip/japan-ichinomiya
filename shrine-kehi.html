@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Kehi Jingu — Ichinomiya of Echizen Province</title>
+<style>
+:root {
+  --red: #9b2335;
+  --gold: #c9a84c;
+  --ink: #1a1a2e;
+  --cream: #fdf6ec;
+  --mist: #f0ebe3;
+  --gray: #6b6b6b;
+  --green: #2e7d32;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Georgia',serif; background:var(--cream); color:var(--ink); line-height:1.75; }
+
+/* ── HEADER ── */
+header {
+  background:var(--ink); color:#fff;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:14px 28px; position:sticky; top:0; z-index:200;
+  box-shadow:0 2px 12px rgba(0,0,0,0.4);
+}
+.logo { display:flex; align-items:baseline; gap:10px; text-decoration:none; }
+.logo .kanji { font-size:1.5rem; color:var(--gold); font-weight:bold; }
+.logo .sub { font-size:0.78rem; color:rgba(255,255,255,0.5); letter-spacing:0.1em; }
+.header-right { display:flex; align-items:center; gap:16px; }
+nav a { color:rgba(255,255,255,0.6); text-decoration:none; font-size:0.78rem; letter-spacing:0.08em; margin-left:20px; }
+nav a:hover { color:var(--gold); }
+.lang-switcher { display:flex; gap:4px; }
+.lang-btn { font-size:0.7rem; padding:2px 8px; border-radius:10px; text-decoration:none; border:1px solid rgba(255,255,255,0.2); color:rgba(255,255,255,0.5); transition:all 0.2s; }
+.lang-btn.active { background:var(--gold); color:var(--ink); border-color:var(--gold); font-weight:bold; }
+
+/* ── HERO ── */
+.hero {
+  position:relative; height:88vh; min-height:520px; overflow:hidden;
+  display:flex; flex-direction:column; align-items:center; justify-content:flex-end;
+  padding-bottom:48px; color:#fff; text-align:center;
+}
+.hero-bg {
+  position:absolute; inset:0;
+  background:
+    linear-gradient(to bottom, rgba(10,5,20,0.3) 0%, rgba(10,5,20,0.1) 40%, rgba(10,5,20,0.75) 100%),
+    linear-gradient(135deg, #1a0a0a 0%, #0a1510 40%, #0a1520 100%);
+}
+.hero-torii { position:absolute; bottom:0; left:50%; transform:translateX(-50%); width:100%; max-width:900px; opacity:0.12; }
+.hero-glow {
+  position:absolute; width:600px; height:600px; border-radius:50%;
+  background:radial-gradient(circle, rgba(201,168,76,0.15) 0%, transparent 70%);
+  top:50%; left:50%; transform:translate(-50%,-50%);
+}
+.particles { position:absolute; inset:0; overflow:hidden; }
+.particle { position:absolute; width:2px; height:2px; background:rgba(201,168,76,0.6); border-radius:50%; animation:float linear infinite; }
+@keyframes float { 0%{transform:translateY(100vh) translateX(0);opacity:0;} 10%{opacity:1;} 90%{opacity:1;} 100%{transform:translateY(-20px) translateX(30px);opacity:0;} }
+.hero-content { position:relative; z-index:1; padding:0 20px; }
+.hero-badge { display:inline-block; border:1px solid var(--gold); color:var(--gold); font-size:0.7rem; letter-spacing:0.25em; padding:4px 16px; border-radius:20px; margin-bottom:16px; text-transform:uppercase; }
+.hero h1 { font-size:clamp(2rem,6vw,4.5rem); font-weight:normal; line-height:1.1; margin-bottom:8px; }
+.hero h1 .jp { display:block; font-size:clamp(2.5rem,8vw,5.5rem); color:var(--gold); }
+.hero-tagline { font-size:clamp(0.9rem,2vw,1.1rem); color:rgba(255,255,255,0.75); max-width:560px; margin:16px auto 0; font-style:italic; }
+.hero-scroll { margin-top:32px; color:rgba(255,255,255,0.3); font-size:0.72rem; letter-spacing:0.2em; animation:pulse 2.5s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{opacity:.3} 50%{opacity:.8} }
+
+/* ── QUICK FACTS BAR ── */
+.quick-bar { background:var(--ink); color:#fff; display:flex; justify-content:center; flex-wrap:wrap; gap:0; }
+.quick-item { padding:14px 28px; display:flex; align-items:center; gap:8px; border-right:1px solid rgba(255,255,255,0.1); font-size:0.8rem; }
+.quick-item:last-child { border-right:none; }
+.quick-icon { font-size:1rem; }
+.quick-label { color:rgba(255,255,255,0.45); font-size:0.65rem; display:block; }
+.quick-value { color:#fff; font-size:0.85rem; }
+
+/* ── MAIN GRID ── */
+.main { max-width:1100px; margin:0 auto; padding:48px 20px 80px; }
+.grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+.grid-full { grid-column:1/-1; }
+
+/* ── CARDS ── */
+.card { background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 2px 16px rgba(0,0,0,0.07); border:1px solid rgba(0,0,0,0.06); }
+.card-header { padding:18px 24px 14px; border-bottom:1px solid #f0e8d8; display:flex; align-items:center; gap:12px; }
+.card-num { width:28px; height:28px; background:var(--red); color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.75rem; font-weight:bold; flex-shrink:0; }
+.card-title-en { font-size:0.65rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold); display:block; }
+.card-title-jp { font-size:1.05rem; font-weight:bold; display:block; line-height:1.2; }
+.card-title-zh { font-size:0.7rem; color:var(--gray); display:block; }
+.card-body { padding:20px 24px 24px; }
+
+/* Essence card */
+.essence-highlight { background:var(--mist); border-radius:8px; padding:16px 20px; margin-bottom:16px; border-left:3px solid var(--gold); }
+.essence-label { font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:6px; }
+.essence-text { font-size:0.95rem; color:#333; }
+.essence-text strong { color:var(--red); }
+
+/* Video embed */
+.video-wrapper { position:relative; border-radius:8px; overflow:hidden; background:var(--ink); margin-top:16px; }
+.video-overlay { position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%); display:flex; align-items:center; justify-content:center; }
+.play-btn { width:56px; height:56px; border-radius:50%; background:rgba(201,168,76,0.9); display:flex; align-items:center; justify-content:center; text-decoration:none; transition:transform 0.2s, background 0.2s; font-size:1.3rem; color:var(--ink); }
+.play-btn:hover { transform:scale(1.1); background:var(--gold); }
+.video-caption { position:absolute; bottom:0; left:0; right:0; padding:10px 14px; color:rgba(255,255,255,0.8); font-size:0.75rem; }
+
+/* Map card */
+.map-wrapper { border-radius:8px; overflow:hidden; margin-bottom:16px; }
+.map-wrapper iframe { width:100%; height:240px; border:none; display:block; }
+.map-link { display:flex; align-items:center; gap:8px; background:var(--ink); color:var(--gold); text-decoration:none; padding:10px 16px; border-radius:6px; font-size:0.82rem; letter-spacing:0.08em; margin-bottom:16px; transition:background 0.2s; }
+.map-link:hover { background:#2a2a3e; }
+.access-list { list-style:none; }
+.access-list li { display:flex; gap:10px; align-items:flex-start; padding:8px 0; border-bottom:1px solid #f0ebe3; font-size:0.88rem; }
+.access-list li:last-child { border-bottom:none; }
+.access-icon { flex-shrink:0; font-size:1rem; }
+.access-main { display:block; color:var(--ink); }
+.access-sub { display:block; font-size:0.75rem; color:var(--gray); }
+
+/* Deep Insight card */
+.insight-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid #f0ebe3; }
+.insight-item:last-child { border-bottom:none; }
+.insight-badge { flex-shrink:0; padding:2px 8px; border-radius:4px; font-size:0.65rem; font-weight:bold; letter-spacing:0.05em; height:fit-content; margin-top:2px; }
+.badge-unique { background:#fff3e0; color:#e65100; }
+.badge-tip { background:#e8f5e9; color:#1b5e20; }
+.badge-info { background:#e8f0fe; color:#1a237e; }
+.badge-seasonal { background:#fce4ec; color:#880e4f; }
+.badge-stamp { background:#fff3e0; color:#e65100; }
+.insight-title { font-size:0.9rem; font-weight:bold; margin-bottom:3px; }
+.insight-desc { font-size:0.83rem; color:var(--gray); }
+
+/* Nearby card */
+.nearby-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; }
+.nearby-item { background:var(--mist); border-radius:8px; padding:14px; }
+.nearby-cat { font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--gray); margin-bottom:4px; }
+.nearby-icon { font-size:1.2rem; margin-bottom:6px; display:block; }
+.nearby-name { font-size:0.88rem; font-weight:bold; margin-bottom:4px; }
+.nearby-desc { font-size:0.78rem; color:var(--gray); }
+
+/* Deity section */
+.deity-card { background:var(--ink); color:#fff; border-radius:12px; padding:32px; display:grid; grid-template-columns:auto 1fr; gap:28px; align-items:start; }
+.deity-symbol { font-size:4rem; line-height:1; }
+.deity-label { font-size:0.65rem; letter-spacing:0.2em; color:var(--gold); text-transform:uppercase; margin-bottom:6px; }
+.deity-name { font-size:1.5rem; font-weight:bold; margin-bottom:4px; }
+.deity-jp { font-size:0.9rem; color:rgba(255,255,255,0.55); margin-bottom:16px; }
+.deity-desc { font-size:0.9rem; color:rgba(255,255,255,0.8); line-height:1.7; margin-bottom:16px; }
+.blessing-tags { display:flex; flex-wrap:wrap; gap:6px; }
+.blessing-tag { background:rgba(201,168,76,0.15); border:1px solid rgba(201,168,76,0.3); color:var(--gold); padding:3px 10px; border-radius:12px; font-size:0.72rem; letter-spacing:0.05em; }
+
+/* Special section */
+.special-box { background:linear-gradient(135deg, #1a1a2e 0%, #2a1010 100%); color:#fff; border-radius:12px; padding:32px; }
+.special-title { color:var(--gold); font-size:1.2rem; margin-bottom:8px; }
+.special-sub { font-size:0.75rem; letter-spacing:0.15em; color:rgba(255,255,255,0.4); margin-bottom:20px; }
+.special-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+.special-item { text-align:center; padding:16px 8px; background:rgba(255,255,255,0.06); border-radius:8px; border:1px solid rgba(201,168,76,0.2); }
+.special-item .item-sym { font-size:1.8rem; display:block; margin-bottom:6px; }
+.special-item .item-name { font-size:0.78rem; color:var(--gold); display:block; margin-bottom:4px; }
+.special-item .item-desc { font-size:0.7rem; color:rgba(255,255,255,0.6); }
+.special-desc { margin-top:20px; font-size:0.88rem; color:rgba(255,255,255,0.75); line-height:1.7; }
+
+/* CTA */
+.cta-bar { background:var(--red); border-radius:12px; padding:28px 32px; display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap; }
+.cta-bar h3 { color:#fff; font-size:1.1rem; font-weight:normal; }
+.cta-bar p { color:rgba(255,255,255,0.75); font-size:0.85rem; margin-top:4px; }
+.cta-links { display:flex; gap:10px; flex-wrap:wrap; }
+.btn { display:inline-block; padding:10px 22px; border:2px solid #fff; color:#fff; text-decoration:none; border-radius:4px; font-size:0.82rem; letter-spacing:0.08em; transition:background 0.2s, color 0.2s; font-family:inherit; cursor:pointer; }
+.btn:hover { background:#fff; color:var(--red); }
+.btn.secondary { border-color:rgba(255,255,255,0.4); color:rgba(255,255,255,0.7); }
+.btn.secondary:hover { background:rgba(255,255,255,0.15); color:#fff; }
+
+/* Breadcrumb */
+.breadcrumb { padding:12px 20px; font-size:0.75rem; color:var(--gray); max-width:1100px; margin:0 auto; }
+.breadcrumb a { color:var(--gray); text-decoration:none; }
+.breadcrumb a:hover { color:var(--red); }
+
+footer { background:var(--ink); color:rgba(255,255,255,0.35); text-align:center; padding:28px; font-size:0.78rem; }
+
+@media(max-width:700px) {
+  .grid { grid-template-columns:1fr; }
+  .special-grid { grid-template-columns:repeat(2,1fr); }
+  .nearby-grid { grid-template-columns:1fr; }
+  .deity-card { grid-template-columns:1fr; }
+  .quick-item { padding:10px 16px; }
+  .cta-bar { flex-direction:column; align-items:flex-start; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a class="logo" href="ichinomiya-map.html">
+    <span class="kanji">一ノ宮</span>
+    <span class="sub">Japan's First Shrines</span>
+  </a>
+  <div class="header-right">
+    <nav>
+      <a href="ichinomiya-intro.html">What is Ichinomiya?</a>
+      <a href="ichinomiya-map.html">&larr; All Shrines</a>
+    </nav>
+    <div class="lang-switcher">
+      <a href="#" class="lang-btn">日本語</a>
+      <a href="#" class="lang-btn active">EN</a>
+      <a href="#" class="lang-btn">中文</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-glow"></div>
+  <!-- Torii silhouette -->
+  <svg class="hero-torii" viewBox="0 0 900 500" xmlns="http://www.w3.org/2000/svg">
+    <rect x="200" y="80" width="500" height="28" fill="white"/>
+    <rect x="240" y="108" width="420" height="16" fill="white"/>
+    <rect x="250" y="108" width="36" height="390" fill="white"/>
+    <rect x="614" y="108" width="36" height="390" fill="white"/>
+    <rect x="258" y="200" width="20" height="30" rx="3" fill="white" opacity="0.5"/>
+    <rect x="622" y="200" width="20" height="30" rx="3" fill="white" opacity="0.5"/>
+  </svg>
+  <!-- Particles -->
+  <div class="particles">
+    <div class="particle" style="left:10%;animation-duration:9s;animation-delay:0s;"></div>
+    <div class="particle" style="left:25%;animation-duration:12s;animation-delay:1.5s;"></div>
+    <div class="particle" style="left:40%;animation-duration:8s;animation-delay:3s;"></div>
+    <div class="particle" style="left:55%;animation-duration:11s;animation-delay:0.5s;"></div>
+    <div class="particle" style="left:70%;animation-duration:10s;animation-delay:2s;"></div>
+    <div class="particle" style="left:85%;animation-duration:13s;animation-delay:4s;"></div>
+    <div class="particle" style="left:95%;animation-duration:7s;animation-delay:1s;"></div>
+    <div class="particle" style="left:5%;animation-duration:14s;animation-delay:5s;"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">越前國一之宮 · Ichinomiya of Echizen Province</div>
+    <h1>
+      <span class="jp">氣比神宮</span>
+      Kehi Jingu
+    </h1>
+    <p class="hero-tagline">
+      One of Japan's Three Great Torii Gates &mdash;<br>
+      1,300 years of longevity blessings and divine sustenance.
+    </p>
+    <div class="hero-scroll">&darr; &nbsp; explore this shrine</div>
+  </div>
+</div>
+
+<!-- QUICK FACTS BAR -->
+<div class="quick-bar">
+  <div class="quick-item">
+    <span class="quick-icon">📍</span>
+    <div>
+      <span class="quick-label">Location</span>
+      <span class="quick-value">Tsuruga, Fukui</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">🚃</span>
+    <div>
+      <span class="quick-label">Nearest Station</span>
+      <span class="quick-value">JR Tsuruga Sta.</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">🚅</span>
+    <div>
+      <span class="quick-label">From Tokyo</span>
+      <span class="quick-value">~3h (Shinkansen)</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">🕐</span>
+    <div>
+      <span class="quick-label">Hours</span>
+      <span class="quick-value">6:00 &ndash; 17:00 (Free)</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">⛩️</span>
+    <div>
+      <span class="quick-label">History</span>
+      <span class="quick-value">1,300+ years</span>
+    </div>
+  </div>
+</div>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a href="ichinomiya-map.html">All Shrines</a> &nbsp;&rsaquo;&nbsp;
+  <a href="ichinomiya-map.html?road=Hokuriku">Hokuriku 北陸道</a> &nbsp;&rsaquo;&nbsp;
+  Echizen Province &nbsp;&rsaquo;&nbsp; Kehi Jingu
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+  <!-- Deity row (full width) -->
+  <div class="deity-card grid-full" style="margin-bottom:24px;">
+    <div class="deity-symbol">⛩️</div>
+    <div>
+      <div class="deity-label">Enshrined Deities &mdash; Seven Gods</div>
+      <div class="deity-name">Isasawake-no-Mikoto &amp; Six Divine Companions</div>
+      <div class="deity-jp">伊兡別命（いざさわけのみこと）ほか六神 &mdash; 氣比七神</div>
+      <div class="deity-desc">
+        Isasawake-no-Mikoto, known as Kehi-no-Okami, is the primary deity of Kehi Jingu and the divine protector of food, harvest, and longevity. Enshrined alongside six divine companions, these seven deities work collectively to bring blessings of abundance, long life, and sustenance to all who seek them. Founded in the legendary era and rebuilt in 702 CE, Kehi Jingu is the <strong style="color:var(--gold);">head guardian shrine of the Hokuriku Road</strong>, one of Japan's great pilgrimage routes. Mentioned in the ancient Kojiki and Nihonshoki chronicles, the shrine has been honored by emperors and common pilgrims alike for over thirteen centuries.
+      </div>
+      <div class="blessing-tags">
+        <span class="blessing-tag">#LongevityBlessing</span>
+        <span class="blessing-tag">#HarvestProtection</span>
+        <span class="blessing-tag">#FoodAbundance</span>
+        <span class="blessing-tag">#SafeJourney</span>
+        <span class="blessing-tag">#HealthRecovery</span>
+        <span class="blessing-tag">#BusinessProsperity</span>
+        <span class="blessing-tag">#FamilyWelfare</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+
+    <!-- ■ CARD 1: ESSENCE -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">1</div>
+        <div class="card-title-block">
+          <span class="card-title-en">The Essence · 核心価値</span>
+          <span class="card-title-jp">核心的価値 &mdash; なぜここが特別なのか</span>
+          <span class="card-title-zh">核心价值 · 为何与众不同</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="essence-highlight">
+          <div class="essence-label">由緒 · Why It Matters</div>
+          <div class="essence-text">
+            <strong>1,300+ years as guardian of the Hokuriku Road &mdash; Japan's Three Great Torii Gates.</strong><br>
+            Founded in the legendary era and formally rebuilt in 702 CE, Kehi Jingu stands as the ancient protector of the Hokuriku region. Mentioned prominently in the Kojiki (Records of Ancient Matters) and Nihonshoki (Chronicles of Japan), the shrine embodies Japan's most sacred mythology. The shrine's massive vermillion torii gate, constructed from juniper wood that washed up from Sado Island in 1645, is one of Japan's only three great wooden torii gates alongside Kasuga Taisha and Itsukushima Shrine, designated an Important Cultural Property.
+          </div>
+        </div>
+        <div class="essence-highlight" style="border-color:var(--red);">
+          <div class="essence-label" style="color:var(--red);">The Waters of Long Life · Chomeisui</div>
+          <div class="essence-text" style="font-size:0.88rem; color:#444;">
+            Kehi Jingu is renowned for sacred spring water known as <em>chomeisui</em>&mdash;the "water of long life." Pilgrims, elderly visitors, and health seekers travel specifically to drink this water, believed to bring longevity and health blessings. The sacred water emerges from natural springs within the shrine grounds, filtered through earth and blessed by 1,300+ years of divine presence. Local residents consider this water so potent that many carry bottles home for family members unable to visit.
+          </div>
+        </div>
+        <!-- Video -->
+        <div class="video-wrapper">
+          <svg style="width:100%;aspect-ratio:16/9;display:block;" viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="torii-sky" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#1a0a05"/>
+                <stop offset="50%" stop-color="#0a1a2a"/>
+                <stop offset="100%" stop-color="#1a1a2e"/>
+              </linearGradient>
+              <linearGradient id="torii-glow" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#ff6633" stop-opacity="0.2"/>
+                <stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <rect width="800" height="450" fill="url(#torii-sky)"/>
+            <!-- Ground/stone -->
+            <rect x="0" y="340" width="800" height="110" fill="#1a0a00" opacity="0.9"/>
+            <!-- Vermillion Torii gate -->
+            <g opacity="0.9">
+              <!-- Top lintel (kasagi) -->
+              <rect x="200" y="100" width="400" height="32" fill="#e63946" rx="4"/>
+              <!-- Second lintel -->
+              <rect x="220" y="145" width="360" height="20" fill="#d62839" rx="3"/>
+              <!-- Left post -->
+              <rect x="260" y="145" width="40" height="240" fill="#e63946"/>
+              <!-- Right post -->
+              <rect x="500" y="145" width="40" height="240" fill="#e63946"/>
+              <!-- Cross beam detail -->
+              <rect x="275" y="240" width="20" height="40" fill="#c9a84c" opacity="0.5"/>
+              <rect x="505" y="240" width="20" height="40" fill="#c9a84c" opacity="0.5"/>
+            </g>
+            <!-- Sacred water reflection -->
+            <ellipse cx="400" cy="350" rx="150" ry="30" fill="#4da6ff" opacity="0.2"/>
+            <!-- Shrine structure in background -->
+            <rect x="320" y="180" width="160" height="120" fill="#2a1a0a" opacity="0.6"/>
+            <polygon points="320,180 400,120 480,180" fill="#c9a84c" opacity="0.5"/>
+            <!-- Moon/Light -->
+            <circle cx="100" cy="60" r="40" fill="#c9a84c" opacity="0.25"/>
+            <!-- Stars -->
+            <circle cx="150" cy="30" r="1.5" fill="white" opacity="0.5"/>
+            <circle cx="300" cy="20" r="1" fill="white" opacity="0.3"/>
+            <circle cx="650" cy="40" r="1.5" fill="white" opacity="0.4"/>
+            <circle cx="750" cy="25" r="1" fill="white" opacity="0.5"/>
+            <!-- Text -->
+            <text x="400" y="420" text-anchor="middle" font-size="12" fill="rgba(255,255,255,0.5)" font-family="Georgia">氣比神宮 · Kehi Jingu</text>
+          </svg>
+          <div class="video-overlay">
+            <a class="play-btn" href="https://www.youtube.com/results?search_query=氣比神宮+大鳥居+参拝" target="_blank" title="Watch on YouTube">&#9654;</a>
+          </div>
+          <div class="video-caption">&#9654; 日本三大鳥居 &mdash; Japan's Three Great Torii Gates · 30 sec</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ■ CARD 2: ACCESS -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">2</div>
+        <div class="card-title-block">
+          <span class="card-title-en">Plan Your Visit · 交通指南</span>
+          <span class="card-title-jp">旅の地図 &mdash; アクセス情報</span>
+          <span class="card-title-zh">交通指南 · 如何前往</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <!-- Google Map embed -->
+        <div class="map-wrapper">
+          <iframe src="https://maps.google.com/maps?q=%E6%B0%A3%E6%AF%94%E7%A5%9E%E5%AE%AE+%E7%A6%8F%E4%BA%95%E7%9C%8C&output=embed&hl=en&z=14" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Kehi Jingu map"></iframe>
+        </div>
+        <a class="map-link" href="https://maps.google.com/maps?q=氣比神宮" target="_blank">
+          📍 Open in Google Maps &mdash; 福井県敦賀市曙產11-68
+        </a>
+        <ul class="access-list">
+          <li>
+            <span class="access-icon">🚃</span>
+            <span class="access-text">
+              <span class="access-main">JR Tsuruga Station · <strong>15 min walk south</strong></span>
+              <span class="access-sub">敦賀駅 · Easy access from main railway hub</span>
+            </span>
+          </li>
+          <li>
+            <span class="access-icon">🚄</span>
+            <span class="access-text">
+              <span class="access-main">From <strong>Kyoto</strong> &mdash; approx. 75 min</span>
+              <span class="access-sub">Hokuriku Shinkansen to Tsuruga, then short walk</span>
+            </span>
+          </li>
+          <li>
+            <span class="access-icon">🚅</span>
+            <span class="access-text">
+              <span class="access-main">From <strong>Tokyo</strong> &mdash; approx. 3 hrs</span>
+              <span class="access-sub">Tokaido Shinkansen to Maibara &rarr; Hokuriku Line to Tsuruga</span>
+            </span>
+          </li>
+          <li>
+            <span class="access-icon">🚗</span>
+            <span class="access-text">
+              <span class="access-main">By car &mdash; Tsuruga IC (Hokuriku Expressway) · 10 min</span>
+              <span class="access-sub">From Fukui Airport: ~50 min by car</span>
+            </span>
+          </li>
+          <li>
+            <span class="access-icon">🅿️</span>
+            <span class="access-text">
+              <span class="access-main">Parking: Ample street and shrine lot parking</span>
+              <span class="access-sub">敦賀駅前駐車場 · Multiple lots near station and shrine</span>
+            </span>
+          </li>
+          <li>
+            <span class="access-icon">⏰</span>
+            <span class="access-text">
+              <span class="access-main">Open 6:00 &ndash; 17:00 · Free admission</span>
+              <span class="access-sub">御朱印受付 Goshuin office: 9:00&ndash;16:00 · &yen;500</span>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ■ CARD 3: DEEP INSIGHT -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">3</div>
+        <div class="card-title-block">
+          <span class="card-title-en">Deep Insight · 深度探索</span>
+          <span class="card-title-jp">リピーターのこだわり &mdash; 知る人ぞ知る</span>
+          <span class="card-title-zh">深度探索 · 行家的坚持</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="insight-item">
+          <span class="insight-badge badge-unique">UNIQUE</span>
+          <div class="insight-body">
+            <div class="insight-title">日本三大鳥居 &mdash; One of Japan's Three Great Torii</div>
+            <div class="insight-desc">
+              The iconic vermillion torii gate standing 11 meters tall is constructed entirely from juniper wood that washed ashore from Sado Island during the Edo period (1645). It is one of only three "great torii gates" in Japan, a select distinction shared only with Kasuga Taisha (Nara) and Itsukushima Shrine (Hiroshima). Designated an Important Cultural Property, this gate represents architectural mastery and spiritual significance.
+            </div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-badge badge-unique">UNIQUE</span>
+          <div class="insight-body">
+            <div class="insight-title">Chomeisui &mdash; The Waters of Long Life</div>
+            <div class="insight-desc">
+              Unlike most shrines, Kehi Jingu features sacred spring water, <em>chomeisui</em>, believed to grant longevity and health. Elderly pilgrims and health seekers travel specifically to drink this water. The springs emerge naturally within the shrine grounds and are said to have emerged for over thirteen centuries without interruption, making them one of Japan's most revered sacred waters.
+            </div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-badge badge-seasonal">FESTIVAL</span>
+          <div class="insight-body">
+            <div class="insight-title">氣比祭 Kehi Matsuri &mdash; September</div>
+            <div class="insight-desc">
+              One of Japan's major summer festivals, held annually in September. The festival features floats, processions, and ritual performances. Thousands of visitors come to witness the nighttime illuminations and the parade of the festival's sacred portable shrines beneath the famous torii gate.
+            </div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-badge badge-tip">TIP</span>
+          <div class="insight-body">
+            <div class="insight-title">古事記・日本書紀の記載 &mdash; Ancient Chronicles Mention</div>
+            <div class="insight-desc">
+              Few shrines in Japan can claim mention in both the Kojiki and Nihonshoki—Japan's oldest written records. This dual reference places Kehi Jingu among the nation's most ancient and spiritually significant sacred sites, linking it directly to Japan's founding myths and imperial lineage.
+            </div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-badge badge-info">INFO</span>
+          <div class="insight-body">
+            <div class="insight-title">北陸道の守護甾 &mdash; Guardian of the Hokuriku Road</div>
+            <div class="insight-desc">
+              Historically, Kehi Jingu served as the spiritual guardian of the Hokuriku Road, one of Japan's five great pilgrimage routes. Merchants, pilgrims, and travelers would make offerings before embarking on dangerous journeys. This tradition of providing safe passage remains central to the shrine's spiritual mission.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ■ CARD 4: EAT STAY MORE -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">4</div>
+        <div class="card-title-block">
+          <span class="card-title-en">Eat, Stay &amp; More · 周邊資訊</span>
+          <span class="card-title-jp">周辺の滞在 &mdash; 食・宿・寄り道</span>
+          <span class="card-title-zh">周边信息 · 吃住游</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="nearby-grid">
+          <div class="nearby-item">
+            <span class="nearby-icon">🍢</span>
+            <div class="nearby-cat">Food · 食</div>
+            <div class="nearby-name">Tsuruga Seafood</div>
+            <div class="nearby-desc">
+              As a historic port city, Tsuruga offers exceptional sushi and sashimi featuring fresh catches. Local restaurants serve traditional Japanese seafood cuisine perfected over centuries. Visit the morning fish market for direct access to fresh ingredients.
+            </div>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-icon">🍜</span>
+            <div class="nearby-cat">Local · 食</div>
+            <div class="nearby-name">Tsuruga Ramen</div>
+            <div class="nearby-desc">
+              Tsuruga boasts its own distinctive ramen style featuring rich broths and local pork. Shops near the station serve this regional specialty to both travelers and locals. Perfect warm meal after shrine visiting.
+            </div>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-icon">🏨</span>
+            <div class="nearby-cat">Stay · 宿</div>
+            <div class="nearby-name">Tsuruga Hot Spring Inns</div>
+            <div class="nearby-desc">
+              Traditional ryokan with onsen (hot spring) facilities dot Tsuruga. Many serve multi-course dinners featuring local seafood and feature views of the port or surrounding mountains. Relaxing overnight option post-shrine.
+            </div>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-icon">🌲</span>
+            <div class="nearby-cat">Nature · 自然</div>
+            <div class="nearby-name">Kehi-no-Matsubara Pine Grove</div>
+            <div class="nearby-desc">
+              One of Japan's three great pine groves, stretching along the coast with ancient pine trees. A short walk from the shrine, this scenic forest represents one of Japan's most beautiful natural treasures. Peaceful riverside walks available.
+            </div>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-icon">⚛️</span>
+            <div class="nearby-cat">Museum · 博</div>
+            <div class="nearby-name">Tsuruga Nuclear Museum</div>
+            <div class="nearby-desc">
+              Modern interactive museum exploring Japan's energy history and nuclear technology. Unique contrast to spiritual shrine experience. Educational and thought-provoking, with views of the power plant from coastal areas.
+            </div>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-icon">→</span>
+            <div class="nearby-cat">Next Shrine · 次の一宮</div>
+            <div class="nearby-name">越前 &rarr; 多賀大社(滋賀)</div>
+            <div class="nearby-desc">
+              Taga Taisha (Omi Province ichinomiya) in Shiga Prefecture is about 1.5 hours by car east. Another ancient shrine on the sacred Hokuriku pilgrimage route.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /grid -->
+
+  <!-- SPECIAL SECTION: Three Great Torii & Seven Deities -->
+  <div class="special-box" style="margin-top:24px;">
+    <div class="special-title">日本三大鳥居と氣比七神 &mdash; Three Great Torii &amp; Seven Divine Deities</div>
+    <div class="special-sub">THE UNIQUE SPIRITUAL HERITAGE OF KEHI JINGU</div>
+    <div class="special-grid">
+      <div class="special-item">
+        <span class="item-sym">⛩️</span>
+        <span class="item-name">Otorii Gate</span>
+        <span class="item-desc">11m tall &mdash; one of three great torii</span>
+      </div>
+      <div class="special-item">
+        <span class="item-sym">🌲</span>
+        <span class="item-name">Juniper Wood</span>
+        <span class="item-desc">Edo period &mdash; Sado Island origin</span>
+      </div>
+      <div class="special-item">
+        <span class="item-sym">💧</span>
+        <span class="item-name">Chomeisui</span>
+        <span class="item-desc">Water of long life &mdash; sacred spring</span>
+      </div>
+      <div class="special-item">
+        <span class="item-sym">👑</span>
+        <span class="item-name">Isasawake-no-Mikoto</span>
+        <span class="item-desc">Chief deity &mdash; food &amp; sustenance</span>
+      </div>
+      <div class="special-item">
+        <span class="item-sym">📖</span>
+        <span class="item-name">Kojiki Mention</span>
+        <span class="item-desc">Japan's oldest records &mdash; 1,300 years</span>
+      </div>
+      <div class="special-item">
+        <span class="item-sym">🛣️</span>
+        <span class="item-name">Hokuriku Road Guardian</span>
+        <span class="item-desc">Pilgrims' safe passage shrine</span>
+      </div>
+      <div class="special-item">
+        <span class="item-sym">🎉</span>
+        <span class="item-name">Kehi Matsuri</span>
+        <span class="item-desc">September festival &mdash; major celebration</span>
+      </div>
+      <div class="special-item">
+        <span class="item-sym">🧓</span>
+        <span class="item-name">Longevity Blessing</span>
+        <span class="item-desc">Elder pilgrims seek sacred waters</span>
+      </div>
+      <div class="special-item" style="background:rgba(201,168,76,0.12); border-color:var(--gold);">
+        <span class="item-sym" style="color:var(--gold);">✦</span>
+        <span class="item-name" style="color:var(--gold);">Ancient Power</span>
+        <span class="item-desc" style="color:rgba(255,255,255,0.8);">Founded legendary era, rebuilt 702 CE</span>
+      </div>
+    </div>
+    <div class="special-desc">
+      Kehi Jingu stands as one of Japan's most storied and spiritually potent shrines, enshrining seven divine deities with Isasawake-no-Mikoto (Kehi-no-Okami) as the chief deity of food, harvest, and longevity. The shrine's iconic vermillion torii gate, one of only three "great torii gates" in all Japan, towers 11 meters above the entrance and stands as both an architectural marvel and a symbol of spiritual threshold. Built from juniper wood that washed ashore from Sado Island in 1645, this Important Cultural Property attracts millions of visitors annually. The shrine's sacred spring water, <em>chomeisui</em>, is renowned as "the water of long life"—pilgrims of all ages seek its blessings. Founded in the legendary era and formally rebuilt in 702 CE, Kehi Jingu is mentioned in both the Kojiki and Nihonshoki, Japan's oldest written records, placing it among the nation's most ancient sacred sites. For thirteen centuries, the shrine has served as the spiritual guardian of the Hokuriku Road, blessing travelers and merchants embarking on dangerous journeys.
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-bar" style="margin-top:24px;">
+    <div>
+      <h3>Ready to visit Kehi Jingu?</h3>
+      <p>Stand beneath Japan's Three Great Torii Gates and drink the sacred waters of long life, or explore more Ichinomiya shrines across Japan.</p>
+    </div>
+    <div class="cta-links">
+      <a href="https://www.fuku-e.com/en/attractions/detail_1062.html" target="_blank" class="btn">Official Information &rarr;</a>
+      <a href="ichinomiya-map.html" class="btn secondary">&larr; All Shrines Map</a>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<footer>
+  <p>一ノ宮 Ichinomiya &nbsp;&middot;&nbsp; Kehi Jingu &middot; 越前國一之宮 氣比神宮</p>
+  <p style="margin-top:6px;">
+    Sources:
+    <a href="https://www.fuku-e.com/en/attractions/detail_1062.html" target="_blank" style="color:rgba(255,255,255,0.4);">Fukui Travel Guide</a> &middot;
+    <a href="https://travel.gaijinpot.com/kehi-jingu-shrine/" target="_blank" style="color:rgba(255,255,255,0.4);">GaijinPot Travel</a> &middot;
+    <a href="https://matcha-jp.com/en/23875" target="_blank" style="color:rgba(255,255,255,0.4);">MATCHA Japan</a>
+  </p>
+</footer>
+
+</body>
+</html>
