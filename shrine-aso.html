@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Aso Shrine — Ichinomiya of Higo Province</title>
+<style>
+:root {
+  --red: #9b2335;
+  --gold: #c9a84c;
+  --ink: #1a1a2e;
+  --cream: #fdf6ec;
+  --mist: #f0ebe3;
+  --gray: #6b6b6b;
+  --green: #2e7d32;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Georgia',serif; background:var(--cream); color:var(--ink); line-height:1.75; }
+
+/* ── HEADER ── */
+header {
+  background:var(--ink); color:#fff;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:14px 28px; position:sticky; top:0; z-index:200;
+  box-shadow:0 2px 12px rgba(0,0,0,0.4);
+}
+.logo { display:flex; align-items:baseline; gap:10px; text-decoration:none; }
+.logo .kanji { font-size:1.5rem; color:var(--gold); font-weight:bold; }
+.logo .sub { font-size:0.78rem; color:rgba(255,255,255,0.5); letter-spacing:0.1em; }
+.header-right { display:flex; align-items:center; gap:16px; }
+nav a { color:rgba(255,255,255,0.6); text-decoration:none; font-size:0.78rem; letter-spacing:0.08em; margin-left:20px; }
+nav a:hover { color:var(--gold); }
+.lang-switcher { display:flex; gap:4px; }
+.lang-btn { font-size:0.7rem; padding:2px 8px; border-radius:10px; text-decoration:none; border:1px solid rgba(255,255,255,0.2); color:rgba(255,255,255,0.5); transition:all 0.2s; }
+.lang-btn.active { background:var(--gold); color:var(--ink); border-color:var(--gold); font-weight:bold; }
+
+/* ── HERO ── */
+.hero {
+  position:relative; height:88vh; min-height:520px; overflow:hidden;
+  display:flex; flex-direction:column; align-items:center; justify-content:flex-end;
+  padding-bottom:48px; color:#fff; text-align:center;
+}
+.hero-bg {
+  position:absolute; inset:0;
+  background:
+    linear-gradient(to bottom, rgba(10,5,20,0.3) 0%, rgba(10,5,20,0.1) 40%, rgba(10,5,20,0.75) 100%),
+    linear-gradient(135deg, #1a0a0a 0%, #2a1508 40%, #0a1520 100%);
+}
+.hero-torii { position:absolute; bottom:0; left:50%; transform:translateX(-50%); width:100%; max-width:900px; opacity:0.12; }
+.hero-glow {
+  position:absolute; width:600px; height:600px; border-radius:50%;
+  background:radial-gradient(circle, rgba(201,168,76,0.15) 0%, transparent 70%);
+  top:50%; left:50%; transform:translate(-50%,-50%);
+}
+.particles { position:absolute; inset:0; overflow:hidden; }
+.particle { position:absolute; width:2px; height:2px; background:rgba(201,168,76,0.6); border-radius:50%; animation:float linear infinite; }
+@keyframes float { 0%{transform:translateY(100vh) translateX(0);opacity:0;} 10%{opacity:1;} 90%{opacity:1;} 100%{transform:translateY(-20px) translateX(30px);opacity:0;} }
+.hero-content { position:relative; z-index:1; padding:0 20px; }
+.hero-badge { display:inline-block; border:1px solid var(--gold); color:var(--gold); font-size:0.7rem; letter-spacing:0.25em; padding:4px 16px; border-radius:20px; margin-bottom:16px; text-transform:uppercase; }
+.hero h1 { font-size:clamp(2rem,6vw,4.5rem); font-weight:normal; line-height:1.1; margin-bottom:8px; }
+.hero h1 .jp { display:block; font-size:clamp(2.5rem,8vw,5.5rem); color:var(--gold); }
+.hero-tagline { font-size:clamp(0.9rem,2vw,1.1rem); color:rgba(255,255,255,0.75); max-width:560px; margin:16px auto 0; font-style:italic; }
+.hero-scroll { margin-top:32px; color:rgba(255,255,255,0.3); font-size:0.72rem; letter-spacing:0.2em; animation:pulse 2.5s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{opacity:.3} 50%{opacity:.8} }
+
+/* ── QUICK FACTS BAR ── */
+.quick-bar { background:var(--ink); color:#fff; display:flex; justify-content:center; flex-wrap:wrap; gap:0; }
+.quick-item { padding:14px 28px; display:flex; align-items:center; gap:8px; border-right:1px solid rgba(255,255,255,0.1); font-size:0.8rem; }
+.quick-item:last-child { border-right:none; }
+.quick-icon { font-size:1rem; }
+.quick-label { color:rgba(255,255,255,0.45); font-size:0.65rem; display:block; }
+.quick-value { color:#fff; font-size:0.85rem; }
+
+/* ── MAIN GRID ── */
+.main { max-width:1100px; margin:0 auto; padding:48px 20px 80px; }
+.grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+.grid-full { grid-column:1/-1; }
+
+/* ── CARDS ── */
+.card { background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 2px 16px rgba(0,0,0,0.07); border:1px solid rgba(0,0,0,0.06); }
+.card-header { padding:18px 24px 14px; border-bottom:1px solid #f0e8d8; display:flex; align-items:center; gap:12px; }
+.card-num { width:28px; height:28px; background:var(--red); color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.75rem; font-weight:bold; flex-shrink:0; }
+.card-title-en { font-size:0.65rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold); display:block; }
+.card-title-jp { font-size:1.05rem; font-weight:bold; display:block; line-height:1.2; }
+.card-title-zh { font-size:0.7rem; color:var(--gray); display:block; }
+.card-body { padding:20px 24px 24px; }
+
+/* Essence card */
+.essence-highlight { background:var(--mist); border-radius:8px; padding:16px 20px; margin-bottom:16px; border-left:3px solid var(--gold); }
+.essence-label { font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:6px; }
+.essence-text { font-size:0.95rem; color:#333; }
+.essence-text strong { color:var(--red); }
+
+/* Video embed */
+.video-wrapper { position:relative; border-radius:8px; overflow:hidden; background:var(--ink); margin-top:16px; }
+.video-overlay { position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%); display:flex; align-items:center; justify-content:center; }
+.play-btn { width:56px; height:56px; border-radius:50%; background:rgba(201,168,76,0.9); display:flex; align-items:center; justify-content:center; text-decoration:none; transition:transform 0.2s, background 0.2s; font-size:1.3rem; color:var(--ink); }
+.play-btn:hover { transform:scale(1.1); background:var(--gold); }
+.video-caption { position:absolute; bottom:0; left:0; right:0; padding:10px 14px; color:rgba(255,255,255,0.8); font-size:0.75rem; }
+
+/* Map card */
+.map-wrapper { border-radius:8px; overflow:hidden; margin-bottom:16px; }
+.map-wrapper iframe { width:100%; height:240px; border:none; display:block; }
+.map-link { display:flex; align-items:center; gap:8px; background:var(--ink); color:var(--gold); text-decoration:none; padding:10px 16px; border-radius:6px; font-size:0.82rem; letter-spacing:0.08em; margin-bottom:16px; transition:background 0.2s; }
+.map-link:hover { background:#2a2a3e; }
+.access-list { list-style:none; }
+.access-list li { display:flex; gap:10px; align-items:flex-start; padding:8px 0; border-bottom:1px solid #f0ebe3; font-size:0.88rem; }
+.access-list li:last-child { border-bottom:none; }
+.access-icon { flex-shrink:0; font-size:1rem; }
+.access-main { display:block; color:var(--ink); }
+.access-sub { display:block; font-size:0.75rem; color:var(--gray); }
+
+/* Deep Insight card */
+.insight-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid #f0ebe3; }
+.insight-item:last-child { border-bottom:none; }
+.insight-badge { flex-shrink:0; padding:2px 8px; border-radius:4px; font-size:0.65rem; font-weight:bold; letter-spacing:0.05em; height:fit-content; margin-top:2px; }
+.badge-unique { background:#fff3e0; color:#e65100; }
+.badge-tip { background:#e8f5e9; color:#1b5e20; }
+.badge-info { background:#e8f0fe; color:#1a237e; }
+.badge-seasonal { background:#fce4ec; color:#880e4f; }
+.badge-stamp { background:#fff3e0; color:#e65100; }
+.insight-title { font-size:0.9rem; font-weight:bold; margin-bottom:3px; }
+.insight-desc { font-size:0.83rem; color:var(--gray); }
+
+/* Nearby card */
+.nearby-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; }
+.nearby-item { background:var(--mist); border-radius:8px; padding:14px; }
+.nearby-cat { font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--gray); margin-bottom:4px; }
+.nearby-icon { font-size:1.2rem; margin-bottom:6px; display:block; }
+.nearby-name { font-size:0.88rem; font-weight:bold; margin-bottom:4px; }
+.nearby-desc { font-size:0.78rem; color:var(--gray); }
+
+/* Deity section */
+.deity-card { background:var(--ink); color:#fff; border-radius:12px; padding:32px; display:grid; grid-template-columns:auto 1fr; gap:28px; align-items:start; }
+.deity-symbol { font-size:4rem; line-height:1; }
+.deity-label { font-size:0.65rem; letter-spacing:0.2em; color:var(--gold); text-transform:uppercase; margin-bottom:6px; }
+.deity-name { font-size:1.5rem; font-weight:bold; margin-bottom:4px; }
+.deity-jp { font-size:0.9rem; color:rgba(255,255,255,0.55); margin-bottom:16px; }
+.deity-desc { font-size:0.9rem; color:rgba(255,255,255,0.8); line-height:1.7; margin-bottom:16px; }
+.blessing-tags { display:flex; flex-wrap:wrap; gap:6px; }
+.blessing-tag { background:rgba(201,168,76,0.15); border:1px solid rgba(201,168,76,0.3); color:var(--gold); padding:3px 10px; border-radius:12px; font-size:0.72rem; letter-spacing:0.05em; }
+
+/* Special section */
+.special-box { background:linear-gradient(135deg, #1a1a2e 0%, #2a1010 100%); color:#fff; border-radius:12px; padding:32px; }
+.special-title { color:var(--gold); font-size:1.2rem; margin-bottom:8px; }
+.special-sub { font-size:0.75rem; letter-spacing:0.15em; color:rgba(255,255,255,0.4); margin-bottom:20px; }
+.special-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+.special-item { text-align:center; padding:16px 8px; background:rgba(255,255,255,0.06); border-radius:8px; border:1px solid rgba(201,168,76,0.2); }
+.special-item .item-sym { font-size:1.8rem; display:block; margin-bottom:6px; }
+.special-item .item-name { font-size:0.78rem; color:var(--gold); display:block; margin-bottom:4px; }
+.special-item .item-desc { font-size:0.7rem; color:rgba(255,255,255,0.6); }
+.special-desc { margin-top:20px; font-size:0.88rem; color:rgba(255,255,255,0.75); line-height:1.7; }
+
+/* CTA */
+.cta-bar { background:var(--red); border-radius:12px; padding:28px 32px; display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap; }
+.cta-bar h3 { color:#fff; font-size:1.1rem; font-weight:normal; }
+.cta-bar p { color:rgba(255,255,255,0.75); font-size:0.85rem; margin-top:4px; }
+.cta-links { display:flex; gap:10px; flex-wrap:wrap; }
+.btn { display:inline-block; padding:10px 22px; border:2px solid #fff; color:#fff; text-decoration:none; border-radius:4px; font-size:0.82rem; letter-spacing:0.08em; transition:background 0.2s, color 0.2s; font-family:inherit; cursor:pointer; }
+.btn:hover { background:#fff; color:var(--red); }
+.btn.secondary { border-color:rgba(255,255,255,0.4); color:rgba(255,255,255,0.7); }
+.btn.secondary:hover { background:rgba(255,255,255,0.15); color:#fff; }
+
+/* Breadcrumb */
+.breadcrumb { padding:12px 20px; font-size:0.75rem; color:var(--gray); max-width:1100px; margin:0 auto; }
+.breadcrumb a { color:var(--gray); text-decoration:none; }
+.breadcrumb a:hover { color:var(--red); }
+
+footer { background:var(--ink); color:rgba(255,255,255,0.35); text-align:center; padding:28px; font-size:0.78rem; }
+
+@media(max-width:700px) {
+  .grid { grid-template-columns:1fr; }
+  .special-grid { grid-template-columns:repeat(2,1fr); }
+  .nearby-grid { grid-template-columns:1fr; }
+  .deity-card { grid-template-columns:1fr; }
+  .quick-item { padding:10px 16px; }
+  .cta-bar { flex-direction:column; align-items:flex-start; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a class="logo" href="ichinomiya-map.html">
+    <span class="kanji">一ノ宮</span>
+    <span class="sub">Japan's First Shrines</span>
+  </a>
+  <div class="header-right">
+    <nav>
+      <a href="ichinomiya-intro.html">What is Ichinomiya?</a>
+      <a href="ichinomiya-map.html">&larr; All Shrines</a>
+    </nav>
+    <div class="lang-switcher">
+      <a href="#" class="lang-btn">日本語</a>
+      <a href="#" class="lang-btn active">EN</a>
+      <a href="#" class="lang-btn">中文</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-glow"></div>
+  <!-- Torii silhouette -->
+  <svg class="hero-torii" viewBox="0 0 900 500" xmlns="http://www.w3.org/2000/svg">
+    <rect x="200" y="80" width="500" height="28" fill="white"/>
+    <rect x="240" y="108" width="420" height="16" fill="white"/>
+    <rect x="250" y="108" width="36" height="390" fill="white"/>
+    <rect x="614" y="108" width="36" height="390" fill="white"/>
+    <rect x="258" y="200" width="20" height="30" rx="3" fill="white" opacity="0.5"/>
+    <rect x="622" y="200" width="20" height="30" rx="3" fill="white" opacity="0.5"/>
+  </svg>
+  <!-- Particles -->
+  <div class="particles">
+    <div class="particle" style="left:10%;animation-duration:9s;animation-delay:0s;"></div>
+    <div class="particle" style="left:25%;animation-duration:12s;animation-delay:1.5s;"></div>
+    <div class="particle" style="left:40%;animation-duration:8s;animation-delay:3s;"></div>
+    <div class="particle" style="left:55%;animation-duration:11s;animation-delay:0.5s;"></div>
+    <div class="particle" style="left:70%;animation-duration:10s;animation-delay:2s;"></div>
+    <div class="particle" style="left:85%;animation-duration:13s;animation-delay:4s;"></div>
+    <div class="particle" style="left:95%;animation-duration:7s;animation-delay:1s;"></div>
+    <div class="particle" style="left:5%;animation-duration:14s;animation-delay:5s;"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">肥後國一之宮 · Ichinomiya of Higo Province</div>
+    <h1>
+      <span class="jp">阿蘇神社</span>
+      Aso Shrine
+    </h1>
+    <p class="hero-tagline">
+      Where the living volcano meets 2,300 years of prayer &mdash;<br>
+      guardian shrine born from fire, rebuilt through resilience.
+    </p>
+    <div class="hero-scroll">&darr; &nbsp; explore this shrine</div>
+  </div>
+</div>
+
+<!-- QUICK FACTS BAR -->
+<div class="quick-bar">
+  <div class="quick-item">
+    <span class="quick-icon">📍</span>
+    <div>
+      <span class="quick-label">Location</span>
+      <span class="quick-value">Aso, Kumamoto</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">🚃</span>
+    <div>
+      <span class="quick-label">Nearest Station</span>
+      <span class="quick-value">Miyaji Sta. (JR Hohi Line)</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">🚅</span>
+    <div>
+      <span class="quick-label">From Tokyo</span>
+      <span class="quick-value">~5 hrs (Shinkansen + local)</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">🕐</span>
+    <div>
+      <span class="quick-label">Hours</span>
+      <span class="quick-value">6:00 &ndash; 18:00 (Free)</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">👥</span>
+    <div>
+      <span class="quick-label">Annual Visitors</span>
+      <span class="quick-value">~1.5 million</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">🅿️</span>
+    <div>
+      <span class="quick-label">Parking</span>
+      <span class="quick-value">Yes (30 min free)</span>
+    </div>
+  </div>
+</div>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a href="ichinomiya-map.html">All Shrines</a> &nbsp;&rsaquo;&nbsp;
+  <a href="ichinomiya-map.html?road=Saikaido">Saikaidō 西海道</a> &nbsp;&rsaquo;&nbsp;
+  Higo Province &nbsp;&rsaquo;&nbsp; Aso Shrine
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+  <!-- Deity row (full width) -->
+  <div class="deity-card grid-full" style="margin-bottom:24px;">
+    <div class="deity-symbol">🌋</div>
+    <div>
+      <div class="deity-label">Enshrined Deities &mdash; 12 Gods</div>
+      <div class="deity-name">Takeiwatatsu-no-Mikoto &amp; 11 Deities</div>
+      <div class="deity-jp">健磐龍命（たけいわたつのみこと）ほか十一神 &mdash; 阿蘇十二神</div>
+      <div class="deity-desc">
+        Takeiwatatsu-no-Mikoto is the legendary grandson of Emperor Jimmu who is said to have opened the Aso caldera by kicking through the mountain wall to drain the ancient lake, creating the fertile farmland that sustains the region today. Together with eleven family deities, the <strong style="color:var(--gold)">Aso Twelve Gods</strong> are worshipped as the divine pioneers who transformed a volcanic wilderness into a land of abundance. As head shrine of approximately 500 Aso shrines across Japan, this is the spiritual heart of Kyushu's volcanic landscape.
+      </div>
+      <div class="blessing-tags">
+        <span class="blessing-tag">#FarmlandProsperity</span>
+        <span class="blessing-tag">#VolcanicProtection</span>
+        <span class="blessing-tag">#FamilyHarmony</span>
+        <span class="blessing-tag">#TrafficSafety</span>
+        <span class="blessing-tag">#BusinessSuccess</span>
+        <span class="blessing-tag">#HealthRecovery</span>
+        <span class="blessing-tag">#DisasterPrevention</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+
+    <!-- ■ CARD 1: ESSENCE -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">1</div>
+        <div class="card-title-block">
+          <span class="card-title-en">The Essence · 核心価値</span>
+          <span class="card-title-jp">核心的価値 &mdash; なぜここが特別なのか</span>
+          <span class="card-title-zh">核心价值 · 为何与众不同</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="essence-highlight">
+          <div class="essence-label">由緒 · Why It Matters</div>
+          <div class="essence-text">
+            <strong>2,300 years of continuous worship at the foot of an active volcano.</strong><br>
+            Founded traditionally in 281 BC, Aso Shrine is one of the oldest shrines in Japan. Ancient Chinese chronicles from the 7th century record that the people of Aso held festivals every time Mount Aso erupted to calm its wrath. The shrine's six main buildings &mdash; including the iconic Romon gate &mdash; are designated Important Cultural Properties of Japan, rebuilt in the Edo period by the Kumamoto domain.
+          </div>
+        </div>
+        <div class="essence-highlight" style="border-color:var(--red);">
+          <div class="essence-label" style="color:var(--red);">復興 · Resilience Reborn</div>
+          <div class="essence-text" style="font-size:0.88rem; color:#444;">
+            On April 16, 2016, the devastating Kumamoto earthquakes collapsed the magnificent Romon gate and severely damaged the worship halls. What followed was 7.5 years of painstaking reconstruction, completed in December 2023. The restored gate retains approximately 70% of its original timber, now reinforced with modern steel to withstand future earthquakes. Visiting today, you witness a shrine that has literally risen from its ruins &mdash; a powerful symbol of Kumamoto's spirit.
+          </div>
+        </div>
+        <!-- Video -->
+        <div class="video-wrapper">
+          <svg style="width:100%;aspect-ratio:16/9;display:block;" viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#1a0a05"/>
+                <stop offset="50%" stop-color="#2a1508"/>
+                <stop offset="100%" stop-color="#1a1a2e"/>
+              </linearGradient>
+              <linearGradient id="glow" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#ff6633" stop-opacity="0.3"/>
+                <stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <rect width="800" height="450" fill="url(#sky)"/>
+            <!-- Volcano silhouette -->
+            <polygon points="200,350 400,120 600,350" fill="#2a1a10" opacity="0.8"/>
+            <!-- Smoke from volcano -->
+            <circle cx="400" cy="100" r="40" fill="#666" opacity="0.2"/>
+            <circle cx="420" cy="80" r="30" fill="#555" opacity="0.15"/>
+            <circle cx="380" cy="70" r="25" fill="#777" opacity="0.1"/>
+            <!-- Volcanic glow -->
+            <circle cx="400" cy="140" r="60" fill="url(#glow)" opacity="0.6"/>
+            <!-- Romon gate -->
+            <rect x="320" y="260" width="160" height="12" fill="#c9a84c" opacity="0.7"/>
+            <rect x="330" y="245" width="140" height="10" fill="#c9a84c" opacity="0.5"/>
+            <rect x="335" y="272" width="14" height="80" fill="#c9a84c" opacity="0.7"/>
+            <rect x="451" y="272" width="14" height="80" fill="#c9a84c" opacity="0.7"/>
+            <!-- Second roof layer -->
+            <rect x="340" y="290" width="120" height="8" fill="#c9a84c" opacity="0.5"/>
+            <!-- Ground -->
+            <rect x="0" y="350" width="800" height="100" fill="#1a1008" opacity="0.9"/>
+            <!-- Path -->
+            <polygon points="370,352 430,352 460,450 340,450" fill="#c9a84c" opacity="0.1"/>
+            <!-- Stars -->
+            <circle cx="100" cy="40" r="1.5" fill="white" opacity="0.5"/>
+            <circle cx="250" cy="25" r="1" fill="white" opacity="0.3"/>
+            <circle cx="600" cy="50" r="1.5" fill="white" opacity="0.4"/>
+            <circle cx="700" cy="30" r="1" fill="white" opacity="0.5"/>
+            <!-- Text -->
+            <text x="400" y="420" text-anchor="middle" font-size="12" fill="rgba(255,255,255,0.5)" font-family="Georgia">阿蘇神社 · Aso Shrine</text>
+          </svg>
+          <div class="video-overlay">
+            <a class="play-btn" href="https://www.youtube.com/results?search_query=阿蘇神社+参拝+楼門+復興" target="_blank" title="Watch on YouTube">&#9654;</a>
+          </div>
+          <div class="video-caption">&#9654; 阿蘇神社の墅内 &mdash; Experience the restored shrine · 30 sec</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ■ CARD 2: ACCESS -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">2</div>
+        <div class="card-title-block">
+          <span class="card-title-en">Plan Your Visit · 交通指南</span>
+          <span class="card-title-jp">旅の地図 &mdash; アクセス情報</span>
+          <span class="card-title-zh">交通指南 · 如何前往</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <!-- Google Map embed -->
+        <div class="map-wrapper">
+          <iframe src="https://maps.google.com/maps?q=%E9%98%BF%E8%98%87%E7%A5%9E%E7%A4%BE+%E7%86%8A%E6%9C%AC%E7%9C%8C&output=embed&hl=en&z=14" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Aso Shrine map"></iframe>
+        </div>
+        <a class="map-link" href="https://maps.google.com/maps?q=阿蘇神社" target="_blank">
+          📍 Open in Google Maps &mdash; 熊本県阿蘇市一の宮町宮地3083-1
+        </a>
+        <ul class="access-list">
+          <li>
+            <span class="access-icon">🚃</span>
+            <span class="access-text">
+              <span class="access-main">JR Hohi Line &mdash; <strong>Miyaji Station</strong> · 20 min walk north</span>
+              <span class="access-sub">宮地駅 · Also 5 min from Aso Station (240 yen, hourly departures)</span>
+            </span>
+          </li>
+          <li>
+            <span class="access-icon">🚄</span>
+            <span class="access-text">
+              <span class="access-main">From <strong>Kumamoto City</strong> &mdash; approx. 70 min</span>
+              <span class="access-sub">JR Hohi Line direct to Miyaji Station</span>
+            </span>
+          </li>
+          <li>
+            <span class="access-icon">🚅</span>
+            <span class="access-text">
+              <span class="access-main">From <strong>Tokyo</strong> &mdash; approx. 5 hrs</span>
+              <span class="access-sub">Tokaido-Sanyo Shinkansen to Kumamoto &rarr; JR Hohi Line to Miyaji</span>
+            </span>
+          </li>
+          <li>
+            <span class="access-icon">🚗</span>
+            <span class="access-text">
+              <span class="access-main">By car &mdash; Aso IC (Kyushu Expressway) · 20 min</span>
+              <span class="access-sub">Kumamoto Airport &rarr; ~50 min by car via Milk Road</span>
+            </span>
+          </li>
+          <li>
+            <span class="access-icon">🅿️</span>
+            <span class="access-text">
+              <span class="access-main">Parking: First 30 min free</span>
+              <span class="access-sub">市営駐車場 · 3 hrs up to 300 yen · Additional lots nearby</span>
+            </span>
+          </li>
+          <li>
+            <span class="access-icon">⏰</span>
+            <span class="access-text">
+              <span class="access-main">Open 6:00 &ndash; 18:00 · Free admission</span>
+              <span class="access-sub">御東印受付 Goshuin office: 9:00&ndash;17:00 · &yen;500</span>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ■ CARD 3: DEEP INSIGHT -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">3</div>
+        <div class="card-title-block">
+          <span class="card-title-en">Deep Insight · 深度探索</span>
+          <span class="card-title-jp">リピーターのこだわり &mdash; 知る人ぞ知る</span>
+          <span class="card-title-zh">深度探索 · 行家的坚持</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="insight-item">
+          <span class="insight-badge badge-unique">UNIQUE</span>
+          <div class="insight-body">
+            <div class="insight-title">横参道 &mdash; Japan's Rare Lateral Approach</div>
+            <div class="insight-desc">
+              Unlike virtually every other shrine in Japan where you approach head-on, Aso Shrine features a <em>yoko-sando</em> &mdash; a lateral approach path. The main path runs perpendicular to the shrine, with the magnificent Romon gate facing sideways onto it. This is exceptionally rare in Shinto architecture and makes the first glimpse of the gate a dramatic surprise as you walk along the shopping street.
+            </div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-badge badge-unique">UNIQUE</span>
+          <div class="insight-body">
+            <div class="insight-title">楼門 &mdash; One of Japan's Three Great Tower Gates</div>
+            <div class="insight-desc">
+              The 18-meter Romon gate is counted among Japan's three greatest shrine tower gates, and is the largest in all of Kyushu. Built in 1850 during the late Edo period, its double-roof structure is a masterwork of traditional craftsmanship. After total collapse in 2016, it was painstakingly rebuilt over 7.5 years and unveiled in December 2023.
+            </div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-badge badge-tip">TIP</span>
+          <div class="insight-body">
+            <div class="insight-title">水基巡り &mdash; Spring Water Walking Tour</div>
+            <div class="insight-desc">
+              The shrine's approach street is dotted with <em>mizuki</em> &mdash; natural spring water fountains fed by Mount Aso's underground aquifer. Each has a poetic name: &ldquo;Golden Vein Spring,&rdquo; &ldquo;Fortune Water,&rdquo; &ldquo;Literary Master's Water.&rdquo; Bring a bottle and taste your way through this unique hydration pilgrimage. The water is clean, cold, and free.
+            </div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-badge badge-seasonal">FESTIVAL</span>
+          <div class="insight-body">
+            <div class="insight-title">御田祭 Onda Matsuri &mdash; July</div>
+            <div class="insight-desc">
+              One of Japan's three great rice-planting festivals, held annually on July 28. A costumed procession of shrine maidens and white-robed priests ritually plants rice while <em>unari</em> (sacred figures with giant masks) chase spectators for blessings. Designated a National Important Intangible Folk Cultural Property. An unforgettable spectacle.
+            </div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-badge badge-info">INFO</span>
+          <div class="insight-body">
+            <div class="insight-title">火振り神事 &mdash; Hifuri Shinji (March)</div>
+            <div class="insight-desc">
+              During the spring Uo-no-Matsuri festival in March, priests swing enormous flaming torches in the darkness to welcome the deity's bride. The 13-day festival celebrates the beginning of rice-planting season and the mythological marriage of the shrine's deities. The fire-swinging ritual against the dark Aso night is hauntingly beautiful.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ■ CARD 4: EAT STAY MORE -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">4</div>
+        <div class="card-title-block">
+          <span class="card-title-en">Eat, Stay &amp; More · 周邊,資訊</span>
+          <span class="card-title-jp">周辺の滞在 &mdash; 食・宿・寄り道</span>
+          <span class="card-title-zh">周边信息 · 吃住游</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="nearby-grid">
+          <div class="nearby-item">
+            <span class="nearby-icon">🍖</span>
+            <div class="nearby-cat">Food · :h���]���]��\��H��X\��K[�[YH��i�8��x����H]ܚ[Z^XO�]���]��\��H��X\��KY\�ȏ��HY�[�\�H	�][�ИK\����I��][��	�Y\��Hܛ�]Y]H�[Y�]���\�[[Y\�Yܜ�HYX][��Y��H�]���YY�ܙ\�����HHNMMKY��[�Y�]�\���ۈH\��X���Y]�X]]�ۈH�[���]�YK���]����]���]��\��H��X\��KZ][H����[��\��H��X\��KZX�ۈ��'�h���[���]��\��H��X\��KX�]����[0��:h���]���]��\��H��X\��K[�[YH��\��[��Z�O�]���]��\��H��X\��KY\�ȏ���Y][ۘ[�\���[Yܚ[YZ\��Y�^�YٝK�Y�]X�\�[��]�\��\�ۈ��]�\�ˈH[�[�Z[��Z\�[�H\��X�Yݙ\��[�\�Y\�[�H\��Y�[�ˈ�]�\�[�\�]\�[��ۈH\��X���Y]���]����]���]��\��H��X\��KZ][H����[��\��H��X\��KZX�ۈ���j;�#���[���]��\��H��X\��KX�]���^H0��9k���]���]��\��H��X\��K[�[YH��\��X�[��XZ�Hۜ�[��]���]��\��H��X\��KY\�ȏ��H���[���ۈ�\�LZ[�]\����HH��[�K��Y][ۘ[�[��[��]���[�X�Z[�\�[�]�[��Y]��وH\���[\�K�\��X�ݙ\��Y��\�H�܈��[�H[����[��^ܘ][ۋ���]����]���]��\��H��X\��KZ][H����[��\��H��X\��KZX�ۈ��'�/���[���]��\��H��X\��KX�]���]\�H0��:!��-��]���]��\��H��X\��K[�[YH���\�\�[��H	�[\�]�\��ܘ]\��]���]��\��H��X\��KY\�ȏ��H�\�ܙY[�YXY���]Hܘ]\�Z�K\�H�[��[��ܘ]\�و�Z�YZ�H	�Y\��ۙHوH�ܛ	��[��X��\��X�HX�]�H���[��\ˈ�Z[��]�H���HH��[�K���]����]���]��\��H��X\��KZ][H����[��\��H��X\��KZX�ۈ��'����[���]��\��H��X\��KX�]���YH�\0��9k��]���]��\��H��X\��K[�[YH���\�Z�]�H�]\���\��O�]���]��\��H��X\��KY\�ȏ��ۙHو�\[���[���X]]Y�[��[���]\���\��\��Y�H\�������[�X��[�][ۋ�ܞ\�[X�X\��]\��\�\�]
+�ۜ�\�Z[�]K��Z[���]وH��[�K���]����]���]��\��H��X\��KZ][H����[��\��H��X\��KZX�ۈ����{�#���[���]��\��H��X\��KX�]���^��[�H0��9�(x�k�. 9k���]���]��\��H��X\��K[�[YH��f/�&!�	��\���9k��/d9�g�k���]���]��\��H��X\��KY\�ȏ��\�H�[��H
+�^�[��ݚ[��HX�[��Z^XJH[��]H�Y�X�\�H\�X��]��H�\���H�\��XY��[�Hو[X�[X[���[�\�[��\[����]����]����]����]����]�����]��KKH�ܚYKO���KKH�P�PS�P�Sӎ�H�[�H���	���[ۈ�]HKO��]��\��H��X�X[X����[OH�X\��[�]���ȏ��]��\��H��X�X[]]H��f/�&!�c`y.�9�g��j9�o:e�	�Y\��H�[�H���	�[\�H�X�ܛ��]O�]���]��\��H��X�X[\�X���HS�TUQH�T�UPST�UQ�HшT���]���]��\��H��X�X[YܚY���]��\��H��X�X[Z][H����[��\��H�][K\�[H��'�"���[����[��\��H�][K[�[YH��Z�Z]�]]�O��[����[��\��H�][KY\�ȏ��YY�Z]H	�Y\���[�YH\���[\�O��[����]���]��\��H��X�X[Z][H����[��\��H�][K\�[H��'�n��[����[��\��H�][K[�[YH��\���Z[YO��[����[��\��H�][KY\�ȏ��ۜ�ܝZ]H	�Y\����\��و\��\���[����]���]��\��H��X�X[Z][H����[��\��H�][K\�[H����;�#���[����[��\��H�][K[�[YH��^X[ZZ�][XO��[����[��\��H�][KY\�ȏ��ۈZ]H	�Y\���\��[܈��و��[����[����]���]��\��H��X�X[Z][H����[��\��H�][K\�[H��'�/���[����[��\��H�][K[�[YH��X�K[��T�[�[���[����[��\��H�][KY\�ȏ��\���[��X\�H	�Y\���\�\��X[HZ]Y\���[����]���]��\��H��X�X[Z][H����[��\��H�][K\�[H��'����[����[��\��H�][K[�[YH���K[��T�[�[���[����[��\��H�][KY\�ȏ��X�ۙ�[��X\�H	�Y\���\�\���[X[HZ]Y\���[����]���]��\��H��X�X[Z][H����[��\��H�][K\�[H��'����#���[����[��\��H�][K[�[YH���[�[��T�[�[���[����[��\��H�][KY\�ȏ�\��[��X\�H	�Y\���\�\�
+�[ܙHZ]Y\���[����]���]��\��H��X�X[Z][H����[��\��H�][K\�[H����{�#���[����[��\��H�][K[�[YH����[ۈ�]H9�o:e���[����[��\��H�][KY\�ȏ�NH[	�Y\��ۙHو�\[�������[����]���]��\��H��X�X[Z][H����[��\��H�][K\�[H��'�)O��[����[��\��H�][K[�[YH���M�X\�]XZ�O��[����[��\��H�][KY\�ȏ��]H��\�Y	�Y\��
+ˍHYX\����X�Z[��[����]���]��\��H��X�X[Z][H��[OH��X��ܛ�[���ؘJ�KM�
+͋�L�N��ܙ\�X��܎��\�KY��
+Nȏ���[��\��H�][K\�[H��[OH���܎��\�KY��
+Nȏ��)���[����[��\��H�][K[�[YH��[OH���܎��\�KY��
+Nȏ��X�ܛ������[����[��\��H�][KY\�Ȉ�[OH���܎��ؘJ�MK�MK�MK�
+Nȏ��	HܚY�[�[[X�\�
+�[�\���Y[�Z[��ܘ�[Y[���[����]����]���]��\��H��X�X[Y\�ȏ��\����[�H[�\]Y[H[���[�\��[�HZ]Y\�[��YH�\\�]H�[��X\�Y\�
+[O��[�[��[O�H	�Y\��H�ۙ�Y�\�][ۈ��[����\�H[�H[��\[��H\��[��[Y[��Y�X��H^]���X�[�[Z[H][YYH���[�X�[���\N�H]�X\��Z�Z]�]]�K\���YKZ\��[�[�[�Z\�]�[�H\��[�[�ˈH��[�I���^XZ[��Z[[���[\�Yۘ]Y[\ܝ[��[\�[��\�Y\��\�H�X�ۜ��X�Y[�H[����YZH\�\�
+N�I��\��N
+L
+H�]H]�ۘY�HوH�[X[[���]Y[�XZ[��Y�\�H]�\�][���M�X\�]XZ�H]�[YH��[ۈ�]H[�[XY�Y]�\�H�Z[[��H�[�\�ܘ][ۈ��\]Y[�X�[X�\����X\���ۙHوH[���YۚY�X�[���[�H�X�ۜ��X�[ۜ�[�[�\���\[�\�H\�ܞK���]����]����KKH�HKO��]��\��H��KX�\���[OH�X\��[�]���ȏ��]���ϔ�XYH��\�]\����[�O��ς���[�\�X�[ۜ�[�[�\���]K܈^ܙH[ܙHX�[��Z^XH��[�\�Xܛ����\[������]���]��\��H��K[[��ȏ��H�Y�H�΋��\�ښ[��K�܋��Ȉ\��]H�؛[�Ȉ�\��H�����ٙ�X�X[�X��]H	��\����O��H�Y�H�X�[��Z^XK[X\�[��\��H����X�ۙ\�H���\���[��[�\�X\�O���]����]�����]��KKH�XZ[�KO������\����. 8��k��X�[��Z^XH	����ɛZY�ɛ����\����[�H	�ZY��: �yo�9g"�. 9.b�k��:f/�&!��g��/�����[OH�X\��[�]���ȏ����\��\΂�H�Y�H�΋��\�ښ[��K�܋��Ȉ\��]H�؛[�Ȉ�[OH���܎��ؘJ�MK�MK�MK�
+Nȏ�ٙ�X�X[��[�O�O�	�ZY�H�Y�H�΋��[���Z�\YXK�ܙ���Z�K�\�����[�H�\��]H�؛[�Ȉ�[OH���܎��ؘJ�MK�MK�MK�
+Nȏ��Z�\YXO�O�	�ZY�H�Y�H�΋���[X[[�˙�ZYK�[������]Z[�M��\��]H�؛[�Ȉ�[OH���܎��ؘJ�MK�MK�MK�
+Nȏ��[X[[���ZYO�O�����ٛ��\����؛�O���[
