@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atsuta Jingu 熱田神宮 | Japan Ichinomiya</title>
+<meta name="description" content="Atsuta Jingu — Japan's second most sacred shrine, home of the legendary Kusanagi sword. Complete visitor guide in English, Japanese, and Chinese.">
+<style>
+:root {
+  --red: #9b2335;
+  --gold: #c9a84c;
+  --ink: #1a1a2e;
+  --cream: #fdf6ec;
+  --mist: #f0ebe3;
+  --gray: #6b6b6b;
+  --green: #2e7d32;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Georgia,'Times New Roman',serif;background:var(--cream);color:var(--ink);line-height:1.7}
+
+/* HEADER */
+header{position:sticky;top:0;z-index:100;background:rgba(26,26,46,0.97);backdrop-filter:blur(8px);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:56px;box-shadow:0 2px 12px rgba(0,0,0,0.3)}
+.logo{color:var(--gold);font-size:1rem;letter-spacing:.08em;text-decoration:none;font-weight:normal}
+nav{display:flex;gap:20px;align-items:center}
+nav a{color:rgba(255,255,255,0.75);text-decoration:none;font-size:.82rem;letter-spacing:.04em;font-family:'Hiragino Mincho ProN','Yu Mincho',Georgia,serif;transition:color .2s}
+nav a:hover{color:var(--gold)}
+.lang-switcher{display:flex;gap:4px;margin-left:16px}
+.lang-btn{background:transparent;border:1px solid rgba(201,168,76,0.4);color:rgba(255,255,255,0.7);padding:3px 10px;font-size:.75rem;cursor:pointer;transition:all .2s;font-family:inherit}
+.lang-btn.active,.lang-btn:hover{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+
+/* HERO */
+.hero{position:relative;height:100vh;min-height:600px;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(160deg,#1a1a2e 0%,#0d1f0d 35%,#1a2e1a 65%,#0a0a1a 100%)}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 60%,rgba(46,125,50,0.12) 0%,transparent 70%)}
+.hero-badge{background:linear-gradient(135deg,var(--gold),#e8c96a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-size:.85rem;letter-spacing:.25em;text-transform:uppercase;margin-bottom:16px;font-family:'Hiragino Mincho ProN','Yu Mincho',Georgia,serif}
+.hero h1{color:#fff;font-size:clamp(2.2rem,6vw,4.2rem);text-align:center;font-weight:normal;letter-spacing:.03em;line-height:1.2;margin-bottom:8px}
+.hero h1 .jp{display:block;font-size:clamp(1.1rem,2.5vw,1.8rem);color:var(--gold);letter-spacing:.12em;margin-top:8px;font-family:'Hiragino Mincho ProN','Yu Mincho',serif}
+.hero-tagline{color:rgba(255,255,255,0.7);font-size:clamp(.95rem,2vw,1.2rem);text-align:center;margin-top:20px;font-style:italic;letter-spacing:.04em}
+.hero-scroll{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(255,255,255,0.4);font-size:.75rem;letter-spacing:.1em}
+.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollPulse 2s ease-in-out infinite}
+@keyframes scrollPulse{0%,100%{opacity:.3}50%{opacity:1}}
+
+/* TORII SVG */
+.torii-wrap{margin-bottom:32px}
+svg.torii{width:160px;height:100px;opacity:.85}
+
+/* PARTICLES */
+.particle{position:absolute;width:3px;height:3px;border-radius:50%;background:var(--gold);opacity:0;animation:float var(--dur,8s) var(--delay,0s) infinite ease-in-out}
+@keyframes float{0%,100%{transform:translateY(0) translateX(0);opacity:0}20%{opacity:.6}80%{opacity:.4}50%{transform:translateY(var(--ty,-80px)) translateX(var(--tx,20px));opacity:.8}}
+
+/* QUICK BAR */
+.quick-bar{background:var(--ink);color:#fff;padding:20px 0;border-bottom:3px solid var(--gold)}
+.quick-bar-inner{max-width:1100px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px}
+.qb-item{display:flex;flex-direction:column;gap:4px}
+.qb-icon{font-size:1.3rem}
+.qb-label{font-size:.7rem;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;font-family:'Hiragino Mincho ProN','Yu Mincho',serif}
+.qb-value{font-size:.88rem;color:rgba(255,255,255,0.9)}
+
+/* CONTENT */
+.content{max-width:1100px;margin:0 auto;padding:56px 24px}
+
+/* DEITY CARD */
+.deity-card{background:linear-gradient(135deg,#0d1f0d 0%,#1a2e0a 100%);border-radius:16px;padding:40px;margin-bottom:40px;position:relative;overflow:hidden}
+.deity-card::before{content:'';position:absolute;top:-40px;right:-40px;width:200px;height:200px;background:radial-gradient(circle,rgba(201,168,76,0.12) 0%,transparent 70%)}
+.deity-name{color:#fff;font-size:1.8rem;font-weight:normal;margin-bottom:4px}
+.deity-jp{color:var(--gold);font-size:1.1rem;font-family:'Hiragino Mincho ProN','Yu Mincho',serif;letter-spacing:.1em;margin-bottom:16px}
+.deity-desc{color:rgba(255,255,255,0.8);font-size:1rem;line-height:1.8;margin-bottom:20px}
+.blessing-tags{display:flex;flex-wrap:wrap;gap:8px}
+.blessing-tag{background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.4);color:var(--gold);padding:4px 12px;border-radius:20px;font-size:.8rem;font-family:'Hiragino Mincho ProN','Yu Mincho',serif}
+
+/* CARDS */
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(480px,1fr));gap:32px;margin-bottom:40px}
+.card{background:#fff;border-radius:16px;padding:36px;box-shadow:0 4px 24px rgba(0,0,0,0.07);border-top:4px solid var(--gold)}
+.card-title{font-size:1.35rem;font-weight:normal;color:var(--ink);margin-bottom:4px;display:flex;align-items:center;gap:10px}
+.card-title .card-num{background:var(--gold);color:var(--ink);width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0}
+.card-subtitle{color:var(--gray);font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:20px;font-family:'Hiragino Mincho ProN','Yu Mincho',serif}
+
+/* ESSENCE */
+.essence-highlight{border-left:4px solid var(--gold);padding:16px 20px;background:rgba(201,168,76,0.06);margin-bottom:20px;border-radius:0 8px 8px 0}
+.essence-highlight p{font-size:1rem;color:var(--ink);line-height:1.8}
+.essence-story{background:var(--mist);padding:20px;border-radius:12px;margin-bottom:20px}
+.essence-story p{font-size:.92rem;color:var(--gray);line-height:1.8}
+.video-wrapper{background:var(--ink);border-radius:12px;padding:24px;text-align:center}
+.video-wrapper a{color:var(--gold);text-decoration:none;font-size:.9rem;display:flex;align-items:center;justify-content:center;gap:8px}
+.video-wrapper a:hover{text-decoration:underline}
+
+/* ACCESS */
+.map-embed{width:100%;height:240px;border:0;border-radius:12px;margin-bottom:20px;display:block}
+.access-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.access-list li{display:flex;gap:12px;font-size:.9rem;color:var(--gray)}
+.access-list li .icon{flex-shrink:0;font-size:1.1rem}
+
+/* DEEP INSIGHT */
+.insight-list{display:flex;flex-direction:column;gap:14px}
+.insight-item{display:flex;gap:12px;padding:14px;border-radius:10px;background:var(--mist)}
+.insight-badge{flex-shrink:0;padding:3px 10px;border-radius:12px;font-size:.72rem;font-weight:bold;letter-spacing:.04em;height:fit-content;margin-top:2px}
+.badge-tip{background:#e8f5e9;color:var(--green)}
+.badge-unique{background:#fff8e1;color:#8d6e00}
+.badge-info{background:#e3f2fd;color:#1565c0}
+.badge-seasonal{background:#fce4ec;color:#b71c1c}
+.insight-text{font-size:.9rem;color:var(--gray);line-height:1.7}
+.insight-text strong{color:var(--ink);display:block;margin-bottom:2px}
+
+/* EAT STAY MORE */
+.esm-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.esm-item{background:var(--mist);border-radius:12px;padding:18px}
+.esm-icon{font-size:1.5rem;margin-bottom:8px}
+.esm-title{font-size:.95rem;color:var(--ink);margin-bottom:6px}
+.esm-desc{font-size:.83rem;color:var(--gray);line-height:1.6}
+
+/* SPECIAL SECTION */
+.special-section{background:linear-gradient(160deg,#0a0a1a 0%,#1a2e0a 50%,#0d1f0d 100%);border-radius:20px;padding:48px;margin-bottom:40px;position:relative;overflow:hidden}
+.special-section::before{content:'';position:absolute;top:0;right:0;width:300px;height:300px;background:radial-gradient(circle,rgba(201,168,76,0.1) 0%,transparent 70%)}
+.special-title{color:var(--gold);font-size:1.5rem;font-weight:normal;margin-bottom:8px;text-align:center}
+.special-subtitle{color:rgba(255,255,255,0.5);font-size:.85rem;text-align:center;margin-bottom:36px;font-family:'Hiragino Mincho ProN','Yu Mincho',serif}
+.sword-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.sword-card{background:rgba(255,255,255,0.05);border:1px solid rgba(201,168,76,0.2);border-radius:12px;padding:24px}
+.sword-card .s-icon{font-size:2rem;margin-bottom:10px}
+.sword-card .s-title{color:var(--gold);font-size:.95rem;margin-bottom:8px;font-family:'Hiragino Mincho ProN','Yu Mincho',serif;font-weight:bold}
+.sword-card .s-desc{color:rgba(255,255,255,0.65);font-size:.82rem;line-height:1.65}
+
+/* CTA BAR */
+.cta-bar{background:var(--ink);border-radius:16px;padding:28px 36px;display:flex;flew-wrap:wrap;gap:16px;align-items:center;justify-content:center;margin-bottom:40px}
+.cta-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border-radius:8px;text-decoration:none;font-size:.92rem;transition:all .25s}
+.cta-primary{background:var(--gold);color:var(--ink);font-weight:bold}
+.cta-primary:hover{background:#e8c96a;transform:translateY(-1px)}
+.cta-secondary{border:1px solid rgba(255,255,255,0.3);color:rgba(255,255,255,0.8)}
+.cta-secondary:hover{border-color:var(--gold);color:var(--gold)}
+
+/* FOOTER NOTE */
+footer{text-align:center;padding:32px;color:var(--gray);font-size:.82rem;border-top:1px solid var(--mist)}
+
+@media(max-width:768px){
+  .cards-grid{grid-template-columns:1fr}
+  .esm-grid{grid-template-columns:1fr}
+  nav a{display:none}
+  .sword-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a class="logo" href="ichinomiya-map.html">⛩ Japan Ichinomiya</a>
+  <nav>
+    <a href="ichinomiya-intro.html">What is Ichinomiya?</a>
+    <a href="ichinomiya-map.html">Shrine Map</a>
+    <a href="ichinomiya-visit.html">Visit Guide</a>
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('ja')">日本語</button>
+      <button class="lang-btn" onclick="setLang('zh')">中文</button>
+    </div>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <!-- Particles -->
+  <div class="particle" style="left:8%;top:25%;--dur:10s;--delay:0s;--ty:-85px;--tx:20px"></div>
+  <div class="particle" style="left:22%;top:65%;--dur:12s;--delay:1.8s;--ty:-70px;--tx:-15px"></div>
+  <div class="particle" style="left:38%;top:45%;--dur:9s;--delay:3.2s;--ty:-95px;--tx:25px"></div>
+  <div class="particle" style="left:55%;top:78%;--dur:11s;--delay:0.6s;--ty:-80px;--tx:-20px"></div>
+  <div class="particle" style="left:70%;top:32%;--dur:13s;--delay:2.4s;--ty:-65px;--tx:30px"></div>
+  <div class="particle" style="left:82%;top:58%;--dur:8s;--delay:4.2s;--ty:-88px;--tx:-10px"></div>
+  <div class="particle" style="left:48%;top:18%;--dur:10s;--delay:1.2s;--ty:-78px;--tx:15px"></div>
+  <div class="particle" style="left:18%;top:55%;--dur:9s;--delay:2.8s;--ty:-72px;--tx:18px"></div>
+  <div class="particle" style="left:92%;top:72%;--dur:11s;--delay:0.9s;--ty:-90px;--tx:-25px"></div>
+  <div class="particle" style="left:63%;top:88%;--dur:8s;--delay:3.6s;--ty:-60px;--tx:12px"></div>
+
+  <div class="hero-badge" id="hero-badge">尾張國一之宮</div>
+
+  <!-- Torii SVG -->
+  <div class="torii-wrap">
+    <svg class="torii" viewBox="0 0 160 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="5" y="18" width="150" height="10" rx="3" fill="#9b2335" opacity=".9"/>
+      <rect x="12" y="28" width="136" height="7" rx="2" fill="#9b2335" opacity=".7"/>
+      <rect x="18" y="22" width="8" height="6" rx="1" fill="#c9a84c" opacity=".8"/>
+      <rect x="134" y="22" width="8" height="6" rx="1" fill="#c9a84c" opacity=".8"/>
+      <rect x="28" y="35" width="10" height="65" rx="3" fill="#9b2335" opacity=".85"/>
+      <rect x="122" y="35" width="10" height="65" rx="3" fill="#9b2335" opacity=".85"/>
+      <rect x="5" y="13" width="150" height="6" rx="3" fill="#c9a84c" opacity=".4"/>
+      <circle cx="80" cy="16" r="4" fill="#c9a84c" opacity=".6"/>
+    </svg>
+  </div>
+
+  <h1 id="hero-title">Atsuta Jingu <span class="jp">熱田神宮</span></h1>
+  <p class="hero-tagline" id="hero-tagline">"Japan's sacred sword sleeps here — in a forest at the heart of Nagoya"</p>
+
+  <div class="hero-scroll">
+    <span>SCROLL</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- QUICK BAR -->
+<div class="quick-bar">
+  <div class="quick-bar-inner">
+    <div class="qb-item">
+      <span class="qb-icon">📍</span>
+      <span class="qb-label" id="qb-loc">Location</span>
+      <span class="qb-value">Nagoya, Aichi Pref.</span>
+    </div>
+    <div class="qb-item">
+      <span class="qb-icon">🚉</span>
+      <span class="qb-label" id="qb-sta">Nearest Station</span>
+      <span class="qb-value">Jingū-mae Sta. (Meitetsu, 3 min walk)</span>
+    </div>
+    <div class="qb-item">
+      <span class="qb-icon">🚅</span>
+      <span class="qb-label" id="qb-tokyo">From Tokyo</span>
+      <span class="qb-value">~1.5 hrs (Shinkansen to Nagoya)</span>
+    </div>
+    <div class="qb-item">
+    2 <span class="qb-icon">🕐</span>
+      <span class="qb-label" id="qb-hours">Hours</span>
+      <span class="qb-value">24 hrs (Treasure Hall 9:00–16:30)</span>
+    </div>
+    <div class="qb-item">
+      <span class="qb-icon">👥</span>
+      <span class="qb-label" id="qb-visitors">Annual Visitors</span>
+      <span class="qb-value">~7 million+</span>
+    </div>
+    <div class="qb-item">
+      <span class="qb-icon">🅿️</span>
+      <span class="qb-label" id="qb-parking">Parking</span>
+      <span class="qb-value">Yes (on-site, paid)</span>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="content">
+
+  <!-- DEITY CARD -->
+  <div class="deity-card">
+    <div class="deity-name" id="deity-name">Atsuta-no-Okami</div>
+    <div class="deity-jp">熱田大神</div>
+    <p class="deity-desc" id="deity-desc">
+      Atsuta-no-Okami is the sacred manifestation of Amaterasu Ōmikami — the Sun Goddess — as she dwells within the Kusanagi-no-Tsurugi, the legendary sword that is one of Japan's three Imperial Regalia. Also enshrined alongside are four great deities: Susanoo-no-Mikoto, Yamato Takeru, Miyazu-hime, and Take Inadane-no-Mikoto — all bound together by the mythic journey of the sacred blade. Atsuta Jingu is second in national importance only to Ise, revered by emperors, samurai generals, and ordinary worshippers for over 1,900 years.
+    </p>
+    <div class="blessing-tags">
+      <span class="blessing-tag">#Victory</span>
+      <span class="blessing-tag">#Courage</span>
+      <span class="blessing-tag">#Imperial Protection</span>
+      <span class="blessing-tag">#Business Success</span>
+      <span class="blessing-tag">#家内安全</span>
+      <span class="blessing-tag">#Martial Arts</span>
+      <span class="blessing-tag">#Sword Craft</span>
+      <span class="blessing-tag">#Divine Power</span>
+    </div>
+  </div>
+
+  <!-- CARD GRID -->
+  <div class="cards-grid">
+
+    <!-- CARD 1: ESSENCE -->
+    <div class="card">
+      <div class="card-title"><span class="card-num">1</span> <span id="c1-title">Essence</span></div>
+      <div class="card-subtitle" id="c1-sub">Why this shrine commands awe</div>
+
+      <div class="essence-highlight">
+        <p id="c1-highlight">In the heart of Japan's third-largest city, a 190,000 m² ancient forest grows undisturbed. Inside it, sealed away from any human eye, rests the Kusanagi-no-Tsurugi — the Grass-Cutting Sword, one of three objects that legitimate the Japanese imperial throne. It has never been displayed, never been photographed, and its very appearance is unknown. Atsuta Jingu exists, in part, simply to guard this secret.</p>
+      </div>
+
+      <div class="essence-story">
+        <p id="c1-story">Founded in 113 CE during Emperor Keiko's reign, Atsuta Jingu has stood for over 1,900 years — making it one of Japan's oldest still-active shrines. Oda Nobunaga prayed here the night before the Battle of Okehazama (1560), where his vastly outnumbered army destroyed Imagawa Yoshimoto. In gratitude, he donated the magnificent stone-walled enclosure that still bears his name: the Nobunaga-bei. Throughout Japanese history, whoever sought to rule Japan first sought the blessing of Atsuta's sword.</p>
+      </div>
+
+      <div class="video-wrapper">
+        <a href="https://www.youtube.com/results?search_query=熱田神宮+参拝+境内+4K" target="_blank">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#9b2335" opacity=".9"/><polygon points="16,13 30,20 16,27" fill="#fff"/></svg>
+          <span id="c1-video">Watch: Atsuta Jingu — The Sacred Forest of Nagoya</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- CARD 2: ACCESS -->
+    <div class="card">
+      <div class="card-title"><span class="card-num">2</span> <span id="c2-title">Access</span></div>
+      <div class="card-subtitle" id="c2-sub">Your journey to Atsuta</div>
+
+      <iframe class="map-embed"
+        src="https://maps.google.com/maps?q=熱田神宮&output=embed"
+        loading="lazy" title="Atsuta Jingu Map" allowfullscreen></iframe>
+
+      <ul class="access-list">
+        <li><span class="icon">🚄</span><div><strong id="a1-title">By Shinkansen from Tokyo</strong><br><span id="a1-desc">Tokaido Shinkansen to Nagoya (~1 hr 40 min), then Meitetsu Nagoya Main Line to Jingū-mae Station (~15 min). Total ~2 hrs door-to-shrine.</span></div></li>
+        <li><span class="icon">🚇</span><div><strong id="a2-title">By Subway (Meijo Line)</strong><br><span id="a2-desc">Atsuta Jingu Nishi Station (Exit 2) → 7-min walk to West Gate. Or Atsuta Jingu Tenmacho Station (Exit 1) → 7-min walk to South Gate (main torii).</span></div></li>
+        <li><span class="icon">🚂</span><div><strong id="a3-title">By Meitetsu (fastest from Nagoya Station)</strong><br><span id="a3-desc">Meitetsu Nagoya Main Line to Jingū-mae Station → 3-min walk to East Gate. ~15 minutes, very convenient.</span></div></li>
+        <li><span class="icon">🚗</span><div><strong id="a4-title">By Car</strong><br><span id="a4-desc">Nagoya Expressway (Atsuta JCT) → ~5 min. On-site paid parking available near the West and South gates. The shrine district is easy to navigate.</span></div></li>
+        <li><span class="icon">♿</span><div><strong id="a5-title">Accessibility</strong><br><span id="a5-desc">Main gravel paths are accessible with care. The main hall area is largely flat. The Treasure Hall has steps — contact the shrine office for assistance.</span></div></li>
+      </ul>
+    </div>
+
+    <!-- CARD 3: DEEP INSIGHT -->
+    <div class="card">
+      <div class="card-title"><span class="card-num">3</span> <span id="c3-title">Deep Insight</span></div>
+      <div class="card-subtitle" id="c3-sub">What repeat visitors discover</div>
+
+      <div class="insight-list">
+        <div class="insight-item">
+          <span class="insight-badge badge-unique">UNIQUE</span>
+          <div class="insight-text">
+            <strong id="i1-title">The Sword No One Has Ever Seen</strong>
+            <span id="i1-desc">The Kusanagi-no-Tsurugi is sealed inside the innermost sanctuary and has never been shown to any person — not even the shrine priests. Its physical appearance is completely unknown. This absolute mystery, maintained for nearly two millennia, gives Atsuta an atmosphere unlike any other shrine in Japan.</span>
+          </div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-badge badge-unique">UNIQUE</span>
+          <div class="insight-text">
+            <strong id="i2-title">450 Swords in the Kusanagi-kan</strong>
+            <span id="i2-desc">The Treasure House contains over 450 historical swords — donated by emperors, shoguns, and samurai lords across 1,900 years. The collection is rotated monthly. Sword enthusiasts come specifically to see masterworks by legendary smiths on display, making this the finest sword museum in Japan attached to a living shrine.</span>
+          </div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-badge badge-info">INFO</span>
+          <div class="insight-text">
+            <strong id="i3-title">Nobunaga's Stone Wall, Still Standing</strong>
+            <span id="i3-desc">After Oda Nobunaga's miraculous victory at Okehazama (1560), he donated a 100-meter stone retaining wall to Atsuta as thanks. The Nobunaga-bei still stands along the shrine's southern perimeter — a direct, touchable connection to one of Japan's most dramatic military turning points.</span>
+          </div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-badge badge-info">INFO</span>
+          <div class="insight-text">
+            <strong id="i4-title">The 1,000-Year-Old Camphor Tree</strong>
+            <span id="i4-desc">The shrine's most famous tree — a colossal camphor (<em>kusu</em>) — is said to have been planted by Kōbō Daishi (Kukai), the founder of Shingon Buddhism, over 1,000 years ago. Its roots spread across the forest floor like a living cathedral. Local tradition holds that you can feel its spiritual energy simply by placing your hands on the bark.</span>
+          </div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-badge badge-seasonal">SEASONAL</span>
+          <div class="insight-text">
+            <strong id="i5-title">Atsuta Festival (June 5)</strong>
+            <span id="i5-desc">The annual Atsuta Matsuri (Shōbu Festival) draws over 60,000 visitors in a single night. The grounds fill with lanterns, and devotees can witness kyudo archery, bugaku court dance, kendo, and sumo — all dedicated as offerings to the shrine. The evening processions through the camphor forest are breathtaking.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 4: EAT / STAY / MORE -->
+    <div class="card">
+      <div class="card-title"><span class="card-num">4</span> <span id="c4-title">Eat · Stay · More</span></div>
+      <div class="card-subtitle" id="c4-sub">Making the most of your Nagoya visit</div>
+
+      <div class="esm-grid">
+        <div class="esm-item">
+          <div class="esm-icon">🍜</div>
+          <div class="esm-title" id="esm1-title">Miya Kishimen</div>
+          <p class="esm-desc" id="esm1-desc">Founded in 1923 and still located inside the shrine grounds, Miya Kishimen serves Nagoya's famous flat noodles (kishimen) in rich dashi broth. Eating here — in a teahouse within the sacred precincts — is a ritual unto itself. Try the kake kishimen with a side of miso katsu.</p>
+        </div>
+        <div class="esm-item">
+          <div class="esm-icon">🍡</div>
+          <div class="esm-title" id="esm2-title">Kiyome Mochi</div>
+          <p class="esm-desc" id="esm2-desc">Since the Edo period, the Kiyome Chaya teahouse has sold these delicate white rice cakes filled with smooth red bean paste. Pilgrims have eaten them for centuries. The shop near the south entrance lets you watch them being made fresh. The perfect shrine souvenir.</p>
+        </div>
+        <div class="esm-item">
+          <div class="esm-icon">🗺️</div>
+          <div class="esm-title" id="esm3-title">Nagoya Castle &amp; Beyond</div>
+          <p class="esm-desc" id="esm3-desc">Nagoya Castle (30 min by subway) is one of Japan's grandest castle complexes with golden shachihoko fish on the roof. The Noritake Garden (ceramics history) and Osu Kannon shopping district round out a full Nagoya day. Both Ise Jingu and Inuyama Castle are day-trip distance.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SPECIAL SECTION: THE KUSANAGI SWORD LEGEND -->
+  <div class="special-section">
+    <div class="special-title" id="sp-title">草薙神剣 · Kusanagi-no-Tsurugi</div>
+    <div class="special-subtitle" id="sp-sub">The Mythic Journey of Japan's Most Sacred Sword — 1,900 Years of Guardianship</div>
+
+    <div class="sword-grid">
+      <div class="sword-card">
+        <div class="s-icon">🐍</div>
+        <div class="s-title" id="k1-title">Born from a Dragon's Tail</div>
+        <p class="s-desc" id="k1-desc">In the age of the gods, Susanoo-no-Mikoto slew the eight-headed serpent Yamata-no-Orochi. From within the creature's fourth tail, he drew a brilliant sword unlike any other. He named it Ame-no-Murakumo-no-Tsurugi — "Sword of the Gathering Clouds of Heaven" — and offered it to his sister Amaterasu.</p>
+      </div>
+      <div class="sword-card">
+        <div class="s-icon">🔥</div>
+        <div class="s-title" id="k2-title">Yamato Takeru Cuts Through Fire</div>
+        <p class="s-desc" id="k2-desc">Amaterasu gave the sword to her grandson Ninigi, from whom it passed to Prince Yamato Takeru. Lured into a burning field by enemies, Yamato Takeru used the sword to cut the surrounding grass — and the wind turned the fire back on his attackers. From that day, the sword was renamed Kusanagi-no-Tsurugi: "Grass-Cutter."</p>
+      </div>
+      <div class="sword-card">
+        <div class="s-icon">⛩️</div>
+        <div class="s-title" id="k3-title">A Shrine Built to Guard It</div>
+        <p class="s-desc" id="k3-desc">After Yamato Takeru's death, his wife Miyazu-hime enshrined the sword at Atsuta — the site of their home. Emperor Keiko commanded that a formal shrine be built to honor and protect it. That shrine, founded in 113 CE, is Atsuta Jingu. For nearly two thousand years, the shrine has kept the sword sealed, unseen, and protected.</p>
+      </div>
+      <div class="sword-card">
+        <div class="s-icon">👑</div>
+        <div class="s-title" id="k4-title">Symbol of Imperial Legitimacy</div>
+        <p class="s-desc" id="k4-desc">Together with the Yata-no-Kagami mirror (at Ise) and the Yasakani-no-Magatama jewel, Kusanagi forms the Three Imperial Regalia (三種の神器). These three objects — passed from emperor to emperor for millennia — are the ultimate symbols of the Japanese imperial throne. Atsuta guards one of the three.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA BAR -->
+  <div class="cta-bar">
+    <a class="cta-btn cta-primary" href="https://www.atsutajingu.or.jp/" target="_blank" id="cta-official">Official Website ↗</a>
+    <a class="cta-btn cta-secondary" href="https://maps.google.com/maps?q=熱田神宮" target="_blank" id="cta-map">📍 View on Google Maps</a>
+    <a class="cta-btn cta-secondary" href="ichinomiya-map.html" id="cta-back">← Back to Shrine Map</a>
+  </div>
+
+</div>
+
+<footer>
+  <p id="footer-text">© Japan Ichinomiya Project — Introducing Japan's sacred first shrines to the world</p>
+</footer>
+
+<script>
+// Particle randomization
+document.querySelectorAll('.particle').forEach(p => {
+  p.style.setProperty('--tx', (Math.random()*60-30)+'px');
+  p.style.setProperty('--ty', -(Math.random()*80+40)+'px');
+});
+
+// Language data
+const i18n = {
+  en: {
+    'hero-badge': '尾張國一之宮',
+    'hero-tagline': '"Japan\'s sacred sword sleeps here — in a forest at the heart of Nagoya"',
+    'qb-loc': 'Location', 'qb-sta': 'Nearest Station', 'qb-tokyo': 'From Tokyo',
+    'qb-hours': 'Hours', 'qb-visitors': 'Annual Visitors', 'qb-parking': 'Parking',
+    'deity-name': 'Atsuta-no-Okami',
+    'deity-desc': 'Atsuta-no-Okami is the sacred manifestation of Amaterasu Ōmikami — the Sun Goddess — as she dwells within the Kusanagi-no-Tsurugi, the legendary sword that is one of Japan\'s three Imperial Regalia. Also enshrined alongside are four great deities: Susanoo-no-Mikoto, Yamato Takeru, Miyazu-hime, and Take Inadane-no-Mikoto — all bound together by the mythic journey of the sacred blade. Atsuta Jingu is second in national importance only to Ise, revered by emperors, samurai generals, and ordinary worshippers for over 1,900 years.',
+    'c1-title': 'Essence', 'c1-sub': 'Why this shrine commands awe',
+    'c2-title': 'Access', 'c2-sub': 'Your journey to Atsuta',
+    'c3-title': 'Deep Insight', 'c3-sub': 'What repeat visitors discover',
+    'c4-title': 'Eat · Stay · More', 'c4-sub': 'Making the most of your Nagoya visit',
+    'sp-title': '草薙神剣 · Kusanagi-no-Tsurugi', 'sp-sub': 'The Mythic Journey of Japan\'s Most Sacred Sword — 1,900 Years of Guardianship',
+    'footer-text': '© Japan Ichinomiya Project — Introducing Japan\'s sacred first shrines to the world'
+  },
+  ja: {
+    'hero-badge': '尾張國一之宮',
+    'hero-tagline': '「名古屋の森に眠る、日本の至宝・草薙神剣」',
+    'qb-loc': '場所', 'qb-sta': '最寄り駅', 'qb-tokyo': '東京から',
+    'qb-hours': '参拝時間', 'qb-visitors': '年間参拝者数', 'qb-parking': '駐車場',
+    'deity-name': '熱田大神',
+    'deity-desc': '熱田大神とは、草薙神剣に宿る天照大御神の御神霊です。天照大御神・素盞嗚尊・日本武尊・宮簀媛命・建稲種命の五柱を熱田五社として祀り、1900年以上にわたって天皇家・武将・庶民から深く崇敬されてきました。伊勢神宮に次ぐ格式を持つ、日本第$��の霊場です。',
+    'c1-title': '本質', 'c1-sub': 'この神社が畏敬を集める理由',
+    'c2-title': 'アクセス', 'c2-sub': '熱田神宮への道のり',
+    'c3-title': '深い洞察', 'c3-sub': 'リピーターだけが知ること',
+    'c4-title': 'グルメ・宿泊・観光', 'c4-sub': '名古屋を深く楽し　ために',
+    'sp-title': '草薙神剣', 'sp-sub': '神話が息〥く宝剣の旅路と1900年の守護',
+    'footer-text': '© Japan Ichinomiya Project — 日本の一ノ宮を世界へ'
+  },
+  zh: {
+    'hero-badge': '尾张国一之宫',
+    'hero-tagline': '"神圣之剑长眠于名古屋的圣林之中"',
+    'qb-loc': '地点', 'qb-sta': '最近车站', 'qb-tokyo': '从东京出发',
+    'qb-hours': '参拜时间', 'qb-visitors': '年参拜者数', 'qb-parking': '停车场',
+    'deity-name': '热田大神',
+    'deity-desc': '热田大神是天照大御神寄宿于草薙神剑中的神圣化身。同时供奉素盏鸣尊、日本武尊、宫简媛命、建稻种命等五柱神明。热田神宫地位仅次于伊势神宫，是日本第二圣地，1900余年来受到天皇、武将与庶民的深厚崇敬。',
+    'c1-title': '精髓', 'c1-sub': '这座神社令人敬畏的原因',
+    'c2-title': '交通指南', 'c2-sub': '前往热田神宫的旅程',
+    'c3-title': '深度解读', 'c3-sub': '回头客才能发现的秘密',
+    'c4-title': '美食·住宿·周边', 'c4-sub': '充分享受名古屋之旅',
+    'sp-title': '草薙神剑', 'sp-sub': '日本最神圣宝剑的神话之旅与千九百年守护',
+    'footer-text': '© Japan Ichinomiya Project — 向世界介绍日本一之宫'
+  }
+};
+
+function setLang(lang) {
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  const d = i18n[lang];
+  if (!d) return;
+  Object.entries(d).forEach(([id, val]) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = val;
+  });
+  document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang;
+}
+</script>
+
+</body>
+</html>
