@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Åmiwa Shrine â Ichinomiya of Yamato Province</title>
+<title>Ōmiwa Shrine — Ichinomiya of Yamato Province</title>
 <style>
 :root {
   --red: #9b2335;
@@ -17,7 +17,7 @@
 * { margin:0; padding:0; box-sizing:border-box; }
 body { font-family:'Georgia',serif; background:var(--cream); color:var(--ink); line-height:1.75; }
 
-/* ââ HEADER ââ */
+/* ── HEADER ── */
 header {
   background:var(--ink); color:#fff;
   display:flex; align-items:center; justify-content:space-between;
@@ -34,7 +34,7 @@ nav a:hover { color:var(--gold); }
 .lang-btn { font-size:0.7rem; padding:2px 8px; border-radius:10px; text-decoration:none; border:1px solid rgba(255,255,255,0.2); color:rgba(255,255,255,0.5); transition:all 0.2s; }
 .lang-btn.active { background:var(--gold); color:var(--ink); border-color:var(--gold); font-weight:bold; }
 
-/* ââ HERO ââ */
+/* ── HERO ── */
 .hero {
   position:relative; height:88vh; min-height:520px; overflow:hidden;
   display:flex; flex-direction:column; align-items:center; justify-content:flex-end;
@@ -63,7 +63,7 @@ nav a:hover { color:var(--gold); }
 .hero-scroll { margin-top:32px; color:rgba(255,255,255,0.3); font-size:0.72rem; letter-spacing:0.2em; animation:pulse 2.5s ease-in-out infinite; }
 @keyframes pulse { 0%,100%{opacity:.3} 50%{opacity:.8} }
 
-/* ââ QUICK FACTS BAR ââ */
+/* ── QUICK FACTS BAR ── */
 .quick-bar { background:var(--ink); color:#fff; display:flex; justify-content:center; flex-wrap:wrap; gap:0; }
 .quick-item { padding:14px 28px; display:flex; align-items:center; gap:8px; border-right:1px solid rgba(255,255,255,0.1); font-size:0.8rem; }
 .quick-item:last-child { border-right:none; }
@@ -71,25 +71,15 @@ nav a:hover { color:var(--gold); }
 .quick-label { color:rgba(255,255,255,0.45); font-size:0.65rem; display:block; }
 .quick-value { color:#fff; font-size:0.85rem; }
 
-/* ââ MAIN GRID ââ */
+/* ── MAIN GRID ── */
 .main { max-width:1100px; margin:0 auto; padding:48px 20px 80px; }
 .grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
 .grid-full { grid-column:1/-1; }
 
-/* ââ CARDS ââ */
+/* ── CARDS ── */
 .card { background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 2px 16px rgba(0,0,0,0.07); border:1px solid rgba(0,0,0,0.06); }
 .card-header { padding:18px 24px 14px; border-bottom:1px solid #f0e8d8; display:flex; align-items:center; gap:12px; }
 .card-num { width:28px; height:28px; background:var(--red); color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.75rem; font-weight:bold; flex-shrink:0; }
-.card-title-en { font-size:0.65rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold); display:block; }
-.card-title-jp { font-size:1.05rem; font-weight:bold; display:block; line-height:1.2; }
-.card-title-zh { font-size:0.7rem; color:var(--gray); display:block; }
-.card-body { padding:20px 24px 24px; }
-
-/* Essence card */
-.essence-highlight { background:var(--mist); border-radius:8px; padding:16px 20px; margin-bottom:16px; border-left:3px solid var(--gold); }
-.essence-label { font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:6px; }
-.essence-text { font-size:0.95rem; color:#333; }
-.essence-text strong { color:var(--red); }rd-num { width:28px; height:28px; background:var(--red); color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.75rem; font-weight:bold; flex-shrink:0; }
 .card-title-en { font-size:0.65rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold); display:block; }
 .card-title-jp { font-size:1.05rem; font-weight:bold; display:block; line-height:1.2; }
 .card-title-zh { font-size:0.7rem; color:var(--gray); display:block; }
@@ -114,7 +104,41 @@ nav a:hover { color:var(--gold); }
 .map-link { display:flex; align-items:center; gap:8px; background:var(--ink); color:var(--gold); text-decoration:none; padding:10px 16px; border-radius:6px; font-size:0.82rem; letter-spacing:0.08em; margin-bottom:16px; transition:background 0.2s; }
 .map-link:hover { background:#2a2a3e; }
 .access-list { list-style:none; }
-.access-list li { display:flex; gap:10px; align-items:flex-start; padding:8px 0; border-bottom:1px solid der-radius:12px; font-size:0.72rem; letter-spacing:0.05em; }
+.access-list li { display:flex; gap:10px; align-items:flex-start; padding:8px 0; border-bottom:1px solid #f0ebe3; font-size:0.88rem; }
+.access-list li:last-child { border-bottom:none; }
+.access-icon { flex-shrink:0; font-size:1rem; }
+.access-main { display:block; color:var(--ink); }
+.access-sub { display:block; font-size:0.75rem; color:var(--gray); }
+
+/* Deep Insight card */
+.insight-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid #f0ebe3; }
+.insight-item:last-child { border-bottom:none; }
+.insight-badge { flex-shrink:0; padding:2px 8px; border-radius:4px; font-size:0.65rem; font-weight:bold; letter-spacing:0.05em; height:fit-content; margin-top:2px; }
+.badge-unique { background:#fff3e0; color:#e65100; }
+.badge-tip { background:#e8f5e9; color:#1b5e20; }
+.badge-info { background:#e8f0fe; color:#1a237e; }
+.badge-seasonal { background:#fce4ec; color:#880e4f; }
+.badge-stamp { background:#fff3e0; color:#e65100; }
+.insight-title { font-size:0.9rem; font-weight:bold; margin-bottom:3px; }
+.insight-desc { font-size:0.83rem; color:var(--gray); }
+
+/* Nearby card */
+.nearby-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; }
+.nearby-item { background:var(--mist); border-radius:8px; padding:14px; }
+.nearby-cat { font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--gray); margin-bottom:4px; }
+.nearby-icon { font-size:1.2rem; margin-bottom:6px; display:block; }
+.nearby-name { font-size:0.88rem; font-weight:bold; margin-bottom:4px; }
+.nearby-desc { font-size:0.78rem; color:var(--gray); }
+
+/* Deity section */
+.deity-card { background:var(--ink); color:#fff; border-radius:12px; padding:32px; display:grid; grid-template-columns:auto 1fr; gap:28px; align-items:start; }
+.deity-symbol { font-size:4rem; line-height:1; }
+.deity-label { font-size:0.65rem; letter-spacing:0.2em; color:var(--gold); text-transform:uppercase; margin-bottom:6px; }
+.deity-name { font-size:1.5rem; font-weight:bold; margin-bottom:4px; }
+.deity-jp { font-size:0.9rem; color:rgba(255,255,255,0.55); margin-bottom:16px; }
+.deity-desc { font-size:0.9rem; color:rgba(255,255,255,0.8); line-height:1.7; margin-bottom:16px; }
+.blessing-tags { display:flex; flex-wrap:wrap; gap:6px; }
+.blessing-tag { background:rgba(201,168,76,0.15); border:1px solid rgba(201,168,76,0.3); color:var(--gold); padding:3px 10px; border-radius:12px; font-size:0.72rem; letter-spacing:0.05em; }
 
 /* Special section */
 .special-box { background:linear-gradient(135deg, #1a1a2e 0%, #2a1010 100%); color:#fff; border-radius:12px; padding:32px; }
@@ -127,7 +151,7 @@ nav a:hover { color:var(--gold); }
 .special-item .item-desc { font-size:0.7rem; color:rgba(255,255,255,0.6); }
 .special-desc { margin-top:20px; font-size:0.88rem; color:rgba(255,255,255,0.75); line-height:1.7; }
 
-/* CTA #(°(Ãâ */
+/* CTA */
 .cta-bar { background:var(--red); border-radius:12px; padding:28px 32px; display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap; }
 .cta-bar h3 { color:#fff; font-size:1.1rem; font-weight:normal; }
 .cta-bar p { color:rgba(255,255,255,0.75); font-size:0.85rem; margin-top:4px; }
@@ -140,7 +164,7 @@ nav a:hover { color:var(--gold); }
 /* Breadcrumb */
 .breadcrumb { padding:12px 20px; font-size:0.75rem; color:var(--gray); max-width:1100px; margin:0 auto; }
 .breadcrumb a { color:var(--gray); text-decoration:none; }
-.breadcrumb a:hover { color:var(---red); }
+.breadcrumb a:hover { color:var(--red); }
 
 footer { background:var(--ink); color:rgba(255,255,255,0.35); text-align:center; padding:28px; font-size:0.78rem; }
 
@@ -150,370 +174,504 @@ footer { background:var(--ink); color:rgba(255,255,255,0.35); text-align:center;
   .nearby-grid { grid-template-columns:1fr; }
   .deity-card { grid-template-columns:1fr; }
   .quick-item { padding:10px 16px; }
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-content">
-    <div class="hero-badge">å¤§ååä¸ä¹å®® Â· Ichinomiya of Yamato Province</div>
+  .cta-bar { flex-direction:column; align-items:flex-start; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a class="logo" href="ichinomiya-map.html">
+    <span class="kanji">一ノ宮</span>
+    <span class="sub">Japan's First Shrines</span>
+  </a>
+  <div class="header-right">
+    <nav>
+      <a href="ichinomiya-intro.html">What is Ichinomiya?</a>
+      <a href="ichinomiya-map.html">&larr; All Shrines</a>
+    </nav>
+    <div class="lang-switcher">
+      <a href="#" class="lang-btn">日本語</a>
+      <a href="#" class="lang-btn active">EN</a>
+      <a href="#" class="lang-btn">中文</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-glow"></div>
+  <!-- Torii silhouette -->
+  <svg class="hero-torii" viewBox="0 0 900 500" xmlns="http://www.w3.org/2000/svg">
+    <rect x="200" y="80" width="500" height="28" fill="white"/>
+    <rect x="240" y="108" width="420" height="16" fill="white"/>
+    <rect x="250" y="108" width="36" height="390" fill="white"/>
+    <rect x="614" y="108" width="36" height="390" fill="white"/>
+    <rect x="258" y="200" width="20" height="30" rx="3" fill="white" opacity="0.5"/>
+    <rect x="622" y="200" width="20" height="30" rx="3" fill="white" opacity="0.5"/>
+  </svg>
+  <!-- Particles -->
+  <div class="particles">
+    <div class="particle" style="left:10%;animation-duration:9s;animation-delay:0s;"></div>
+    <div class="particle" style="left:25%;animation-duration:12s;animation-delay:1.5s;"></div>
+    <div class="particle" style="left:40%;animation-duration:8s;animation-delay:3s;"></div>
+    <div class="particle" style="left:55%;animation-duration:11s;animation-delay:0.5s;"></div>
+    <div class="particle" style="left:70%;animation-duration:10s;animation-delay:2s;"></div>
+    <div class="particle" style="left:85%;animation-duration:13s;animation-delay:4s;"></div>
+    <div class="particle" style="left:95%;animation-duration:7s;animation-delay:1s;"></div>
+    <div class="particle" style="left:5%;animation-duration:14s;animation-delay:5s;"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">大和國一之宮 · Ichinomiya of Yamato Province</div>
     <h1>
-      <span class="jp">å¤§ç¥ç¥ç¤¾</span>
-      Åmiwa Shrine
+      <span class="jp">大神神社</span>
+      Ōmiwa Shrine
     </h1>
     <p class="hero-tagline">
       Where the mountain itself is the deity &mdash;<br>
       Japan's oldest shrine, where worship predates architecture.
     </p>
     <div class="hero-scroll">&darr; &nbsp; explore this shrine</div>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+  </div>
+</div>
+
+<!-- QUICK FACTS BAR -->
+<div class="quick-bar">
+  <div class="quick-item">
+    <span class="quick-icon">📍</span>
+    <div>
+      <span class="quick-label">Location</span>
+      <span class="quick-value">Sakurai, Nara Prefecture</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">🚃</span>
+    <div>
+      <span class="quick-label">Nearest Station</span>
+      <span class="quick-value">Miwa Sta. (JR Manyo Mahoroba Line)</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">🚅</span>
+    <div>
+      <span class="quick-label">From Tokyo</span>
+      <span class="quick-value">~3.5 hrs (Shinkansen + Kintetsu/JR)</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">🕐</span>
+    <div>
+      <span class="quick-label">Hours</span>
+      <span class="quick-value">24 hours (Office 9:00-17:00, Free)</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">👥</span>
+    <div>
+      <span class="quick-label">Annual Visitors</span>
+      <span class="quick-value">~1.5 million</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">🅿️</span>
+    <div>
+      <span class="quick-label">Parking</span>
+      <span class="quick-value">Yes (free, 590 spaces)</span>
+    </div>
+  </div>
+</div>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a href="ichinomiya-map.html">All Shrines</a> &nbsp;&rsaquo;&nbsp;
+  <a href="ichinomiya-map.html?region=Kinai">Kinai 畿内</a> &nbsp;&rsaquo;&nbsp;
+  Yamato Province &nbsp;&rsaquo;&nbsp; Ōmiwa Shrine
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+  <!-- Deity row (full width) -->
+  <div class="deity-card grid-full" style="margin-bottom:24px;">
+    <div class="deity-symbol">⛰️</div>
+    <div>
+      <div class="deity-label">Enshrined Deity — The Mountain Itself</div>
+      <div class="deity-name">Ōmononushi-no-Kami</div>
+      <div class="deity-jp">大物主大神（おおものぬしのおおかみ）</div>
+      <div class="deity-desc">
+        Ōmononushi-no-Kami is the spirit of Mount Miwa (三輪山), one of the most powerful kami in the Shinto pantheon. According to the Kojiki and Nihon Shoki, this deity is the guardian of agriculture, medicine, brewing (sake), and the nation itself. Unlike other shrines, no building houses this god &mdash; the entire sacred mountain IS the divine body <strong style="color:var(--gold);">(shintai)</strong>. As the Ichinomiya of Yamato, the ancient imperial heartland, Ōmiwa Shrine sits at the very origin of Japanese civilization.
+      </div>
+      <div class="blessing-tags">
+        <span class="blessing-tag">#Agriculture</span>
+        <span class="blessing-tag">#Medicine</span>
+        <span class="blessing-tag">#Brewing</span>
+        <span class="blessing-tag">#NationalProsperity</span>
+        <span class="blessing-tag">#MarriageTies</span>
+        <span class="blessing-tag">#IndustrySuccess</span>
+        <span class="blessing-tag">#WardingEvil</span>
+        <span class="blessing-tag">#Wisdom</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+
+    <!-- ■ CARD 1: ESSENCE -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">1</div>
+        <div class="card-title-block">
+          <span class="card-title-en">The Essence · 核心価値</span>
+          <span class="card-title-jp">核心的価値 &mdash; なぜここが特別なのか</span>
+          <span class="card-title-zh">核心价值 · 为何与众不同</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="essence-highlight">
+          <div class="essence-label">由緒 · Why It Matters</div>
+          <div class="essence-text">
+            <strong>Japan's oldest shrine &mdash; where architecture yields to nature.</strong><br>
+            Founded traditionally over 2,000 years ago (records in the Kojiki, 712 AD and Nihon Shoki, 720 AD), Ōmiwa Shrine has NO main hall (honden). The 467m Mount Miwa behind it IS the deity. This is the primordial form of Japanese worship &mdash; before anyone thought to build houses for the gods. The prayer hall (haiden, Important Cultural Property) faces the mountain through a unique triple torii gate (mitsu-torii, Important Cultural Property).
+          </div>
+        </div>
+        <div class="essence-highlight" style="border-color:var(--red);">
+          <div class="essence-label" style="color:var(--red);">三輪山 · The Forbidden Mountain</div>
+          <div class="essence-text" style="font-size:0.88rem; color:#444;">
+            Mount Miwa was completely off-limits to all but priests for centuries. Since the Meiji era, pilgrims may climb it with strict rules: register at Sai Shrine (狭井神社), wear a white sash, carry a gohei staff, no photography, no eating, maintain silence. The 90-minute climb through ancient cedar forest is one of Japan's most spiritually intense experiences.
+          </div>
+        </div>
+        <!-- Video -->
+        <div class="video-wrapper">
+          <svg style="width:100%;aspect-ratio:16/9;display:block;" viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#1a0a05"/>
+                <stop offset="50%" stop-color="#2a1508"/>
+                <stop offset="100%" stop-color="#1a1a2e"/>
+              </linearGradient>
+              <linearGradient id="glow" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#2d5016" stop-opacity="0.4"/>
+                <stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <rect width="800" height="450" fill="url(#sky)"/>
+            <!-- Mount Miwa silhouette -->
+            <polygon points="200,350 400,100 600,350" fill="#1a3d0a" opacity="0.9"/>
+            <!-- Cedar trees on mountain -->
+            <polygon points="280,280 290,240 300,280" fill="#0d2005" opacity="0.8"/>
+            <polygon points="320,300 332,260 344,300" fill="#0d2005" opacity="0.8"/>
+            <polygon points="360,290 375,240 390,290" fill="#0d2005" opacity="0.8"/>
+            <polygon points="410,310 425,270 440,310" fill="#0d2005" opacity="0.8"/>
+            <polygon points="460,300 475,255 490,300" fill="#0d2005" opacity="0.8"/>
+            <polygon points="510,295 525,245 540,295" fill="#0d2005" opacity="0.8"/>
+            <!-- Mountain glow -->
+            <circle cx="400" cy="120" r="50" fill="url(#glow)" opacity="0.5"/>
+            <!-- Triple Torii gate at base -->
+            <g opacity="0.7">
+              <!-- Left torii -->
+              <rect x="250" y="330" width="80" height="10" fill="#c9a84c"/>
+              <rect x="258" y="340" width="8" height="40" fill="#c9a84c"/>
+              <rect x="322" y="340" width="8" height="40" fill="#c9a84c"/>
+              <!-- Center torii (larger) -->
+              <rect x="335" y="320" width="130" height="14" fill="#c9a84c"/>
+              <rect x="348" y="334" width="12" height="55" fill="#c9a84c"/>
+              <rect x="453" y="334" width="12" height="55" fill="#c9a84c"/>
+              <!-- Right torii -->
+              <rect x="520" y="330" width="80" height="10" fill="#c9a84c"/>
+              <rect x="528" y="340" width="8" height="40" fill="#c9a84c"/>
+              <rect x="592" y="340" width="8" height="40" fill="#c9a84c"/>
+            </g>
+            <!-- Ground -->
+            <rect x="0" y="350" width="800" height="100" fill="#0d0804" opacity="0.95"/>
+            <!-- Path -->
+            <polygon points="370,352 430,352 460,450 340,450" fill="#c9a84c" opacity="0.08"/>
+            <!-- Stars -->
+            <circle cx="100" cy="40" r="1.5" fill="white" opacity="0.5"/>
+            <circle cx="250" cy="25" r="1" fill="white" opacity="0.3"/>
+            <circle cx="600" cy="50" r="1.5" fill="white" opacity="0.4"/>
+            <circle cx="700" cy="30" r="1" fill="white" opacity="0.5"/>
+            <!-- Text -->
+            <text x="400" y="420" text-anchor="middle" font-size="12" fill="rgba(255,255,255,0.5)" font-family="Georgia">大神神社 · Ōmiwa Shrine</text>
+          </svg>
+          <div class="video-overlay">
+            <a class="play-btn" href="https://www.youtube.com/results?search_query=大神神社+三輪山+参拝" target="_blank" title="Watch on YouTube">&#9654;</a>
+          </div>
+          <div class="video-caption">&#9654; 大神神社と三輪山 &mdash; The sacred mountain at sunrise · 30 sec</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ■ CARD 2: ACCESS -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">2</div>
+        <div class="card-title-block">
+          <span class="card-title-en">Plan Your Visit · 交通指南</span>
+          <span class="card-title-jp">旅の地図 &mdash; アクセス情報</span>
+          <span class="card-title-zh">交通指南 · 如何前往</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <!-- Google Map embed -->
+        <div class="map-wrapper">
+          <iframe src="https://maps.google.com/maps?q=%E5%A4%A7%E7%A5%9E%E7%A5%9E%E7%A4%BE+%E5%A5%88%E8%89%AF%E7%9C%8C&output=embed&hl=en&z=14" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Ōmiwa Shrine map"></iframe>
+        </div>
+        <a class="map-link" href="https://maps.google.com/maps?q=大神神社" target="_blank">
+          📍 Open in Google Maps &mdash; 奈良県桜井市三輪
+        </a>
+        <ul class="access-list">
+          <li>
+            <span class="access-icon">🚃</span>
+            <span class="access-text">
+              <span class="access-main">JR Manyo Mahoroba Line &mdash; <strong>Miwa Station</strong> · 5 min walk</span>
+              <span class="access-sub">三輪駅 · Direct access from Nara/Kyoto via Kintetsu network</span>
+            </span>
+          </li>
+          <li>
+            <span class="access-icon">🚄</span>
+            <span class="access-text">
+              <span class="access-main">From <strong>Osaka</strong> &mdash; approx. 1.5 hrs</span>
+              <span class="access-sub">JR Tennoji Line to Sakurai, then local JR to Miwa Station</span>
+            </span>
+          </li>
+          <li>
+            <span class="access-icon">🚅</span>
+            <span class="access-text">
+              <span class="access-main">From <strong>Tokyo</strong> &mdash; approx. 3.5 hrs</span>
+              <span class="access-sub">Shinkansen to Kyoto &rarr; Kintetsu/JR to Miwa Station</span>
+            </span>
+          </li>
+          <li>
+            <span class="access-icon">🚗</span>
+            <span class="access-text">
+              <span class="access-main">By car &mdash; Tenri IC (Meihan Expressway) · 15 min</span>
+              <span class="access-sub">From Osaka/Kyoto via expressway to shrine parking</span>
+            </span>
+          </li>
+          <li>
+            <span class="access-icon">🅿️</span>
+            <span class="access-text">
+              <span class="access-main">Parking: Free · 590 spaces available</span>
+              <span class="access-sub">Large lot accommodates coaches and standard vehicles</span>
+            </span>
+          </li>
+          <li>
+            <span class="access-icon">⏰</span>
+            <span class="access-text">
+              <span class="access-main">Grounds open 24 hours · Shrine office 9:00-17:00</span>
+              <span class="access-sub">Mt. Miwa registration: 9:00-12:00 at Sai Shrine · ¥300 entry fee</span>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ■ CARD 3: DEEP INSIGHT -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">3</div>
+        <div class="card-title-block">
+          <span class="card-title-en">Deep Insight · 深度探索</span>
+          <span class="card-title-jp">リピーターのこだわり &mdash; 知る人ぞ知る</span>
+          <span class="card-title-zh">深度探索 · 行家的坚持</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="insight-item">
+          <span class="insight-badge badge-unique">UNIQUE</span>
+          <div class="insight-body">
+            <div class="insight-title">三ツ鳥居 &mdash; Triple Torii Gate</div>
+            <div class="insight-desc">
+              Three torii gates fused into one, behind the prayer hall. This extremely rare gate form is the boundary between human world and divine mountain. Designated an Important Cultural Property. Special viewing available by request at shrine office.
+            </div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-badge badge-tip">TIP</span>
+          <div class="insight-body">
+            <div class="insight-title">狭井神社と薬井戸 &mdash; Sai Shrine & Sacred Spring</div>
+            <div class="insight-desc">
+              Walk 10 min upslope to this sub-shrine to register for Mount Miwa climb. Don't miss the kusuri-mizu (薬井戸) &mdash; sacred spring water said to cure illness. Bring a bottle; it's one of Japan's most sought-after medicinal waters.
+            </div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-badge badge-unique">UNIQUE</span>
+          <div class="insight-body">
+            <div class="insight-title">なでうさぎ &mdash; Healing Rabbit</div>
+            <div class="insight-desc">
+              A bronze rabbit at the Sanshu-den hall. Stroke the rabbit on the body part where you have pain &mdash; tradition says it heals that area. Extremely popular good-luck charm, beloved by visitors.
+            </div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-badge badge-seasonal">FESTIVAL</span>
+          <div class="insight-body">
+            <div class="insight-title">醸造安全祈願祭 &mdash; Sake Festival (November)</div>
+            <div class="insight-desc">
+              Every November, sake breweries across Japan hang huge sugidama (cedar balls) at Ōmiwa. This is THE origin of the sugidama tradition &mdash; because the deity is the god of brewing. A spectacular display honoring Japan's sacred alcohol.
+            </div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-badge badge-info">INFO</span>
+          <div class="insight-body">
+            <div class="insight-title">山辺の道 &mdash; Yamanobe Trail</div>
+            <div class="insight-desc">
+              Japan's oldest recorded road runs right past the shrine. A stunning 16km walking trail from Ōmiwa to Isonokami Shrine through ancient Yamato countryside. A pilgrimage through living history.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ■ CARD 4: EAT STAY MORE -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">4</div>
+        <div class="card-title-block">
+          <span class="card-title-en">Eat, Stay &amp; More · 周邊䳈訊</span>
+          <span class="card-title-jp">周辺の滞在 &mdash; 食・宿・寄り道</span>
+          <span class="card-title-zh">周边信息 · 吃住游</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="nearby-grid">
+          <div class="nearby-item">
+            <span class="nearby-icon">🍜</span>
+            <div class="nearby-cat">Food · 食</div>
+            <div class="nearby-name">Miwa Sōmen</div>
+            <div class="nearby-desc">
+              The birthplace of Japanese sōmen noodles. Try at Senjutei (千寿亭, garden-side dining) or Morisho (森正) for authentic experience. Cold sōmen in summer, warm nyumen in winter.
+            </div>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-icon">🍶</span>
+            <div class="nearby-cat">Local · 食</div>
+            <div class="nearby-name">Imanishi Sake Brewery</div>
+            <div class="nearby-desc">
+              One of Nara's oldest breweries, just minutes away. The deity is the god of sake, making this the spiritual home of Japanese brewing. Tastings available.
+            </div>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-icon">♨️</span>
+            <div class="nearby-cat">Stay · 宿</div>
+            <div class="nearby-name">Nara Hotels & Sakurai</div>
+            <div class="nearby-desc">
+              Stay in central Nara (20 min) for more options. Asuka area ryokan also nearby for traditional experience with shrine proximity.
+            </div>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-icon">🌿</span>
+            <div class="nearby-cat">Nature · 自然</div>
+            <div class="nearby-name">Asuka Village</div>
+            <div class="nearby-desc">
+              20 min south. Ancient capital with mysterious stone carvings, burial mounds, and rice paddies. Rent a bicycle for exploration.
+            </div>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-icon">⛩️</span>
+            <div class="nearby-cat">Side Trip · 寄</div>
+            <div class="nearby-name">Isonokami Shrine</div>
+            <div class="nearby-desc">
+              Next Yamato ichinomiya, 1 hour walk north along Yamanobe-no-Michi. One of Japan's oldest shrines with a sacred sword treasury.
+            </div>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-icon">→</span>
+            <div class="nearby-cat">Next Shrine · 次の一宮</div>
+            <div class="nearby-name">大和 → 河内</div>
+            <div class="nearby-desc">
+              Hiraoka Shrine (枚岡神社, Kawachi Province ichinomiya), 50 min by train northeast toward Osaka.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /grid -->
+
+  <!-- SPECIAL SECTION: Triple Gate & Mountain of God -->
+  <div class="special-box" style="margin-top:24px;">
+    <div class="special-title">三ツ鳥居と御神体山 &mdash; The Triple Gate &amp; the Mountain of God</div>
+    <div class="special-sub">THE PRIMORDIAL FORM OF JAPANESE WORSHIP</div>
+    <div class="special-grid">
+      <div class="special-item">
+        <span class="item-sym">⛰️</span>
+        <span class="item-name">Mount Miwa</span>
+        <span class="item-desc">467m sacred peak, the divine body itself</span>
+      </div>
+      <div class="special-item">
+        <span class="item-sym">⛩️</span>
+        <span class="item-name">Mitsu-torii</span>
+        <span class="item-desc">Triple gate, boundary between worlds (ICP)</span>
+      </div>
+      <div class="special-item">
+        <span class="item-sym">🙏</span>
+        <span class="item-name">Haiden</span>
+        <span class="item-desc">Prayer hall facing the mountain (ICP)</span>
+      </div>
+      <div class="special-item">
+        <span class="item-sym">🐍</span>
+        <span class="item-name">Sacred Serpent</span>
+        <span class="item-desc">Ancient cedar where the snake god dwells</span>
+      </div>
+      <div class="special-item">
+        <span class="item-sym">🐰</span>
+        <span class="item-name">Nadeusagi</span>
+        <span class="item-desc">Healing rabbit, stroke for recovery</span>
+      </div>
+      <div class="special-item">
+        <span class="item-sym">💧</span>
+        <span class="item-name">Kusuri-mizu</span>
+        <span class="item-desc">Sacred healing water spring</span>
+      </div>
+      <div class="special-item">
+        <span class="item-sym">🍶</span>
+        <span class="item-name">Sugidama Origin</span>
+        <span class="item-desc">Birthplace of sake brewery cedar balls</span>
+      </div>
+      <div class="special-item">
+        <span class="item-sym">🛤️</span>
+        <span class="item-name">Yamanobe Trail</span>
+        <span class="item-desc">Japan's oldest recorded road</span>
+      </div>
+      <div class="special-item" style="background:rgba(201,168,76,0.12); border-color:var(--gold);">
+        <span class="item-sym" style="color:var(--gold);">✦</span>
+        <span class="item-name" style="color:var(--gold);">No Honden</span>
+        <span class="item-desc" style="color:rgba(255,255,255,0.8);">The only major shrine where nature IS the temple</span>
+      </div>
+    </div>
+    <div class="special-desc">
+      Ōmiwa Shrine represents the most ancient form of Shinto worship &mdash; the belief that mountains, rivers, and forests themselves are divine. While most shrines evolved to house their deities in buildings, Ōmiwa preserved the primordial practice of worshipping nature directly. The triple torii gate (mitsu-torii), designated an Important Cultural Property, stands behind the prayer hall as the sacred threshold between the human realm and the divine mountain. This architectural absence &mdash; the deliberate choice NOT to build a main hall &mdash; speaks volumes about the original relationship between the Japanese people and nature.
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-bar" style="margin-top:24px;">
+    <div>
+      <h3>Ready to visit Ōmiwa Shrine?</h3>
+      <p>Find directions, plan your route, or explore more Ichinomiya shrines across Japan.</p>
+    </div>
+    <div class="cta-links">
+      <a href="https://oomiwa.or.jp/" target="_blank" class="btn">Official Website &rarr;</a>
+      <a href="ichinomiya-map.html" class="btn secondary">&larr; All Shrines Map</a>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<footer>
+  <p>一ノ宮 Ichinomiya &nbsp;&middot;&nbsp; Ōmiwa Shrine &middot; 大和國一之宮 大神神社</p>
+  <p style="margin-top:6px;">
+    Sources:
+    <a href="https://oomiwa.or.jp/" target="_blank" style="color:rgba(255,255,255,0.4);">Official Shrine</a> &middot;
+    <a href="https://en.wikipedia.org/wiki/Ōmiwa_Shrine" target="_blank" style="color:rgba(255,255,255,0.4);">Wikipedia</a> &middot;
+    <a href="https://www.visitnara.jp/" target="_blank" style="color:rgba(255,255,255,0.4);">Visit Nara</a>
+  </p>
+</footer>
+
+</body>
+</html>
