@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Shiogama Shrine — Ichinomiya of Mutsu Province</title>
+<style>
+:root {
+  --red: #9b2335;
+  --gold: #c9a84c;
+  --ink: #1a1a2e;
+  --cream: #fdf6ec;
+  --mist: #f0ebe3;
+  --gray: #6b6b6b;
+  --green: #2e7d32;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Georgia',serif; background:var(--cream); color:var(--ink); line-height:1.75; }
+
+/* ── HEADER ── */
+header {
+  background:var(--ink); color:#fff;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:14px 28px; position:sticky; top:0; z-index:200;
+  box-shadow:0 2px 12px rgba(0,0,0,0.4);
+}
+.logo { display:flex; align-items:baseline; gap:10px; text-decoration:none; }
+.logo .kanji { font-size:1.5rem; color:var(--gold); font-weight:bold; }
+.logo .sub { font-size:0.78rem; color:rgba(255,255,255,0.5); letter-spacing:0.1em; }
+.header-right { display:flex; align-items:center; gap:16px; }
+nav a { color:rgba(255,255,255,0.6); text-decoration:none; font-size:0.78rem; letter-spacing:0.08em; margin-left:20px; }
+nav a:hover { color:var(--gold); }
+.lang-switcher { display:flex; gap:4px; }
+.lang-btn { font-size:0.7rem; padding:2px 8px; border-radius:10px; text-decoration:none; border:1px solid rgba(255,255,255,0.2); color:rgba(255,255,255,0.5); transition:all 0.2s; }
+.lang-btn.active { background:var(--gold); color:var(--ink); border-color:var(--gold); font-weight:bold; }
+
+/* ── HERO ── */
+.hero {
+  position:relative; height:88vh; min-height:520px; overflow:hidden;
+  display:flex; flex-direction:column; align-items:center; justify-content:flex-end;
+  padding-bottom:48px; color:#fff; text-align:center;
+}
+.hero-bg {
+  position:absolute; inset:0;
+  background:
+    linear-gradient(to bottom, rgba(10,5,20,0.3) 0%, rgba(10,5,20,0.1) 40%, rgba(10,5,20,0.75) 100%),
+    linear-gradient(135deg, #0a0a1a 0%, #1a0808 40%, #0a1020 100%);
+}
+.hero-torii { position:absolute; bottom:0; left:50%; transform:translateX(-50%); width:100%; max-width:900px; opacity:0.12; }
+.hero-glow {
+  position:absolute; width:600px; height:600px; border-radius:50%;
+  background:radial-gradient(circle, rgba(201,168,76,0.15) 0%, transparent 70%);
+  top:50%; left:50%; transform:translate(-50%,-50%);
+}
+.particles { position:absolute; inset:0; overflow:hidden; }
+.particle { position:absolute; width:2px; height:2px; background:rgba(201,168,76,0.6); border-radius:50%; animation:float linear infinite; }
+@keyframes float { 0%{transform:translateY(100vh) translateX(0);opacity:0;} 10%{opacity:1;} 90%{opacity:1;} 100%{transform:translateY(-20px) translateX(30px);opacity:0;} }
+.hero-content { position:relative; z-index:1; padding:0 20px; }
+.hero-badge { display:inline-block; border:1px solid var(--gold); color:var(--gold); font-size:0.7rem; letter-spacing:0.25em; padding:4px 16px; border-radius:20px; margin-bottom:16px; text-transform:uppercase; }
+.hero h1 { font-size:clamp(2rem,6vw,4.5rem); font-weight:normal; line-height:1.1; margin-bottom:8px; }
+.hero h1 .jp { display:block; font-size:clamp(2.5rem,8vw,5.5rem); color:var(--gold); }
+.hero-tagline { font-size:clamp(0.9rem,2vw,1.1rem); color:rgba(255,255,255,0.75); max-width:560px; margin:16px auto 0; font-style:italic; }
+.hero-scroll { margin-top:32px; color:rgba(255,255,255,0.3); font-size:0.72rem; letter-spacing:0.2em; animation:pulse 2.5s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{opacity:.3} 50%{opacity:.8} }
+
+/* ── QUICK FACTS BAR ── */
+.quick-bar { background:var(--ink); color:#fff; display:flex; justify-content:center; flex-wrap:wrap; gap:0; }
+.quick-item { padding:14px 28px; display:flex; align-items:center; gap:8px; border-right:1px solid rgba(255,255,255,0.1); font-size:0.8rem; }
+.quick-item:last-child { border-right:none; }
+.quick-icon { font-size:1rem; }
+.quick-label { color:rgba(255,255,255,0.45); font-size:0.65rem; display:block; }
+.quick-value { color:#fff; font-size:0.85rem; }
+
+/* ── MAIN GRID ── */
+.main { max-width:1100px; margin:0 auto; padding:48px 20px 80px; }
+.grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+.grid-full { grid-column:1/-1; }
+
+/* ── CARDS ── */
+.card { background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 2px 16px rgba(0,0,0,0.07); border:1px solid rgba(0,0,0,0.06); }
+.card-header { padding:18px 24px 14px; border-bottom:1px solid #f0e8d8; display:flex; align-items:center; gap:12px; }
+.card-num { width:28px; height:28px; background:var(--red); color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.75rem; font-weight:bold; flex-shrink:0; }
+.card-title-en { font-size:0.65rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold); display:block; }
+.card-title-jp { font-size:1.05rem; font-weight:bold; display:block; line-height:1.2; }
+.card-title-zh { font-size:0.7rem; color:var(--gray); display:block; }
+.card-body { padding:20px 24px 24px; }
+
+/* Essence card */
+.essence-highlight { background:var(--mist); border-radius:8px; padding:16px 20px; margin-bottom:16px; border-left:3px solid var(--gold); }
+.essence-label { font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:6px; }
+.essence-text { font-size:0.95rem; color:#333; }
+.essence-text strong { color:var(--red); }
+
+/* Video embed */
+.video-wrapper { position:relative; border-radius:8px; overflow:hidden; background:var(--ink); margin-top:16px; }
+.video-overlay { position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%); display:flex; align-items:center; justify-content:center; }
+.play-btn { width:56px; height:56px; border-radius:50%; background:rgba(201,168,76,0.9); display:flex; align-items:center; justify-content:center; text-decoration:none; transition:transform 0.2s, background 0.2s; font-size:1.3rem; color:var(--ink); }
+.play-btn:hover { transform:scale(1.1); background:var(--gold); }
+.video-caption { position:absolute; bottom:0; left:0; right:0; padding:10px 14px; color:rgba(255,255,255,0.8); font-size:0.75rem; }
+
+/* Map card */
+.map-wrapper { border-radius:8px; overflow:hidden; margin-bottom:16px; }
+.map-wrapper iframe { width:100%; height:240px; border:none; display:block; }
+.map-link { display:flex; align-items:center; gap:8px; background:var(--ink); color:var(--gold); text-decoration:none; padding:10px 16px; border-radius:6px; font-size:0.82rem; letter-spacing:0.08em; margin-bottom:16px; transition:background 0.2s; }
+.map-link:hover { background:#2a2a3e; }
+.access-list { list-style:none; }
+.access-list li { display:flex; gap:10px; align-items:flex-start; padding:8px 0; border-bottom:1px solid #f0ebe3; font-size:0.88rem; }
+.access-list li:last-child { border-bottom:none; }
+.access-icon { flex-shrink:0; font-size:1rem; }
+.access-main { display:block; color:var(--ink); }
+.access-sub { display:block; font-size:0.75rem; color:var(--gray); }
+
+/* Deep Insight card */
+.insight-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid #f0ebe3; }
+.insight-item:last-child { border-bottom:none; }
+.insight-badge { flex-shrink:0; padding:2px 8px; border-radius:4px; font-size:0.65rem; font-weight:bold; letter-spacing:0.05em; height:fit-content; margin-top:2px; }
+.badge-unique { background:#fff3e0; color:#e65100; }
+.badge-tip { background:#e8f5e9; color:#1b5e20; }
+.badge-info { background:#e8f0fe; color:#1a237e; }
+.badge-seasonal { background:#fce4ec; color:#880e4f; }
+.badge-stamp { background:#fff3e0; color:#e65100; }
+.insight-title { font-size:0.9rem; font-weight:bold; margin-bottom:3px; }
+.insight-desc { font-size:0.83rem; color:var(--gray); }
+
+/* Nearby card */
+.nearby-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; }
+.nearby-item { background:var(--mist); border-radius:8px; padding:14px; }
+.nearby-cat { font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--gray); margin-bottom:4px; }
+.nearby-icon { font-size:1.2rem; margin-bottom:6px; display:block; }
+.nearby-name { font-size:0.88rem; font-weight:bold; margin-bottom:4px; }
+.nearby-desc { font-size:0.78rem; color:var(--gray); }
+
+/* Deity section */
+.deity-card { background:var(--ink); color:#fff; border-radius:12px; padding:32px; display:grid; grid-template-columns:auto 1fr; gap:28px; align-items:start; }
+.deity-symbol { font-size:4rem; line-height:1; }
+.deity-label { font-size:0.65rem; letter-spacing:0.2em; color:var(--gold); text-transform:uppercase; margin-bottom:6px; }
+.deity-name { font-size:1.5rem; font-weight:bold; margin-bottom:4px; }
+.deity-jp { font-size:0.9rem; color:rgba(255,255,255,0.55); margin-bottom:16px; }
+.deity-desc { font-size:0.9rem; color:rgba(255,255,255,0.8); line-height:1.7; margin-bottom:16px; }
+.blessing-tags { display:flex; flex-wrap:wrap; gap:6px; }
+.blessing-tag { background:rgba(201,168,76,0.15); border:1px solid rgba(201,168,76,0.3); color:var(--gold); padding:3px 10px; border-radius:12px; font-size:0.72rem; letter-spacing:0.05em; }
+
+/* Special section */
+.special-box { background:linear-gradient(135deg, #1a1a2e 0%, #2a1010 100%); color:#fff; border-radius:12px; padding:32px; }
+.special-title { color:var(--gold); font-size:1.2rem; margin-bottom:8px; }
+.special-sub { font-size:0.75rem; letter-spacing:0.15em; color:rgba(255,255,255,0.4); margin-bottom:20px; }
+.special-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+.special-item { text-align:center; padding:16px 8px; background:rgba(255,255,255,0.06); border-radius:8px; border:1px solid rgba(201,168,76,0.2); }
+.special-item .item-sym { font-size:1.8rem; display:block; margin-bottom:6px; }
+.special-item .item-name { font-size:0.78rem; color:var(--gold); display:block; margin-bottom:4px; }
+.special-item .item-desc { font-size:0.7rem; color:rgba(255,255,255,0.6); }
+.special-desc { margin-top:20px; font-size:0.88rem; color:rgba(255,255,255,0.75); line-height:1.7; }
+
+/* CTA */
+.cta-bar { background:var(--red); border-radius:12px; padding:28px 32px; display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap; }
+.cta-bar h3 { color:#fff; font-size:1.1rem; font-weight:normal; }
+.cta-bar p { color:rgba(255,255,255,0.75); font-size:0.85rem; margin-top:4px; }
+.cta-links { display:flex; gap:10px; flex-wrap:wrap; }
+.btn { display:inline-block; padding:10px 22px; border:2px solid #fff; color:#fff; text-decoration:none; border-radius:4px; font-size:0.82rem; letter-spacing:0.08em; transition:background 0.2s, color 0.2s; font-family:inherit; cursor:pointer; }
+.btn:hover { background:#fff; color:var(--red); }
+.btn.secondary { border-color:rgba(255,255,255,0.4); color:rgba(255,255,255,0.7); }
+.btn.secondary:hover { background:rgba(255,255,255,0.15); color:#fff; }
+
+/* Breadcrumb */
+.breadcrumb { padding:12px 20px; font-size:0.75rem; color:var(--gray); max-width:1100px; margin:0 auto; }
+.breadcrumb a { color:var(--gray); text-decoration:none; }
+.breadcrumb a:hover { color:var(--red); }
+
+footer { background:var(--ink); color:rgba(255,255,255,0.35); text-align:center; padding:28px; font-size:0.78rem; }
+
+@media(max-width:700px) {
+  .grid { grid-template-columns:1fr; }
+  .special-grid { grid-template-columns:repeat(2,1fr); }
+  .nearby-grid { grid-template-columns:1fr; }
+  .deity-card { grid-template-columns:1fr; }
+  .quick-item { padding:10px 16px; }
+  .cta-bar { flex-direction:column; align-items:flex-start; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a class="logo" href="ichinomiya-map.html">
+    <span class="kanji">一ノ宮</span>
+    <span class="sub">Japan's First Shrines</span>
+  </a>
+  <div class="header-right">
+    <nav>
+      <a href="ichinomiya-intro.html">What is Ichinomiya?</a>
+      <a href="ichinomiya-map.html">&larr; All Shrines</a>
+    </nav>
+    <div class="lang-switcher">
+      <a href="#" class="lang-btn">日本語</a>
+      <a href="#" class="lang-btn active">EN</a>
+      <a href="#" class="lang-btn">中文</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-glow"></div>
+  <!-- Torii silhouette -->
+  <svg class="hero-torii" viewBox="0 0 900 500" xmlns="http://www.w3.org/2000/svg">
+    <rect x="200" y="80" width="500" height="28" fill="white"/>
+    <rect x="240" y="108" width="420" height="16" fill="white"/>
+    <rect x="250" y="108" width="36" height="390" fill="white"/>
+    <rect x="614" y="108" width="36" height="390" fill="white"/>
+    <rect x="258" y="200" width="20" height="30" rx="3" fill="white" opacity="0.5"/>
+    <rect x="622" y="200" width="20" height="30" rx="3" fill="white" opacity="0.5"/>
+  </svg>
+  <!-- Particles -->
+  <div class="particles">
+    <div class="particle" style="left:10%;animation-duration:9s;animation-delay:0s;"></div>
+    <div class="particle" style="left:25%;animation-duration:12s;animation-delay:1.5s;"></div>
+    <div class="particle" style="left:40%;animation-duration:8s;animation-delay:3s;"></div>
+    <div class="particle" style="left:55%;animation-duration:11s;animation-delay:0.5s;"></div>
+    <div class="particle" style="left:70%;animation-duration:10s;animation-delay:2s;"></div>
+    <div class="particle" style="left:85%;animation-duration:13s;animation-delay:4s;"></div>
+    <div class="particle" style="left:95%;animation-duration:7s;animation-delay:1s;"></div>
+    <div class="particle" style="left:5%;animation-duration:14s;animation-delay:5s;"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">陸奥國一之宮 · Ichinomiya of Mutsu Province</div>
+    <h1>
+      <span class="jp">鹽竈神社</span>
+      Shiogama Shrine
+    </h1>
+    <p class="hero-tagline">
+      Guardian of the sea and salt traditions &mdash;<br>
+      where 1,400 years of seafarers' prayers guide the waters.
+    </p>
+    <div class="hero-scroll">&darr; &nbsp; explore this shrine</div>
+  </div>
+</div>
+
+<!-- QUICK FACTS BAR -->
+<div class="quick-bar">
+  <div class="quick-item">
+    <span class="quick-icon">📍</span>
+    <div>
+      <span class="quick-label">Location</span>
+      <span class="quick-value">Shiogama, Miyagi</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">🚃</span>
+    <div>
+      <span class="quick-label">Nearest Station</span>
+      <span class="quick-value">Shiogama Sta. (JR)</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">🚅</span>
+    <div>
+      <span class="quick-label">From Tokyo</span>
+      <span class="quick-value">~2h (Shinkansen + JR)</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">🕐</span>
+    <div>
+      <span class="quick-label">Hours</span>
+      <span class="quick-value">5:00 &ndash; 18:00 (Free)</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">⛩️</span>
+    <div>
+      <span class="quick-label">History</span>
+      <span class="quick-value">1,400+ years</span>
+    </div>
+  </div>
+</div>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a href="ichinomiya-map.html">All Shrines</a> &nbsp;&rsaquo;&nbsp;
+  <a href="ichinomiya-map.html?road=Tokaido">Tōkaidō 東海道</a> &nbsp;&rsaquo;&nbsp;
+  Mutsu Province &nbsp;&rsaquo;&nbsp; Shiogama Shrine
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+  <!-- Deity row (full width) -->
+  <div class="deity-card grid-full" style="margin-bottom:24px;">
+    <div class="deity-symbol">⛩️</div>
+    <div>
+      <div class="deity-label">Enshrined Deities &mdash; Three Gods</div>
+      <div class="deity-name">Shiotsuchi-Oji &amp; Takemikazuchi</div>
+      <div class="deity-jp">鹽土老翁神・武甕槌神・經津主神 &mdash; 鹽観三神</div>
+      <div class="deity-desc">
+        Shiotsuchi-Oji-no-Kami, the god of salt and the sea, stands as the patron deity of Shiogama Shrine in its betsugu (detached sanctuary). The shrine also enshrines Takemikazuchi and Futsunushi in its left and right sanctuaries respectively. These three deities work together to protect mariners, fishermen, and those engaged in salt-making traditions. As the <strong style="color:var(--gold)">head shrine of hundreds of Shiogama shrines across Japan</strong>, this Mutsu Province ichinomiya is the spiritual protector of the Tohoku coast and those who draw their livelihood from the sea. The shrine has been recorded since the 9th century and is revered as the guardian of safe passage across the waters.
+      </div>
+      <div class="blessing-tags">
+        <span class="blessing-tag">#SafeVoyage</span>
+        <span class="blessing-tag">#FisheriesBlessing</span>
+        <span class="blessing-tag">#SaltCraftProtection</span>
+        <span class="blessing-tag">#PregnancyProtection</span>
+        <span class="blessing-tag">#CoastalSafety</span>
+        <span class="blessing-tag">#MarinerGuidance</span>
+        <span class="blessing-tag">#SeaAbundance</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+
+    <!-- ■ CARD 1: ESSENCE -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">1</div>
+        <div class="card-title-block">
+          <span class="card-title-en">The Essence · 核心価値</span>
+          <span class="card-title-jp">核心的価値 &mdash; なぜここが特別なのか</span>
+          <span class="card-title-zh">核心价值 · 为何与众不同</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="essence-highlight">
+          <div class="essence-label">由綒 · Why It Matters</div>
+          <div class="essence-text">
+            <strong>1,400+ years protecting Japan's seafarers and salt makers.</strong><br>
+            Founded in the 9th century (though legend traces it to the Shiotsuchi-Oji of ancient mythology), Shiogama Shrine rises majestically on the Shiogama Peninsula overlooking the sea. Recorded in historical documents as the official ichinomiya of Mutsu Province, the shrine is mentioned in the 927 AD Engishiki imperial records. Fifteen buildings are designated Important Cultural Properties, including the elegant shrine halls and museum built in 1996.
+          </div>
+        </div>
+        <div class="essence-highlight" style="border-color:var(--green);">
+          <div class="essence-label" style="color:var(--green);">202 Stone Steps · A Sacred Ascent</div>
+          <div class="essence-text" style="font-size:0.88rem; color:#444;">
+            The iconic approach to Shiogama Shrine winds uphill through a modern shopping arcade and 202 ancient stone steps that climb toward the main shrine buildings. This steep ascent mirrors the spiritual journey—each step brings visitors closer to the sea deities above. The 202 steps have become emblematic of the shrine's character, offering contemplative passage from the harbor below to the sacred space above, rewarding climbers with coastal views and the presence of centuries of pilgrims' footsteps.
+          </div>
+        </div>
+        <!-- Video -->
+        <div class="video-wrapper">
+          <svg style="width:100%;aspect-ratio:16/9;display:block;" viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="seasky" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#1a0a05"/>
+                <stop offset="50%" stop-color="#0a1a2a"/>
+                <stop offset="100%" stop-color="#1a2a3e"/>
+              </linearGradient>
+              <linearGradient id="seaglow" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#4da6ff" stop-opacity="0.2"/>
+                <stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <rect width="800" height="450" fill="url(#seasky)"/>
+            <!-- Sea waves -->
+            <ellipse cx="400" cy="380" rx="400" ry="60" fill="#0a2a4a" opacity="0.6"/>
+            <path d="M 0 350 Q 100 340 200 350 T 400 350 T 600 350 T 800 350 L 800 450 L 0 450" fill="#0a2a3a" opacity="0.8"/>
+            <!-- Stone steps -->
+            <g opacity="0.7">
+              <rect x="300" y="280" width="200" height="10" fill="#c9a84c"/>
+              <rect x="290" y="295" width="220" height="10" fill="#b89636"/>
+              <rect x="280" y="310" width="240" height="10" fill="#a88428"/>
+              <rect x="270" y="325" width="260" height="10" fill="#988a1a"/>
+            </g>
+            <!-- Shrine structure -->
+            <rect x="320" y="220" width="160" height="80" fill="#2a1a0a" opacity="0.8"/>
+            <polygon points="320,220 400,160 480,220" fill="#c9a84c" opacity="0.7"/>
+            <rect x="340" y="245" width="30" height="55" fill="#c9a84c" opacity="0.5"/>
+            <rect x="430" y="245" width="30" height="55" fill="#c9a84c" opacity="0.5"/>
+            <!-- Moon/Light -->
+            <circle cx="100" cy="80" r="50" fill="#c9a84c" opacity="0.3"/>
+            <!-- Stars -->
+            <circle cx="150" cy="40" r="1.5" fill="white" opacity="0.5"/>
+            <circle cx="300" cy="25" r="1" fill="white" opacity="0.3"/>
+            <circle cx="650" cy="50" r="1.5" fill="white" opacity="0.4"/>
+            <circle cx="750" cy="30" r="1" fill="white" opacity="0.5"/>
+            <!-- Text -->
+            <text x="400" y="420" text-anchor="middle" font-size="12" fill="rgba(255,255,255,0.5)" font-family="Georgia">鹽竈神社 · Shiogama Shrine</text>
+          </svg>
+          <div class="video-overlay">
+            <a class="play-btn" href="https://www.youtube.com/results?search_query=鹽竈神社+参拝+202石段" target="_blank" title="Watch on YouTube">&#9654;</a>
+          </div>
+          <div class="video-caption">&#9654; 鹽竈神社の202石段 &mdash; Experience the sacred ascent · 30 sec</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ■ CARD 2: ACCESS -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">2</div>
+        <div class="card-title-block">
+          <span class="card-title-en">Plan Your Visit · 交通指南</span>
+          <span class="card-title-jp">旅の地図 &mdash; アクセス情報</span>
+          <span class="card-title-zh">交通指南 · 如何前往</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <!-- Google Map embed -->
+        <div class="map-wrapper">
+          <iframe src="https://maps.google.com/maps?q=%E9%B9%BE%E7%AB%88%E7%A5%9E%E7%A4%BE+%E5%AE%AE%E5%9F%8E%E7%9C%8C&output=embed&hl=en&z=14" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Shiogama Shrine map"></iframe>
+        </div>
+        <a class="map-link" href="https://maps.google.com/maps?q=鹽竈神社" target="_blank">
+          📍 Open in Google Maps &mdash; 宮城県塩竈市本町9-19
+        </a>
+        <ul class="access-list">
+          <li>
+            <span class="access-icon">🚃</span>
+            <span class="access-text">
+              <span class="access-main">JR Hon-Shiogama Station · <strong>15 min walk uphill</strong></span>
+              <span class="access-sub">本塩釜駅 · 202 stone steps to main shrine</span>
+            </span>
+          </li>
+          <li>
+            <span class="access-icon">🚄</span>
+            <span class="access-text">
+              <span class="access-main">From <strong>Sendai</strong> &mdash; approx. 30 min</span>
+              <span class="access-sub">JR Senseki Line direct to Hon-Shiogama Station</span>
+            </span>
+          </li>
+          <li>
+            <span class="access-icon">🚅</span>
+            <span class="access-text">
+              <span class="access-main">From <strong>Tokyo</strong> &mdash; approx. 2 hrs</span>
+              <span class="access-sub">Tokaido Shinkansen to Sendai &rarr; JR Senseki Line to Hon-Shiogama</span>
+            </span>
+          </li>
+          <li>
+            <span class="access-icon">🚗</span>
+            <span class="access-text">
+              <span class="access-main">By car &mdash; Sendai Airport &cdot; 40 min</span>
+              <span class="access-sub">Via Tomei Expressway or direct coastal route</span>
+            </span>
+          </li>
+          <li>
+            <span class="access-icon">🅿️</span>
+            <span class="access-text">
+              <span class="access-main">Parking: Street parking available</span>
+              <span class="access-sub">市営駐車場 · Municipal lots near base of steps</span>
+            </span>
+          </li>
+          <li>
+            <span class="access-icon">⏰</span>
+            <span class="access-text">
+              <span class="access-main">Open 5:00 &ndash; 18:00 · Free admission</span>
+              <span class="access-sub">御朱印受付 Goshuin office: Variable hours · &yen;500</span>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ■ CARD 3: DEEP INSIGHT -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">3</div>
+        <div class="card-title-block">
+          <span class="card-title-en">Deep Insight · 深度探索</span>
+          <span class="card-title-jp">リピーターのこだわり &mdash; 知る人ぞ知る</span>
+          <span class="card-title-zh">深度探索 · 行家的坚持</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="insight-item">
+          <span class="insight-badge badge-unique">UNIQUE</span>
+          <div class="insight-body">
+            <div class="insight-title">202 Stone Steps · Sacred Numerology</div>
+            <div class="insight-desc">
+              The 202 steps are not arbitrary—this number mirrors sacred Buddhist numerology and the journey toward enlightenment. Each step worn smooth by centuries of pilgrims' feet, the ascent is both physical and spiritual. The main shopping street below and the steep climb above create a distinct separation between the mundane and sacred worlds.
+            </div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-badge badge-unique">UNIQUE</span>
+          <div class="insight-body">
+            <div class="insight-title">Salt & Seafaring Heritage · Living Tradition</div>
+            <div class="insight-desc">
+              Unlike shrines dedicated to mountains or agriculture, Shiogama specifically guards the salt-making crafts that defined the Tohoku coast for millennia. Local salt producers still make offerings for successful harvests, keeping pre-industrial traditions alive. The nearby Shiogama fish market demonstrates how the shrine's marine blessings remain relevant today.
+            </div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-badge badge-seasonal">FESTIVAL</span>
+          <div class="insight-body">
+            <div class="insight-title">Shiogama Minato Matsuri · July</div>
+            <div class="insight-desc">
+              Celebrated in July, this maritime festival features floating lanterns on the harbor, shrine processions to the waterfront, and traditional fishing community celebrations. The festival ties the shrine directly to Shiogama's identity as a fishing port and honors the seafarers the shrine has protected for over 1,400 years.
+            </div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-badge badge-tip">TIP</span>
+          <div class="insight-body">
+            <div class="insight-title">Shiogama-zakura &mdash; Unique Cherry Blossoms</div>
+            <div class="insight-desc">
+              The shrine grounds feature the rare <em>shiogama-zakura</em>, a particular cherry blossom variety named after this shrine. In spring, the 202 steps are lined with these delicate blossoms, creating a stunning floral tunnel. This variety blooms slightly later than common sakura, extending Tohoku's cherry season by weeks.
+            </div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-badge badge-info">INFO</span>
+          <div class="insight-body">
+            <div class="insight-title">Shrine Museum &mdash; 1,400 Years of Treasures</div>
+            <div class="insight-desc">
+              The 1996 museum houses swords, armor, historical documents, and religious artifacts spanning the shrine's entire history. The collection illuminates the shrine's role as both spiritual and political institution throughout Japan's dynasties. A must-visit for understanding Mutsu Province's cultural significance.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ■ CARD 4: EAT STAY MORE -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">4</div>
+        <div class="card-title-block">
+          <span class="card-title-en">Eat, Stay &amp; More · 周邊資訊</span>
+          <span class="card-title-jp">周辺の滞在 &mdash; 食・宿・寄り道</span>
+          <span class="card-title-zh">周边信息 · 吃住游</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="nearby-grid">
+          <div class="nearby-item">
+            <span class="nearby-icon">🍣</span>
+            <div class="nearby-cat">Food · 食</div>
+            <div class="nearby-name">Shiogama Fish Market</div>
+            <div class="nearby-desc">
+              One of Japan's premier seafood markets, famous for sushi restaurants serving ultra-fresh tuna, scallops, and local catches. Market opening hours and weekday crowds make for optimal browsing. Many stalls offer fresh sashimi to eat while walking.
+            </div>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-icon">🥾</span>
+            <div class="nearby-cat">Local · 食</div>
+            <div class="nearby-name">Shiogama-Style Salt Cuisine</div>
+            <div class="nearby-desc">
+              Traditional dishes featuring Shiogama's famous sea salt, including salt-grilled fish, salt-brewed noodles, and salt-cured vegetables. Restaurants along the harbor preserve these heritage recipes. The shrine's salt protection extends to culinary traditions.
+            </div>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-icon">🏨</span>
+            <div class="nearby-cat">Stay · 宿</div>
+            <div class="nearby-name">Shiogama Harbor Ryokan</div>
+            <div class="nearby-desc">
+              Traditional waterfront inns with views of the fishing harbor and offshore islands. Many include fresh seafood dinners and hot spring baths. Staying overnight allows morning shrine visits when pilgrims are fewer and light is clearest.
+            </div>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-icon">⛩️</span>
+            <div class="nearby-cat">Nearby · 次</div>
+            <div class="nearby-name">Matsushima Bay &mdash; 30 min away</div>
+            <div class="nearby-desc">
+              Japan's most famous bay featuring 260 pine-covered islands. Boat tours depart hourly from nearby docks. Combined with Shiogama's shrine visit, this creates a perfect day combining spiritual and scenic exploration.
+            </div>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-icon">🗻</span>
+            <div class="nearby-cat">Nature · 自然</div>
+            <div class="nearby-name">Oshika Peninsula Coastal Hike</div>
+            <div class="nearby-desc">
+              Dramatic coastal scenery, rocky tidal pools, and fishing villages. The peninsula extends beyond Shiogama and offers day-hike opportunities with panoramic ocean views. Car or local bus needed, but stunning nature rewards the journey.
+            </div>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-icon">→</span>
+            <div class="nearby-cat">Next Shrine · 次の一宮</div>
+            <div class="nearby-name">塩竈 &rarr; 八幡宮(宮城)</div>
+            <div class="nearby-desc">
+              Other Tohoku ichinomiya shrines are accessible via Sendai. Shiogama as the Mutsu Province shrine is the spiritual centerpiece of northern Honshu's shrine network.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /grid -->
+
+  <!-- SPECIAL SECTION: Three Gods & Stone Steps -->
+  <div class="special-box" style="margin-top:24px;">
+    <div class="special-title">鹽竈三神と202石段 &mdash; The Three Deities &amp; Sacred Steps</div>
+    <div class="special-sub">THE UNIQUE SPIRITUAL HERITAGE OF SHIOGAMA</div>
+    <div class="special-grid">
+      <div class="special-item">
+        <span class="item-sym">💧</span>
+        <span class="item-name">Shiotsuchi-Oji</span>
+        <span class="item-desc">God of salt &mdash; chief deity</span>
+      </div>
+      <div class="special-item">
+        <span class="item-sym">⚔️</span>
+        <span class="item-name">Takemikazuchi</span>
+        <span class="item-desc">Warrior god &mdash; left sanctuary</span>
+      </div>
+      <div class="special-item">
+        <span class="item-sym">🛡️</span>
+        <span class="item-name">Futsunushi</span>
+        <span class="item-desc">Protection god &mdash; right sanctuary</span>
+      </div>
+      <div class="special-item">
+        <span class="item-sym">👶</span>
+        <span class="item-name">Pregnancy Blessing</span>
+        <span class="item-desc">Ancient guardian tradition</span>
+      </div>
+      <div class="special-item">
+        <span class="item-sym">🚤</span>
+        <span class="item-name">Seafarer Protection</span>
+        <span class="item-desc">Mariners' prayers answered</span>
+      </div>
+      <div class="special-item">
+        <span class="item-sym">🧂</span>
+        <span class="item-name">Salt Craft Guardian</span>
+        <span class="item-desc">Living heritage preserved</span>
+      </div>
+      <div class="special-item">
+        <span class="item-sym">🪜</span>
+        <span class="item-name">202 Stone Steps</span>
+        <span class="item-desc">Centuries of pilgrims' passage</span>
+      </div>
+      <div class="special-item">
+        <span class="item-sym">🌸</span>
+        <span class="item-name">Shiogama-Zakura</span>
+        <span class="item-desc">Unique cherry blossom variety</span>
+      </div>
+      <div class="special-item" style="background:rgba(201,168,76,0.12); border-color:var(--gold);">
+        <span class="item-sym" style="color:var(--gold);">✦</span>
+        <span class="item-name" style="color:var(--gold);">Harbor Guardian</span>
+        <span class="item-desc" style="color:rgba(255,255,255,0.8);">1,400 years of coastal protection</span>
+      </div>
+    </div>
+    <div class="special-desc">
+      Shiogama Shrine uniquely enshrines three deities—Shiotsuchi-Oji (god of salt), Takemikazuchi, and Futsunushi—representing the marriage of maritime, martial, and agricultural protection. The shrine's position on the Shiogama Peninsula overlooking the harbor makes it a living guardian of Japan's fishing heritage. As the head shrine of hundreds of Shiogama shrines nationwide, it represents not merely local significance but a spiritual network protecting mariners, pregnant women, and salt-making artisans across Japan. The famous 202 stone steps form a contemplative ascent, each step inscribed with the presence of 1,400+ years of pilgrimage. The shrine was recorded as an important shrine in the 927 AD Engishiki imperial records and has been patronized by emperors and warrior clans throughout Japan's dynasties. Fifteen buildings at Shiogama Shrine are collectively designated as Important Cultural Properties, preserving Heian and Edo period architectural traditions.
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-bar" style="margin-top:24px;">
+    <div>
+      <h3>Ready to visit Shiogama Shrine?</h3>
+      <p>Climb 202 sacred steps and experience 1,400 years of maritime protection, or explore more Ichinomiya shrines across Japan.</p>
+    </div>
+    <div class="cta-links">
+      <a href="https://shiomo.jp/shiogama-shrine" target="_blank" class="btn">Official Website &rarr;</a>
+      <a href="ichinomiya-map.html" class="btn secondary">&larr; All Shrines Map</a>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<footer>
+  <p>一ノ宮 Ichinomiya &nbsp;&middot;&nbsp; Shiogama Shrine &middot; 陸奥國一之宮 鹽竈神社</p>
+  <p style="margin-top:6px;">
+    Sources:
+    <a href="https://shiomo.jp/shiogama-shrine" target="_blank" style="color:rgba(255,255,255,0.4);">Official Shrine</a> &middot;
+    <a href="https://en.wikipedia.org/wiki/Shiogama_shrine" target="_blank" style="color:rgba(255,255,255,0.4);">Wikipedia</a> &middot;
+    <a href="https://www.travelinjapan.net/tohoku/miyagi/shiogama/shiogama-shrine/" target="_blank" style="color:rgba(255,255,255,0.4);">Travel in Japan</a>
+  </p>
+</footer>
+
+</body>
+</html>
