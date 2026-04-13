@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Munakata Taisha — Ichinomiya of Chikuzen Province</title>
+<style>
+:root {
+  --red: #9b2335;
+  --gold: #c9a84c;
+  --ink: #1a1a2e;
+  --cream: #fdf6ec;
+  --mist: #f0ebe3;
+  --gray: #6b6b6b;
+  --green: #2e7d32;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Georgia',serif; background:var(--cream); color:var(--ink); line-height:1.75; }
+
+/* ── HEADER ── */
+header {
+  background:var(--ink); color:#fff;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:14px 28px; position:sticky; top:0; z-index:200;
+  box-shadow:0 2px 12px rgba(0,0,0,0.4);
+}
+.logo { display:flex; align-items:baseline; gap:10px; text-decoration:none; }
+.logo .kanji { font-size:1.5rem; color:var(--gold); font-weight:bold; }
+.logo .sub { font-size:0.78rem; color:rgba(255,255,255,0.5); letter-spacing:0.1em; }
+.header-right { display:flex; align-items:center; gap:16px; }
+nav a { color:rgba(255,255,255,0.6); text-decoration:none; font-size:0.78rem; letter-spacing:0.08em; margin-left:20px; }
+nav a:hover { color:var(--gold); }
+.lang-switcher { display:flex; gap:4px; }
+.lang-btn { font-size:0.7rem; padding:2px 8px; border-radius:10px; text-decoration:none; border:1px solid rgba(255,255,255,0.2); color:rgba(255,255,255,0.5); transition:all 0.2s; }
+.lang-btn.active { background:var(--gold); color:var(--ink); border-color:var(--gold); font-weight:bold; }
+
+/* ── HERO ── */
+.hero {
+  position:relative; height:88vh; min-height:520px; overflow:hidden;
+  display:flex; flex-direction:column; align-items:center; justify-content:flex-end;
+  padding-bottom:48px; color:#fff; text-align:center;
+}
+.hero-bg {
+  position:absolute; inset:0;
+  background:
+    linear-gradient(to bottom, rgba(10,5,20,0.3) 0%, rgba(10,5,20,0.1) 40%, rgba(10,5,20,0.75) 100%),
+    linear-gradient(135deg, #0a1520 0%, #1a0520 40%, #2a1010 100%);
+}
+.hero-torii { position:absolute; bottom:0; left:50%; transform:translateX(-50%); width:100%; max-width:900px; opacity:0.12; }
+.hero-glow {
+  position:absolute; width:600px; height:600px; border-radius:50%;
+  background:radial-gradient(circle, rgba(201,168,76,0.15) 0%, transparent 70%);
+  top:50%; left:50%; transform:translate(-50%,-50%);
+}
+.particles { position:absolute; inset:0; overflow:hidden; }
+.particle { position:absolute; width:2px; height:2px; background:rgba(201,168,76,0.6); border-radius:50%; animation:float linear infinite; }
+@keyframes float { 0%{transform:translateY(100vh) translateX(0);opacity:0;} 10%{opacity:1;} 90%{opacity:1;} 100%{transform:translateY(-20px) translateX(30px);opacity:0;} }
+.hero-content { position:relative; z-index:1; padding:0 20px; }
+.hero-badge { display:inline-block; border:1px solid var(--gold); color:var(--gold); font-size:0.7rem; letter-spacing:0.25em; padding:4px 16px; border-radius:20px; margin-bottom:16px; text-transform:uppercase; }
+.hero h1 { font-size:clamp(2rem,6vw,4.5rem); font-weight:normal; line-height:1.1; margin-bottom:8px; }
+.hero h1 .jp { display:block; font-size:clamp(2.5rem,8vw,5.5rem); color:var(--gold); }
+.hero-tagline { font-size:clamp(0.9rem,2vw,1.1rem); color:rgba(255,255,255,0.75); max-width:560px; margin:16px auto 0; font-style:italic; }
+.hero-scroll { margin-top:32px; color:rgba(255,255,255,0.3); font-size:0.72rem; letter-spacing:0.2em; animation:pulse 2.5s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{opacity:.3} 50%{opacity:.8} }
+
+/* ── QUICK FACTS BAR ── */
+.quick-bar { background:var(--ink); color:#fff; display:flex; justify-content:center; flex-wrap:wrap; gap:0; }
+.quick-item { padding:14px 28px; display:flex; align-items:center; gap:8px; border-right:1px solid rgba(255,255,255,0.1); font-size:0.8rem; }
+.quick-item:last-child { border-right:none; }
+.quick-icon { font-size:1rem; }
+.quick-label { color:rgba(255,255,255,0.45); font-size:0.65rem; display:block; }
+.quick-value { color:#fff; font-size:0.85rem; }
+
+/* ── MAIN GRID ── */
+.main { max-width:1100px; margin:0 auto; padding:48px 20px 80px; }
+.grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+.grid-full { grid-column:1/-1; }
+
+/* ── CARDS ── */
+.card { background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 2px 16px rgba(0,0,0,0.07); border:1px solid rgba(0,0,0,0.06); }
+.card-header { padding:18px 24px 14px; border-bottom:1px solid #f0e8d8; display:flex; align-items:center; gap:12px; }
+.card-num { width:28px; height:28px; background:var(--red); color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.75rem; font-weight:bold; flex-shrink:0; }
+.card-title-en { font-size:0.65rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold); display:block; }
+.card-title-jp { font-size:1.05rem; font-weight:bold; display:block; line-height:1.2; }
+.card-title-zh { font-size:0.7rem; color:var(--gray); display:block; }
+.card-body { padding:20px 24px 24px; }
+
+/* Essence card */
+.essence-highlight { background:var(--mist); border-radius:8px; padding:16px 20px; margin-bottom:16px; border-left:3px solid var(--gold); }
+.essence-label { font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:6px; }
+.essence-text { font-size:0.95rem; color:#333; }
+.essence-text strong { color:var(--red); }
+
+/* Video embed */
+.video-wrapper { position:relative; border-radius:8px; overflow:hidden; background:var(--ink); margin-top:16px; }
+.video-overlay { position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%); display:flex; align-items:center; justify-content:center; }
+.play-btn { width:56px; height:56px; border-radius:50%; background:rgba(201,168,76,0.9); display:flex; align-items:center; justify-content:center; text-decoration:none; transition:transform 0.2s, background 0.2s; font-size:1.3rem; color:var(--ink); }
+.play-btn:hover { transform:scale(1.1); background:var(--gold); }
+.video-caption { position:absolute; bottom:0; left:0; right:0; padding:10px 14px; color:rgba(255,255,255,0.8); font-size:0.75rem; }
+
+/* Map card */
+.map-wrapper { border-radius:8px; overflow:hidden; margin-bottom:16px; }
+.map-wrapper iframe { width:100%; height:240px; border:none; display:block; }
+.map-link { display:flex; align-items:center; gap:8px; background:var(--ink); color:var(--gold); text-decoration:none; padding:10px 16px; border-radius:6px; font-size:0.82rem; letter-spacing:0.08em; margin-bottom:16px; transition:background 0.2s; }
+.map-link:hover { background:#2a2a3e; }
+.access-list { list-style:none; }
+.access-list li { display:flex; gap:10px; align-items:flex-start; padding:8px 0; border-bottom:1px solid #f0ebe3; font-size:0.88rem; }
+.access-list li:last-child { border-bottom:none; }
+.access-icon { flex-shrink:0; font-size:1rem; }
+.access-main { display:block; color:var(--ink); }
+.access-sub { display:block; font-size:0.75rem; color:var(--gray); }
+
+/* Deep Insight card */
+.insight-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid #f0ebe3; }
+.insight-item:last-child { border-bottom:none; }
+.insight-badge { flex-shrink:0; padding:2px 8px; border-radius:4px; font-size:0.65rem; font-weight:bold; letter-spacing:0.05em; height:fit-content; margin-top:2px; }
+.badge-unique { background:#fff3e0; color:#e65100; }
+.badge-tip { background:#e8f5e9; color:#1b5e20; }
+.badge-info { background:#e8f0fe; color:#1a237e; }
+.badge-seasonal { background:#fce4ec; color:#880e4f; }
+.badge-stamp { background:#fff3e0; color:#e65100; }
+.insight-title { font-size:0.9rem; font-weight:bold; margin-bottom:3px; }
+.insight-desc { font-size:0.83rem; color:var(--gray); }
+
+/* Nearby card */
+.nearby-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; }
+.nearby-item { background:var(--mist); border-radius:8px; padding:14px; }
+.nearby-cat { font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--gray); margin-bottom:4px; }
+.nearby-icon { font-size:1.2rem; margin-bottom:6px; display:block; }
+.nearby-name { font-size:0.88rem; font-weight:bold; margin-bottom:4px; }
+.nearby-desc { font-size:0.78rem; color:var(--gray); }
+
+/* Deity section */
+.deity-card { background:var(--ink); color:#fff; border-radius:12px; padding:32px; display:grid; grid-template-columns:auto 1fr; gap:28px; align-items:start; }
+.deity-symbol { font-size:4rem; line-height:1; }
+.deity-label { font-size:0.65rem; letter-spacing:0.2em; color:var(--gold); text-transform:uppercase; margin-bottom:6px; }
+.deity-name { font-size:1.5rem; font-weight:bold; margin-bottom:4px; }
+.deity-jp { font-size:0.9rem; color:rgba(255,255,255,0.55); margin-bottom:16px; }
+.deity-desc { font-size:0.9rem; color:rgba(255,255,255,0.8); line-height:1.7; margin-bottom:16px; }
+.blessing-tags { display:flex; flex-wrap:wrap; gap:6px; }
+.blessing-tag { background:rgba(201,168,76,0.15); border:1px solid rgba(201,168,76,0.3); color:var(--gold); padding:3px 10px; border-radius:12px; font-size:0.72rem; letter-spacing:0.05em; }
+
+/* Special section */
+.special-box { background:linear-gradient(135deg, #1a1a2e 0%, #0a1520 100%); color:#fff; border-radius:12px; padding:32px; }
+.special-title { color:var(--gold); font-size:1.2rem; margin-bottom:8px; }
+.special-sub { font-size:0.75rem; letter-spacing:0.15em; color:rgba(255,255,255,0.4); margin-bottom:20px; }
+.special-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+.special-item { text-align:center; padding:16px 8px; background:rgba(255,255,255,0.06); border-radius:8px; border:1px solid rgba(201,168,76,0.2); }
+.special-item .item-sym { font-size:1.8rem; display:block; margin-bottom:6px; }
+.special-item .item-name { font-size:0.78rem; color:var(--gold); display:block; margin-bottom:4px; }
+.special-item .item-desc { font-size:0.7rem; color:rgba(255,255,255,0.6); }
+.special-desc { margin-top:20px; font-size:0.88rem; color:rgba(255,255,255,0.75); line-height:1.7; }
+
+/* CTA */
+.cta-bar { background:var(--red); border-radius:12px; padding:28px 32px; display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap; }
+.cta-bar h3 { color:#fff; font-size:1.1rem; font-weight:normal; }
+.cta-bar p { color:rgba(255,255,255,0.75); font-size:0.85rem; margin-top:4px; }
+.cta-links { display:flex; gap:10px; flex-wrap:wrap; }
+.btn { display:inline-block; padding:10px 22px; border:2px solid #fff; color:#fff; text-decoration:none; border-radius:4px; font-size:0.82rem; letter-spacing:0.08em; transition:background 0.2s, color 0.2s; font-family:inherit; cursor:pointer; }
+.btn:hover { background:#fff; color:var(--red); }
+.btn.secondary { border-color:rgba(255,255,255,0.4); color:rgba(255,255,255,0.7); }
+.btn.secondary:hover { background:rgba(255,255,255,0.15); color:#fff; }
+
+/* Breadcrumb */
+.breadcrumb { padding:12px 20px; font-size:0.75rem; color:var(--gray); max-width:1100px; margin:0 auto; }
+.breadcrumb a { color:var(--gray); text-decoration:none; }
+.breadcrumb a:hover { color:var(--red); }
+
+footer { background:var(--ink); color:rgba(255,255,255,0.35); text-align:center; padding:28px; font-size:0.78rem; }
+
+@media(max-width:700px) {
+  .grid { grid-template-columns:1fr; }
+  .special-grid { grid-template-columns:repeat(2,1fr); }
+  .nearby-grid { grid-template-columns:1fr; }
+  .deity-card { grid-template-columns:1fr; }
+  .quick-item { padding:10px 16px; }
+  .cta-bar { flex-direction:column; align-items:flex-start; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a class="logo" href="ichinomiya-map.html">
+    <span class="kanji">一ノ宮</span>
+    <span class="sub">Japan's First Shrines</span>
+  </a>
+  <div class="header-right">
+    <nav>
+      <a href="ichinomiya-intro.html">What is Ichinomiya?</a>
+      <a href="ichinomiya-map.html">&larr; All Shrines</a>
+    </nav>
+    <div class="lang-switcher">
+      <a href="#" class="lang-btn">日本語</a>
+      <a href="#" class="lang-btn active">EN</a>
+      <a href="#" class="lang-btn">中文</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-glow"></div>
+  <!-- Torii silhouette -->
+  <svg class="hero-torii" viewBox="0 0 900 500" xmlns="http://www.w3.org/2000/svg">
+    <rect x="200" y="80" width="500" height="28" fill="white"/>
+    <rect x="240" y="108" width="420" height="16" fill="white"/>
+    <rect x="250" y="108" width="36" height="390" fill="white"/>
+    <rect x="614" y="108" width="36" height="390" fill="white"/>
+    <rect x="258" y="200" width="20" height="30" rx="3" fill="white" opacity="0.5"/>
+    <rect x="622" y="200" width="20" height="30" rx="3" fill="white" opacity="0.5"/>
+  </svg>
+  <!-- Particles -->
+  <div class="particles">
+    <div class="particle" style="left:10%;animation-duration:9s;animation-delay:0s;"></div>
+    <div class="particle" style="left:25%;animation-duration:12s;animation-delay:1.5s;"></div>
+    <div class="particle" style="left:40%;animation-duration:8s;animation-delay:3s;"></div>
+    <div class="particle" style="left:55%;animation-duration:11s;animation-delay:0.5s;"></div>
+    <div class="particle" style="left:70%;animation-duration:10s;animation-delay:2s;"></div>
+    <div class="particle" style="left:85%;animation-duration:13s;animation-delay:4s;"></div>
+    <div class="particle" style="left:95%;animation-duration:7s;animation-delay:1s;"></div>
+    <div class="particle" style="left:5%;animation-duration:14s;animation-delay:5s;"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">筑前國一之宮 · Ichinomiya of Chikuzen Province</div>
+    <h1>
+      <span class="jp">宗像大社</span>
+      Munakata Taisha
+    </h1>
+    <p class="hero-tagline">
+      Where three shrines guard three sacred islands &mdash;<br>
+      origin shrine of the sea goddesses, gateway to the maritime silk road.
+    </p>
+    <div class="hero-scroll">&darr; &nbsp; explore this shrine</div>
+  </div>
+</div>
+
+<!-- QUICK FACTS BAR -->
+<div class="quick-bar">
+  <div class="quick-item">
+    <span class="quick-icon">📍</span>
+    <div>
+      <span class="quick-label">Location</span>
+      <span class="quick-value">Munakata, Fukuoka</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">🚃</span>
+    <div>
+      <span class="quick-label">Nearest Station</span>
+      <span class="quick-value">JR Togo Sta. + Bus 12 min</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">🚅</span>
+    <div>
+      <span class="quick-label">From Tokyo</span>
+      <span class="quick-value">~5.5 hrs (Shinkansen)</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">🕐</span>
+    <div>
+      <span class="quick-label">Hours</span>
+      <span class="quick-value">Grounds: Free · Museum: 9-16:30</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">💰</span>
+    <div>
+      <span class="quick-label">Admission</span>
+      <span class="quick-value">Treasure Hall: ¥800</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">🌍</span>
+    <div>
+      <span class="quick-label">UNESCO Status</span>
+      <span class="quick-value">World Heritage 2017</span>
+    </div>
+  </div>
+</div>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a href="ichinomiya-map.html">All Shrines</a> &nbsp;&rsaquo;&nbsp;
+  <a href="ichinomiya-map.html?road=Saikaido">Saikaidō 西海道</a> &nbsp;&rsaquo;&nbsp;
+  Chikuzen Province &nbsp;&rsaquo;&nbsp; Munakata Taisha
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+  <!-- Deity row (full width) -->
+  <div class="deity-card grid-full" style="margin-bottom:24px;">
+    <div class="deity-symbol">🌊</div>
+    <div>
+      <div class="deity-label">Enshrined Deities &mdash; The Three Sea Goddesses</div>
+      <div class="deity-name">Ichikishima-hime, Tagitsu-hime &amp; Tagori-hime</div>
+      <div class="deity-jp">市杵島姫命・田心姫命・�kJ^Zz�Y�f�F6��Z�~X8�K��Z[>zY���F�c��F�b6�73�&FV�G��FW62#�F�R�V��F6��6����F�&VR6Vv�FFW76W2�&RF�RFVv�FW'2�b7W6�������֖��F�����v���6���F�חF����w�2F�RF�f��R&�FV7F�'2�bF�R6V��&�F��R6���W&6R��B6fR76vR�F�W6Rv�FFW76W2�fR&VV�v�'6��VBB�V��FF�6�6��6R&Rֆ�7F�&�6�F��W>(	F����rF��2F�R�7G&��r7G��S�&6���#�f"���v��B��#��&�v��6�&��S��7G&��s�f�"�G7V�W6���w2v�'6���bF�R6�RFV�F�W2�F�7G&�'WFVB7&�72F�&VR67&VB6�FW2��WG7R�֗���F�R�����B���G7R�֗����6����6��B��B���G7R�֗���F�Rf�&&�FFV��6��B�b�����6�����F�W�6���V7F�fVǒwV&BF�R�&�F��R&�WFW2�bF�R�6�V�B6�Ʋ&�B�B��FW&���w26�7F�vFW'2���F�c��F�b6�73�&&�W76��r�Fw2#��7�6�73�&&�W76��r�Fr#�4�&�F��U6�Ƶ&�C��7���7�6�73�&&�W76��r�Fr#�5G&FU&�FV7F�����7���7�6�73�&&�W76��r�Fr#�56V6fWG���7���7�6�73�&&�W76��r�Fr#�4F�f��T�&�v����7���7�6�73�&&�W76��r�Fr#�56����u7V66W73��7���7�6�73�&&�W76��r�Fr#�4�6��D&�W76��s��7���7�6�73�&&�W76��r�Fr#�46V�W7F���vW#��7����F�c���F�c���F�cࠢ�F�b6�73�&w&�B#ࠢ���)j4$B�U54T�4R����F�b6�73�&6&B#��F�b6�73�&6&BֆVFW"#��F�b6�73�&6&B��V�#���F�c��F�b6�73�&6&B�F�F�R�&��6�#��7�6�73�&6&B�F�F�R�V�#�F�RW76V�6R+rj�[�>K�~X���7���7�6�73�&6&B�F�F�R֧#�K��zK�K�K�>8�zY�n8Rf�F6��8�8�8>8>8�x��X�^8�8�8���7���7�6�73�&6&B�F�F�Rצ�#�K��zK�K�K�2+rK��K�^K��K�~K��Y���7����F�c���F�c��F�b6�73�&6&B�&�G�#��F�b6�73�&W76V�6Rֆ�v�Ɩv�B#��F�b6�73�&W76V�6R��&V�#�yK{y"+rv���B�GFW'3��F�c��F�b6�73�&W76V�6R�FW�B#��7G&��s�חF����v�6�W&�&�v��6�&��^(	GF�R6�W&6R�b���V��Fv�'6�����7G&��s��'#��V��FF�6�7F�G22F�R�&�v��6�&��Rf�"F�R�V��Fv�FFW76W2�W7F&Ɨ6�VB��&Rֆ�7F�&�6�F��W2�B&V6�&FVB����w2��FW7B��7F�&�6�FW�G2�V�Ɩ�R�G7V�W6����v��6�V�6�&��W2F�R6�RF�&VRv�FFW76W2���V��Fw2V�VRF�&VR�6�&��R6��f�wW&F���7���r��B�B6V�2V�&��V�VB�F�Rf�&&�FFV��6��B�b�����6����v�W&RF�R��ƖW7B6�&��R����G7R�֗��7F�G2��66W76�&�RF���'WB6���F�&�W7G2�6��F��2�fW"���F����G&V7W&W2g&��F�R�F��F�6V�GW&�W>(	GF�Rv�&�Bw2�&vW7B6���V7F����b�6�V�B�&�F��RG&FR'F�f7G2���F�c���F�c��F�b6�73�&W76V�6Rֆ�v�Ɩv�B"7G��S�&&�&FW"�6���#�f"���&VB��#��F�b6�73�&W76V�6R��&V�"7G��S�&6���#�f"���&VB��#�	���+rT�U44��W&�FvR#s��F�c��F�b6�73�&W76V�6R�FW�B"7G��S�&f��B�6��S�デ&VӲ6���#�3CCC�#���#r�F�R67&VB�6��B�b�����6����B76�6�FVB6�FW2��F�R�V��F&Vv���vW&RFW6�v�FVBT�U44�v�&�B�W&�FvR6�FR�F��2&V6�v�F�������'2F�R6�&��Rw2&��R27�&�GV��B&6�V���v�6�Ɩ�F��6�V�B�&�F��RG&FR&�WFW26���V7F��r�����&V�6�����B&W���B�F�RSֶ����WFW"��W&�W�F������6�����f��fW267&VB��w&��vR&�F�6��2V�6��vVBf�"�fW"��V'2�v��V��fRG&F�F����ǒ&VV�f�&&�FFV�g&����F��r�������6����&W7G&�7F���F�B7F���ƖW2F�F������r�B��R�b��w2�7BgV�ǒ&W7G&�7FVB67&VB6�FW2���F�c���F�c����f�FV�����F�b6�73�'f�FV��w&W"#��7fr7G��S�'v�GF��S�7V7B�&F��b�F�7���&��6��"f�Wt&���#�CS"����3�&�GG���wwr�s2��&r�#�7fr#��FVg3��Ɩ�V$w&F�V�B�C�'6V66R"��#"��#"�#�#"�#�##��7F��fg6WC�#R"7F��6���#�"3&V"���7F��fg6WC�#SR"7F��6���#�"3F"���7F��fg6WC�#R"7F��6���#�"3&R"����Ɩ�V$w&F�V�C��Ɩ�V$w&F�V�B�C�&�6��Fv��r"��#"��#"�#�#"�#�##��7F��fg6WC�#R"7F��6���#�"6ffc32"7F���6�G��#�2"���7F��fg6WC�#R"7F��6���#�"63��F2"7F���6�G��#"����Ɩ�V$w&F�V�C���FVg3��&V7Bv�GF��#�"�V�v�C�#CS"f����'W&76V66R�"�����F�&VUe islands -->
+            <ellipse cx="150" cy="280" rx="60" ry="40" fill="#3a5a4a" opacity="0.7"/>
+            <ellipse cx="400" cy="200" rx="80" ry="50" fill="#4a6a5a" opacity="0.8"/>
+            <ellipse cx="700" cy="150" rx="50" ry="35" fill="#2a4a3a" opacity="0.6"/>
+            <!-- Shrine symbols on islands -->
+            <g transform="translate(150, 280)">
+              <polygon points="0,-20 8,-5 -8,-5" fill="#c9a84c" opacity="0.8"/>
+              <circle cx="0" cy="15" r="4" fill="#c9a84c" opacity="0.6"/>
+            </g>
+            <g transform="translate(400, 200)">
+              <polygon points="0,-25 10,-8 -10,-8" fill="#c9a84c" opacity="0.8"/>
+              <circle cx="0" cy="20" r="5" fill="#c9a84c" opacity="0.6"/>
+            </g>
+            <g transform="translate(700, 150)">
+              <polygon points="0,-18 7,-4 -7,-4" fill="#c9a84c" opacity="0.8"/>
+              <circle cx="0" cy="12" r="3" fill="#c9a84c" opacity="0.6"/>
+            </g>
+            <!-- Water waves -->
+            <path d="M 0 320 Q 50 310 100 320 T 200 320 T 300 320 T 400 320 T 500 320 T 600 320 T 700 320 T 800 320" stroke="#2a5a7a" stroke-width="2" fill="none" opacity="0.5"/>
+            <path d="M 0 350 Q 60 340 120 350 T 240 350 T 360 350 T 480 350 T 600 350 T 720 350 T 800 350" stroke="#1a4a6a" stroke-width="1.5" fill="none" opacity="0.4"/>
+            <!-- Trading ships -->
+            <g transform="translate(250, 330)">
+              <polygon points="0,0 15,0 12,8 3,8" fill="#8b6f47" opacity="0.7"/>
+              <line x1="7.5" y1="0" x2="7.5" y2="-8" stroke="#8b6f47" stroke-width="1" opacity="0.6"/>
+            </g>
+            <g transform="translate(600, 300)">
+              <polygon points="0,0 12,0 10,6 2,6" fill="#8b6f47" opacity="0.6"/>
+              <line x1="6" y1="0" x2="6" y2="-6" stroke="#8b6f47" stroke-width="1" opacity="0.5"/>
+            </g>
+            <!-- Text -->
+            <text x="400" y="420" text-anchor="middle" font-size="12" fill="rgba(255,255,255,0.5)" font-family="Georgia">宗像大社の三社 · Three Shrines Across the Sea</text>
+          </svg>
+          <div class="video-overlay">
+            <a class="play-btn" href="https://www.youtube.com/results?search_query=宗像大社+沖ノ島+古代遺跡" target="_blank" title="Watch on YouTube">&#9654;</a>
+          </div>
+          <div class="video-caption">&#9654; 宗像大社と沖ノ島 &mdash; The three sacred sites · 50 sec</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ■ CARD 2: ACCESS -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">2</div>
+        <div class="card-title-block">
+          <span class="card-title-en">Plan Your Visit · 交通指南</span>
+          <span class="card-title-jp">旅の地図 &mdash; アクセス情報</span>
+          <span class="card-title-zh">交通指南 · 如何前往</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <!-- Google Map embed -->
+        <div class="map-wrapper">
+          <iframe src="https://maps.google.com/maps?q=%E5%AE%97%E5%83%8F%E5%A4%A7%E7%A4%BE+%E7%A6%8F%E5%B2%A1%E7%9C%8C&output=embed&hl=en&z=14" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Munakata Taisha map"></iframe>
+        </div>
+        <a class="map-link" href="https://maps.google.com/maps?q=宗像大社" target="_blank">
+          📍 Open in Google Maps &mdash; Munakata, Fukuoka Prefecture
+        </a>
+        <ul class="access-list">
+          <li>
+            <span class="access-icon">🚃</span>
+            <span class="access-text">
+              <span class="access-main">JR Togo Line &mdash; <strong>JR Togo Station</strong> · 12 min by bus</span>
+              <span class="access-sub">戸畔駅 · Buses depart hourly from the station</span>
+            </span>
+          </li>
+          <li>
+            <span class="access-icon">🚄</span>
+            <span class="access-text">
+              <span class="access-main">From <strong>Fukuoka City</strong> &mdash; approx. 50 min</span>
+              <span class="access-sub">JR Togo Line to Togo Sta. · Scenic coastal route</span>
+            </span>
+          </li>
+          <li>
+            <span class="access-icon">🚅</span>
+            <span class="access-text">
+              <span class="access-main">From <strong>Tokyo</strong> &mdash; approx. 5.5 hrs</span>
+              <span class="access-sub">Tokaido-Sanyo Shinkansen to Kokura &rarr; JR to Togo &rarr; bus</span>
+            </span>
+          </li>
+          <li>
+            <span class="access-icon">🚢</span>
+            <span class="access-text">
+              <span class="access-main">Oshima Island pilgrimage &mdash; <strong>ferry required</strong></span>
+              <span class="access-sub">12 min boat ride from Konominato port (check tide schedules)</span>
+            </span>
+          </li>
+          <li>
+            <span class="access-icon">⏰</span>
+            <span class="access-text">
+              <span class="access-main">Hetsumiya (main): Free grounds · Treasure Hall 9:00&ndash;16:30</span>
+              <span class="access-sub">Museum admission ¥800 · Goshuin office: 9:00&ndash;17:00</span>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ■ CARD 3: DEEP INSIGHT -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">3</div>
+        <div class="card-title-block">
+          <span class="card-title-en">Deep Insight · 深度探索</span>
+          <span class="card-title-jp">リピーターのこだわり &mdash; 知る人ぞ知る</span>
+          <span class="card-title-zh">深度探索 · 行家的坚持</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="insight-item">
+          <span class="insight-badge badge-unique">UNIQUE</span>
+          <div class="insight-body">
+            <div class="insight-title">沖ノ島 &mdash; The Forbidden Sacred Island</div>
+            <div class="insight-desc">
+              Okinoshima, located 50 kilometers off the coast and barely visible to the naked eye, remains Japan's most restricted sacred site. Except for Shinto priests performing annual ceremonies, no one—especially not women—is permitted to set foot on the island. The island contains 80,000+ national treasures (国宝) dating to the 8th-11th centuries, artifacts that connect Japan to the ancient maritime Silk Road. This "land of the gods" remains untouched by development.
+            </div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-badge badge-unique">UNIQUE</span>
+          <div class="insight-body">
+            <div class="insight-title">三社一体 &mdash; The Trinity of Shrines</div>
+            <div class="insight-desc">
+              Unlike most shrines where deities are enshrined in a single sanctuary, Munakata Taisha's three goddesses are deliberately separated across three sites: Hetsu-miya on mainland Tajima (open to all), Nakatsu-miya on Oshima island (accessible by ferry, open to visitors), and Okitsu-miya on Okinoshima (off-limits). This spatial separation reflects their divine domains—land, sea transition, and pure sea.
+            </div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-badge badge-tip">TIP</span>
+          <div class="insight-body">
+            <div class="insight-title">God Treasure Pavilion 神宝館</div>
+            <div class="insight-desc">
+              The museum at Hetsu-miya houses a curated collection of artifacts from Okinoshima—bronze mirrors, iron weapons, pottery, and stone tools that document 2,000 years of maritime trade. Many items are designated as National Treasures. Seeing these objects feels like holding hands with ancient merchants who sailed the Silk Road.
+            </div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-badge badge-seasonal">FESTIVAL</span>
+          <div class="insight-body">
+            <div class="insight-title">みあれ祭 Miare Autumn Festival &mdash; October 1</div>
+            <div class="insight-desc">
+              The goddesses are symbolically transported from all three shrines to Hetsu-miya in an elaborate maritime procession. Hundreds of fishing boats surround a central boat carrying the three mikoshi (portable shrines) as priests chant ancient incantations. Local fishermen view this as blessing for the coming season's catch.
+            </div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-badge badge-seasonal">FESTIVAL</span>
+          <div class="insight-body">
+            <div class="insight-title">七夏祭 Tanabata Festival &mdash; August</div>
+            <div class="insight-desc">
+              Since the Kamakura period (600+ years), Munakata has held a Tanabata celebration honoring the meeting of celestial lovers Orihime and Hikoboshi. The shrine's main hall is decorated with bamboo, colored paper, and handwritten wishes. Limited-edition red seals distributed during this period are collector's items.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ■ CARD 4: EAT STAY MORE -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">4</div>
+        <div class="card-title-block">
+          <span class="card-title-en">Eat, Stay &amp; More · 周邊資訊</span>
+          <span class="card-title-jp">周辺の滞在 &mdash; 食・宿・寄り道</span>
+          <span class="card-title-zh">周边信息 · 吃住游</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="nearby-grid">
+          <div class="nearby-item">
+            <span class="nearby-icon">🐟</span>
+            <div class="nearby-cat">Food · 食</div>
+            <div class="nearby-name">Local Seafood (地元の海鮮)</div>
+            <div class="nearby-desc">
+              Munakata's fishing port, Konominato, supplies fresh seafood restaurants throughout the region. Grilled squid, sea urchin rice bowls, and raw fish are caught daily from waters blessed by the goddesses.
+            </div>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-icon">🏛️</span>
+            <div class="nearby-cat">Museum · 展示</div>
+            <div class="nearby-name">Okinoshima Heritage Center</div>
+            <div class="nearby-desc">
+              Dedicated museum explaining the UNESCO World Heritage site. Exhibits explain the ancient maritime trade routes and the significance of Okinoshima's 80,000 artifacts through interactive displays.
+            </div>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-icon">♨️</span>
+            <div class="nearby-cat">Stay · 宿</div>
+            <div class="nearby-name">Munakata Onsen Resorts</div>
+            <div class="nearby-desc">
+              Several ryokan and hotel accommodations in Munakata offer traditional hospitality and hot spring facilities. Many provide views of the Genkai Sea and surrounding islands.
+            </div>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-icon">🚣</span>
+            <div class="nearby-cat">Ferry · 交通</div>
+            <div class="nearby-name">Konominato Fishing Port</div>
+            <div class="nearby-desc">
+              Active fishing village with boats departing for Oshima island. Watch fishermen unload the day's catch and understand the maritime culture that sustains the region for centuries.
+            </div>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-icon">🌲</span>
+            <div class="nearby-cat">Nature · 自然</div>
+            <div class="nearby-name">Shinboku Sacred Forest</div>
+            <div class="nearby-desc">
+              Ancient cryptomeria forest surrounding the shrine grounds. Walking among 1,000-year-old trees invokes the spiritual presence of the goddesses. Peaceful meditation paths throughout.
+            </div>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-icon">🧭</span>
+            <div class="nearby-cat">Next Shrine · 次の一宮</div>
+            <div class="nearby-name">筑前 → 香歒宮へ</div>
+            <div class="nearby-desc">
+              Explore nearby Kashii Shrine (香椎宮) and continue your Ichinomiya pilgrimage across Kyushu's sacred spiritual landscape.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /grid -->
+
+  <!-- SPECIAL SECTION: Three Shrines Across the Sea -->
+  <div class="special-box" style="margin-top:24px;">
+    <div class="special-title">三社を巡る海の聖域 &mdash; The Three Shrines Across the Sea</div>
+    <div class="special-sub">THE SACRED GEOGRAPHY OF MUNAKATA TAISHA</div>
+    <div class="special-grid">
+      <div class="special-item">
+        <span class="item-sym">🏛️</span>
+        <span class="item-name">Hetsu-miya</span>
+        <span class="item-desc">Head shrine on mainland</span>
+      </div>
+      <div class="special-item">
+        <span class="item-sym">⛩️</span>
+        <span class="item-name">Nakatsu-miya</span>
+        <span class="item-desc">Middle shrine on Oshima</span>
+      </div>
+      <div class="special-item">
+        <span class="item-sym">🌊</span>
+        <span class="item-name">Okitsu-miya</span>
+        <span class="item-desc">Holy shrine on Okinoshima</span>
+      </div>
+      <div class="special-item">
+        <span class="item-sym">🚢</span>
+        <span class="item-name">Maritime Silk Road</span>
+        <span class="item-desc">Connected Japan to ancient Asia</span>
+      </div>
+      <div class="special-item">
+        <span class="item-sym">📚</span>
+        <span class="item-name">80,000 Treasures</span>
+        <span class="item-desc">8th-11th century artifacts</span>
+      </div>
+      <div class="special-item">
+        <span class="item-sym">🚫</span>
+        <span class="item-name">Forbidden Island</span>
+        <span class="item-desc">Okinoshima access restricted</span>
+      </div>
+      <div class="special-item">
+        <span class="item-sym">📖</span>
+        <span class="item-name">Pre-Historical Origins</span>
+        <span class="item-desc">Oldest recorded shrine worship</span>
+      </div>
+      <div class="special-item">
+        <span class="item-sym">🌙</span>
+        <span class="item-name">Ancient Ceremonies</span>
+        <span class="item-desc">1,000+ years unbroken tradition</span>
+      </div>
+      <div class="special-item" style="background:rgba(201,168,76,0.12); border-color:var(--gold);">
+        <span class="item-sym" style="color:var(--gold);">🌍</span>
+        <span class="item-name" style="color:var(--gold);">UNESCO 2017</span>
+        <span class="item-desc" style="color:rgba(255,255,255,0.8);">World Heritage Sacred Island</span>
+      </div>
+    </div>
+    <div class="special-desc">
+      Munakata Taisha's genius lies in its three-shrine configuration spanning the terrestrial, oceanic, and celestial realms. Hetsu-miya, the head shrine on the mainland, represents the mortal world where pilgrims gather. Nakatsu-miya on Oshima island (accessible by ferry) marks the transition between land and sea—a liminal sacred space. Okitsu-miya on Okinoshima represents the purely divine realm, off-limits except for priests. Together, they create a spiritual hierarchy reflecting Shinto cosmology. The shrine's connection to the ancient Maritime Silk Road—evidenced by its 80,000 artifacts—demonstrates how Munakata served as Japan's gateway to the wider Buddhist and trading worlds for over 1,000 years. The preservation of Okinoshima as a forbidden, untouched island reflects a Shinto principle rarely seen in modern Japan: some sacred spaces must remain forever closed to human visitation.
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-bar" style="margin-top:24px;">
+    <div>
+      <h3>Ready to visit Munakata Taisha?</h3>
+      <p>Explore the origin shrine of the sea goddesses and discover the maritime heritage of ancient Japan.</p>
+    </div>
+    <div class="cta-links">
+      <a href="https://www.munakata-taisha.or.jp/" target="_blank" class="btn">Official Site &rarr;</a>
+      <a href="ichinomiya-map.html" class="btn secondary">&larr; All Shrines Map</a>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<!-- FOOTER -->
+<footer>
+  &copy; 2026 Japan's Ichinomiya Shrines. Each province's greatest shrine. &mdash; Explore the spiritual heart of Japan.
+</footer>
+
+</body>
+</html>
