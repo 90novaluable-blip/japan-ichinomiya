@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Yahiko Shrine — Ichinomiya of Echigo Province</title>
+<style>
+:root {
+  --red: #9b2335;
+  --gold: #c9a84c;
+  --ink: #1a1a2e;
+  --cream: #fdf6ec;
+  --mist: #f0ebe3;
+  --gray: #6b6b6b;
+  --green: #2e7d32;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Georgia',serif; background:var(--cream); color:var(--ink); line-height:1.75; }
+
+/* ── HEADER ── */
+header {
+  background:var(--ink); color:#fff;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:14px 28px; position:sticky; top:0; z-index:200;
+  box-shadow:0 2px 12px rgba(0,0,0,0.4);
+}
+.logo { display:flex; align-items:baseline; gap:10px; text-decoration:none; }
+.logo .kanji { font-size:1.5rem; color:var(--gold); font-weight:bold; }
+.logo .sub { font-size:0.78rem; color:rgba(255,255,255,0.5); letter-spacing:0.1em; }
+.header-right { display:flex; align-items:center; gap:16px; }
+nav a { color:rgba(255,255,255,0.6); text-decoration:none; font-size:0.78rem; letter-spacing:0.08em; margin-left:20px; }
+nav a:hover { color:var(--gold); }
+.lang-switcher { display:flex; gap:4px; }
+.lang-btn { font-size:0.7rem; padding:2px 8px; border-radius:10px; text-decoration:none; border:1px solid rgba(255,255,255,0.2); color:rgba(255,255,255,0.5); transition:all 0.2s; }
+.lang-btn.active { background:var(--gold); color:var(--ink); border-color:var(--gold); font-weight:bold; }
+
+/* ── HERO ── */
+.hero {
+  position:relative; height:88vh; min-height:520px; overflow:hidden;
+  display:flex; flex-direction:column; align-items:center; justify-content:flex-end;
+  padding-bottom:48px; color:#fff; text-align:center;
+}
+.hero-bg {
+  position:absolute; inset:0;
+  background:
+    linear-gradient(to bottom, rgba(10,5,20,0.3) 0%, rgba(10,5,20,0.1) 40%, rgba(10,5,20,0.75) 100%),
+    linear-gradient(135deg, #1a0a0a 0%, #2a1508 40%, #0a1520 100%);
+}
+.hero-torii { position:absolute; bottom:0; left:50%; transform:translateX(-50%); width:100%; max-width:900px; opacity:0.12; }
+.hero-glow {
+  position:absolute; width:600px; height:600px; border-radius:50%;
+  background:radial-gradient(circle, rgba(201,168,76,0.15) 0%, transparent 70%);
+  top:50%; left:50%; transform:translate(-50%,-50%);
+}
+.particles { position:absolute; inset:0; overflow:hidden; }
+.particle { position:absolute; width:2px; height:2px; background:rgba(201,168,76,0.6); border-radius:50%; animation:float linear infinite; }
+@keyframes float { 0%{transform:translateY(100vh) translateX(0);opacity:0;} 10%{opacity:1;} 90%{opacity:1;} 100%{transform:translateY(-20px) translateX(30px);opacity:0;} }
+.hero-content { position:relative; z-index:1; padding:0 20px; }
+.hero-badge { display:inline-block; border:1px solid var(--gold); color:var(--gold); font-size:0.7rem; letter-spacing:0.25em; padding:4px 16px; border-radius:20px; margin-bottom:16px; text-transform:uppercase; }
+.hero h1 { font-size:clamp(2rem,6vw,4.5rem); font-weight:normal; line-height:1.1; margin-bottom:8px; }
+.hero h1 .jp { display:block; font-size:clamp(2.5rem,8vw,5.5rem); color:var(--gold); }
+.hero-tagline { font-size:clamp(0.9rem,2vw,1.1rem); color:rgba(255,255,255,0.75); max-width:560px; margin:16px auto 0; font-style:italic; }
+.hero-scroll { margin-top:32px; color:rgba(255,255,255,0.3); font-size:0.72rem; letter-spacing:0.2em; animation:pulse 2.5s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{opacity:.3} 50%{opacity:.8} }
+
+/* ── QUICK FACTS BAR ── */
+.quick-bar { background:var(--ink); color:#fff; display:flex; justify-content:center; flex-wrap:wrap; gap:0; }
+.quick-item { padding:14px 28px; display:flex; align-items:center; gap:8px; border-right:1px solid rgba(255,255,255,0.1); font-size:0.8rem; }
+.quick-item:last-child { border-right:none; }
+.quick-icon { font-size:1rem; }
+.quick-label { color:rgba(255,255,255,0.45); font-size:0.65rem; display:block; }
+.quick-value { color:#fff; font-size:0.85rem; }
+
+/* ── MAIN GRID ── */
+.main { max-width:1100px; margin:0 auto; padding:48px 20px 80px; }
+.grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+.grid-full { grid-column:1/-1; }
+
+/* ── CARDS ── */
+.card { background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 2px 16px rgba(0,0,0,0.07); border:1px solid rgba(0,0,0,0.06); }
+.card-header { padding:18px 24px 14px; border-bottom:1px solid #f0e8d8; display:flex; align-items:center; gap:12px; }
+.card-num { width:28px; height:28px; background:var(--red); color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.75rem; font-weight:bold; flex-shrink:0; }
+.card-title-en { font-size:0.65rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold); display:block; }
+.card-title-jp { font-size:1.05rem; font-weight:bold; display:block; line-height:1.2; }
+.card-title-zh { font-size:0.7rem; color:var(--gray); display:block; }
+.card-body { padding:20px 24px 24px; }
+
+/* Essence card */
+.essence-highlight { background:var(--mist); border-radius:8px; padding:16px 20px; margin-bottom:16px; border-left:3px solid var(--gold); }
+.essence-label { font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:6px; }
+.essence-text { font-size:0.95rem; color:#333; }
+.essence-text strong { color:var(--red); }
+
+/* Video embed */
+.video-wrapper { position:relative; border-radius:8px; overflow:hidden; background:var(--ink); margin-top:16px; }
+.video-overlay { position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%); display:flex; align-items:center; justify-content:center; }
+.play-btn { width:56px; height:56px; border-radius:50%; background:rgba(201,168,76,0.9); display:flex; align-items:center; justify-content:center; text-decoration:none; transition:transform 0.2s, background 0.2s; font-size:1.3rem; color:var(--ink); }
+.play-btn:hover { transform:scale(1.1); background:var(--gold); }
+.video-caption { position:absolute; bottom:0; left:0; right:0; padding:10px 14px; color:rgba(255,255,255,0.8); font-size:0.75rem; }
+
+/* Map card */
+.map-wrapper { border-radius:8px; overflow:hidden; margin-bottom:16px; }
+.map-wrapper iframe { width:100%; height:240px; border:none; display:block; }
+.map-link { display:flex; align-items:center; gap:8px; background:var(--ink); color:var(--gold); text-decoration:none; padding:10px 16px; border-radius:6px; font-size:0.82rem; letter-spacing:0.08em; margin-bottom:16px; transition:background 0.2s; }
+.map-link:hover { background:#2a2a3e; }
+.access-list { list-style:none; }
+.access-list li { display:flex; gap:10px; align-items:flex-start; padding:8px 0; border-bottom:1px solid #f0ebe3; font-size:0.88rem; }
+.access-list li:last-child { border-bottom:none; }
+.access-icon { flex-shrink:0; font-size:1rem; }
+.access-main { display:block; color:var(--ink); }
+.access-sub { display:block; font-size:0.75rem; color:var(--gray); }
+
+/* Deep Insight card */
+.insight-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid #f0ebe3; }
+.insight-item:last-child { border-bottom:none; }
+.insight-badge { flex-shrink:0; padding:2px 8px; border-radius:4px; font-size:0.65rem; font-weight:bold; letter-spacing:0.05em; height:fit-content; margin-top:2px; }
+.badge-unique { background:#fff3e0; color:#e65100; }
+.badge-tip { background:#e8f5e9; color:#1b5e20; }
+.badge-info { background:#e8f0fe; color:#1a237e; }
+.badge-seasonal { background:#fce4ec; color:#880e4f; }
+.badge-stamp { background:#fff3e0; color:#e65100; }
+.insight-title { font-size:0.9rem; font-weight:bold; margin-bottom:3px; }
+.insight-desc { font-size:0.83rem; color:var(--gray); }
+
+/* Nearby card */
+.nearby-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; }
+.nearby-item { background:var(--mist); border-radius:8px; padding:14px; }
+.nearby-cat { font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--gray); margin-bottom:4px; }
+.nearby-icon { font-size:1.2rem; margin-bottom:6px; display:block; }
+.nearby-name { font-size:0.88rem; font-weight:bold; margin-bottom:4px; }
+.nearby-desc { font-size:0.78rem; color:var(--gray); }
+
+/* Deity section */
+.deity-card { background:var(--ink); color:#fff; border-radius:12px; padding:32px; display:grid; grid-template-columns:auto 1fr; gap:28px; align-items:start; }
+.deity-symbol { font-size:4rem; line-height:1; }
+.deity-label { font-size:0.65rem; letter-spacing:0.2em; color:var(--gold); text-transform:uppercase; margin-bottom:6px; }
+.deity-name { font-size:1.5rem; font-weight:bold; margin-bottom:4px; }
+.deity-jp { font-size:0.9rem; color:rgba(255,255,255,0.55); margin-bottom:16px; }
+.deity-desc { font-size:0.9rem; color:rgba(255,255,255,0.8); line-height:1.7; margin-bottom:16px; }
+.blessing-tags { display:flex; flex-wrap:wrap; gap:6px; }
+.blessing-tag { background:rgba(201,168,76,0.15); border:1px solid rgba(201,168,76,0.3); color:var(--gold); padding:3px 10px; border-radius:12px; font-size:0.72rem; letter-spacing:0.05em; }
+
+/* Special section */
+.special-box { background:linear-gradient(135deg, #1a1a2e 0%, #2a1010 100%); color:#fff; border-radius:12px; padding:32px; }
+.special-title { color:var(--gold); font-size:1.2rem; margin-bottom:8px; }
+.special-sub { font-size:0.75rem; letter-spacing:0.15em; color:rgba(255,255,255,0.4); margin-bottom:20px; }
+.special-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+.special-item { text-align:center; padding:16px 8px; background:rgba(255,255,255,0.06); border-radius:8px; border:1px solid rgba(201,168,76,0.2); }
+.special-item .item-sym { font-size:1.8rem; display:block; margin-bottom:6px; }
+.special-item .item-name { font-size:0.78rem; color:var(--gold); display:block; margin-bottom:4px; }
+.special-item .item-desc { font-size:0.7rem; color:rgba(255,255,255,0.6); }
+.special-desc { margin-top:20px; font-size:0.88rem; color:rgba(255,255,255,0.75); line-height:1.7; }
+
+/* CTA */
+.cta-bar { background:var(--red); border-radius:12px; padding:28px 32px; display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap; }
+.cta-bar h3 { color:#fff; font-size:1.1rem; font-weight:normal; }
+.cta-bar p { color:rgba(255,255,255,0.75); font-size:0.85rem; margin-top:4px; }
+.cta-links { display:flex; gap:10px; flex-wrap:wrap; }
+.btn { display:inline-block; padding:10px 22px; border:2px solid #fff; color:#fff; text-decoration:none; border-radius:4px; font-size:0.82rem; letter-spacing:0.08em; transition:background 0.2s, color 0.2s; font-family:inherit; cursor:pointer; }
+.btn:hover { background:#fff; color:var(--red); }
+.btn.secondary { border-color:rgba(255,255,255,0.4); color:rgba(255,255,255,0.7); }
+.btn.secondary:hover { background:rgba(255,255,255,0.15); color:#fff; }
+
+/* Breadcrumb */
+.breadcrumb { padding:12px 20px; font-size:0.75rem; color:var(--gray); max-width:1100px; margin:0 auto; }
+.breadcrumb a { color:var(--gray); text-decoration:none; }
+.breadcrumb a:hover { color:var(--red); }
+
+footer { background:var(--ink); color:rgba(255,255,255,0.35); text-align:center; padding:28px; font-size:0.78rem; }
+
+@media(max-width:700px) {
+  .grid { grid-template-columns:1fr; }
+  .special-grid { grid-template-columns:repeat(2,1fr); }
+  .nearby-grid { grid-template-columns:1fr; }
+  .deity-card { grid-template-columns:1fr; }
+  .quick-item { padding:10px 16px; }
+  .cta-bar { flex-direction:column; align-items:flex-start; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a class="logo" href="ichinomiya-map.html">
+    <span class="kanji">一ノ宮</span>
+    <span class="sub">Japan's First Shrines</span>
+  </a>
+  <div class="header-right">
+    <nav>
+      <a href="ichinomiya-intro.html">What is Ichinomiya?</a>
+      <a href="ichinomiya-map.html">&larr; All Shrines</a>
+    </nav>
+    <div class="lang-switcher">
+      <a href="#" class="lang-btn">日本語</a>
+      <a href="#" class="lang-btn active">EN</a>
+      <a href="#" class="lang-btn">中文</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-glow"></div>
+  <!-- Torii silhouette -->
+  <svg class="hero-torii" viewBox="0 0 900 500" xmlns="http://www.w3.org/2000/svg">
+    <rect x="200" y="80" width="500" height="28" fill="white"/>
+    <rect x="240" y="108" width="420" height="16" fill="white"/>
+    <rect x="250" y="108" width="36" height="390" fill="white"/>
+    <rect x="614" y="108" width="36" height="390" fill="white"/>
+    <rect x="258" y="200" width="20" height="30" rx="3" fill="white" opacity="0.5"/>
+    <rect x="622" y="200" width="20" height="30" rx="3" fill="white" opacity="0.5"/>
+  </svg>
+  <!-- Particles -->
+  <div class="particles">
+    <div class="particle" style="left:10%;animation-duration:9s;animation-delay:0s;"></div>
+    <div class="particle" style="left:25%;animation-duration:12s;animation-delay:1.5s;"></div>
+    <div class="particle" style="left:40%;animation-duration:8s;animation-delay:3s;"></div>
+    <div class="particle" style="left:55%;animation-duration:11s;animation-delay:0.5s;"></div>
+    <div class="particle" style="left:70%;animation-duration:10s;animation-delay:2s;"></div>
+    <div class="particle" style="left:85%;animation-duration:13s;animation-delay:4s;"></div>
+    <div class="particle" style="left:95%;animation-duration:7s;animation-delay:1s;"></div>
+    <div class="particle" style="left:5%;animation-duration:14s;animation-delay:5s;"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">越後國一之宮 · Ichinomiya of Echigo Province</div>
+    <h1>
+      <span class="jp">弥彦神社</span>
+      Yahiko Shrine
+    </h1>
+    <p class="hero-tagline">
+      Where mountain divinity meets timeless tradition &mdash;<br>
+      2,400 years of teaching civilization to humankind.
+    </p>
+    <div class="hero-scroll">&darr; &nbsp; explore this shrine</div>
+  </div>
+</div>
+
+<!-- QUICK FACTS BAR -->
+<div class="quick-bar">
+  <div class="quick-item">
+    <span class="quick-icon">📍</span>
+    <div>
+      <span class="quick-label">Location</span>
+      <span class="quick-value">Yahiko Village, Niigata</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">🚃</span>
+    <div>
+      <span class="quick-label">Nearest Station</span>
+      <span class="quick-value">Yahiko Sta. (JR Yahiko Line)</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">🚅</span>
+    <div>
+      <span class="quick-label">From Tokyo</span>
+      <span class="quick-value">~2.5 hrs (Joetsu Shinkansen)</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">🕐</span>
+    <div>
+      <span class="quick-label">Hours</span>
+      <span class="quick-value">Always open grounds (Free)</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">👥</span>
+    <div>
+      <span class="quick-label">Annual Visitors</span>
+      <span class="quick-value">~200,000 (mostly New Year)</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">🏔️</span>
+    <div>
+      <span class="quick-label">Mt. Yahiko Ropeway</span>
+      <span class="quick-value">Summit views of Sea of Japan</span>
+    </div>
+  </div>
+</div>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a href="ichinomiya-map.html">All Shrines</a> &nbsp;&rsaquo;&nbsp;
+  <a href="ichinomiya-map.html?road=Oshu">Oshu Road 陸奥国</a> &nbsp;&rsaquo;&nbsp;
+  Echigo Province &nbsp;&rsaquo;&nbsp; Yahiko Shrine
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+  <!-- Deity row (full width) -->
+  <div class="deity-card grid-full" style="margin-bottom:24px;">
+    <div class="deity-symbol">🌾</div>
+    <div>
+      <div class="deity-label">Enshrined Deity &mdash; Divine Teacher of Civilization</div>
+      <div class="deity-name">Ame no Kagoyama no Mikoto</div>
+      <div class="deity-jp">天香山命（あめのかごやまのみこと）&mdash; 天照大神の孫</div>
+      <div class="deity-desc">
+        Ame no Kagoyama no Mikoto is the divine grandson of Amaterasu, the supreme sun goddess of Japan. Legendary founder-deity of Echigo Province, he is revered as the great teacher who brought agriculture and fishing knowledge to the people of Koshi (ancient Echigo). According to shrine tradition, he ascended Mount Yahiko at the end of his mortal life and was deified by the local people, making Yahiko Shrine one of Japan's most ancient spiritual centers with traditions documented since before written history.
+      </div>
+      <div class="blessing-tags">
+        <span class="blessing-tag">#AgriculturalProsperity</span>
+        <span class="blessing-tag">#FishingBlessing</span>
+        <span class="blessing-tag">#CivilizationBringing</span>
+        <span class="blessing-tag">#MountainProtection</span>
+        <span class="blessing-tag">#HarvestSuccess</span>
+        <span class="blessing-tag">#FamilyWelfare</span>
+        <span class="blessing-tag">#AncestralVeneration</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+
+    <!-- ■ CARD 1: ESSENCE -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">1</div>
+        <div class="card-title-block">
+          <span class="card-title-en">The Essence · 核心価値</span>
+          <span class="card-title-jp">核心的価値 &mdash; なぜここが特別なのか</span>
+          <span class="card-title-zh">核心价值 · 为何与众不同</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="essence-highlight">
+          <div class="essence-label">由緒 · Why It Matters</div>
+          <div class="essence-text">
+            <strong>Niigata's greatest shrine with 2,400 years of documented pilgrimage.</strong><br>
+            Yahiko Shrine is so ancient that its history extends into the legendary era before written Japanese records. Featured in the Manyoshu &mdash; Japan's oldest poetry anthology from the 8th century &mdash; Yahiko Shrine is specifically mentioned as a sacred destination that inspired classical poets. The shrine's connection to the deity Ame no Kagoyama no Mikoto makes it unique among Ichinomiya as a place of both spiritual pilgrimage and historical literary significance.
+          </div>
+        </div>
+        <div class="essence-highlight" style="border-color:var(--red);">
+          <div class="essence-label" style="color:var(--red);">越後信仰 · Echigo's Spiritual Heart</div>
+          <div class="essence-text" style="font-size:0.88rem; color:#444;">
+            Yahiko Shrine stands as the foremost spiritual institution of Niigata Prefecture and the greater Echigo region. The shrine grounds remain open 24 hours a year, attracting over 200,000 visitors annually, particularly during New Year celebrations when crowds of pilgrims climb the cedar-lined path to seek blessings for a prosperous year. The shrine's role as teacher of civilization &mdash; bringing agriculture and fishing knowledge to ancient peoples &mdash; makes it unique in its mission to bless human endeavor and livelihood.
+          </div>
+        </div>
+        <!-- Video -->
+        <div class="video-wrapper">
+          <svg style="width:100%;aspect-ratio:16/9;display:block;" viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#1a0a05"/>
+                <stop offset="50%" stop-color="#2a1508"/>
+                <stop offset="100%" stop-color="#1a1a2e"/>
+              </linearGradient>
+              <linearGradient id="glow" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#228b22" stop-opacity="0.3"/>
+                <stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <rect width="800" height="450" fill="url(#sky)"/>
+            <!-- Mountain silhouette -->
+            <polygon points="150,280 400,100 650,280" fill="#1a2a1a" opacity="0.85"/>
+            <!-- Forest green -->
+            <ellipse cx="400" cy="200" rx="220" ry="120" fill="#2a4a2a" opacity="0.6"/>
+            <!-- Shrine building -->
+            <rect x="320" y="260" width="160" height="12" fill="#c9a84c" opacity="0.7"/>
+            <rect x="330" y="245" width="140" height="10" fill="#c9a84c" opacity="0.5"/>
+            <rect x="335" y="272" width="14" height="80" fill="#c9a84c" opacity="0.7"/>
+            <rect x="451" y="272" width="14" height="80" fill="#c9a84c" opacity="0.7"/>
+            <!-- Roof -->
+            <rect x="340" y="290" width="120" height="8" fill="#c9a84c" opacity="0.5"/>
+            <!-- Torii gate on path -->
+            <rect x="360" y="320" width="80" height="4" fill="#c9a84c" opacity="0.4"/>
+            <rect x="375" y="325" width="8" height="40" fill="#c9a84c" opacity="0.4"/>
+            <rect x="417" y="325" width="8" height="40" fill="#c9a84c" opacity="0.4"/>
+            <!-- Ground -->
+            <rect x="0" y="350" width="800" height="100" fill="#1a1008" opacity="0.9"/>
+            <!-- Path -->
+            <polygon points="370,352 430,352 460,450 340,450" fill="#c9a84c" opacity="0.1"/>
+            <!-- Stars -->
+            <circle cx="100" cy="40" r="1.5" fill="white" opacity="0.5"/>
+            <circle cx="250" cy="25" r="1" fill="white" opacity="0.3"/>
+            <circle cx="600" cy="50" r="1.5" fill="white" opacity="0.4"/>
+            <circle cx="700" cy="30" r="1" fill="white" opacity="0.5"/>
+            <!-- Text -->
+            <text x="400" y="420" text-anchor="middle" font-size="12" fill="rgba(255,255,255,0.5)" font-family="Georgia">弥彦神社 · Yahiko Shrine</text>
+          </svg>
+          <div class="video-overlay">
+            <a class="play-btn" href="https://www.youtube.com/results?search_query=弥彦神社+参拝+新潟" target="_blank" title="Watch on YouTube">&#9654;</a>
+          </div>
+          <div class="video-caption">&#9654; 弥彦神社の杉並木 &mdash; Cedar-lined approach · 30 sec</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ■ CARD 2: ACCESS -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">2</div>
+        <div class="card-title-block">
+          <span class="card-title-en">Plan Your Visit · 交通指南</span>
+          <span class="card-title-jp">旅の地図 &mdash; アクセス情報</span>
+          <span class="card-title-zh">交通指南 · 如何前往</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <!-- Google Map embed -->
+        <div class="map-wrapper">
+          <iframe src="https://maps.google.com/maps?q=%E5%BC%A5%E5%BD%A6%E7%A5%9E%E7%A4%BE+%E6%96%B0%E6%BD%9F%E7%9C%8C&output=embed&hl=en&z=14" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Yahiko Shrine map"></iframe>
+        </div>
+        <a class="map-link" href="https://maps.google.com/maps?q=弥彦神社" target="_blank">
+          📍 Open in Google Maps &mdash; 新潟県西蒲原郡弥彦村弥彦 大字弥彦2954
+        </a>
+        <ul class="access-list">
+          <li>
+            <span class="access-icon">🚃</span>
+            <span class="access-text">
+              <span class="access-main">JR Yahiko Line &mdash; <strong>Yahiko Station</strong> · 15 min walk</span>
+              <span class="access-sub">弥彦駉 · Easy pedestrian path with signage · ~850 yen from central Niigata</span>
+            </span>
+          </li>
+          <li>
+            <span class="access-icon">🚄</span>
+            <span class="access-text">
+              <span class="access-main">From <strong>Tsubame-Sanjo Station</strong> &mdash; approx. 20 min</span>
+              <span class="access-sub">JR Joetsu Line connection · Gateway to regional exploring</span>
+            </span>
+          </li>
+          <li>
+            <span class="access-icon">🚅</span>
+            <span class="access-text">
+              <span class="access-main">From <strong>Tokyo</strong> &mdash; approx. 2.5 hrs</span>
+              <span class="access-sub">Joetsu Shinkansen to Tsubame-Sanjo → local train to Yahiko</span>
+            </span>
+          </li>
+          <li>
+            <span class="access-icon">🚗</span>
+            <span class="access-text">
+              <span class="access-main">By car &mdash; Sanjo IC (Kanetsu Expressway) · 25 min</span>
+              <span class="access-sub">Niigata Airport → ~60 min by rental car</span>
+            </span>
+          </li>
+          <li>
+            <span class="access-icon">🎡</span>
+            <span class="access-text">
+              <span class="access-main">Mt. Yahiko Ropeway &mdash; 5 min gondola ride to summit</span>
+              <span class="access-sub">850 yen round trip · Panoramic views of Niigata Plain and Sea of Japan</span>
+            </span>
+          </li>
+          <li>
+            <span class="access-icon">⏰</span>
+            <span class="access-text">
+              <span class="access-main">Grounds always open · Free admission</span>
+              <span class="access-sub">御朱印受付 Goshuin office: dawn to dusk · &yen;500</span>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ■ CARD 3: DEEP INSIGHT -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">3</div>
+        <div class="card-title-block">
+          <span class="card-title-en">Deep Insight · 深度探索</span>
+          <span class="card-title-jp">リピーターのこだわり &mdash; 知る人ぞ知る</span>
+          <span class="card-title-zh">深度探索 · 行家的坚持</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="insight-item">
+          <span class="insight-badge badge-unique">UNIQUE</span>
+          <div class="insight-body">
+            <div class="insight-title">千年杉並木 &mdash; Thousand-Year Cedar Path</div>
+            <div class="insight-desc">
+              The approach to Yahiko Shrine features one of Japan's most atmospheric cedar-lined paths. The massive coniferous trees, some centuries old, create a tunnel of green light that has inspired pilgrims and poets for over 2,000 years. Walking this path is itself a meditative experience, where the scent of ancient cedar and cool forest air prepare the soul for spiritual encounter.
+            </div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-badge badge-unique">UNIQUE</span>
+          <div class="insight-body">
+            <div class="insight-title">万葉集に記載 &mdash; Featured in Japan's Oldest Poetry</div>
+            <div class="insight-desc">
+              Yahiko Shrine is specifically mentioned in the Manyoshu (Collection of Ten Thousand Leaves), Japan's oldest surviving poetry anthology from the 8th century. Classical poets came to this shrine seeking inspiration, and their verses about Yahiko have survived for over 1,200 years. This makes Yahiko one of the few shrines with verified literary historical records predating the medieval period.
+            </div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-badge badge-tip">TIP</span>
+          <div class="insight-body">
+            <div class="insight-title">弥彦ロープウェイ &mdash; Mountain Summit Ropeway Experience</div>
+            <div class="insight-desc">
+              The Yahiko Ropeway ascends directly from the shrine area to the mountain's 634-meter summit in 5 minutes. At the top, a panoramic vista unfolds: the Niigata Plain spreads beneath you, and on clear days, the Sea of Japan glimmers at the horizon. This combination of spiritual sanctuary and natural beauty makes Yahiko unique among shrine experiences.
+            </div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-badge badge-seasonal">FESTIVAL</span>
+          <div class="insight-body">
+            <div class="insight-title">正月大祭 &mdash; New Year Grand Festival</div>
+            <div class="insight-desc">
+              Every January 1st, Yahiko Shrine celebrates with Japan's most festive Shinto ceremony, drawing over 200,000 pilgrims in a single day. The massive crowds, lantern-lit paths, and traditional music create an unforgettable New Year's experience that differs from urban shrine ceremonies through its maintained rustic charm and mountain sanctuary atmosphere.
+            </div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-badge badge-seasonal">FESTIVAL</span>
+          <div class="insight-body">
+            <div class="insight-title">菊花祭 &mdash; Chrysanthemum Festival (November)</div>
+            <div class="insight-desc">
+              The autumn chrysanthemum festival transforms the shrine grounds into a horticultural display featuring hundreds of chrysanthemum varieties arranged in traditional patterns. Combined with autumn foliage, the festival creates a spectacular visual experience that highlights Japanese aesthetic principles of seasonal beauty and botanical reverence.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ■ CARD 4: EAT STAY MORE -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">4</div>
+        <div class="card-title-block">
+          <span class="card-title-en">Eat, Stay &amp; More · 周邆�∈</span>
+          <span class="card-title-jp">周辺の�ӕ�� &mdash; 食・宿・寄り道</span>
+          <span class="card-title-zh">周边信息 · 吃住游</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="nearby-grid">
+          <div class="nearby-item">
+            <span class="nearby-icon">🍶</span>
+            <div class="nearby-cat">Food · 食</div>
+            <div class="nearby-name">Niigata Sake Brewery Tours</div>
+            <div class="nearby-desc">
+              Yahiko sits in Japan's premier sake region. Tsubame-Sanjo nearby hosts multiple breweries with tasting tours. Niigata sake is world-renowned for its clean, delicate flavor profile &mdash; the perfect pilgrimage souvenir.
+            </div>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-icon">🍜</span>
+            <div class="nearby-cat">Local · 食🍜</div>
+            <div class="nearby-name">Yahiko Za�� Soba</div>
+            <div class="nearby-desc">
+              Cold buckwheat noodles served on a woven bamboo tray, a specialty of the Yahiko area. Light, refreshing, and traditionally eaten after shrine visits. Several traditional restaurants near the shrine approach.
+            </div>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-icon">♨️</span>
+            <div class="nearby-cat">Stay · 宿</div>
+            <div class="nearby-name">Yahiko Onsen Resort</div>
+            <div class="nearby-desc">
+              Traditional hot spring village at the foot of Mount Yahiko with ryokan accommodations, sulfurous baths, and mountain views. Perfect for combining shrine pilgrimage with relaxation.
+            </div>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-icon">🌊</span>
+            <div class="nearby-cat">Nature · ���-��]���]��\��H��X\��K[�[YH���XHو�\[���\��]���]��\��H��X\��KY\�ȏ���ZY�]I���[X]X���\�[�H\��Z[�]\�]�^K��X\�YH�[Y�\��\�[��\��ܜ�[��XX��ۜ�ٙ�\�H��\]H�۝�\��[�[�Z[��\�]X[]H[�\�H�ܝ�[H�YH��\��^\˂��]����]���]��\��H��X\��KZ][H����[��\��H��X\��KZX�ۈ��'�*��[���]��\��H��X\��KX�]��ܘY�0��9m�z"��]���]��\��H��X\��K[�[YH���X�[YKT�[���Y][�ܚ��]���]��\��H��X\��KY\�ȏ��H�X�[YKT�[����Y�[ۈ\��\[����[ZY\�Y][�ܚ�[���[�\���X�[���[�H�]\�KX�]�\�K[�X�ܘ]]�HY][�ܚ��܈�[�\�Y\ˈ^�[[��܈�[�[��[�ܘY�Y��[�Hٙ�\�[��][\˂��]����]���]��\��H��X\��KZ][H����[��\��H��X\��KZX�ۈ����{�#���[���]��\��H��X\��KX�]���^��[�H0��9�(x�k�. 9k���]���]��\��H��X\��K[�[YH��o)yoi�8���9oc9oi��g��/��]���]��\��H��X\��KY\�ȏ��YZH��[�H
+]�H�ݚ[��HX�[��Z^XJH[�X[XY�]H\�\��[X][H��H�\���H�\��ۙHو�\[���[���XܙY[�[�Z[���[�\˂��]����]����]����]����]�����]��KKH�ܚYKO���KKH�P�PS�P�Sӎ�[�[�Z[�وH���KO��]��\��H��X�X[X����[OH�X\��[�]���ȏ��]��\��H��X�X[]]H��o)yoi��k�i)�g,	�Y\��[�[�Z[�وH����]���]��\��H��X�X[\�X���H�PԑQ�S�ԐTHшP�Q���ՒS��O�]���]��\��H��X�X[YܚY���]��\��H��X�X[Z][H����[��\��H�][K\�[H����{�#���[����[��\��H�][K[�[YH��XZZ����[�HXZ[�[��[����[��\��H�][KY\�ȏ��[X\�H�[��X\�H][�[�Z[������[����]���]��\��H��X�X[Z][H����[��\��H�][K\�[H��'��;�#���[����[��\��H�][K[�[YH��]�XZZ����[����[��\��H�][KY\�ȏ���H�XܙY[�[�Z[�0����]�^HX��\����[����]���]��\��H��X�X[Z][H����[��\��H�][K\�[H��'�O��[����[��\��H�][K[�[YH���[[Z]��]�^O��[����[��\��H�][KY\�ȏ�K[Z[�]H��[�X�\��[�0��
+LY[���[����]���]��\��H��X�X[Z][H����[��\��H�][K\�[H��'�,���[����[��\��H�][K[�[YH��[��Y[��Y\��ܙ\���[����[��\��H�][KY\�ȏ��\�[�^YX\�[��YH[��[\��X���[����]���]��\��H��X�X[Z][H����[��\��H�][K\�[H��'����[����[��\��H�][K[�[YH��X[�[��HY[�[ۏ��[����[��\��H�][KY\�ȏ��\[����\��]�H[����H�X�ܙ���[����]���]��\��H��X�X[Z][H����[��\��H�][K\�[H��'�/���[����[��\��H�][K[�[YH��[YH���Y��X[XHZ]O��[����[��\��H�][KY\�ȏ�XX�\�وYܚX�[\�H	�[\��\�[����[����]���]��\��H��X�X[Z][H����[��\��H�][K\�[H��'㡏��[����[��\��H�][K[�[YH���]�YX\��[X��][ۏ��[����[��\��H�][KY\�ȏ��[ܚ[\�0��XZ�܈�][ۘ[�\�]�[��[����]���]��\��H��X�X[Z][H����[��\��H�][K\�[H��'�.��[����[��\��H�][K[�[YH����\�[�[][H�\�]�[��[����[��\��H�][KY\�ȏ�]][[�ܝX�[\�[\�^H0���ݙ[X�\���[����]���]��\��H��X�X[Z][H��[OH��X��ܛ�[���ؘJ�KM�
+͋�L�N��ܙ\�X��܎��\�KY��
+Nȏ���[��\��H�][K\�[H��[OH���܎��\�KY��
+Nȏ��)���[����[��\��H�][K[�[YH��[OH���܎��\�KY��
+Nȏ�X�Y����X\���[����[��\��H�][KY\�Ȉ�[OH���܎��ؘJ�MK�MK�MK�
+Nȏ��ZY�]I���\�[YH��[�H	�[\��[\�[[�X\����[����]����]���]��\��H��X�X[Y\�ȏ��XZZ����[�H�\�\�[��H�\�]X[[��[\�[�[�\�وX�Y���ݚ[��H
+[�\���ZY�]JK�H��[�I��Z]K[YH���Y��X[XH��ZZ���\�[�\]YH[��\[�\�H^]���H\�H]�[�HXX�\������Y��]�[^�][ۉ���[�[Y[�[���	�Y\��YܚX�[\�K�\�[��[�ܘY�ۛ��Y�H	�Y\���H[��Y[�[�\ˈ[�Z�HX[�H��[�\����\�Yۈ��X�[ۈ܈���\�]H[ۙKXZZ����[�H[X��Y\�H�ۘ�\و]�[�H[���X�[ۈ[�[X[�[�X]�܋�H[�[�Z[��][��[��Y[��Y\��ܙ\���[Y[�Y]\�\�H�YۚY�X�[��H[�HX[�[��K[��۝[�[�\��
+^YX\��Y][ۈو[ܚ[XY�HXZ�HXZZ��ۙHو�\[���[��\�ܚX�[H�YۚY�X�[��XܙY�]\˂��]����]����KKH�HKO��]��\��H��KX�\���[OH�X\��[�]���ȏ��]���ϔ�XYH��\�]XZZ����[�O��ς��[�[�\�[ܚ[XY�K^ܙH�ZY�]I���Z�H��[��K[�\��ݙ\�[�[�Z[��Y][ۜˏ����]���]��\��H��K[[��ȏ��H�Y�H�΋����˙K^XZZ�˘��KȈ\��]H�؛[�Ȉ�\��H�����ٙ�X�X[�X��]H	��\����O��H�Y�H�X�[��Z^XK[X\�[��\��H����X�ۙ\�H���\���[��[�\�X\�O���]����]�����]��KKH�XZ[�KO������\����. 8��k��X�[��Z^XH	����ɛZY�ɛ����XZZ����[�H	�ZY��:-��o�9g"�. 9.b�k��9o)yoi��g��/�����[OH�X\��[�]���ȏ����\��\΂�H�Y�H�΋����˙K^XZZ�˘��KȈ\��]H�؛[�Ȉ�[OH���܎��ؘJ�MK�MK�MK�
+Nȏ�ٙ�X�X[��[�O�O�	�ZY�H�Y�H�΋��[���Z�\YXK�ܙ���Z�K�XZZ�����[�H�\��]H�؛[�Ȉ�[OH���܎��ؘJ�MK�MK�MK�
+Nȏ��Z�\YXO�O�	�ZY�H�Y�H�΋����˚�[�ZKZ�\[����K�[�[�^XZZ��Z�[��K[�ZY�]H�\��]H�؛[�Ȉ�[OH���܎��ؘJ�MK�MK�MK�
+Nȏ��[�ZH�\[��O�����ٛ��\����؛�O���[�
