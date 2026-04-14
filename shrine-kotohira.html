@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kotohira-gu (金刀比羅宮) — Sanuki Ichinomiya | Japan Ichinomiya Shrine Guide</title>
+<meta name="description" content="Discover Kotohira-gu (Kompira-san), Sanuki Province's Ichinomiya shrine in Kagawa. Climb 1,368 sacred stone steps to the guardian deity of the sea.">
+<style>
+:root {
+  --red: #9b2335;
+  --gold: #c9a84c;
+  --ink: #1a1a2e;
+  --cream: #fdf6ec;
+  --mist: #f0ebe3;
+  --gray: #6b6b6b;
+  --green: #2e7d32;
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: Georgia, 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+  background: var(--cream);
+  color: var(--ink);
+  line-height: 1.8;
+  overflow-x: hidden;
+}
+
+/* ── Header ── */
+header {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(26,26,46,.97);
+  backdrop-filter: blur(8px);
+  padding: .6rem 1.5rem;
+  display: flex; justify-content: space-between; align-items: center;
+}
+header nav a {
+  color: var(--cream); text-decoration: none; margin: 0 .8rem;
+  font-size: .85rem; opacity: .8; transition: opacity .3s;
+}
+header nav a:hover { opacity: 1; }
+.lang-switch { display: flex; gap: .3rem; }
+.lang-btn {
+  background: transparent; border: 1px solid rgba(255,255,255,.3);
+  color: var(--cream); padding: .25rem .6rem; border-radius: 3px;
+  font-size: .75rem; cursor: pointer; transition: all .3s;
+}
+.lang-btn.active, .lang-btn:hover {
+  background: var(--gold); border-color: var(--gold); color: var(--ink);
+}
+
+/* ── Hero ── */
+.hero {
+  position: relative;
+  min-height: 85vh;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  text-align: center;
+  background: linear-gradient(160deg, #1a1a2e 0%, #2d1b3d 30%, #1a3a2e 60%, #1a1a2e 100%);
+  overflow: hidden;
+  padding: 2rem;
+}
+.hero::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at 50% 120%, rgba(155,35,53,.15) 0%, transparent 60%),
+              radial-gradient(ellipse at 20% 20%, rgba(201,168,76,.08) 0%, transparent 50%);
+}
+.hero-badge {
+  position: relative; z-index: 2;
+  display: inline-block;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  padding: .3rem 1.2rem;
+  font-size: .8rem;
+  letter-spacing: .15em;
+  margin-bottom: 1.5rem;
+}
+.hero h1 {
+  position: relative; z-index: 2;
+  color: var(--cream);
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-weight: 400;
+  line-height: 1.3;
+  margin-bottom: 1rem;
+}
+.hero h1 .jp {
+  display: block;
+  font-size: .45em;
+  color: var(--gold);
+  margin-top: .3rem;
+  letter-spacing: .1em;
+}
+.hero-tagline {
+  position: relative; z-index: 2;
+  color: rgba(253,246,236,.7);
+  font-size: 1.1rem;
+  font-style: italic;
+  max-width: 500px;
+}
+
+/* SVG torii */
+.torii-silhouette {
+  position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+  opacity: .06; z-index: 1;
+}
+
+/* Particles */
+.particle {
+  position: absolute;
+  width: 4px; height: 4px;
+  background: var(--gold);
+  border-radius: 50%;
+  opacity: 0;
+  animation: floatUp 6s ease-in-out infinite;
+}
+@keyframes floatUp {
+  0% { opacity: 0; transform: translateY(0) scale(1); }
+  20% { opacity: .6; }
+  80% { opacity: .3; }
+  100% { opacity: 0; transform: translateY(-120px) scale(.3); }
+}
+
+/* ── Quick Bar ── */
+.quick-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1px;
+  background: var(--ink);
+  max-width: 1100px;
+  margin: -2rem auto 0;
+  position: relative; z-index: 10;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0,0,0,.15);
+}
+.qb-item {
+  background: white;
+  padding: 1.2rem 1rem;
+  text-align: center;
+}
+.qb-icon { font-size: 1.3rem; margin-bottom: .3rem; }
+.qb-label { font-size: .7rem; color: var(--gray); text-transform: uppercase; letter-spacing: .08em; }
+.qb-value { font-size: .95rem; color: var(--ink); margin-top: .2rem; font-weight: 600; }
+
+/* ── Cards ── */
+.card {
+  max-width: 900px;
+  margin: 3rem auto;
+  background: white;
+  border-radius: 12px;
+  padding: 2.5rem;
+  box-shadow: 0 2px 20px rgba(0,0,0,.06);
+}
+.card-label {
+  display: inline-block;
+  font-size: .7rem;
+  text-transform: uppercase;
+  letter-spacing: .15em;
+  color: var(--red);
+  border: 1px solid var(--red);
+  padding: .2rem .8rem;
+  border-radius: 3px;
+  margin-bottom: 1rem;
+}
+.card h2 {
+  font-size: 1.6rem;
+  color: var(--ink);
+  margin-bottom: 1rem;
+  font-weight: 400;
+}
+.card h3 {
+  font-size: 1.15rem;
+  color: var(--ink);
+  margin: 1.5rem 0 .8rem;
+  font-weight: 600;
+}
+
+/* ── Deity Card ── */
+.deity-card {
+  max-width: 900px;
+  margin: 4rem auto 3rem;
+  background: linear-gradient(135deg, #1a1a2e 0%, #2d1b3d 100%);
+  border-radius: 12px;
+  padding: 2.5rem;
+  text-align: center;
+  color: var(--cream);
+  box-shadow: 0 4px 25px rgba(0,0,0,.2);
+}
+.deity-name {
+  font-size: 1.8rem;
+  color: var(--gold);
+  font-weight: 400;
+  margin-bottom: .2rem;
+}
+.deity-jp {
+  font-size: 1rem;
+  color: rgba(253,246,236,.5);
+  margin-bottom: 1.2rem;
+  letter-spacing: .1em;
+}
+.deity-desc {
+  font-size: .95rem;
+  line-height: 1.9;
+  color: rgba(253,246,236,.8);
+  max-width: 650px;
+  margin: 0 auto 1.5rem;
+}
+.blessing-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .5rem;
+}
+.blessing-tag {
+  background: rgba(201,168,76,.15);
+  color: var(--gold);
+  padding: .3rem .8rem;
+  border-radius: 20px;
+  font-size: .78rem;
+}
+
+/* ── Essence ── */
+.essence-highlight {
+  border-left: 3px solid var(--gold);
+  padding: 1rem 1.5rem;
+  margin: 1.2rem 0;
+  font-size: 1.05rem;
+  color: var(--ink);
+  background: rgba(201,168,76,.05);
+}
+.essence-story {
+  background: var(--mist);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1.2rem 0;
+  font-size: .92rem;
+  color: #444;
+}
+
+/* Video wrapper */
+.video-wrapper {
+  margin: 1.5rem 0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--ink);
+  position: relative;
+}
+.video-wrapper a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 180px;
+  text-decoration: none;
+  color: var(--cream);
+  font-size: .9rem;
+  transition: opacity .3s;
+}
+.video-wrapper a:hover { opacity: .8; }
+.play-icon {
+  width: 50px; height: 50px;
+  border: 2px solid var(--gold);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin-right: 1rem;
+}
+
+/* ── Access ── */
+.map-container {
+  margin: 1.2rem 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #ddd;
+}
+.map-container iframe {
+  width: 100%; height: 350px; border: 0;
+}
+.access-list { list-style: none; margin: 1rem 0; }
+.access-list li {
+  padding: .7rem 0;
+  border-bottom: 1px solid var(--mist);
+  font-size: .92rem;
+  display: flex; align-items: flex-start; gap: .6rem;
+}
+.access-list li:last-child { border-bottom: none; }
+.access-emoji { font-size: 1.1rem; flex-shrink: 0; }
+
+/* ── Deep Insight ── */
+.insight-item {
+  margin: 1.2rem 0;
+  padding: 1.2rem;
+  background: var(--mist);
+  border-radius: 8px;
+  position: relative;
+}
+.insight-badge {
+  display: inline-block;
+  padding: .15rem .6rem;
+  border-radius: 3px;
+  font-size: .7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  margin-bottom: .5rem;
+}
+.badge-tip { background: rgba(46,125,50,.12); color: var(--green); }
+.badge-unique { background: rgba(201,168,76,.15); color: #b8941f; }
+.badge-info { background: rgba(33,100,180,.1); color: #2164b4; }
+.badge-seasonal { background: rgba(155,35,53,.1); color: var(--red); }
+.insight-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: .4rem;
+}
+.insight-text {
+  font-size: .9rem;
+  color: #555;
+  line-height: 1.8;
+}
+
+/* ── Eat / Stay / More ── */
+.esm-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.2rem;
+}
+.esm-item {
+  background: var(--mist);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+.esm-icon { font-size: 1.5rem; margin-bottom: .5rem; }
+.esm-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: .5rem;
+  color: var(--ink);
+}
+.esm-desc {
+  font-size: .88rem;
+  color: #555;
+  line-height: 1.7;
+}
+
+/* ── Special Section ── */
+.special-section {
+  background: linear-gradient(135deg, #1a1a2e 0%, #0d2137 50%, #1a2a1a 100%);
+  padding: 4rem 2rem;
+  margin: 3rem 0;
+  color: var(--cream);
+  text-align: center;
+}
+.special-section h2 {
+  font-size: 1.8rem;
+  color: var(--gold);
+  margin-bottom: .5rem;
+  font-weight: 400;
+}
+.special-section .subtitle {
+  color: rgba(253,246,236,.5);
+  font-size: .9rem;
+  margin-bottom: 2.5rem;
+}
+.steps-visual {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.step-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  min-width: 200px;
+}
+.step-bar {
+  width: 80px;
+  border-radius: 6px 6px 0 0;
+  transition: height .3s;
+}
+.step-bar-1 { height: 120px; background: linear-gradient(to top, var(--gold), #d4b85c); }
+.step-bar-2 { height: 200px; background: linear-gradient(to top, var(--red), #c4384e); }
+.step-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--gold);
+  margin-top: .8rem;
+}
+.step-label {
+  font-size: .85rem;
+  color: rgba(253,246,236,.7);
+  margin-top: .3rem;
+}
+.step-detail {
+  font-size: .75rem;
+  color: rgba(253,246,236,.4);
+  margin-top: .2rem;
+}
+.steps-note {
+  max-width: 600px;
+  margin: 2rem auto 0;
+  font-size: .88rem;
+  color: rgba(253,246,236,.6);
+  line-height: 1.8;
+}
+
+/* ── CTA Bar ── */
+.cta-bar {
+  max-width: 900px;
+  margin: 0 auto 4rem;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  padding: 0 1rem;
+}
+.cta-bar a {
+  display: inline-flex;
+  align-items: center;
+  padding: .8rem 2rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: .9rem;
+  transition: all .3s;
+}
+.cta-primary {
+  background: var(--red);
+  color: white;
+}
+.cta-primary:hover { background: #b82a40; }
+.cta-secondary {
+  background: transparent;
+  border: 1px solid var(--ink);
+  color: var(--ink);
+}
+.cta-secondary:hover { background: var(--ink); color: var(--cream); }
+
+/* ── Footer ── */
+footer {
+  background: var(--ink);
+  color: rgba(253,246,236,.4);
+  text-align: center;
+  padding: 2rem;
+  font-size: .8rem;
+}
+footer a { color: var(--gold); text-decoration: none; }
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .card { margin: 2rem 1rem; padding: 1.5rem; }
+  .deity-card { margin: 2rem 1rem; padding: 1.5rem; }
+  .quick-bar { margin: -1rem 1rem 0; }
+  header nav a { font-size: .75rem; margin: 0 .4rem; }
+  .steps-visual { flex-direction: column; align-items: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header>
+  <nav>
+    <a href="ichinomiya-intro.html">What is Ichinomiya?</a>
+    <a href="ichinomiya-map.html">Shrine Map</a>
+    <a href="ichinomiya-visit.html">Visit Guide</a>
+  </nav>
+  <div class="lang-switch">
+    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('ja')">日本語</button>
+    <button class="lang-btn" onclick="setLang('zh')">中文</button>
+  </div>
+</header>
+
+<!-- ── Hero ── -->
+<section class="hero">
+  <svg class="torii-silhouette" width="300" height="260" viewBox="0 0 300 260">
+    <rect x="30" y="0" width="12" height="260" fill="white"/>
+    <rect x="258" y="0" width="12" height="260" fill="white"/>
+    <rect x="10" y="20" width="280" height="14" rx="2" fill="white"/>
+    <rect x="24" y="50" width="252" height="10" fill="white"/>
+    <rect x="130" y="50" width="40" height="30" fill="white"/>
+  </svg>
+  <div class="particle" style="left:15%;top:70%;animation-delay:0s"></div>
+  <div class="particle" style="left:25%;top:80%;animation-delay:1s"></div>
+  <div class="particle" style="left:40%;top:75%;animation-delay:2s"></div>
+  <div class="particle" style="left:55%;top:85%;animation-delay:0.5s"></div>
+  <div class="particle" style="left:65%;top:70%;animation-delay:3s"></div>
+  <div class="particle" style="left:78%;top:78%;animation-delay:1.5s"></div>
+  <div class="particle" style="left:85%;top:82%;animation-delay:4s"></div>
+  <div class="particle" style="left:35%;top:90%;animation-delay:2.5s"></div>
+  <div class="particle" style="left:50%;top:65%;animation-delay:3.5s"></div>
+  <div class="particle" style="left:10%;top:88%;animation-delay:4.5s"></div>
+
+  <div class="hero-badge">
+    <span data-en="Sanuki Province Ichinomiya" data-ja="讃岐國一之宮" data-zh="赞岐国一之宫">Sanuki Province Ichinomiya</span>
+  </div>
+  <h1>
+    <span data-en="Kotohira-gu" data-ja="金刀比羅宮" data-zh="金刀比罗宫">Kotohira-gu</span>
+    <span class="jp">金刀比羅宮</span>
+  </h1>
+  <p class="hero-tagline">
+    <span data-en="1,368 stone steps to the guardian of every sea" data-ja="海のすべてを守る神への1,368段の石段" data-zh="通往海洋守护神的1,368级石阶">1,368 stone steps to the guardian of every sea</span>
+  </p>
+</section>
+
+<!-- ── Quick Facts ── -->
+<div class="quick-bar">
+  <div class="qb-item">
+    <div class="qb-icon">📍</div>
+    <div class="qb-label" data-en="Location" data-ja="所在地" data-zh="地点">Location</div>
+    <div class="qb-value" data-en="Kotohira, Kagawa Pref." data-ja="香川県仲多度郡琴平町" data-zh="香川县�的平町">Kotohira, Kagawa Pref.</div>
+  </div>
+  <div class="qb-item">
+    <div class="qb-icon">🚉</div>
+    <div class="qb-label" data-en="Nearest Station" data-ja="最寄り駅" data-zh="最近车站">Nearest Station</div>
+    <div class="qb-value" data-en="JR Kotohira / Kotoden Kotohira" data-ja="JR琴平駅 / ことでん琴平駅" data-zh="JR琴平站 / 琴电琴平站">JR Kotohira / Kotoden Kotohira</div>
+  </div>
+  <div class="qb-item">
+    <div class="qb-icon">🚅</div>
+    <div class="qb-label" data-en="From Tokyo" data-ja="東京から" data-zh="从东京">From Tokyo</div>
+    <div class="qb-value" data-en="~4 hrs (Shinkansen + local)" data-ja="約4時間（新幹線＋在来線）" data-zh="约4小时（新干线+在来线）">~4 hrs (Shinkansen + local)</div>
+  </div>
+  <div class="qb-item">
+    <div class="qb-icon">🕐</div>
+    <div class="qb-label" data-en="Hours" data-ja="参拝時間" data-zh="参拜时间">Hours</div>
+    <div class="qb-value" data-en="6:00–18:00 (Free)" data-ja="6:00〜18:00（無料）" data-zh="6:00–18:00（免费）">6:00–18:00 (Free)</div>
+  </div>
+  <div class="qb-item">
+    <div class="qb-icon">👥</div>
+    <div class="qb-label" data-en="Annual Visitors" data-ja="年間参拝者数" data-zh="年参拜人数">Annual Visitors</div>
+    <div class="qb-value" data-en="~4 million" data-ja="約400万人" data-zh="约400万人">~4 million</div>
+  </div>
+  <div class="qb-item">
+    <div class="qb-icon">🅿️</div>
+    <div class="qb-label" data-en="Parking" data-ja="駐車場" data-zh="停车场">Parking</div>
+    <div class="qb-value" data-en="Nearby paid lots" data-ja="周边有料駐車場あり" data-zh="附近收费停车场">Nearby paid lots</div>
+  </div>
+</div>
+
+<!-- ── Deity Card ── -->
+<div class="deity-card">
+  <div class="deity-name" data-en="Ōmononushi-no-Kami" data-ja="大物主神" data-zh="大物主神">Ōmononushi-no-Kami</div>
+  <div class="deity-jp" data-en="大物主神 — also enshrines Emperor Sutoku (崇徳天皇)" data-ja="大物主神 — 相殿に崇徳天皇" data-zh="大物主神 — 并祀崇德天皇">大物主神 — also enshrines Emperor Sutoku (崇徳天皇)</div>
+  <p class="deity-desc">
+    <span data-en="Ōmononushi-no-Kami has been worshipped since antiquity as the supreme guardian of the seas. Sailors, fishermen, and merchants across Japan have placed their faith in this deity for maritime safety and prosperous voyages. As the head shrine of approximately 600 Kotohira shrines nationwide, Kotohira-gu stands as the spiritual anchor for all who depend upon the ocean." data-ja="大物主神は古来より海上の最高守護神として崇拝されてきました。日本全国の船乗り、漁師、商人たちがこの神に海上安全と航海繁栄の信仰を寄せてきました。全国約600社の金刀比羅神社の総本宮として。海に生きるすべての人々の精神的な拠り所です。" data-zh="大物主神自古以来被尊为海洋的至高守护神。日本全国的水手、渔民和商人们都向这位神灵祈求海上安全和航海繁荣。作为全国约600座金刀比罗神社的总本宫，金刀比罗宫是所有依赖海洋之人的精神支柱。">Ōmononushi-no-Kami has been worshipped since antiquity as the supreme guardian of the seas. Sailors, fishermen, and merchants across Japan have placed their faith in this deity for maritime safety and prosperous voyages. As the head shrine of approximately 600 Kotohira shrines nationwide, Kotohira-gu stands as the spiritual anchor for all who depend upon the ocean.</span>
+  </p>
+  <div class="blessing-tags">
+    <span class="blessing-tag">#MaritimeSafety</span>
+    <span class="blessing-tag">#Navigation</span>
+    <span class="blessing-tag">#Prosperity</span>
+    <span class="blessing-tag">#GoodHarvest</span>
+    <span class="blessing-tag">#HealingIllness</span>
+    <span class="blessing-tag">#TravelSafety</span>
+    <span class="blessing-tag">#BusinessSuccess</span>
+  </div>
+</div>
+
+<!-- ── Card 1: Essence ── -->
+<div class="card">
+  <span class="card-label" data-en="Essence" data-ja="核心的価値" data-zh="核心价值">Essence</span>
+  <h2 data-en="The Mountain Shrine of the Sea God" data-ja="海神の鎮座する山上の宮" data-zh="海神镇座的山上神宫">The Mountain Shrine of the Sea God</h2>
+
+  <div class="essence-highlight">
+    <span data-en="Perched on the slopes of sacred Mt. Zōzu at 421 meters above sea level, Kotohira-gu presents a beautiful paradox: Japan's most revered sea deity resides not beside the ocean, but high upon a mountain. For over a thousand years, pilgrims have climbed 1,368 stone steps to reach this sanctuary — a journey of devotion once considered one of the great pilgrimages of a lifetime." data-ja="標高421メートルの象頭山の山腹に鎮座する金刀比羅宮は、美しい矛盾を体現しています。日本で最も崇敬される海の神は、海辺ではなく山の上に祀られているのです。千年以上にわたり、参拝者たちは1,368段の石段を登ってこの聖域を目指してきました。この巡礼は、一生に一度は果たすべき大願のひとつとされてきました。" data-zh="金刀比罗宫坐落于海拔421米的象头山山腰，展现出一种美丽的矛盾：日本最受尊崇的海洋之神并非栖居于海边，而是高踞山上。千余年来，朝圣者们攀登1,368级石阶前往这座圣殿——这一信仰之旅曾被视为一生中最伟大的朝圣之一。">Perched on the slopes of sacred Mt. Zōzu at 421 meters above sea level, Kotohira-gu presents a beautiful paradox: Japan's most revered sea deity resides not beside the ocean, but high upon a mountain. For over a thousand years, pilgrims have climbed 1,368 stone steps to reach this sanctuary — a journey of devotion once considered one of the great pilgrimages of a lifetime.</span>
+  </div>
+
+  <div class="essence-story">
+    <span data-en="During the Edo period (1603–1868), ordinary citizens were generally forbidden from traveling freely, but an exception was made for religious pilgrimages to shrines like Ise Jingū and Kotohira-gu. 'Konpira-mairi' (pilgrimage to Konpira) became enormously popular, with hundreds of thousands making the journey each year. So powerful was the desire to visit that people who couldn't travel themselves would tie a purse of coins around the neck of their dog and send the animal on the pilgrimage — an extraordinary custom known as 'Konpira-inu' (Konpira dog). The faithful canine would be passed from traveler to traveler until it reached the shrine, where priests would offer prayers on behalf of the absent owner." data-ja="江戸時代（1603〜1868年）、一般庶民の自由な旅行は基本的に禁じられていましたが、伊勢神宮や金刀比羅宮への宗教的な参拝だけは例外とされていました。「こんぴら参り」は大変な人気を博し、毎年数十万人が参拝の旅に出ました。自ら旅できない人々は、犬の首に旅費を入れた袋を結び、参拝の旅に送り出すという驚くべき骨習「こんぴら狗」が生まれました。忠実な犬は旅人から旅人へと託され、神社に到着すると、神職が留守の飼い主に代わって祈祷を行いました。" data-zh="在江户时代（1603-1868年），普通百姓一般不允许自由旅行，但前往伊势神宫和金刀比罗宫等神社的宗教朝圣是例外。'金比罗参拜'变得极为流行，每年有数十万人踏上旇程。那些无法亲自出行的人会在狗的脖子上挂上钱袋，让狗代替自己去朝圣——这种非凡的习俗被称为'金比罗犬'。忠实的犬从一个旅人传递给另一个旅人，直到到达神社，神职人员代替未到场的主人进行祈祷。">During the Edo period (1603–1868), ordinary citizens were generally forbidden from traveling freely, but an exception was made for religious pilgrimages to shrines like Ise Jingū and Kotohira-gu. "Konpira-mairi" (pilgrimage to Konpira) became enormously popular, with hundreds of thousands making the journey each year. So powerful was the desire to visit that people who couldn't travel themselves would tie a purse of coins around the neck of their dog and send the animal on the pilgrimage — an extraordinary custom known as "Konpira-inu" (Konpira dog). The faithful canine would be passed from traveler to traveler until it reached the shrine, where priests would offer prayers on behalf of the absent owner.</span>
+  </div>
+
+  <div class="video-wrapper">
+    <a href="https://www.youtube.com/results?search_query=%E9%87%91%E5%88%80%E6%AF%94%E7%BE%85%E5%AE%AE+%E5%8F%82%E6%8B%9D+%E5%A2%83%E5%86%85" target="_blank" rel="noopener">
+      <div class="play-icon">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><polygon points="6,3 17,10 6,17" fill="currentColor"/></svg>
+      </div>
+      <span data-en="Watch videos of Kotohira-gu on YouTube" data-ja="金刀比羅宮の動画をYouTubeで見る" data-zh="在YouTube上观看金刀比罗宫的视频">Watch videos of Kotohira-gu on YouTube</span>
+    </a>
+  </div>
+</div>
+
+<!-- ── Card 2: Access ── -->
+<div class="card">
+  <span class="card-label" data-en="Access" data-ja="アクセス" data-zh="交通">Access</span>
+  <h2 data-en="Your Journey to Kotohira-gu" data-ja="金刀比羅宮への旅路" data-zh="前往金刀比罗宫的旅程">Your Journey to Kotohira-gu</h2>
+
+  <div class="map-container">
+    <iframe src="https://maps.google.com/maps?q=%E9%87%91%E5%88%80%E6%AF%94%E7%BE%85%E5%AE%AE&output=embed" allowfullscreen loading="lazy"></iframe>
+  </div>
+
+  <ul class="access-list">
+    <li>
+      <span class="access-emoji">🚂</span>
+      <div>
+        <strong data-en="By Train (Recommended)" data-ja="電車（推奨）" data-zh="乘电车（推荐）">By Train (Recommended)</strong><br>
+        <span data-en="From Takamatsu: Kotoden Kotohira Line from Takamatsu-Chikko Sta. → Kotoden Kotohira Sta. (~60 min). From Okayama: JR Seto-Ōhashi Line + Dosan Line to JR Kotohira Sta. (~75 min). From Tokyo: Shinkansen to Okayama, then transfer (~4 hrs total)." data-ja="高松から：ことでん琴平線 高松築港駅→琴電琴平駅（約60分）。岡山から：JR瀬戸大橋線＋土讃線でJR琴平駅（約75分）。東京から：新幹線で岡山、乗り換えで約4時間。" data-zh="从高松：琴电琴平线 高松等港站→琴电琴平站（约60分钟）。从�的山：JR�的户大桥线+土赞线到JR琴平站（约75分钟）。从东京：新干线到冈山转乘（共约4小时）。">From Takamatsu: Kotoden Kotohira Line from Takamatsu-Chikko Sta. → Kotoden Kotohira Sta. (~60 min). From Okayama: JR Seto-Ōhashi Line + Dosan Line to JR Kotohira Sta. (~75 min). From Tokyo: Shinkansen to Okayama, then transfer (~4 hrs total).</span>
+      </div>
+    </li>
+    <li>
+      <span class="access-emoji">🚗</span>
+      <div>
+        <strong data-en="By Car" data-ja="車" data-zh="自驾">By Car</strong><br>
+        <span data-en="From Zentsuji IC (Takamatsu Expressway): ~15 min. Multiple paid parking lots available near the shrine approach (around ¥300–500). No official shrine parking." data-ja="高松自動車道 善通寺ICから約15分。参道周辺に有料駐車場多数（約300〜500円）。神社専用駐車場はなし。" data-zh="从高松高速公路善通寺IC约15分钟。神社参道附近有多个收费停车场（约300-500日元）。无神社专用停车场。">From Zentsuji IC (Takamatsu Expressway): ~15 min. Multiple paid parking lots available near the shrine approach (around ¥300–500). No official shrine parking.</span>
+      </div>
+    </li>
+    <li>
+      <span class="access-emoji">🚶</span>
+      <div>
+        <strong data-en="Walking from Station" data-ja="駅からの徒歩" data-zh="从车站步行">Walking from Station</strong><br>
+        <span data-en="From JR Kotohira Sta.: ~15 min walk to step 1. From Kotoden Kotohira Sta.: ~8 min walk to step 1. From step 1 to main shrine (785 steps): ~30–45 min. From main shrine to inner shrine (583 more steps): ~30 min." data-ja="JR琴平駅から石段入口まで徒歩約15分。琴電琴平駅から石段入口まで徒歩約8分。石段1段目から本宮（785段）まで約30〜45分。本宮から奥社（さらに583段）まで約30分。" data-zh="从JR琴平站步行约15分钟到石阶入口。从琴电琴平站步行约8分钟。从第1级到本宫（785级）约30-45分钟。从本宫到奥社（再583级）约30分钟。">From JR Kotohira Sta.: ~15 min walk to step 1. From Kotoden Kotohira Sta.: ~8 min walk to step 1. From step 1 to main shrine (785 steps): ~30–45 min. From main shrine to inner shrine (583 more steps): ~30 min.</span>
+      </div>
+    </li>
+    <li>
+      <span class="access-emoji">♿</span>
+      <div>
+        <strong data-en="Accessibility" data-ja="バリアフリー" data-zh="无障碍">Accessibility</strong><br>
+        <span data-en="The shrine approach involves steep stone steps. A kago (palanquin) service was historically available but has been discontinued. The lower sections of the approach have a gentler slope. Those with mobility challenges may find the climb very difficult." data-ja="参道は急な石段です。かつてはかごのサービスがありましたが現在は廣止。参道下部は比較的緩やかです。足腰に不安のある方には大変厳しい道のりです。" data-zh="参道为陡峭的石阶。历史上曾有轿子服务但已停止。参道下部坡度较缓。行动不便者可能会感到非常困难。">The shrine approach involves steep stone steps. A kago (palanquin) service was historically available but has been discontinued. The lower sections of the approach have a gentler slope. Those with mobility challenges may find the climb very difficult.</span>
+      </div>
+    </li>
+    <li>
+      <span class="access-emoji">🕐</span>
+      <div>
+        <strong data-en="Hours" data-ja="参拝時間" data-zh="参拜时间">Hours</strong><br>
+        <span data-en="Shrine grounds: 6:00–18:00 (Apr–Sep), 6:00–17:00 (Oct–Mar). Treasure House: 8:30–17:00 (¥800). Shoin Hall: 8:30–17:00 (¥800). The inner shrine (Okusha) goshuin office closes at 16:30." data-ja="境内：6:00〜18:00（4〜9月）、6:00〜17:00（10〜3月）。宝物館：8:30〜17:00（800円）。書院：8:30〜17:00（800円）。奥社の御朱印受付は16:30まで。" data-zh="境内：6:00-18:00（4-9栈），6:00-17:00（10-3月）。宝物馆：8:30-17:00（800日元）。书院：8:30-17:00（800日元）。奥社御朱印受理至16:30。">Shrine grounds: 6:00–18:00 (Apr–Sep), 6:00–17:00 (Oct–Mar). Treasure House: 8:30–17:00 (¥800). Shoin Hall: 8:30–17:00 (¥800). The inner shrine (Okusha) goshuin office closes at 16:30.</span>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<!-- ── Card 3: Deep Insight ── -->
+<div class="card">
+  <span class="card-label" data-en="Deep Insight" data-ja="こだわりポイント" data-zh="深度洞察">Deep Insight</span>
+  <h2 data-en="What Makes Kotohira-gu Truly Special" data-ja="金刀比羅宮が真に特別な理由" data-zh="金刀比罗宫的独特之处">What Makes Kotohira-gu Truly Special</h2>
+
+  <div class="insight-item">
+    <span class="insight-badge badge-unique" data-en="Unique" data-ja="唯一無二" data-zh="独一无二">Unique</span>
+    <div class="insight-title" data-en="The Konpira Dog — A Pilgrimage by Proxy" data-ja="こんぴら狗 — 代参の忠犬" data-zh="金比罗犬——代替朝圣的忠犬">The Konpira Dog — A Pilgrimage by Proxy</div>
+    <div class="insight-text">
+      <span data-en="In the Edo period, people who couldn't make the journey would send their dogs in their place. Coins were tied around the dog's neck, and travelers along the road would pass the animal forward until it reached the shrine. A bronze statue of the Konpira-inu stands near the main shrine — look for it after step 628." data-ja="江戸時代、旅に出られない人々は代わりに犬を送り出しました。犬の首に旅費を結び、道中の旅人が次々とバトンタッチして神社まで届けました。本宮付近にはこんぴら狗の銅像があります。628段目を過ぎたら探してみてください。" data-zh="在江户时代，无法亲自出行的人会派遣自己的狗代替朝圣。将旅费系在狗脖子上，沿途旅人接力传递直到神社。本宫附近有金比罗犬的铜像——在第628级台阶之后寻找它。">In the Edo period, people who couldn't make the journey would send their dogs in their place. Coins were tied around the dog's neck, and travelers along the road would pass the animal forward until it reached the shrine. A bronze statue of the Konpira-inu stands near the main shrine — look for it after step 628.</span>
+    </div>
+  </div>
+
+  <div class="insight-item">
+    <span class="insight-badge badge-info" data-en="Art" data-ja="芸術" data-zh="艺术">Art</span>
+    <div class="insight-title" data-en="Maruyama Ōkyo's Tigers in the Omote Shoin" data-ja="表書院の円山応挙の虎" data-zh="表书院中円山应举的虎画">Maruyama Ōkyo's Tigers in the Omote Shoin</div>
+    <div class="insight-text">
+      <span data-en="The Omote Shoin (front reception hall), an Important Cultural Property, houses stunning fusuma paintings by Maruyama Ōkyo (1733–1795), one of Japan's most celebrated painters. His 'Tigers Drinking Water' depicts tigers so lifelike they seem ready to leap from the sliding doors. The Shoin also features landscape paintings and works by Itō Jakuchū." data-ja="重要文化財の表書院には、日本を代表する画家・円山応挙（1733〜1795年）の見事な襖絵が収められています。「遊虎図（水飲みの虎）」は、今にも襖から飛び出してきそうなほど生き生きとした虎が描かれています。書院には風景画や伊藤若冲の作品も展示されています。" data-zh="作为重要文化财产的表书院收藏了日本最著名画家之一圆山应举（1733-1795）的精美障壁画。他的'饮水虎图'描绘的老虎栩栩如生，仿佛随时要从拉门中跃出。书院还展示有风景画和伊藤若冲的作品。">The Omote Shoin (front reception hall), an Important Cultural Property, houses stunning fusuma paintings by Maruyama Ōkyo (1733–1795), one of Japan's most celebrated painters. His "Tigers Drinking Water" depicts tigers so lifelike they seem ready to leap from the sliding doors. The Shoin also features landscape paintings and works by Itō Jakuchũ.</span>
+    </div>
+  </div>
+
+  <div class="insight-item">
+    <span class="insight-badge badge-unique" data-en="Unique" data-ja="唯一無二" data-zh="独一无二">Unique</span>
+    <div class="insight-title" data-en="Kamiyo Ame — The 1,300-Year-Old Candy" data-ja="加美代飴 — 五人百姓の伝統菓子" data-zh="加美代饴——五人百姓的传统糖果">Kamiyo Ame — The 1,300-Year-Old Candy</div>
+    <div class="insight-text">
+      <span data-en="On the approach between steps 365 and 431, you'll encounter the 'Five Families' (Gonin Byakushō) — the only merchants historically permitted to sell within the shrine precincts. Under large white parasols, they sell kamiyo ame, golden fan-shaped candy that comes with a tiny hammer. You break it into pieces and share — spreading the blessings of Konpira." data-ja="365段目から431段目の間には「五人百姓」と呼ばれる唯一境内での商売を許された商人がいます。大きな白い傘の下で売られる加美代飴は、扇形の金色の飴で小さなハンマーが付いています。割って分け合うことで、こんぴらさんのご利益を広めるとされています。" data-zh="在第365至431级台阶之间，您会遇到'五人百姓'——历史上唯一被允许在神社境内经商的商人。在大白伞下，他们出售加美代饴——扇形的金色糖果附带小锤。敲碎分享，寓意传播金比罗的庇佑。">On the approach between steps 365 and 431, you'll encounter the "Five Families" (Gonin Byakushō) — the only merchants historically permitted to sell within the shrine precincts. Under large white parasols, they sell kamiyo ame, golden fan-shaped candy that comes with a tiny hammer. You break it into pieces and share — spreading the blessings of Konpira.</span>
+    </div>
+  </div>
+
+  <div class="insight-item">
+    <span class="insight-badge badge-tip" data-en="Tip" data-ja="コツ" data-zh="小贴士">Tip</span>
+    <div class="insight-title" data-en="Go to the Okusha (Inner Shrine) — Most Visitors Don't" data-ja="奥社まで登ろう — ほとんどの人は行かない" data-zh="登上奥社——大多数人不会去">Go to the Okusha (Inner Shrine) — Most Visitors Don't</div>
+    <div class="insight-text">
+      <span data-en="Most visitors stop at the main shrine (step 785), but the truly rewarding experience is climbing all 1,368 steps to the inner shrine (Izutama Jinja). The path becomes a serene forest trail, the crowds thin out, and the view from the top is breathtaking. The goshuin at the Okusha is different from the main shrine — a special memento for those who make the full climb." data-ja="多くの参拝者は本宮（785段）で引き返しますが、真の醍醐味は1,368段すべてを登り奥社（厳魂神社）に至ることです。道は静かな森の中を進み、人混みは薄れ、頂上からの眺めは息を飥む美しさです。奥社の御朱印は本宮とは異なる特別なものです。" data-zh="大多数参拜者在本宫（第785级）就返回了，但真正的回报是攀登全部1,368级到达奥社（严魂神社）。小路变成宁静的森林步道，人群稀少，山顶的景色令人屏息。奥社的御朱印与本宫不同——是完成全程攀登者的特别纪念。">Most visitors stop at the main shrine (step 785), but the truly rewarding experience is climbing all 1,368 steps to the inner shrine (Izutama Jinja). The path becomes a serene forest trail, the crowds thin out, and the view from the top is breathtaking. The goshuin at the Okusha is different from the main shrine — a special memento for those who make the full climb.</span>
+    </div>
+  </div>
+
+  <div class="insight-item">
+    <span class="insight-badge badge-seasonal" data-en="Seasonal" data-ja="季節限定" data-zh="季节限定">Seasonal</span>
+    <div class="insight-title" data-en="Konpira Stone Steps Marathon (October)" data-ja="こんぴら石段マラソン（10月）" data-zh="金比罗石阶马拉松（10月）">Konpira Stone Steps Marathon (October)</div>
+    <div class="insight-text">
+      <span data-en="Every October, a unique marathon is held on the 785 stone steps to the main shrine. Runners race up and down the stairs in an exhilarating test of endurance and agility. It's an incredible spectacle and a wonderful time to experience the energy and community spirit of Kotohira." data-ja="毎年10月、本宮までの785段の石段を使ったユニークなマラソンが開催されます。ランナーたちが石段を駆け上がり駆け下りる姿は、持久力と俊敏性の壮絶な試練です。驚くべきスペクタクルであり、琴平のエネルギーとコミュニティ精神を体験する素晴らしい機会です。" data-zh="每年10月，在通往本宫的785级石阶上举办独特的马拉松。跑者们在阶梯上奔跑，是耐力和敏捷性的惊人考验。这是一场不可思议的盛会，也是体验琴平社区精神的绝佳时机。">Every October, a unique marathon is held on the 785 stone steps to the main shrine. Runners race up and down the stairs in an exhilarating test of endurance and agility. It's an incredible spectacle and a wonderful time to experience the energy and community spirit of Kotohira.</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── Card 4: Eat / Stay / More ── -->
+<div class="card">
+  <span class="card-label" data-en="Eat / Stay / More" data-ja="食べる・泊まる・遊ぶ" data-zh="美食·住宿·更多">Eat / Stay / More</span>
+  <h2 data-en="Around Kotohira-gu" data-ja="金刀比羅宮の周辺" data-zh="金刀比罗宫周边">Around Kotohira-gu</h2>
+
+  <div class="esm-grid">
+    <div class="esm-item">
+      <div class="esm-icon">🍽️</div>
+      <div class="esm-title" data-en="Sanuki Udon Paradise" data-ja="讃岐うどんの聖地" data-zh="赞岐乌冬面圣地">Sanuki Udon Paradise</div>
+      <div class="esm-desc">
+        <span data-en="Kagawa is the undisputed capital of udon. The approach to Kotohira-gu is lined with udon shops serving fresh, hand-made noodles. Try shōyu udon (soy sauce udon) — a Kagawa specialty where thick, chewy noodles are eaten with just soy sauce and a raw egg. Also try 'Kyūman' (灸まん), a moxibustion-shaped sweet bun that's been a Konpira souvenir for generations." data-ja="香川は日本一のうどん県。金刀比羅宮の参道にはうどん屋が立ち並び、打ちたての手打ち麺を楽しめます。讃岐名物の醤油うどんは、コシのある太麺に醤油と生卵だけでいただきます。何世代にもわたるこんぴら土産「灸まん」もお試しください。" data-zh="香川是无可争议的乌冬面之都。金刀比罗宫参道两旁满是乌冬面店。尝试酱油乌冬面——香川名产，粗而有嚼劲的面条只配酱油和生鸡蛋。还有世代相传的金比罗特产'灸馒'。">Kagawa is the undisputed capital of udon. The approach to Kotohira-gu is lined with udon shops serving fresh, hand-made noodles. Try shōyu udon (soy sauce udon) — a Kagawa specialty where thick, chewy noodles are eaten with just soy sauce and a raw egg. Also try "Kyūman" (灸まん), a moxibustion-shaped sweet bun that's been a Konpira souvenir for generations.</span>
+      </div>
+    </div>
+    <div class="esm-item">
+      <div class="esm-icon">🏨</div>
+      <div class="esm-title" data-en="Konpira Onsen — Hot Spring Ryokan" data-ja="こんぴら温泉郷" data-zh="金比罗温泉乡">Konpira Onsen — Hot Spring Ryokan</div>
+      <div class="esm-desc">
+        <span data-en="Kotohira offers excellent hot spring ryokan for post-climb relaxation. Kotohira Kadan is a 400-year-old inn once frequented by literary giants like Mori Ōgai. Kotosankaku offers modern comfort with rooftop baths. Shikishimakan, housed in a restored registered cultural property, features four private baths of cypress, rock, ceramic, and bamboo." data-ja="琴平には参拝後のくつろぎにぴったりの温泉旅館が揃っています。琴平花壋は森鷗外よ訪れた400年の歴史を持つ宿。琴参閣は屋上風呂付きの快適な宿。敷島館は登録有形文化財を復元した宿で、檜・岩ヷ陶・竹の4つの貸切風呂が特徴です。" data-zh="琴平拥有优质温泉旅馆，适合敠登后放松。琴平花坛是一家拥有400年历史的旅馆，森�的外等文豪曾下榻于此。琴参阁提供屋顶浴池的现代舒适。�的岛馆是修复的注册文化财产，设有桧木、岩石、陶器和竹子四种包场浴池。">Kotohira offers excellent hot spring ryokan for post-climb relaxation. Kotohira Kadan is a 400-year-old inn once frequented by literary giants like Mori Ōgai. Kotosankaku offers modern comfort with rooftop baths. Shikishimakan, housed in a restored registered cultural property, features four private baths of cypress, rock, ceramic, and bamboo.</span>
+      </div>
+    </div>
+    <div class="esm-item">
+      <div class="esm-icon">🗺️</div>
+      <div class="esm-title" data-en="Kanamaru-za & Beyond" data-ja="旧金毘羅大芝居と周辺" data-zh="旧金毗罗大剧场及周边">Kanamaru-za & Beyond</div>
+      <div class="esm-desc">
+        <span data-en="Visit Kanamaru-za (旧金毘羅大芝居), Japan's oldest surviving kabuki theater, built in 1835 and designated an Important Cultural Property. Every spring, professional kabuki performances are held here — a truly rare experience. Also explore the Maritime Museum (琴平海洋博物館) celebrating Konpira's connection to the sea, and nearby Zentsu-ji Temple, birthplace of Kūkai (Kōbō Daishi)." data-ja="日本最古の現存する芝居小屋、旧金毘羅大芝居（金丸座）は1835年建築の重要文化財。毎年春には本格的な歌舞伎公演が行われます。海の神との縁を紹介する琴平海洋博物館や、空海（弘法大師）生誕の地・善通寺もぜひ訪れてください。" data-zh="参观金丸座（旧金毗罗大剧场），日本现存最古老的歌舞伎剧场，建于1835年，为重要文化财产。每年春天举行专业歌舞伎演出。还可以探访展示金比罗与海洋渊源的琴平海洋博物馆，以及附近空海（弘法大师）诞生地善通寺。">Visit Kanamaru-za (旧金毘羅大芝居), Japan's oldest surviving kabuki theater, built in 1835 and designated an Important Cultural Property. Every spring, professional kabuki performances are held here — a truly rare experience. Also explore the Maritime Museum (琴平海洋博物館) celebrating Konpira's connection to the sea, and nearby Zentsu-ji Temple, birthplace of Kūkai (Kōbō Daishi).</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Special Section: The 1,368 Steps ── -->
+<section class="special-section">
+  <h2 data-en="The Sacred Ascent: 1,368 Steps" data-ja="聖なる登拝：1,368段の石段" data-zh="神圣的攀登：1,368级石阶">The Sacred Ascent: 1,368 Steps</h2>
+  <p class="subtitle" data-en="A journey of devotion measured in stone" data-ja="石段に刻まれた信仰の道" data-zh="以石阶丈量的信仰之旅">A journey of devotion measured in stone</p>
+
+  <div class="steps-visual">
+    <div class="step-stage">
+      <div class="step-bar step-bar-1"></div>
+      <div class="step-number" data-en="785" data-ja="785" data-zh="785">785</div>
+      <div class="step-label" data-en="Steps to Hongu" data-ja="本宮まで" data-zh="至本宫">Steps to Hongu</div>
+      <div class="step-detail" data-en="Main Shrine · 251m elevation" data-ja="御本宮・標高251m" data-zh="本宫·海拔251米">Main Shrine · 251m elevation</div>
+    </div>
+    <div class="step-stage">
+      <div class="step-bar step-bar-2"></div>
+      <div class="step-number" data-en="1,368" data-ja="1,368" data-zh="1,368">1,368</div>
+      <div class="step-label" data-en="Steps to Okusha" data-ja="奥社まで" data-zh="至奥社">Steps to Okusha</div>
+      <div class="step-detail" data-en="Inner Shrine · 421m elevation" data-ja="厳魂神社ヶ標高421m" data-zh="严魂神社·海拔421米">Inner Shrine · 421m elevation</div>
+    </div>
+  </div>
+
+  <div class="steps-note">
+    <span data-en="The approach is lined with souvenir shops, teahouses, and historic buildings. Key landmarks: Step 365 — the Five Families candy sellers; Step 431 — the great stone lantern; Step 628 — Asahi-sha shrine (Important Cultural Property); Step 785 — the main shrine with its panoramic view of the Sanuki Plain. Beyond lies the forest path to the inner shrine — increasingly quiet, deeply spiritual." data-ja="参道には土産物店、茶屋、歴史的建造物が並びます。主な目印：365段目 — 五人百姓の飴売り、431段目 — 大石灯篭、628段目 — 旭社（重要文化財）、785段目 — 讃岐平野を一望する御本宮。その先は奥社への森の道 — 静寂が深まり、精神性が増していきます。" data-zh="参道两旁是纪念品店、茶屋和历史建筑。主要地标：第365级——五人百姓糖果摊、第431级——大石灯笼、第628级——旭社（重要文化财产）、第785级——可眺望赞岐平原的本宫。再往前是通往奥社的森林小径——越来越安静，充满灵性。">The approach is lined with souvenir shops, teahouses, and historic buildings. Key landmarks: Step 365 — the Five Families candy sellers; Step 431 — the great stone lantern; Step 628 — Asahi-sha shrine (Important Cultural Property); Step 785 — the main shrine with its panoramic view of the Sanuki Plain. Beyond lies the forest path to the inner shrine — increasingly quiet, deeply spiritual.</span>
+  </div>
+</section>
+
+<!-- ── CTA Bar ── -->
+<div class="cta-bar">
+  <a href="https://www.konpira.or.jp/" target="_blank" rel="noopener" class="cta-primary">
+    <span data-en="Official Website ↗" data-ja="公式サイト ↗" data-zh="官方网站 ↗">Official Website ↗</span>
+  </a>
+  <a href="ichinomiya-map.html" class="cta-secondary">
+    <span data-en="← Back to Shrine Map" data-ja="← 神社マップに戻る" data-zh="← 返回神社地图">← Back to Shrine Map</span>
+  </a>
+</div>
+
+<!-- ── Footer ── -->
+<footer>
+  <p data-en="Japan Ichinomiya Shrine Guide — Discover the spiritual heart of each province" data-ja="日本一ノ宮神社ガイド — 各国の精神的中心を発見する" data-zh="日本一之宫神社指南 — 探索每个令制国的精神中心">Japan Ichinomiya Shrine Guide — Discover the spiritual heart of each province</p>
+  <p style="margin-top:.5rem;"><a href="ichinomiya-intro.html">Home</a> · <a href="ichinomiya-map.html">Map</a> · <a href="ichinomiya-visit.html">Visit Guide</a></p>
+</footer>
+
+<!-- ── Language Switch JS ── -->
+<script>
+function setLang(lang) {
+  document.querySelectorAll('.lang-btn').forEach(function(btn) {
+    btn.classList.toggle('active', btn.textContent.trim() === (lang === 'en' ? 'EN' : lang === 'ja' ? '日本語' : '中文'));
+  });
+  document.querySelectorAll('[data-' + lang + ']').forEach(function(el) {
+    var val = el.getAttribute('data-' + lang);
+    if (val !== null) {
+      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+        el.value = val;
+      } else {
+        el.innerHTML = val;
+      }
+    }
+  });
+}
+</script>
+
+<!-- ── Particle Animation ── -->
+<script>
+document.querySelectorAll('.particle').forEach(function(p) {
+  var x = Math.random() * 100;
+  var y = 60 + Math.random() * 35;
+  var delay = Math.random() * 5;
+  var dur = 4 + Math.random() * 4;
+  p.style.left = x + '%';
+  p.style.top = y + '%';
+  p.style.animationDelay = delay + 's';
+  p.style.animationDuration = dur + 's';
+});
+</script>
+
+</body>
+</html>
+
