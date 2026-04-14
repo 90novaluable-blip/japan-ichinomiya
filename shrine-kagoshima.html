@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Kagoshima Jingu — Ichinomiya of Osumi Province</title>
+<style>
+:root {
+  --red: #9b2335;
+  --gold: #c9a84c;
+  --ink: #1a1a2e;
+  --cream: #fdf6ec;
+  --mist: #f0ebe3;
+  --gray: #6b6b6b;
+  --green: #2e7d32;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Georgia',serif; background:var(--cream); color:var(--ink); line-height:1.75; }
+
+/* ── HEADER ── */
+header {
+  background:var(--ink); color:#fff;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:14px 28px; position:sticky; top:0; z-index:200;
+  box-shadow:0 2px 12px rgba(0,0,0,0.4);
+}
+.logo { display:flex; align-items:baseline; gap:10px; text-decoration:none; }
+.logo .kanji { font-size:1.5rem; color:var(--gold); font-weight:bold; }
+.logo .sub { font-size:0.78rem; color:rgba(255,255,255,0.5); letter-spacing:0.1em; }
+.header-right { display:flex; align-items:center; gap:16px; }
+nav a { color:rgba(255,255,255,0.6); text-decoration:none; font-size:0.78rem; letter-spacing:0.08em; margin-left:20px; }
+nav a:hover { color:var(--gold); }
+.lang-switcher { display:flex; gap:4px; }
+.lang-btn { font-size:0.7rem; padding:2px 8px; border-radius:10px; text-decoration:none; border:1px solid rgba(255,255,255,0.2); color:rgba(255,255,255,0.5); transition:all 0.2s; }
+.lang-btn.active { background:var(--gold); color:var(--ink); border-color:var(--gold); font-weight:bold; }
+
+/* ── HERO ── */
+.hero {
+  position:relative; height:88vh; min-height:520px; overflow:hidden;
+  display:flex; flex-direction:column; align-items:center; justify-content:flex-end;
+  padding-bottom:48px; color:#fff; text-align:center;
+}
+.hero-bg {
+  position:absolute; inset:0;
+  background:
+    linear-gradient(to bottom, rgba(10,5,20,0.3) 0%, rgba(10,5,20,0.1) 40%, rgba(10,5,20,0.75) 100%),
+    linear-gradient(135deg, #15080a 0%, #0a0a15 40%, #0a1520 100%);
+}
+.hero-torii { position:absolute; bottom:0; left:50%; transform:translateX(-50%); width:100%; max-width:900px; opacity:0.12; }
+.hero-glow {
+  position:absolute; width:600px; height:600px; border-radius:50%;
+  background:radial-gradient(circle, rgba(201,168,76,0.15) 0%, transparent 70%);
+  top:50%; left:50%; transform:translate(-50%,-50%);
+}
+.particles { position:absolute; inset:0; overflow:hidden; }
+.particle { position:absolute; width:2px; height:2px; background:rgba(201,168,76,0.6); border-radius:50%; animation:float linear infinite; }
+@keyframes float { 0%{transform:translateY(100vh) translateX(0);opacity:0;} 10%{opacity:1;} 90%{opacity:1;} 100%{transform:translateY(-20px) translateX(30px);opacity:0;} }
+.hero-content { position:relative; z-index:1; padding:0 20px; }
+.hero-badge { display:inline-block; border:1px solid var(--gold); color:var(--gold); font-size:0.7rem; letter-spacing:0.25em; padding:4px 16px; border-radius:20px; margin-bottom:16px; text-transform:uppercase; }
+.hero h1 { font-size:clamp(2rem,6vw,4.5rem); font-weight:normal; line-height:1.1; margin-bottom:8px; }
+.hero h1 .jp { display:block; font-size:clamp(2.5rem,8vw,5.5rem); color:var(--gold); }
+.hero-tagline { font-size:clamp(0.9rem,2vw,1.1rem); color:rgba(255,255,255,0.75); max-width:560px; margin:16px auto 0; font-style:italic; }
+.hero-scroll { margin-top:32px; color:rgba(255,255,255,0.3); font-size:0.72rem; letter-spacing:0.2em; animation:pulse 2.5s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{opacity:.3} 50%{opacity:.8} }
+
+/* ── QUICK FACTS BAR ── */
+.quick-bar { background:var(--ink); color:#fff; display:flex; justify-content:center; flex-wrap:wrap; gap:0; }
+.quick-item { padding:14px 28px; display:flex; align-items:center; gap:8px; border-right:1px solid rgba(255,255,255,0.1); font-size:0.8rem; }
+.quick-item:last-child { border-right:none; }
+.quick-icon { font-size:1rem; }
+.quick-label { color:rgba(255,255,255,0.45); font-size:0.65rem; display:block; }
+.quick-value { color:#fff; font-size:0.85rem; }
+
+/* ── MAIN GRID ── */
+.main { max-width:1100px; margin:0 auto; padding:48px 20px 80px; }
+.grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+.grid-full { grid-column:1/-1; }
+
+/* ── CARDS ── */
+.card { background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 2px 16px rgba(0,0,0,0.07); border:1px solid rgba(0,0,0,0.06); }
+.card-header { padding:18px 24px 14px; border-bottom:1px solid #f0e8d8; display:flex; align-items:center; gap:12px; }
+.card-num { width:28px; height:28px; background:var(--red); color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.75rem; font-weight:bold; flex-shrink:0; }
+.card-title-en { font-size:0.65rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold); display:block; }
+.card-title-jp { font-size:1.05rem; font-weight:bold; display:block; line-height:1.2; }
+.card-title-zh { font-size:0.7rem; color:var(--gray); display:block; }
+.card-body { padding:20px 24px 24px; }
+
+/* Essence card */
+.essence-highlight { background:var(--mist); border-radius:8px; padding:16px 20px; margin-bottom:16px; border-left:3px solid var(--gold); }
+.essence-label { font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:6px; }
+.essence-text { font-size:0.95rem; color:#333; }
+.essence-text strong { color:var(--red); }
+
+/* Video embed */
+.video-wrapper { position:relative; border-radius:8px; overflow:hidden; background:var(--ink); margin-top:16px; }
+.video-overlay { position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%); display:flex; align-items:center; justify-content:center; }
+.play-btn { width:56px; height:56px; border-radius:50%; background:rgba(201,168,76,0.9); display:flex; align-items:center; justify-content:center; text-decoration:none; transition:transform 0.2s, background 0.2s; font-size:1.3rem; color:var(--ink); }
+.play-btn:hover { transform:scale(1.1); background:var(--gold); }
+.video-caption { position:absolute; bottom:0; left:0; right:0; padding:10px 14px; color:rgba(255,255,255,0.8); font-size:0.75rem; }
+
+/* Map card */
+.map-wrapper { border-radius:8px; overflow:hidden; margin-bottom:16px; }
+.map-wrapper iframe { width:100%; height:240px; border:none; display:block; }
+.map-link { display:flex; align-items:center; gap:8px; background:var(--ink); color:var(--gold); text-decoration:none; padding:10px 16px; border-radius:6px; font-size:0.82rem; letter-spacing:0.08em; margin-bottom:16px; transition:background 0.2s; }
+.map-link:hover { background:#2a2a3e; }
+.access-list { list-style:none; }
+.access-list li { display:flex; gap:10px; align-items:flex-start; padding:8px 0; border-bottom:1px solid #f0ebe3; font-size:0.88rem; }
+.access-list li:last-child { border-bottom:none; }
+.access-icon { flex-shrink:0; font-size:1rem; }
+.access-main { display:block; color:var(--ink); }
+.access-sub { display:block; font-size:0.75rem; color:var(--gray); }
+
+/* Deep Insight card */
+.insight-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid #f0ebe3; }
+.insight-item:last-child { border-bottom:none; }
+.insight-badge { flex-shrink:0; padding:2px 8px; border-radius:4px; font-size:0.65rem; font-weight:bold; letter-spacing:0.05em; height:fit-content; margin-top:2px; }
+.badge-unique { background:#fff3e0; color:#e65100; }
+.badge-tip { background:#e8f5e9; color:#1b5e20; }
+.badge-info { background:#e8f0fe; color:#1a237e; }
+.badge-seasonal { background:#fce4ec; color:#880e4f; }
+.badge-stamp { background:#fff3e0; color:#e65100; }
+.insight-title { font-size:0.9rem; font-weight:bold; margin-bottom:3px; }
+.insight-desc { font-size:0.83rem; color:var(--gray); }
+
+/* Nearby card */
+.nearby-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; }
+.nearby-item { background:var(--mist); border-radius:8px; padding:14px; }
+.nearby-cat { font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--gray); margin-bottom:4px; }
+.nearby-icon { font-size:1.2rem; margin-bottom:6px; display:block; }
+.nearby-name { font-size:0.88rem; font-weight:bold; margin-bottom:4px; }
+.nearby-desc { font-size:0.78rem; color:var(--gray); }
+
+/* Deity section */
+.deity-card { background:var(--ink); color:#fff; border-radius:12px; padding:32px; display:grid; grid-template-columns:auto 1fr; gap:28px; align-items:start; }
+.deity-symbol { font-size:4rem; line-height:1; }
+.deity-label { font-size:0.65rem; letter-spacing:0.2em; color:var(--gold); text-transform:uppercase; margin-bottom:6px; }
+.deity-name { font-size:1.5rem; font-weight:bold; margin-bottom:4px; }
+.deity-jp { font-size:0.9rem; color:rgba(255,255,255,0.55); margin-bottom:16px; }
+.deity-desc { font-size:0.9rem; color:rgba(255,255,255,0.8); line-height:1.7; margin-bottom:16px; }
+.blessing-tags { display:flex; flex-wrap:wrap; gap:6px; }
+.blessing-tag { background:rgba(201,168,76,0.15); border:1px solid rgba(201,168,76,0.3); color:var(--gold); padding:3px 10px; border-radius:12px; font-size:0.72rem; letter-spacing:0.05em; }
+
+/* Special section */
+.special-box { background:linear-gradient(135deg, #1a1a2e 0%, #2a1010 100%); color:#fff; border-radius:12px; padding:32px; }
+.special-title { color:var(--gold); font-size:1.2rem; margin-bottom:8px; }
+.special-sub { font-size:0.75rem; letter-spacing:0.15em; color:rgba(255,255,255,0.4); margin-bottom:20px; }
+.special-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+.special-item { text-align:center; padding:16px 8px; background:rgba(255,255,255,0.06); border-radius:8px; border:1px solid rgba(201,168,76,0.2); }
+.special-item .item-sym { font-size:1.8rem; display:block; margin-bottom:6px; }
+.special-item .item-name { font-size:0.78rem; color:var(--gold); display:block; margin-bottom:4px; }
+.special-item .item-desc { font-size:0.7rem; color:rgba(255,255,255,0.6); }
+.special-desc { margin-top:20px; font-size:0.88rem; color:rgba(255,255,255,0.75); line-height:1.7; }
+
+/* CTA */
+.cta-bar { background:var(--red); border-radius:12px; padding:28px 32px; display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap; }
+.cta-bar h3 { color:#fff; font-size:1.1rem; font-weight:normal; }
+.cta-bar p { color:rgba(255,255,255,0.75); font-size:0.85rem; margin-top:4px; }
+.cta-links { display:flex; gap:10px; flex-wrap:wrap; }
+.btn { display:inline-block; padding:10px 22px; border:2px solid #fff; color:#fff; text-decoration:none; border-radius:4px; font-size:0.82rem; letter-spacing:0.08em; transition:background 0.2s, color 0.2s; font-family:inherit; cursor:pointer; }
+.btn:hover { background:#fff; color:var(--red); }
+.btn.secondary { border-color:rgba(255,255,255,0.4); color:rgba(255,255,255,0.7); }
+.btn.secondary:hover { background:rgba(255,255,255,0.15); color:#fff; }
+
+/* Breadcrumb */
+.breadcrumb { padding:12px 20px; font-size:0.75rem; color:var(--gray); max-width:1100px; margin:0 auto; }
+.breadcrumb a { color:var(--gray); text-decoration:none; }
+.breadcrumb a:hover { color:var(--red); }
+
+footer { background:var(--ink); color:rgba(255,255,255,0.35); text-align:center; padding:28px; font-size:0.78rem; }
+
+@media(max-width:700px) {
+  .grid { grid-template-columns:1fr; }
+  .special-grid { grid-template-columns:repeat(2,1fr); }
+  .nearby-grid { grid-template-columns:1fr; }
+  .deity-card { grid-template-columns:1fr; }
+  .quick-item { padding:10px 16px; }
+  .cta-bar { flex-direction:column; align-items:flex-start; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a class="logo" href="ichinomiya-map.html">
+    <span class="kanji">一ノ宮</span>
+    <span class="sub">Japan's First Shrines</span>
+  </a>
+  <div class="header-right">
+    <nav>
+      <a href="ichinomiya-intro.html">What is Ichinomiya?</a>
+      <a href="ichinomiya-map.html">&larr; All Shrines</a>
+    </nav>
+    <div class="lang-switcher">
+      <a href="#" class="lang-btn">日本語</a>
+      <a href="#" class="lang-btn active">EN</a>
+      <a href="#" class="lang-btn">中文</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-glow"></div>
+  <!-- Torii silhouette -->
+  <svg class="hero-torii" viewBox="0 0 900 500" xmlns="http://www.w3.org/2000/svg">
+    <rect x="200" y="80" width="500" height="28" fill="white"/>
+    <rect x="240" y="108" width="420" height="16" fill="white"/>
+    <rect x="250" y="108" width="36" height="390" fill="white"/>
+    <rect x="614" y="108" width="36" height="390" fill="white"/>
+    <rect x="258" y="200" width="20" height="30" rx="3" fill="white" opacity="0.5"/>
+    <rect x="622" y="200" width="20" height="30" rx="3" fill="white" opacity="0.5"/>
+  </svg>
+  <!-- Particles -->
+  <div class="particles">
+    <div class="particle" style="left:10%;animation-duration:9s;animation-delay:0s;"></div>
+    <div class="particle" style="left:25%;animation-duration:12s;animation-delay:1.5s;"></div>
+    <div class="particle" style="left:40%;animation-duration:8s;animation-delay:3s;"></div>
+    <div class="particle" style="left:55%;animation-duration:11s;animation-delay:0.5s;"></div>
+    <div class="particle" style="left:70%;animation-duration:10s;animation-delay:2s;"></div>
+    <div class="particle" style="left:85%;animation-duration:13s;animation-delay:4s;"></div>
+    <div class="particle" style="left:95%;animation-duration:7s;animation-delay:1s;"></div>
+    <div class="particle" style="left:5%;animation-duration:14s;animation-delay:5s;"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">大隅國一之宮 · Ichinomiya of Osumi Province</div>
+    <h1>
+      <span class="jp">鹿児島神宮</span>
+      Kagoshima Jingu
+    </h1>
+    <p class="hero-tagline">
+      Where heaven meets the southern sea &mdash;<br>
+      birthplace of the Imperial line in the Land of Hayato.
+    </p>
+    <div class="hero-scroll">&darr; &nbsp; explore this shrine</div>
+  </div>
+</div>
+
+<!-- QUICK FACTS BAR -->
+<div class="quick-bar">
+  <div class="quick-item">
+    <span class="quick-icon">📍</span>
+    <div>
+      <span class="quick-label">Location</span>
+      <span class="quick-value">Kirishima, Kagoshima</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">🚃</span>
+    <div>
+      <span class="quick-label">Nearest Station</span>
+      <span class="quick-value">Hayato Sta. (JR)</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">🚅</span>
+    <div>
+      <span class="quick-label">From Tokyo</span>
+      <span class="quick-value">~5 hrs (Flight + JR)</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">🕐</span>
+    <div>
+      <span class="quick-label">Hours</span>
+      <span class="quick-value">Always Open (Free)</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">🌋</span>
+    <div>
+      <span class="quick-label">Nearby</span>
+      <span class="quick-value">Sakurajima Volcano</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">♨️</span>
+    <div>
+      <span class="quick-label">Nearby</span>
+      <span class="quick-value">Kirishima Hot Springs</span>
+    </div>
+  </div>
+</div>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a href="ichinomiya-map.html">All Shrines</a> &nbsp;&rsaquo;&nbsp;
+  <a href="ichinomiya-map.html?road=Saikaido">Saikaidō 西海道</a> &nbsp;&rsaquo;&nbsp;
+  Osumi Province &nbsp;&rsaquo;&nbsp; Kagoshima Jingu
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+  <!-- Deity row (full width) -->
+  <div class="deity-card grid-full" style="margin-bottom:24px;">
+    <div class="deity-symbol">👻</div>
+    <div>
+      <div class="deity-label">Enshrined Deities &mdash; Divine Ancestors of the Imperial Line</div>
+      <div class="deity-name">Hoori no Mikoto &amp; Toyotama-hime</div>
+      <div class="deity-jp">火遠理命（ひおうりのみこと）&amp; 豊玉姫命（とよたまひめのみこと）</div>
+      <div class="deity-desc">
+        Hoori no Mikoto, grandson of Amaterasu and son of Ninigi-no-Mikoto, is the mythical ancestor of Emperor Jimmu, the first emperor of Japan. His consort Toyotama-hime, the sea princess, brought heavenly bloodline into the mortal realm. According to legend, this shrine was once Takachiho Palace, the residence of Hoori during the Age of the Gods. In Kirishima's misty Hayato highlands, the divine and earthly realms converge. Kagoshima Jingu stands as the physical manifestation of this pivotal moment when heaven descended to establish the Japanese imperial dynasty.
+      </div>
+      <div class="blessing-tags">
+        <span class="blessing-tag">#ImperialLineage</span>
+        <span class="blessing-tag">#HeavenlyDescentMythology</span>
+        <span class="blessing-tag">#SeaPrincess</span>
+        <span class="blessing-tag">#ImperialAncestors</span>
+        <span class="blessing-tag">#SouthernKyushu</span>
+        <span class="blessing-tag">#HayatoHeritage</span>
+        <span class="blessing-tag">#TakachihoPalace</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+
+    <!-- ■ CARD 1: ESSENCE -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">1</div>
+        <div class="card-title-block">
+          <span class="card-title-en">The Essence · 核心価値</span>
+          <span class="card-title-jp">核心的価値 &mdash; なぜここが特別なのか</span>
+          <span class="card-title-zh">核心价值 · 为何与众不同</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="essence-highlight">
+          <div class="essence-label">由緒 · Where Heaven Met Earth</div>
+          <div class="essence-text">
+            <strong>The legendary Takachiho Palace where the Imperial line was born in the Age of the Gods.</strong><br>
+            Kagoshima Jingu marks one of Japan's most mythologically significant sites. According to tradition, Hoori no Mikoto, the grandson of Amaterasu and ancestor of the first emperor, made this place his Takachiho Palace. Here, he married Toyotama-hime, the sea princess, and fathered the lineage that would rule Japan eternally. The shrine is Japan's sole Shikinai Taisha (officially sanctioned great shrine) in southern Kyushu, recognized in the Engishiki (10th century official shrine registry) as the preeminent shrine of Osumi Province.
+          </div>
+        </div>
+        <div class="essence-highlight" style="border-color:var(--red);">
+          <div class="essence-label" style="color:var(--red);">伝説 · Ryugu Legend Connection</div>
+          <div class="essence-text" style="font-size:0.88rem; color:#444;">
+            The myth of Hoori and the sea princess mirrors the timeless tale of the Dragon Palace (Ryugu) found throughout East Asian mythology. Toyotama-hime's father was a sea god, and their union created a bridge between heaven and ocean. Kirishima's location at the volcanic heart of southern Kyushu, near the sea, embodies this cosmic harmony. The shrine's landscape bridges myth and natural beauty.
+          </div>
+        </div>
+        <!-- Video -->
+        <div class="video-wrapper">
+          <svg style="width:100%;aspect-ratio:16/9;display:block;" viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="southern-sky" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#0a0a20"/>
+                <stop offset="50%" stop-color="#15080a"/>
+                <stop offset="100%" stop-color="#1a1a2e"/>
+              </linearGradient>
+              <linearGradient id="volcanic-glow" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#ff8844" stop-opacity="0.3"/>
+                <stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <rect width="800" height="450" fill="url(#southern-sky)"/>
+            <!-- Mountains -->
+            <polygon points="50,350 200,120 350,350" fill="#2a1a10" opacity="0.7"/>
+            <polygon points="300,350 450,140 600,350" fill="#1a1a10" opacity="0.8"/>
+            <polygon points="550,350 700,160 850,350" fill="#2a1a15" opacity="0.6"/>
+            <!-- Sea/Southern landscape -->
+            <rect x="0" y="350" width="800" height="100" fill="#0a1520" opacity="0.9"/>
+            <!-- Ocean horizon glow -->
+            <ellipse cx="400" cy="350" rx="400" ry="40" fill="rgba(201,168,76,0.1)" opacity="0.4"/>
+            <!-- Shrine on mountain -->
+            <rect x="320" y="210" width="160" height="25" fill="#c9a84c" opacity="0.7"/>
+            <polygon points="350 210 450 190 550 210" fill="#c9a84c" opacity="0.6"/>
+            <rect x="340" y="235" width="14" height="60" fill="#c9a84c" opacity="0.7"/>
+            <rect x="446" y="235" width="14" height="60" fill="#c9a84c" opacity="0.7"/>
+            <!-- Sunrise/celestial glow -->
+            <circle cx="700" cy="100" r="50" fill="url(#volcanic-glow)" opacity="0.6"/>
+            <!-- Stars -->
+            <circle cx="80" cy="60" r="1.5" fill="white" opacity="0.5"/>
+            <circle cx="250" cy="40" r="1" fill="white" opacity="0.3"/>
+            <circle cx="550" cy="70" r="1.5" fill="white" opacity="0.4"/>
+            <circle cx="720" cy="50" r="1" fill="white" opacity="0.5"/>
+            <!-- Text -->
+            <text x="400" y="420" text-anchor="middle" font-size="12" fill="rgba(255,255,255,0.5)" font-family="Georgia">鹿児島神宮 · Kagoshima Jingu</text>
+          </svg>
+          <div class="video-overlay">
+            <a class="play-btn" href="https://www.youtube.com/results?search_query=鹿児島神宮+参拝+火遠理命" target="_blank" title="Watch on YouTube">&#9654;</a>
+          </div>
+          <div class="video-caption">&#9654; 鹿児島神宮の伝説の地 &mdash; Experience the legendary shrine · 30 sec</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ■ CARD 2: ACCESS -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">2</div>
+        <div class="card-title-block">
+          <span class="card-title-en">Plan Your Visit · 交通指南</span>
+          <span class="card-title-jp">旅の地図 &mdash; アクセス情報</span>
+          <span class="card-title-zh">交通指南 · 如何前往</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <!-- Google Map embed -->
+        <div class="map-wrapper">
+          <iframe src="https://maps.google.com/maps?q=%E9%B9%BF%E5%85%90%E5%B3%B6%E7%A5%9E%E5%AE%AE+%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C&output=embed&hl=en&z=13" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Kagoshima Jingu map"></iframe>
+        </div>
+        <a class="map-link" href="https://maps.google.com/maps?q=鹿児島神宮" target="_blank">
+          📍 Open in Google Maps &mdash; 鹿児島県霧島市隼人町内1428
+        </a>
+        <ul class="access-list">
+          <li>
+            <span class="access-icon">🚃</span>
+            <span class="access-text">
+              <span class="access-main">JR Hayato Station &mdash; <strong>10 min walk</strong></span>
+              <span class="access-sub">隺人駅 · On the Kirishima Line · Regular local trains from Kagoshima City</span>
+            </span>
+          </li>
+          <li>
+            <span class="access-icon">🚄</span>
+            <span class="access-text">
+              <span class="access-main">From <strong>Kagoshima City</strong> &mdash; approx. 45 min</span>
+              <span class="access-sub">JR Kirishima Line to Hayato Station</span>
+            </span>
+          </li>
+          <li>
+            <span class="access-icon">✈️</span>
+            <span class="access-text">
+              <span class="access-main">From <strong>Tokyo</strong> &mdash; approx. 5 hrs total</span>
+              <span class="access-sub">Flight to Kagoshima Airport (~2 hrs) &rarr; Bus/JR to Hayato (~60 min)</span>
+            </span>
+          </li>
+          <li>
+            <span class="access-icon">🚗</span>
+            <span class="access-text">
+              <span class="access-main">By car &mdash; From Kagoshima Airport &rarr; approx. 50 min</span>
+              <span class="access-sub">Kirishima IC (Kyushu Expressway) &rarr; 15 min local drive to shrine</span>
+            </span>
+          </li>
+          <li>
+            <span class="access-icon">⏰</span>
+            <span class="access-text">
+              <span class="access-main">Open 24/7 · Free admission</span>
+              <span class="access-sub">Goshuin office: typically 9:00&ndash;17:00 · &yen;500</span>
+            </span>
+          </li>
+          <li>
+            <span class="access-icon">♨️</span>
+            <span class="access-text">
+              <span class="access-main">Kirishima Hot Springs nearby &mdash; perfect overnight base</span>
+              <span class="access-sub">Multiple ryokan with volcanic onsen · 10-15 min from shrine</span>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ■ CARD 3: DEEP INSIGHT -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">3</div>
+        <div class="card-title-block">
+          <span class="card-title-en">Deep Insight · 深度探索</span>
+          <span class="card-title-jp">リピーターのこだわり &mdash; 知る人ぞ知る</span>
+          <span class="card-title-zh">深度探索 · 行家的坚持</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="insight-item">
+          <span class="insight-badge badge-unique">UNIQUE</span>
+          <div class="insight-body">
+            <div class="insight-title">Engishiki Recognition &mdash; Only Southern Kyushu Taisha</div>
+            <div class="insight-desc">
+              In the Engishiki (10th century official registry of sacred shrines), Kagoshima Jingu is the only Shikinai Taisha listed for southern Kyushu. This status places it in the most elite category of Japanese shrines, signifying its importance as a conduit between the imperial court and southern regional power.
+            </div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-badge badge-unique">UNIQUE</span>
+          <div class="insight-body">
+            <div class="insight-title">Takachiho Palace Mythology &mdash; Seat of the Divine Ancestor</div>
+            <div class="insight-desc">
+              The shrine grounds are believed to be where Takachiho Palace once stood &mdash; the residence of Hoori no Mikoto during the Age of the Gods. This is not merely a temple built in honor of a deity, but the legendary actual dwelling place. Walking the shrine's paths, visitors trace the steps of Japan's imperial mythology.
+            </div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-badge badge-info">INFO</span>
+          <div class="insight-body">
+            <div class="insight-title">Hayato People Connection &mdash; Indigenous Southern Warriors</div>
+            <div class="insight-desc">
+              Hayato were the indigenous warrior people of southern Kyushu. The shrine's location and mythology connect to the historical Hayato culture and their eventual integration into the emerging Japanese state. This shrine represents a bridge between imperial mythology and local southern heritage.
+            </div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-badge badge-seasonal">FESTIVAL</span>
+          <div class="insight-body">
+            <div class="insight-title">Hatsu-uma Matsuri &mdash; August Horse Festival</div>
+            <div class="insight-desc">
+              The main annual festival is held on August 15 by the lunar calendar. "Hatsu-uma" refers to the first horse day in the traditional calendar. The festival celebrates the divine ancestors and draws pilgrims from across Kyushu, featuring traditional performances and ceremonies honoring the Imperial lineage.
+            </div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-badge badge-tip">TIP</span>
+          <div class="insight-body">
+            <div class="insight-title">Ancient Camphor Trees &mdash; Living Connections to Antiquity</div>
+            <div class="insight-desc">
+              Like Oyamazumi Shrine, Kagoshima Jingu features ancient camphor trees that have witnessed centuries of worship. These venerable trees are living links to Japan's oldest spiritual practices. Visitors often touch or embrace the trees as a way of connecting to the deep past.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ■ CARD 4: EAT STAY MORE -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">4</div>
+        <div class="card-title-block">
+          <span class="card-title-en">Eat, Stay &amp; More · 周邊資訊</span>
+          <span class="card-title-jp">周辺の滞在 &mdash; 食・宿・寄り道</span>
+          <span class="card-title-zh">周边信息 · 吃住游</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="nearby-grid">
+          <div class="nearby-item">
+            <span class="nearby-icon">🐷</span>
+            <div class="nearby-cat">Food · 食</div>
+            <div class="nearby-name">Kurobuta Pork</div>
+            <div class="nearby-desc">
+              Black Berkshire pork raised in Kirishima's volcanic soil is an Osumi delicacy. Rich, flavorful meat served grilled, in hot pot, or as tonkatsu (breaded cutlet). Try it at local restaurants near Hayato Station.
+            </div>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-icon">♨️</span>
+            <div class="nearby-cat">Stay · 宿</div>
+            <div class="nearby-name">Kirishima Hot Springs</div>
+            <div class="nearby-desc">
+              Traditional ryokan nestled in volcanic foothills. Multiple onsen fed by Kirishima's natural hot springs. The perfect base for combining shrine pilgrimage with mountain relaxation.
+            </div>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-icon">🌋</span>
+            <div class="nearby-cat">Nature · 自然</div>
+            <div class="nearby-name">Kirishima Mountain Park</div>
+            <div class="nearby-desc">
+              Scenic hiking in volcanic terrain with crater lakes and mountain views. Multiple trails range from short walks to full-day treks. Connected to Kirishima Jingu (another major shrine).
+            </div>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-icon">🌋</span>
+            <div class="nearby-cat">Nature · 自然</div>
+            <div class="nearby-name">Sakurajima Active Volcano</div>
+            <div class="nearby-desc">
+              Visible from many points around Kagoshima, Japan's most active volcano can be reached by ferry from Kagoshima City. Watch steam and ash eruptions in real-time &mdash; 40 min from shrine by train.
+            </div>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-icon">⛩️</span>
+            <div class="nearby-cat">Next Shrine · 次</div>
+            <div class="nearby-name">Kirishima Jingu</div>
+            <div class="nearby-desc">
+              Another major Kyushu shrine located in the Kirishima mountains, about 30 min by local bus from Hayato Station. Can combine visits on a shrine pilgrimage circuit.
+            </div>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-icon">🏙️</span>
+            <div class="nearby-cat">City · 都市</div>
+            <div class="nearby-name">Kagoshima City</div>
+            <div class="nearby-desc">
+              Samurai heritage, Meiji Restoration history, and southern Kyushu culture. About 45 min by train from Hayato. Museums, gardens, and waterfront attractions.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /grid -->
+
+  <!-- SPECIAL SECTION: Where Heaven Meets the Southern Sea -->
+  <div class="special-box" style="margin-top:24px;">
+    <div class="special-title">天界と南の海が出会う地 &mdash; Where Heaven Meets the Southern Sea</div>
+    <div class="special-sub">THE MYTHOLOGICAL BIRTH OF IMPERIAL JAPAN IN SOUTHERN KYUSHU</div>
+    <div class="special-grid">
+      <div class="special-item">
+        <span class="item-sym">👻</span>
+        <span class="item-name">Hoori no Mikoto</span>
+        <span class="item-desc">Ancestor of Emperor Jimmu</span>
+      </div>
+      <div class="special-item">
+        <span class="item-sym">🧜</span>
+        <span class="item-name">Toyotama-hime</span>
+        <span class="item-desc">Sea princess &amp; mother of next generation</span>
+      </div>
+      <div class="special-item">
+        <span class="item-sym">🌊</span>
+        <span class="item-name">Ryugu Connection</span>
+        <span class="item-desc">Dragon Palace mythology link</span>
+      </div>
+      <div class="special-item">
+        <span class="item-sym">🏿</span>
+        <span class="item-name">Takachiho Palace</span>
+        <span class="item-desc">Legendary divine residence</span>
+      </div>
+      <div class="special-item">
+        <span class="item-sym">⛩️</span>
+        <span class="item-name">Shikinai Taisha Status</span>
+        <span class="item-desc">Only southern Kyushu shrine in registry</span>
+      </div>
+      <div class="special-item">
+        <span class="item-sym">🏹</span>
+        <span class="item-name">Hayato Heritage</span>
+        <span class="item-desc">Connection to indigenous warriors</span>
+      </div>
+      <div class="special-item">
+        <span class="item-sym">🌋</span>
+        <span class="item-name">Volcanic Kirishima</span>
+        <span class="item-desc">Sacred mountain setting</span>
+      </div>
+      <div class="special-item">
+        <span class="item-sym">🐴</span>
+        <span class="item-name">Hatsu-uma Festival</span>
+        <span class="item-desc">August horse festival celebration</span>
+      </div>
+      <div class="special-item" style="background:rgba(201,168,76,0.12); border-color:var(--gold);">
+        <span class="item-sym" style="color:var(--gold);">✦</span>
+        <span class="item-name" style="color:var(--gold);">Eternal Imperial Line</span>
+        <span class="item-desc" style="color:rgba(255,255,255,0.8);">Unbroken dynasty established here</span>
+      </div>
+    </div>
+    <div class="special-desc">
+      Kagoshima Jingu represents one of Japan's most mythologically resonant sites &mdash; the legendary point where heaven descended to earth, where the divine ancestor married a sea princess, and where the Imperial lineage that would rule Japan for two millennia was born. Recognized in the Engishiki as the only Shikinai Taisha shrine in southern Kyushu, Kagoshima Jingu holds unique spiritual authority. The shrine's location in Kirishima, surrounded by volcanic mountains and connected geographically to the sea, reflects the cosmic harmony of its founding mythology. Unlike shrines built centuries after the events they commemorate, Kagoshima Jingu is believed to stand at the actual site of Takachiho Palace. For those seeking to understand Japan's deepest mythological foundations, this shrine in southern Kyushu offers an experience of encountering the very origins of an eternal imperial civilization.
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-bar" style="margin-top:24px;">
+    <div>
+      <h3>Ready to visit Kagoshima Jingu?</h3>
+      <p>Experience the birthplace of Imperial Japan and the legendary Takachiho Palace in the mountains of southern Kyushu.</p>
+    </div>
+    <div class="cta-links">
+      <a href="https://kagoshima-jingu.jp/" target="_blank" class="btn">Official Website &rarr;</a>
+      <a href="ichinomiya-map.html" class="btn secondary">&larr; All Shrines Map</a>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<footer>
+  <p>一ノ宮 Ichinomiya &nbsp;&middot;&nbsp; Kagoshima Jingu &middot; 大隅國一之宮 鹿児島神宮</p>
+  <p style="margin-top:6px;">
+    Sources:
+    <a href="https://kagoshima-jingu.jp/" target="_blank" style="color:rgba(255,255,255,0.4);">Official Shrine</a> &middot;
+    <a href="https://en.m.wikipedia.org/wiki/Kagoshima_Shrine" target="_blank" style="color:rgba(255,255,255,0.4);">Wikipedia</a> &middot;
+    <a href="https://www.japan-experience.com/" target="_blank" style="color:rgba(255,255,255,0.4);">Japan Experience</a>
+  </p>
+</footer>
+
+</body>
+</html>
