@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Taga Taisha — Ichinomiya of Omi Province</title>
+<style>
+:root {
+  --red: #9b2335;
+  --gold: #c9a84c;
+  --ink: #1a1a2e;
+  --cream: #fdf6ec;
+  --mist: #f0ebe3;
+  --gray: #6b6b6b;
+  --green: #2e7d32;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Georgia',serif; background:var(--cream); color:var(--ink); line-height:1.75; }
+
+/* ── HEADER ── */
+header { background:var(--ink); color:#fff; display:flex; align-items:center; justify-content:space-between; padding:14px 28px; position:sticky; top:0; z-index:200; box-shadow:0 2px 12px rgba(0,0,0,0.4); }
+.logo { display:flex; align-items:baseline; gap:10px; text-decoration:none; }
+.logo .kanji { font-size:1.5rem; color:var(--gold); font-weight:bold; }
+.logo .sub { font-size:0.78rem; color:rgba(255,255,255,0.5); letter-spacing:0.1em; }
+.header-right { display:flex; align-items:center; gap:16px; }
+nav a { color:rgba(255,255,255,0.6); text-decoration:none; font-size:0.78rem; letter-spacing:0.08em; margin-left:20px; }
+nav a:hover { color:var(--gold); }
+.lang-switcher { display:flex; gap:4px; }
+.lang-btn { font-size:0.7rem; padding:2px 8px; border-radius:10px; text-decoration:none; border:1px solid rgba(255,255,255,0.2); color:rgba(255,255,255,0.5); transition:all 0.2s; }
+.lang-btn.active { background:var(--gold); color:var(--ink); border-color:var(--gold); font-weight:bold; }
+
+/* ── HERO ── */
+.hero { position:relative; height:88vh; min-height:520px; overflow:hidden; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; padding-bottom:48px; color:#fff; text-align:center; }
+.hero-bg { position:absolute; inset:0; background: linear-gradient(to bottom, rgba(10,5,20,0.3) 0%, rgba(10,5,20,0.1) 40%, rgba(10,5,20,0.75) 100%), linear-gradient(135deg, #1a0d0a 0%, #0d1a0d 40%, #0a1520 100%); }
+.hero-torii { position:absolute; bottom:0; left:50%; transform:translateX(-50%); width:100%; max-width:900px; opacity:0.12; }
+.hero-glow { position:absolute; width:600px; height:600px; border-radius:50%; background:radial-gradient(circle, rgba(201,168,76,0.15) 0%, transparent 70%); top:50%; left:50%; transform:translate(-50%,-50%); }
+.particles { position:absolute; inset:0; overflow:hidden; }
+.particle { position:absolute; width:2px; height:2px; background:rgba(201,168,76,0.6); border-radius:50%; animation:float linear infinite; }
+@keyframes float { 0% { transform:translateY(100vh) translateX(0); opacity:0; } 10% { opacity:1; } 90% { opacity:1; } 100% { transform:translateY(-20px) translateX(30px); opacity:0; } }
+.hero-content { position:relative; z-index:1; padding:0 20px; }
+.hero-badge { display:inline-block; border:1px solid var(--gold); color:var(--gold); font-size:0.7rem; letter-spacing:0.25em; padding:4px 16px; border-radius:20px; margin-bottom:16px; text-transform:uppercase; }
+.hero h1 { font-size:clamp(2rem,6vw,4.5rem); font-weight:normal; line-height:1.1; margin-bottom:8px; }
+.hero h1 .jp { display:block; font-size:clamp(2.5rem,8vw,5.5rem); color:var(--gold); }
+.hero-tagline { font-size:clamp(0.9rem,2vw,1.1rem); color:rgba(255,255,255,0.75); max-width:560px; margin:16px auto 0; font-style:italic; }
+.hero-scroll { margin-top:32px; color:rgba(255,255,255,0.3); font-size:0.72rem; letter-spacing:0.2em; animation:pulse 2.5s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{opacity:.3} 50%{opacity:.8} }
+
+/* ── QUICK FACTS BAR ── */
+.quick-bar { background:var(--ink); color:#fff; display:flex; justify-content:center; flex-wrap:wrap; gap:0; }
+.quick-item { padding:14px 28px; display:flex; align-items:center; gap:8px; border-right:1px solid rgba(255,255,255,0.1); font-size:0.8rem; }
+.quick-item:last-child { border-right:none; }
+.quick-icon { font-size:1rem; }
+.quick-label { color:rgba(255,255,255,0.45); font-size:0.65rem; display:block; }
+.quick-value { color:#fff; font-size:0.85rem; }
+
+/* ── MAIN GRID ── */
+.main { max-width:1100px; margin:0 auto; padding:48px 20px 80px; }
+.grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+.grid-full { grid-column:1/-1; }
+
+/* ── CARDS ── */
+.card { background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 2px 16px rgba(0,0,0,0.07); border:1px solid rgba(0,0,0,0.06); }
+.card-header { padding:18px 24px 14px; border-bottom:1px solid #f0e8d8; display:flex; align-items:center; gap:12px; }
+.card-num { width:28px; height:28px; background:var(--red); color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.75rem; font-weight:bold; flex-shrink:0; }
+.card-title-block {}
+.card-title-en { font-size:0.65rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold); display:block; }
+.card-title-jp { font-size:1.05rem; font-weight:bold; display:block; line-height:1.2; }
+.card-title-zh { font-size:0.7rem; color:var(--gray); display:block; }
+.card-body { padding:20px 24px 24px; }
+
+/* Essence card */
+.essence-highlight { background:var(--mist); border-radius:8px; padding:16px 20px; margin-bottom:16px; border-left:3px solid var(--gold); }
+.essence-label { font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:6px; }
+.essence-text { font-size:0.95rem; color:#333; }
+.essence-text strong { color:var(--red); }
+
+/* Video embed */
+.video-wrapper { position:relative; border-radius:8px; overflow:hidden; background:var(--ink); margin-top:16px; }
+.video-overlay { position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%); display:flex; align-items:center; justify-content:center; }
+.play-btn { width:56px; height:56px; border-radius:50%; background:rgba(201,168,76,0.9); display:flex; align-items:center; justify-content:center; text-decoration:none; transition:transform 0.2s, background 0.2s; font-size:1.3rem; color:var(--ink); }
+.play-btn:hover { transform:scale(1.1); background:var(--gold); }
+.video-caption { position:absolute; bottom:0; left:0; right:0; padding:10px 14px; color:rgba(255,255,255,0.8); font-size:0.75rem; }
+
+/* Map card */
+.map-wrapper { border-radius:8px; overflow:hidden; margin-bottom:16px; }
+.map-wrapper iframe { width:100%; height:240px; border:none; display:block; }
+.map-link { display:flex; align-items:center; gap:8px; background:var(--ink); color:var(--gold); text-decoration:none; padding:10px 16px; border-radius:6px; font-size:0.82rem; letter-spacing:0.08em; margin-bottom:16px; transition:background 0.2s; }
+.map-link:hover { background:#2a2a3e; }
+.access-list { list-style:none; }
+.access-list li { display:flex; gap:10px; align-items:flex-start; padding:8px 0; border-bottom:1px solid #f0ebe3; font-size:0.88rem; }
+.access-list li:last-child { border-bottom:none; }
+.access-icon { flex-shrink:0; font-size:1rem; }
+.access-main { display:block; color:var(--ink); }
+.access-sub { display:block; font-size:0.75rem; color:var(--gray); }
+
+/* Deep Insight card */
+.insight-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid #f0ebe3; }
+.insight-item:last-child { border-bottom:none; }
+.insight-badge { flex-shrink:0; padding:2px 8px; border-radius:4px; font-size:0.65rem; font-weight:bold; letter-spacing:0.05em; height:fit-content; margin-top:2px; }
+.badge-secret { background:#e8f0fe; color:#1a237e; }
+.badge-best { background:#e8f5e9; color:#1b5e20; }
+.badge-stamp { background:#fff3e0; color:#e65100; }
+.badge-tip { background:#f3e5f5; color:#6a1b9a; }
+.badge-unique { background:rgba(201,168,76,0.15); color:#8d6e00; }
+.badge-seasonal { background:#fce4ec; color:#880e4f; }
+.insight-title { font-size:0.9rem; font-weight:bold; margin-bottom:3px; }
+.insight-desc { font-size:0.83rem; color:var(--gray); }
+
+/* Nearby card */
+.nearby-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; }
+.nearby-item { background:var(--mist); border-radius:8px; padding:14px; }
+.nearby-cat { font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--gray); margin-bottom:4px; }
+.nearby-icon { font-size:1.2rem; margin-bottom:6px; display:block; }
+.nearby-name { font-size:0.88rem; font-weight:bold; margin-bottom:4px; }
+.nearby-desc { font-size:0.78rem; color:var(--gray); }
+
+/* Deity section */
+.deity-card { background:var(--ink); color:#fff; border-radius:12px; padding:32px; display:grid; grid-template-columns:auto 1fr; gap:28px; align-items:start; }
+.deity-symbol { font-size:4rem; line-height:1; }
+.deity-label { font-size:0.65rem; letter-spacing:0.2em; color:var(--gold); text-transform:uppercase; margin-bottom:6px; }
+.deity-name { font-size:1.5rem; font-weight:bold; margin-bottom:4px; }
+.deity-jp { font-size:0.9rem; color:rgba(255,255,255,0.55); margin-bottom:16px; }
+.deity-desc { font-size:0.9rem; color:rgba(255,255,255,0.8); line-height:1.7; margin-bottom:16px; }
+.blessing-tags { display:flex; flex-wrap:wrap; gap:6px; }
+.blessing-tag { background:rgba(201,168,76,0.15); border:1px solid rgba(201,168,76,0.3); color:var(--gold); padding:3px 10px; border-radius:12px; font-size:0.72rem; letter-spacing:0.05em; }
+
+/* Special section */
+.special-box { background:linear-gradient(135deg, #1a1a2e 0%, #2a1010 100%); color:#fff; border-radius:12px; padding:32px; }
+.special-title { color:var(--gold); font-size:1.2rem; margin-bottom:8px; }
+.special-sub { font-size:0.75rem; letter-spacing:0.15em; color:rgba(255,255,255,0.4); margin-bottom:20px; }
+.special-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:20px; }
+.special-item { text-align:center; padding:16px 8px; background:rgba(255,255,255,0.06); border-radius:8px; border:1px solid rgba(201,168,76,0.2); }
+.special-item .item-sym { font-size:2rem; display:block; margin-bottom:6px; }
+.special-item .item-name { font-size:0.75rem; color:var(--gold); display:block; }
+.special-item .item-desc { font-size:0.68rem; color:rgba(255,255,255,0.55); display:block; margin-top:4px; }
+.special-desc { font-size:0.88rem; color:rgba(255,255,255,0.75); line-height:1.7; }
+
+/* CTA */
+.cta-bar { background:var(--red); border-radius:12px; padding:28px 32px; display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap; }
+.cta-bar h3 { color:#fff; font-size:1.1rem; font-weight:normal; }
+.cta-bar p { color:rgba(255,255,255,0.75); font-size:0.85rem; margin-top:4px; }
+.cta-links { display:flex; gap:10px; flex-wrap:wrap; }
+.btn { display:inline-block; padding:10px 22px; border:2px solid #fff; color:#fff; text-decoration:none; border-radius:4px; font-size:0.82rem; letter-spacing:0.08em; transition:background 0.2s, color 0.2s; font-family:inherit; cursor:pointer; }
+.btn:hover { background:#fff; color:var(--red); }
+.btn.secondary { border-color:rgba(255,255,255,0.4); color:rgba(255,255,255,0.7); }
+.btn.secondary:hover { background:rgba(255,255,255,0.15); color:#fff; }
+
+/* Breadcrumb */
+.breadcrumb { padding:12px 20px; font-size:0.75rem; color:var(--gray); max-width:1100px; margin:0 auto; }
+.breadcrumb a { color:var(--gray); text-decoration:none; }
+.breadcrumb a:hover { color:var(--red); }
+
+footer { background:var(--ink); color:rgba(255,255,255,0.35); text-align:center; padding:28px; font-size:0.78rem; }
+
+@media(max-width:700px) {
+  .grid { grid-template-columns:1fr; }
+  .special-grid { grid-template-columns:repeat(2,1fr); }
+  .nearby-grid { grid-template-columns:1fr; }
+  .deity-card { grid-template-columns:1fr; }
+  .quick-item { padding:10px 16px; }
+  .cta-bar { flex-direction:column; align-items:flex-start; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a class="logo" href="ichinomiya-map.html">
+    <span class="kanji">一ノ宮</span>
+    <span class="sub">Japan's First Shrines</span>
+  </a>
+  <div class="header-right">
+    <nav>
+      <a href="ichinomiya-intro.html">What is Ichinomiya?</a>
+      <a href="ichinomiya-map.html">&larr; All Shrines</a>
+    </nav>
+    <div class="lang-switcher">
+      <a href="#" class="lang-btn">日本語</a>
+      <a href="#" class="lang-btn active">EN</a>
+      <a href="#" class="lang-btn">中文</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-glow"></div>
+  <!-- Torii silhouette -->
+  <svg class="hero-torii" viewBox="0 0 900 500" xmlns="http://www.w3.org/2000/svg">
+    <rect x="200" y="80" width="500" height="28" fill="white"/>
+    <rect x="240" y="108" width="420" height="16" fill="white"/>
+    <rect x="250" y="108" width="36" height="390" fill="white"/>
+    <rect x="614" y="108" width="36" height="390" fill="white"/>
+    <rect x="258" y="200" width="20" height="30" rx="3" fill="white" opacity="0.5"/>
+    <rect x="622" y="200" width="20" height="30" rx="3" fill="white" opacity="0.5"/>
+  </svg>
+  <!-- Particles -->
+  <div class="particles">
+    <div class="particle" style="left:12%;animation-duration:9s;animation-delay:0s;"></div>
+    <div class="particle" style="left:25%;animation-duration:12s;animation-delay:1.5s;"></div>
+    <div class="particle" style="left:40%;animation-duration:8s;animation-delay:3s;"></div>
+    <div class="particle" style="left:55%;animation-duration:11s;animation-delay:0.5s;"></div>
+    <div class="particle" style="left:68%;animation-duration:10s;animation-delay:2s;"></div>
+    <div class="particle" style="left:80%;animation-duration:13s;animation-delay:4s;"></div>
+    <div class="particle" style="left:92%;animation-duration:9s;animation-delay:1s;"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">近江國一之宮 &middot; Ichinomiya of Omi Province</div>
+    <h1>
+      <span class="jp">多賀大社</span>
+      Taga Taisha
+    </h1>
+    <p class="hero-tagline">
+      Where the parent gods of all creation are enshrined &mdash;<br>
+      a sanctuary of longevity, love, and the origin of life itself.
+    </p>
+    <div class="hero-scroll">&darr; &nbsp; explore this shrine</div>
+  </div>
+</div>
+
+<!-- QUICK FACTS BAR -->
+<div class="quick-bar">
+  <div class="quick-item">
+    <span class="quick-icon">📍</span>
+    <div>
+      <span class="quick-label">Location</span>
+      <span class="quick-value">Taga, Shiga Prefecture</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">🚃</span>
+    <div>
+      <span class="quick-label">Nearest Station</span>
+      <span class="quick-value">Taga Taisha-mae &middot; 10 min walk</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">🚅</span>
+    <div>
+      <span class="quick-label">From Tokyo</span>
+      <span class="quick-value">~2.5 hrs (Shinkansen + local)</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">⏰</span>
+    <div>
+      <span class="quick-label">Hours</span>
+      <span class="quick-value">Open 24 hrs &middot; Office 8:30–16:30</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">🙏</span>
+    <div>
+      <span class="quick-label">Annual Visitors</span>
+      <span class="quick-value">~1.7 million</span>
+    </div>
+  </div>
+  <div class="quick-item">
+    <span class="quick-icon">🅿️</span>
+    <div>
+      <span class="quick-label">Parking</span>
+      <span class="quick-value">Free &middot; on site</span>
+    </div>
+  </div>
+</div>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a href="ichinomiya-map.html">All Shrines</a> &nbsp;&rsaquo;&nbsp;
+  <a href="ichinomiya-map.html?road=Tokaido">Tōkaidō 東海道</a> &nbsp;&rsaquo;&nbsp;
+  Omi Province &nbsp;&rsaquo;&nbsp; Taga Taisha
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+  <!-- Deity row (full width) -->
+  <div class="deity-card grid-full" style="margin-bottom:24px;">
+    <div class="deity-symbol">🌿</div>
+    <div>
+      <div class="deity-label">Enshrined Deities</div>
+      <div class="deity-name">Izanagi no Mikoto &amp; Izanami no Mikoto</div>
+      <div class="deity-jp">伊邪那岐命・伊邪那美命 — The Divine Couple Who Created Japan</div>
+      <div class="deity-desc">
+        Izanagi and Izanami are the primordial creator deities of Japanese mythology. They churned the ocean with a jeweled spear and formed the Japanese islands; they gave birth to the myriad gods, including <strong style="color:var(--gold)">Amaterasu Omikami</strong>, the Sun Goddess enshrined at Ise Jingu. Taga Taisha is where these parent gods retired after completing their divine work of creation &mdash; making this shrine the spiritual origin point of all Japanese divinity.
+      </div>
+      <div class="blessing-tags">
+        <span class="blessing-tag">#Longevity</span>
+        <span class="blessing-tag">#Matchmaking</span>
+        <span class="blessing-tag">#MaritalHarmony</span>
+        <span class="blessing-tag">#WardingOffEvil</span>
+        <span class="blessing-tag">#FamilyProsperity</span>
+        <span class="blessing-tag">#HealthRecovery</span>
+        <span class="blessing-tag">#SafeChildbirth</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+
+    <!-- CARD 1: ESSENCE -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">1</div>
+        <div class="card-title-block">
+          <span class="card-title-en">The Essence &middot; 核心価値</span>
+          <span class="card-title-jp">核心的価値 &mdash; なぜここが特別なのか</span>
+          <span class="card-title-zh">核心价值 &middot; 为何与众不同</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="essence-highlight">
+          <div class="essence-label">由緒 &middot; Why It Matters</div>
+          <div class="essence-text">
+            <strong>The home of the gods who created Japan itself.</strong><br>
+            The ancient chronicle <em>Kojiki</em> (712 AD) records that after creating the world, Izanagi no Mikoto dwelt at Taga in Omi Province. With over 1,300 years of history, Taga Taisha is revered as the ultimate shrine for <em>longevity</em> and <em>en-musubi</em> (binding of fate) &mdash; the parent deities who gave birth to all of creation are naturally the supreme authority on life and love.
+          </div>
+        </div>
+        <div class="essence-highlight" style="border-color:var(--red);">
+          <div class="essence-label" style="color:var(--red);">深読み &middot; The Deeper Story</div>
+          <div class="essence-text" style="font-size:0.88rem; color:#444;">
+            In 1588, the great warlord Toyotomi Hideyoshi donated a magnificent stone bridge and garden to Taga Taisha, praying for the recovery of his ailing mother, Omandokoro. She miraculously recovered and lived several more years. This story cemented Taga Taisha's reputation as the supreme shrine for longevity. The saying <em>&ldquo;O-Ise mairi ni O-Taga e yokare&rdquo;</em> (&ldquo;After visiting Ise, do visit Taga&rdquo;) became a national proverb &mdash; linking the daughter shrine (Ise) to its spiritual parents (Taga).
+          </div>
+        </div>
+        <!-- Video -->
+        <div class="video-wrapper">
+          <svg style="width:100%;aspect-ratio:16/9;display:block;" viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#0a1008"/>
+                <stop offset="60%" stop-color="#1a1a10"/>
+                <stop offset="100%" stop-color="#2a1a0a"/>
+              </linearGradient>
+              <linearGradient id="glow" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#c9a84c" stop-opacity="0.4"/>
+                <stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <rect width="800" height="450" fill="url(#sky)"/>
+            <circle cx="400" cy="200" r="100" fill="url(#glow)" opacity="0.5"/>
+            <!-- Arched bridge silhouette -->
+            <path d="M250,300 Q400,200 550,300" stroke="#c9a84c" stroke-width="8" fill="none" opacity="0.6"/>
+            <path d="M260,300 Q400,210 540,300" stroke="#c9a84c" stroke-width="3" fill="none" opacity="0.3"/>
+            <!-- Pillars -->
+            <rect x="270" y="300" width="8" height="60" fill="#c9a84c" opacity="0.5"/>
+            <rect x="522" y="300" width="8" height="60" fill="#c9a84c" opacity="0.5"/>
+            <!-- Water reflection -->
+            <ellipse cx="400" cy="370" rx="180" ry="20" fill="#c9a84c" opacity="0.08"/>
+            <!-- Trees -->
+            <ellipse cx="120" cy="320" rx="70" ry="90" fill="#0a0a0a" opacity="0.8"/>
+            <ellipse cx="680" cy="320" rx="70" ry="90" fill="#0a0a0a" opacity="0.8"/>
+            <!-- Cherry blossom petals -->
+            <circle cx="300" cy="160" r="3" fill="#ffb7c5" opacity="0.6"/>
+            <circle cx="340" cy="140" r="2" fill="#ffb7c5" opacity="0.5"/>
+            <circle cx="450" cy="150" r="3" fill="#ffb7c5" opacity="0.6"/>
+            <circle cx="500" cy="170" r="2" fill="#ffb7c5" opacity="0.4"/>
+            <circle cx="380" cy="130" r="2.5" fill="#ffb7c5" opacity="0.5"/>
+            <text x="400" y="430" text-anchor="middle" font-size="12" fill="rgba(255,255,255,0.5)" font-family="Georgia">多賀大社 &middot; Taga Taisha</text>
+          </svg>
+          <div class="video-overlay">
+            <a class="play-btn" href="https://www.youtube.com/results?search_query=多賀大社+参拝+境内" target="_blank" title="Watch on YouTube">&#9654;</a>
+          </div>
+          <div class="video-caption">&#9654; 境内の空気感 &mdash; Experience the shrine atmosphere</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 2: ACCESS -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">2</div>
+        <div class="card-title-block">
+          <span class="card-title-en">Plan Your Visit &middot; 交通指南</span>
+          <span class="card-title-jp">旅の地図 &mdash; アクセス情報</span>
+          <span class="card-title-zh">交通指南 &middot; 如何前往</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="map-wrapper">
+          <iframe src="https://maps.google.com/maps?q=%E5%A4%9A%E8%B3%80%E5%A4%A7%E7%A4%BE&output=embed&hl=en&z=15"
+            allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            title="Taga Taisha map"></iframe>
+        </div>
+        <a class="map-link" href="https://maps.google.com/maps?q=%E5%A4%9A%E8%B3%80%E5%A4%A7%E7%A4%BE" target="_blank">
+          📍 Open in Google Maps &mdash; 滋賀県爬上郡多賀町多賀604
+        </a>
+        <ul class="access-list">
+          <li>
+            <span class="access-icon">🚃</span>
+            <span class="access-text">
+              <span class="access-main">Ohmi Railway Taga Line &mdash; <strong>Taga Taisha-mae Station</strong> &middot; 10 min walk</span>
+              <span class="access-sub">多賀大社前駅 &middot; most convenient &middot; scenic approach road with shops</span>
+            </span>
+          </li>
+          <li>
+            <span class="access-icon">🚄</span>
+            <span class="access-text">
+              <span class="access-main">From <strong>Tokyo</strong> &mdash; approx. 2.5 hrs</span>
+              <span class="access-sub">Tokaido Shinkansen to Maibara &rarr; JR Biwako Line to Minami-Hikone &rarr; Ohmi Railway Taga Line</span>
+            </span>
+          </li>
+          <li>
+            <span class="access-icon">🚄</span>
+            <span class="access-text">
+              <span class="access-main">From <strong>Osaka/Kyoto</strong> &mdash; approx. 1&ndash;1.5 hrs</span>
+              <span class="access-sub">JR Special Rapid to Hikone or Minami-Hikone &rarr; Ohmi Railway Taga Line</span>
+            </span>
+          </li>
+          <li>
+            <span class="access-icon">🚌</span>
+            <span class="access-text">
+              <span class="access-main">Bus from <strong>Minami-Hikone Station</strong> &mdash; approx. 10 min</span>
+              <span class="access-sub">南彦根駅 &middot; JR Biwako Line &middot; direct bus available</span>
+            </span>
+          </li>
+          <li>
+            <span class="access-icon">🅿️</span>
+            <span class="access-text">
+              <span class="access-main">Free parking on-site</span>
+              <span class="access-sub">名神高速 Hikone IC &middot; approx. 10 min by car</span>
+            </span>
+          </li>
+          <li>
+            <span class="access-icon">⏰</span>
+            <span class="access-text">
+              <span class="access-main">Open 24 hours &middot; Shrine Office: 8:30&ndash;16:30</span>
+              <span class="access-sub">Okusho-in Garden: 9:00&ndash;16:00 (admission &yen;300) &middot; National Scenic Beauty</span>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CARD 3: DEEP INSIGHT -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">3</div>
+        <div class="card-title-block">
+          <span class="card-title-en">Deep Insight &middot; 深度探索</span>
+          <span class="card-title-jp">リピーターのこだわり &mdash; 知る人ぞ知る</span>
+          <span class="card-title-zh">深度探索 &middot; 行家的坚持</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="insight-item">
+          <span class="insight-badge badge-unique">UNIQUE</span>
+          <div class="insight-body">
+            <div class="insight-title">太閥橋 &mdash; Taiko-bashi: Hideyoshi's Stone Bridge</div>
+            <div class="insight-desc">
+              The beautiful arched stone bridge at the entrance was donated by Toyotomi Hideyoshi in 1588, in gratitude for his mother's miraculous recovery. Crossing this steep, elegant bridge is said to grant longevity. Its graceful curve reflected in the water below is the iconic image of Taga Taisha.
+            </div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-badge badge-secret">SECRET</span>
+          <div class="insight-body">
+            <div class="insight-title">奥書院庭園 &mdash; Okusho-in: A Hidden Masterpiece</div>
+            <div class="insight-desc">
+              Behind the main hall, the Okusho-in Garden is a nationally designated Place of Scenic Beauty (<em>meisho</em>). Created in the Azuchi-Momoyama period (late 16th century), this contemplative pond garden was also a gift from Hideyoshi. Few visitors venture here &mdash; making it one of Shiga's best-kept secrets. Admission &yen;300.
+            </div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-badge badge-unique">UNIQUE</span>
+          <div class="insight-body">
+            <div class="insight-title">しゃもじ &mdash; The Rice Paddle Tradition</div>
+            <div class="insight-desc">
+              Taga Taisha's signature lucky charm is the <em>shamoji</em> (rice paddle). Write your wish on a wooden shamoji and offer it at the shrine. This unique custom symbolizes the nourishment and sustenance of life &mdash; the rice paddle that feeds all. You will see thousands of shamoji hanging in the shrine precincts.
+            </div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-badge badge-best">BEST TIME</span>
+          <div class="insight-body">
+            <div class="insight-title">春の枝垂桜 &mdash; Weeping Cherry Blossoms in Spring</div>
+            <div class="insight-desc">
+              Late March to early April transforms Taga Taisha into a cascade of pink. The massive weeping cherry trees (<em>shidarezakura</em>) along the approach and around the Taiko-bashi bridge create one of Shiga's most breathtaking spring scenes. The combination of the arched bridge and falling petals is unforgettable.
+            </div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-badge badge-stamp">GOSHUIN</span>
+          <div class="insight-body">
+            <div class="insight-title">御朱印 &mdash; Ichinomiya Pilgrimage Stamp</div>
+            <div class="insight-desc">
+              Taga Taisha participates in the <em>zenkoku ichinomiya</em> goshuin collection. The powerful brushwork and distinctive seal mark it as an Omi Province ichinomiya stamp. Office open 8:30&ndash;16:30 &middot; &yen;500. Seasonal limited-edition goshuin are also available.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 4: EAT STAY MORE -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">4</div>
+        <div class="card-title-block">
+          <span class="card-title-en">Eat, Stay &amp; More &middot; 周邊資訊</span>
+          <span class="card-title-jp">周辺の滞在 &mdash; 食・宿・寄り道</span>
+          <span class="card-title-zh">周边信息 &middot; 吃住游</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="nearby-grid">
+          <div class="nearby-item">
+            <span class="nearby-icon">🍖</span>
+            <div class="nearby-cat">Food &middot; 食</div>
+            <div class="nearby-name">近江牛 Omi Beef</div>
+            <div class="nearby-desc">
+              One of Japan's top three wagyu brands, Omi beef has been raised in Shiga for over 400 years. Try it at local restaurants near Hikone or along the shrine approach road.
+            </div>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-icon">🍡</span>
+            <div class="nearby-cat">Sweets &middot; 甘味</div>
+            <div class="nearby-name">糸切餅 Itokiri Mochi</div>
+            <div class="nearby-desc">
+              Taga's signature sweet &mdash; soft rice cakes cut with thread, filled with sweet red bean paste. Sold at traditional shops along the shrine approach. A must-try pilgrimage treat.
+            </div>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-icon">🏯</span>
+            <div class="nearby-cat">Sightseeing &middot; 観光</div>
+            <div class="nearby-name">彦根城 Hikone Castle</div>
+            <div class="nearby-desc">
+              One of only 12 original castles in Japan and a National Treasure. Just 15 min by train from Taga. Don't miss the iconic mascot Hikonyan and the stunning lake views.
+            </div>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-icon">🏨</span>
+            <div class="nearby-cat">Stay &middot; 宿</div>
+            <div class="nearby-name">Hikone Hotels &amp; Ryokan</div>
+            <div class="nearby-desc">
+              Stay in Hikone city for easy access to both Taga Taisha and Hikone Castle. Traditional ryokan with lake views and Omi beef dinners available near the castle.
+            </div>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-icon">🌊</span>
+            <div class="nearby-cat">Nature &middot; 自然</div>
+            <div class="nearby-name">琵琶湖 Lake Biwa</div>
+            <div class="nearby-desc">
+              Japan's largest lake is just west of Taga. Cycling the lakeshore, boat cruises, and lakeside onsen make for a perfect complement to your shrine visit.
+            </div>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-icon">⛩️</span>
+            <div class="nearby-cat">Next Shrine &middot; 次の一宮</div>
+            <div class="nearby-name">多賀 &rarr; 建部大社</div>
+            <div class="nearby-desc">
+              Takebe Taisha (also Omi Province ichinomiya) is 40 min south by train in Otsu. Pair these two Omi shrines for a complete pilgrimage day.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /grid -->
+
+  <!-- SPECIAL SECTION: Parent Gods & Ise Connection -->
+  <div class="special-box" style="margin-top:24px;">
+    <div class="special-title">お伊勢参らばお多賀へ参れ &mdash; The Sacred Bond with Ise</div>
+    <div class="special-sub">THE SPIRITUAL PARENTS OF JAPAN'S HOLIEST SHRINE</div>
+    <div class="special-grid">
+      <div class="special-item">
+        <span class="item-sym">🌅</span>
+        <span class="item-name">Amaterasu</span>
+        <span class="item-desc">Sun Goddess &middot; Enshrined at Ise Jingu</span>
+      </div>
+      <div class="special-item" style="background:rgba(201,168,76,0.12); border-color:var(--gold);">
+        <span class="item-sym" style="color:var(--gold);">👨‍👩‍👧</span>
+        <span class="item-name" style="color:var(--gold);">Izanagi &amp; Izanami</span>
+        <span class="item-desc" style="color:rgba(255,255,255,0.7);">Parent Gods &middot; Enshrined at Taga Taisha</span>
+      </div>
+      <div class="special-item">
+        <span class="item-sym">🔥</span>
+        <span class="item-name">Kagutsuchi</span>
+        <span class="item-desc">Fire God &middot; Born of Izanami</span>
+      </div>
+      <div class="special-item">
+        <span class="item-sym">🌙</span>
+        <span class="item-name">Tsukuyomi</span>
+        <span class="item-desc">Moon God &middot; Born of Izanagi</span>
+      </div>
+      <div class="special-item">
+        <span class="item-sym">🌊</span>
+        <span class="item-name">Susanoo</span>
+        <span class="item-desc">Storm God &middot; Born of Izanagi</span>
+      </div>
+      <div class="special-item">
+        <span class="item-sym">🏝️</span>
+        <span class="item-name">Eight Great Islands</span>
+        <span class="item-desc">Japan itself &middot; Created by the Divine Couple</span>
+      </div>
+    </div>
+    <div class="special-desc">
+      The ancient proverb <em>&ldquo;O-Ise mairi ni O-Taga e yokare&rdquo;</em> was once known throughout Japan: after completing the great pilgrimage to Ise Jingu, one must also visit Taga &mdash; because Ise enshrines Amaterasu, the daughter, while Taga enshrines Izanagi and Izanami, her <strong style="color:var(--gold)">parents who created the entire world</strong>. During the Edo period, millions of pilgrims traveled the Tokaido road, and Taga became an essential stop on the spiritual circuit. This parent-child bond between Ise and Taga remains one of the most profound connections in all of Shinto theology.
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-bar" style="margin-top:24px;">
+    <div>
+      <h3>Ready to visit Taga Taisha?</h3>
+      <p>Find directions, plan your route, or explore more Ichinomiya shrines across Japan.</p>
+    </div>
+    <div class="cta-links">
+      <a href="https://www.tagataisya.or.jp/" target="_blank" class="btn">Official Website &rarr;</a>
+      <a href="ichinomiya-map.html" class="btn secondary">&larr; All Shrines Map</a>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<footer>
+  <p>一ノ宮 Ichinomiya &nbsp;&middot;&nbsp; Taga Taisha &middot; 近江國一之宮 多賀大社</p>
+  <p style="margin-top:6px;">
+    Sources:
+    <a href="https://www.tagataisya.or.jp/" target="_blank" style="color:rgba(255,255,255,0.4);">Official Shrine</a> &middot;
+    <a href="https://en.wikipedia.org/wiki/Taga-taisha" target="_blank" style="color:rgba(255,255,255,0.4);">Wikipedia</a> &middot;
+    <a href="https://www.biwako-visitors.jp/spot/detail/1207/" target="_blank" style="color:rgba(255,255,255,0.4);">Biwako Visitors</a>
+  </p>
+</footer>
+
+</body>
+</html>
